@@ -1,0 +1,88 @@
+:root {
+  /* ─── Palette ──────────────────────────────────────────────────── */
+  /* Warm off-whites to keep the app feeling friendly, not clinical */
+  --color-bg: #FAFAF8;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-surface-sunken: #F5F5F0;
+
+  /* Text hierarchy: strong contrast for words, softer for parent-facing UI */
+  --color-text: #2D3748;
+  --color-text-muted: #718096;
+  --color-text-light: #A0AEC0;
+  --color-text-inverse: #FFFFFF;
+
+  /* Tier indicators — the three key states of the app */
+  --color-tier-produce: #48BB78;       /* green: mastered, go ahead */
+  --color-tier-produce-bg: #F0FFF4;
+  --color-tier-guided: #ECC94B;        /* amber: emerging, model carefully */
+  --color-tier-guided-bg: #FFFFF0;
+  --color-tier-expose: #FC8181;        /* soft pink: future, just listen */
+  --color-tier-expose-bg: #FFF5F5;
+
+  /* Accent for interactive elements */
+  --color-accent: #4A90D9;
+  --color-accent-hover: #3A7BC8;
+  --color-accent-light: #EBF4FF;
+
+  /* Borders and dividers */
+  --color-border: #E2E8F0;
+  --color-border-light: #EDF2F7;
+
+  /* ─── Spacing ──────────────────────────────────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* ─── Typography ───────────────────────────────────────────────── */
+  --font-family: "Nunito", -apple-system, system-ui, "Segoe UI", Roboto,
+    "Helvetica Neue", sans-serif;
+
+  /* The word on the card — big, clear, unmistakable */
+  --font-size-word: clamp(48px, 8vw, 96px);
+  --font-weight-word: 800;
+
+  /* Phoneme breakdown — parent reads this aloud */
+  --font-size-phoneme: clamp(18px, 3vw, 28px);
+  --font-weight-phoneme: 600;
+
+  /* Body text, labels, filter UI */
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+  --font-size-xs: 12px;
+
+  /* Landing page hero */
+  --font-size-hero: clamp(32px, 6vw, 64px);
+  --font-size-subhero: clamp(18px, 2.5vw, 24px);
+
+  /* ─── Card ─────────────────────────────────────────────────────── */
+  --card-max-width: 640px;
+  --card-radius: 20px;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+  /* ─── Layout ───────────────────────────────────────────────────── */
+  --content-max-width: 1200px;
+  --nav-height: 56px;
+
+  /* ─── Transitions ──────────────────────────────────────────────── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ─── Z-index layers ───────────────────────────────────────────── */
+  --z-card: 1;
+  --z-filter: 10;
+  --z-overlay: 20;
+  --z-modal: 30;
+
+  /* ─── Breakpoints (for reference, used in media queries) ───────── */
+  /* Phone: < 768px */
+  /* Tablet portrait: 768px–1023px */
+  /* Tablet landscape / small desktop: 1024px–1199px */
+  /* Desktop: 1200px+ */
+}

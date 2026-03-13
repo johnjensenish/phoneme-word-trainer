@@ -1,0 +1,181 @@
+/* ─── Card Container ─────────────────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--card-max-width);
+  margin: 0 auto;
+  background: var(--color-surface);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  transition: box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* ─── Image Area ─────────────────────────────────────────────────── */
+.imageArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+  background: var(--color-surface-sunken);
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 120px;
+  line-height: 1;
+}
+
+/* ─── Content Area ───────────────────────────────────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg) var(--space-md) var(--space-xl);
+  gap: var(--space-md);
+}
+
+/* ─── Word ───────────────────────────────────────────────────────── */
+.word {
+  font-size: var(--font-size-word);
+  font-weight: var(--font-weight-word);
+  color: var(--color-text);
+  text-transform: capitalize;
+  text-align: center;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* ─── Phoneme Breakdown ──────────────────────────────────────────── */
+.phonemeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.audioButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: background var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+.audioButton:hover {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+.audioButton:active {
+  transform: scale(0.92);
+}
+
+.phonemeText {
+  font-size: var(--font-size-phoneme);
+  font-weight: var(--font-weight-phoneme);
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Tier Indicator ─────────────────────────────────────────────── */
+.tier {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 20px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tierDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tierProduce {
+  background: var(--color-tier-produce-bg);
+  color: var(--color-tier-produce);
+}
+.tierProduce .tierDot { background: var(--color-tier-produce); }
+
+.tierGuided {
+  background: var(--color-tier-guided-bg);
+  color: #B7791F;
+}
+.tierGuided .tierDot { background: var(--color-tier-guided); }
+
+.tierExpose {
+  background: var(--color-tier-expose-bg);
+  color: #C53030;
+}
+.tierExpose .tierDot { background: var(--color-tier-expose); }
+
+/* ─── Swipe hint ─────────────────────────────────────────────────── */
+.swipeHint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+
+/* Phone */
+@media (max-width: 767px) {
+  .card {
+    border-radius: 16px;
+    margin: 0 var(--space-md);
+  }
+
+  .imageArea {
+    height: 200px;
+    font-size: 80px;
+  }
+
+  .content {
+    padding: var(--space-md) var(--space-sm) var(--space-lg);
+  }
+}
+
+/* Tablet portrait */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .imageArea {
+    height: 300px;
+    font-size: 140px;
+  }
+}
+
+/* Tablet landscape / desktop */
+@media (min-width: 1024px) {
+  .imageArea {
+    height: 350px;
+    font-size: 160px;
+  }
+
+  .content {
+    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+  .card {
+    max-width: 700px;
+  }
+}

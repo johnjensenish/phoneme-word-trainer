@@ -1,0 +1,141 @@
+.section {
+  padding: var(--space-3xl) var(--space-md);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  color: var(--color-text);
+}
+
+/* ─── How it works: three steps ──────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.step {
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+.stepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-weight: 800;
+  font-size: 20px;
+  margin-bottom: var(--space-md);
+}
+
+.stepTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.stepDesc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ─── Science section ────────────────────────────────────────────── */
+.science {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+  background: var(--color-surface);
+  border-radius: 16px;
+  border: 1px solid var(--color-border-light);
+}
+
+.scienceTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.scienceList {
+  list-style: none;
+  padding: 0;
+}
+
+.scienceItem {
+  position: relative;
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.scienceItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-tier-produce);
+}
+
+/* ─── Tier cards preview ─────────────────────────────────────────── */
+.tierPreview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tierCard {
+  padding: var(--space-md);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.tierCardProduce { background: var(--color-tier-produce-bg); }
+.tierCardGuided { background: var(--color-tier-guided-bg); }
+.tierCardExpose { background: var(--color-tier-expose-bg); }
+
+.tierDot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: var(--space-xs);
+  vertical-align: middle;
+}
+
+.tierDotProduce { background: var(--color-tier-produce); }
+.tierDotGuided { background: var(--color-tier-guided); }
+.tierDotExpose { background: var(--color-tier-expose); }
+
+.tierLabel {
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tierDesc {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+  line-height: 1.5;
+}

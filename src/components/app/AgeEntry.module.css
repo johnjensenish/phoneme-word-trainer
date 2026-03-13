@@ -1,0 +1,193 @@
+/* ─── Layout ──────────────────────────────────────────────────────── */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: var(--space-xl) var(--space-md);
+  background: linear-gradient(
+    180deg,
+    var(--color-bg) 0%,
+    var(--color-surface-sunken) 100%
+  );
+  font-family: var(--font-family);
+}
+
+/* ─── Heading ─────────────────────────────────────────────────────── */
+.title {
+  font-size: var(--font-size-hero);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: var(--space-md);
+  max-width: 600px;
+}
+
+.subtitle {
+  font-size: var(--font-size-subhero);
+  color: var(--color-text-muted);
+  font-weight: 400;
+  text-align: center;
+  max-width: 480px;
+  line-height: 1.5;
+  margin-bottom: var(--space-2xl);
+}
+
+/* ─── Slider ──────────────────────────────────────────────────────── */
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: var(--space-2xl);
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+  outline: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+
+  /* Firefox track */
+  &::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-border);
+    border: none;
+  }
+
+  /* Firefox progress fill */
+  &::-moz-range-progress {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-accent);
+  }
+
+  /* Webkit thumb */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(74, 144, 217, 0.4);
+    transition: background var(--transition-fast),
+                transform var(--transition-fast),
+                box-shadow var(--transition-fast);
+  }
+
+  &::-webkit-slider-thumb:hover {
+    background: var(--color-accent-hover);
+    transform: scale(1.15);
+    box-shadow: 0 4px 14px rgba(74, 144, 217, 0.5);
+  }
+
+  &::-webkit-slider-thumb:active {
+    transform: scale(1.05);
+  }
+
+  /* Firefox thumb */
+  &::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(74, 144, 217, 0.4);
+    transition: background var(--transition-fast),
+                transform var(--transition-fast);
+  }
+
+  &::-moz-range-thumb:hover {
+    background: var(--color-accent-hover);
+    transform: scale(1.15);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 3px;
+  }
+}
+
+/* ─── Age display ─────────────────────────────────────────────────── */
+.ageDisplay {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  color: var(--color-accent);
+  text-align: center;
+  letter-spacing: -0.01em;
+  min-height: 1.4em;
+}
+
+/* ─── Start button ────────────────────────────────────────────────── */
+.startButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-inverse);
+  background: var(--color-accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(74, 144, 217, 0.35);
+}
+
+.startButton:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(74, 144, 217, 0.45);
+}
+
+.startButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+}
+
+.startButton:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .container {
+    padding: var(--space-xl) var(--space-md);
+    justify-content: flex-start;
+    padding-top: clamp(48px, 15vh, 80px);
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .sliderContainer {
+    margin-bottom: var(--space-xl);
+  }
+
+  .startButton {
+    width: 100%;
+    max-width: 360px;
+    font-size: 17px;
+  }
+}
