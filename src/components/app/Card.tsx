@@ -1,12 +1,12 @@
 import type { ComputedWordCard, DrillMode } from '~/data/types'
-import { getTargetSoundId } from '~/engine/drillMode'
+import { PHONEME_LABELS } from '~/engine/drillMode'
 import { emojiMap } from '~/data/emojiMap'
 import styles from './Card.module.css'
 
 interface CardProps {
   card: ComputedWordCard
   onAudioPlay: (wordId: string) => void
-  onDisplayPlay: (soundId: string, wordId: string) => void
+  onPhonemePlay: (soundId: string) => void
 }
 
 const TIER_LABELS: Record<DrillMode, string> = {
@@ -21,17 +21,14 @@ const TIER_STYLES: Record<DrillMode, string> = {
   expose: styles.tierExpose,
 }
 
-export function Card({ card, onAudioPlay, onDisplayPlay }: CardProps) {
+export function Card({ card, onAudioPlay, onPhonemePlay }: CardProps) {
   const emoji = emojiMap[card.word.visual_hint] ?? '🔤'
 
-  const handleDisplayPlay = () => {
-    const soundId = getTargetSoundId(card.word, card.drill_mode)
-    if (soundId) {
-      onDisplayPlay(soundId, card.word.word_id)
-    } else {
-      onAudioPlay(card.word.word_id)
-    }
-  }
+  // Show the hardest sound as a playable pill, falling back to first consonant
+  const phonemeSoundId =
+    card.word.hardest_sound_id !== '—' ? card.word.hardest_sound_id
+    : card.word.consonant_ids[0] ?? null
+  const phonemeLabel = phonemeSoundId ? PHONEME_LABELS[phonemeSoundId] : null
 
   return (
     <div className={styles.card}>
@@ -47,22 +44,27 @@ export function Card({ card, onAudioPlay, onDisplayPlay }: CardProps) {
         {/* Word */}
         <div className={styles.word}>{card.word.word}</div>
 
-        {/* Phoneme breakdown + audio */}
-        <div className={styles.phonemeRow}>
+        {/* Phoneme display text */}
+        <div className={styles.phonemeText}>{card.phoneme_display}</div>
+
+        {/* Audio controls */}
+        <div className={styles.audioRow}>
           <button
             className={styles.audioButton}
             onClick={() => onAudioPlay(card.word.word_id)}
             aria-label={`Play pronunciation of ${card.word.word}`}
           >
-            🔊
+            🔊 Word
           </button>
-          <button
-            className={styles.phonemeText}
-            onClick={handleDisplayPlay}
-            aria-label={`Play phoneme breakdown for ${card.word.word}`}
-          >
-            {card.phoneme_display}
-          </button>
+          {phonemeLabel && phonemeSoundId && (
+            <button
+              className={styles.phonemePill}
+              onClick={() => onPhonemePlay(phonemeSoundId)}
+              aria-label={`Play isolated ${phonemeLabel} sound`}
+            >
+              🔉 {phonemeLabel}
+            </button>
+          )}
         </div>
 
         {/* Tier indicator */}

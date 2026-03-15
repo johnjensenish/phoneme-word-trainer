@@ -64,7 +64,7 @@ function AppRoute() {
     filters,
   })
 
-  const { speak, speakPhonemeDisplay } = useAudio()
+  const { speak, speakPhoneme } = useAudio()
 
   const goNext = useCallback(() => {
     setCurrentIndex(i => (cards.length > 0 ? (i + 1) % cards.length : 0))
@@ -207,7 +207,7 @@ function AppRoute() {
             <Card
               card={currentCard}
               onAudioPlay={(wordId) => speak(wordId, currentCard.word.word)}
-              onDisplayPlay={(soundId, wordId) => speakPhonemeDisplay(soundId, wordId, currentCard.phoneme_display)}
+              onPhonemePlay={speakPhoneme}
             />
             <p style={{
               textAlign: 'center',
