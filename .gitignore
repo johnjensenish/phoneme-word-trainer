@@ -6,3 +6,4 @@ dist/
 *.log
 .DS_Store
 .claude/worktrees/
+.claude/*.local.json
