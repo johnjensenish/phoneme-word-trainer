@@ -92,10 +92,10 @@ export const rhymeGroups: RhymeGroup[] = [
   {
     rhyme_group_id: "hen_pen_ten",
     rhyme_pattern: "-en",
-    word_ids: ["ANI006", "OBJ024"],
-    words: "hen, pen",
-    target_sounds: "H, P, N",
-    notes: "Could add 'ten', 'men', 'den'."
+    word_ids: ["ANI006", "OBJ024", "NUM010"],
+    words: "hen, pen, ten",
+    target_sounds: "H, P, T, N",
+    notes: "All early sounds. Great starter rhyme set."
   },
   {
     rhyme_group_id: "van_pan_man",
@@ -116,10 +116,10 @@ export const rhymeGroups: RhymeGroup[] = [
   {
     rhyme_group_id: "run_fun_sun",
     rhyme_pattern: "-un",
-    word_ids: ["ACT021"],
-    words: "run",
-    target_sounds: "R, N",
-    notes: "Foundation. Add 'fun', 'sun', 'bun'."
+    word_ids: ["ACT021", "NUM001"],
+    words: "run, one",
+    target_sounds: "R, W, N",
+    notes: "Cross-tier: R is late, W/N early."
   },
   {
     rhyme_group_id: "goat_boat",
@@ -164,10 +164,10 @@ export const rhymeGroups: RhymeGroup[] = [
   {
     rhyme_group_id: "door_more",
     rhyme_pattern: "-or",
-    word_ids: ["OBJ004", "ACT011"],
-    words: "door, more",
-    target_sounds: "D, M, R",
-    notes: "R in final position."
+    word_ids: ["OBJ004", "ACT011", "NUM004"],
+    words: "door, more, four",
+    target_sounds: "D, M, F, R",
+    notes: "R in final position. Cross-tier with F."
   },
   {
     rhyme_group_id: "jump_bump",
@@ -260,10 +260,10 @@ export const rhymeGroups: RhymeGroup[] = [
   {
     rhyme_group_id: "bad_dad_had",
     rhyme_pattern: "-ad",
-    word_ids: ["DES013", "PPL002"],
-    words: "bad, dad",
-    target_sounds: "B, D",
-    notes: "Tier 1 sounds. Could add 'had', 'mad', 'sad'."
+    word_ids: ["DES013", "PPL002", "FEE001", "FEE002"],
+    words: "bad, dad, sad, mad",
+    target_sounds: "B, D, S, M",
+    notes: "Cross-tier rhyme: S is 24mo, others early."
   },
   {
     rhyme_group_id: "rain_train",
@@ -272,5 +272,37 @@ export const rhymeGroups: RhymeGroup[] = [
     words: "rain, train",
     target_sounds: "R, TR, N",
     notes: "Cluster contrast."
+  },
+  {
+    rhyme_group_id: "shirt_skirt",
+    rhyme_pattern: "-ɜːrt",
+    word_ids: ["CLO001", "CLO015", "NAT017"],
+    words: "shirt, skirt, dirt",
+    target_sounds: "SH, SK, D, R, T",
+    notes: "R-controlled vowel rhyme. All have late R.",
+  },
+  {
+    rhyme_group_id: "rock_sock",
+    rhyme_pattern: "-ock",
+    word_ids: ["NAT003", "OBJ014"],
+    words: "rock, sock",
+    target_sounds: "R, S, K",
+    notes: "CVC rhyme pair. R vs S initial contrast.",
+  },
+  {
+    rhyme_group_id: "shell_bell",
+    rhyme_pattern: "-ell",
+    word_ids: ["NAT016"],
+    words: "shell",
+    target_sounds: "SH, L",
+    notes: "Foundation. Add 'bell', 'well', 'tell'.",
+  },
+  {
+    rhyme_group_id: "flower_shower",
+    rhyme_pattern: "-ower",
+    word_ids: ["NAT001", "FUR017"],
+    words: "flower, shower",
+    target_sounds: "FL, SH, R",
+    notes: "Both have vocalic R. Late sounds.",
   },
 ]
