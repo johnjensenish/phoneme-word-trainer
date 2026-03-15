@@ -7,7 +7,9 @@
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
     "preview": "vite preview",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "generate-audio": "bun run scripts/generate-audio.ts",
+    "generate-audio:force": "bun run scripts/generate-audio.ts --force"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.166.7",
@@ -16,6 +18,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@google-cloud/text-to-speech": "^6.4.0",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",

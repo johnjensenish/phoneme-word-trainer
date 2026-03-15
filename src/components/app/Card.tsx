@@ -1,10 +1,12 @@
 import type { ComputedWordCard, DrillMode } from '~/data/types'
+import { getTargetSoundId } from '~/engine/drillMode'
 import { emojiMap } from '~/data/emojiMap'
 import styles from './Card.module.css'
 
 interface CardProps {
   card: ComputedWordCard
-  onAudioPlay: (text: string) => void
+  onAudioPlay: (wordId: string) => void
+  onDisplayPlay: (soundId: string, wordId: string) => void
 }
 
 const TIER_LABELS: Record<DrillMode, string> = {
@@ -19,8 +21,17 @@ const TIER_STYLES: Record<DrillMode, string> = {
   expose: styles.tierExpose,
 }
 
-export function Card({ card, onAudioPlay }: CardProps) {
+export function Card({ card, onAudioPlay, onDisplayPlay }: CardProps) {
   const emoji = emojiMap[card.word.visual_hint] ?? '🔤'
+
+  const handleDisplayPlay = () => {
+    const soundId = getTargetSoundId(card.word, card.drill_mode)
+    if (soundId) {
+      onDisplayPlay(soundId, card.word.word_id)
+    } else {
+      onAudioPlay(card.word.word_id)
+    }
+  }
 
   return (
     <div className={styles.card}>
@@ -40,12 +51,18 @@ export function Card({ card, onAudioPlay }: CardProps) {
         <div className={styles.phonemeRow}>
           <button
             className={styles.audioButton}
-            onClick={() => onAudioPlay(card.word.word)}
+            onClick={() => onAudioPlay(card.word.word_id)}
             aria-label={`Play pronunciation of ${card.word.word}`}
           >
             🔊
           </button>
-          <span className={styles.phonemeText}>{card.phoneme_display}</span>
+          <button
+            className={styles.phonemeText}
+            onClick={handleDisplayPlay}
+            aria-label={`Play phoneme breakdown for ${card.word.word}`}
+          >
+            {card.phoneme_display}
+          </button>
         </div>
 
         {/* Tier indicator */}

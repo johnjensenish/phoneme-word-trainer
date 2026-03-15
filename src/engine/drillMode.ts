@@ -64,6 +64,21 @@ function capitalize(s: string): string {
 }
 
 /**
+ * Return the sound_id that should be isolated/emphasized for a given word+drillMode,
+ * or null if no phoneme isolation applies (pure vowel words, expose mode).
+ */
+export function getTargetSoundId(word: Word, drillMode: DrillMode): string | null {
+  switch (drillMode) {
+    case 'produce':
+      return word.consonant_ids[0] ?? null
+    case 'guided':
+      return word.hardest_sound_id !== '—' ? word.hardest_sound_id : null
+    case 'expose':
+      return null
+  }
+}
+
+/**
  * Generate the phoneme display line for a card based on the drill mode.
  *
  * Produce (Tier 1):  "Buh · Ball"     — isolate first phoneme, then word

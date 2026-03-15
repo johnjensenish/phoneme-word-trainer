@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import type { Tier, SoundOverride } from '~/data/types'
 import { DEFAULT_FILTERS, type FilterState } from '~/engine/cardOrdering'
 import { useCards } from '~/hooks/useCards'
-import { useAudio } from '~/hooks/useAudio'
+import { useAudio, usePrefetchAudio } from '~/hooks/useAudio'
 import { useSwipe } from '~/hooks/useSwipe'
 import { AgeEntry } from '~/components/app/AgeEntry'
 import { Card } from '~/components/app/Card'
@@ -64,7 +64,7 @@ function AppRoute() {
     filters,
   })
 
-  const { speak } = useAudio()
+  const { speak, speakPhonemeDisplay } = useAudio()
 
   const goNext = useCallback(() => {
     setCurrentIndex(i => (cards.length > 0 ? (i + 1) % cards.length : 0))
@@ -87,7 +87,8 @@ function AppRoute() {
       const { cards: c, currentIndex: i } = stateRef.current
       if (e.key === ' ' && c.length > 0) {
         e.preventDefault()
-        speak(c[i]?.word.word ?? '')
+        const card = c[i]
+        if (card) speak(card.word.word_id, card.word.word)
       }
     }
     window.addEventListener('keydown', handleKeyDown)
@@ -127,12 +128,13 @@ function AppRoute() {
     setCurrentIndex(0)
   }, [])
 
+  const currentCard = cards[currentIndex]
+  usePrefetchAudio(currentCard)
+
   // Age not set → show age entry
   if (childAgeMonths === null) {
     return <AgeEntry onSubmit={handleAgeSubmit} />
   }
-
-  const currentCard = cards[currentIndex]
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--color-bg)' }}>
@@ -202,7 +204,11 @@ function AppRoute() {
       >
         {currentCard ? (
           <div style={{ width: '100%', maxWidth: 'var(--card-max-width)' }}>
-            <Card card={currentCard} onAudioPlay={speak} />
+            <Card
+              card={currentCard}
+              onAudioPlay={(wordId) => speak(wordId, currentCard.word.word)}
+              onDisplayPlay={(soundId, wordId) => speakPhonemeDisplay(soundId, wordId, currentCard.phoneme_display)}
+            />
             <p style={{
               textAlign: 'center',
               color: 'var(--color-text-light)',
