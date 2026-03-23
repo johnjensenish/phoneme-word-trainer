@@ -7,7 +7,8 @@
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
     "preview": "vite preview",
-    "start": "node .output/server/index.mjs",
+    "deploy": "bun run build && wrangler deploy",
+    "cf-typegen": "wrangler types",
     "generate-audio": "bun run scripts/generate-audio.ts",
     "generate-audio:force": "bun run scripts/generate-audio.ts --force"
   },
@@ -18,14 +19,15 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.30.0",
     "@google-cloud/text-to-speech": "^6.4.0",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.6.0",
-    "nitro": "3.0.1-alpha.2",
     "typescript": "^5.7.2",
     "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.76.0"
   }
 }
