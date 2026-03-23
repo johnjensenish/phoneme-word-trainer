@@ -11,6 +11,8 @@ for (const [i, group] of staticRhymeGroups.entries()) {
   }
 }
 
+export const ALL_CATEGORIES = ['actions', 'animals', 'body', 'colors', 'describing', 'food', 'house', 'people', 'vehicles'] as const
+
 export interface FilterState {
   categories: string[]
   tiers: Tier[]
@@ -21,8 +23,8 @@ export interface FilterState {
 }
 
 export const DEFAULT_FILTERS: FilterState = {
-  categories: [],
-  tiers: [],
+  categories: [...ALL_CATEGORIES],
+  tiers: [1, 2],
   targetSound: null,
   wordTypes: [],
   rhymeMode: false,

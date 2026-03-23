@@ -1,4 +1,5 @@
 import type { Tier } from '~/data/types'
+import { ALL_CATEGORIES } from '~/engine/cardOrdering'
 import styles from './FilterPanel.module.css'
 
 interface FilterPanelProps {
@@ -12,11 +13,10 @@ interface FilterPanelProps {
   onShuffleToggle: () => void
 }
 
-const ALL_CATEGORIES = ['actions', 'animals', 'body', 'colors', 'describing', 'food', 'house', 'people', 'vehicles']
-const TIER_OPTIONS: { value: Tier; label: string }[] = [
-  { value: 1, label: 'Produce' },
-  { value: 2, label: 'Guided' },
-  { value: 3, label: 'Listen' },
+const TIER_OPTIONS: { value: Tier; label: string; description: string }[] = [
+  { value: 1, label: 'Produce', description: 'Sounds your child has mastered — encourage saying the word' },
+  { value: 2, label: 'Guided', description: 'Emerging sounds — model the word clearly, celebrate attempts' },
+  { value: 3, label: 'Listen', description: 'Future sounds — just expose, no pressure to repeat' },
 ]
 
 export function FilterPanel({
@@ -44,7 +44,7 @@ export function FilterPanel({
               <label key={cat} className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
-                  checked={selectedCategories.length === 0 || selectedCategories.includes(cat)}
+                  checked={selectedCategories.includes(cat)}
                   onChange={() => onCategoryToggle(cat)}
                   className={styles.checkbox}
                 />
@@ -55,19 +55,18 @@ export function FilterPanel({
         </div>
 
         <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>Tier</h3>
-          <div className={styles.tierButtons}>
+          <h3 className={styles.sectionTitle}>Practice mode</h3>
+          <div className={styles.tierList}>
             {TIER_OPTIONS.map(opt => (
               <button
                 key={opt.value}
-                className={`${styles.tierButton} ${
-                  selectedTiers.length === 0 || selectedTiers.includes(opt.value)
-                    ? styles.tierButtonActive
-                    : ''
+                className={`${styles.tierItem} ${
+                  selectedTiers.includes(opt.value) ? styles.tierItemActive : ''
                 }`}
                 onClick={() => onTierToggle(opt.value)}
               >
-                {opt.label}
+                <span className={styles.tierLabel}>{opt.label}</span>
+                <span className={styles.tierDescription}>{opt.description}</span>
               </button>
             ))}
           </div>

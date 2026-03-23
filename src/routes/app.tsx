@@ -13,17 +13,44 @@ export const Route = createFileRoute('/app')({
   component: AppRoute,
 })
 
-const STORAGE_KEY_AGE = 'phoneme-trainer-age'
+const STORAGE_KEY_BIRTH = 'phoneme-trainer-birth'
 const STORAGE_KEY_OVERRIDES = 'phoneme-trainer-overrides'
 
-function loadAge(): number | null {
-  if (typeof window === 'undefined') return null
-  const stored = localStorage.getItem(STORAGE_KEY_AGE)
-  return stored ? Number(stored) : null
+interface BirthDate {
+  month: number
+  year: number
 }
 
-function saveAge(age: number) {
-  localStorage.setItem(STORAGE_KEY_AGE, String(age))
+function loadBirth(): BirthDate | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY_BIRTH)
+    if (!stored) return null
+    const parsed = JSON.parse(stored)
+    if (parsed && typeof parsed.month === 'number' && typeof parsed.year === 'number') {
+      return parsed as BirthDate
+    }
+    return null
+  } catch {
+    return null
+  }
+}
+
+function saveBirth(month: number, year: number) {
+  localStorage.setItem(STORAGE_KEY_BIRTH, JSON.stringify({ month, year }))
+}
+
+function computeAgeMonths(birth: BirthDate): number {
+  const now = new Date()
+  return (now.getFullYear() - birth.year) * 12 + (now.getMonth() + 1 - birth.month)
+}
+
+function formatAgeShort(months: number): string {
+  const y = Math.floor(months / 12)
+  const m = months % 12
+  if (y === 0) return `${m}m`
+  if (m === 0) return `${y}y`
+  return `${y}y ${m}m`
 }
 
 function loadOverrides(): Map<string, SoundOverride> {
@@ -45,21 +72,26 @@ function saveOverrides(overrides: Map<string, SoundOverride>) {
 }
 
 function AppRoute() {
-  const [childAgeMonths, setChildAgeMonths] = useState<number | null>(null)
+  const [birthDate, setBirthDate] = useState<BirthDate | null>(null)
+  const [birthLoaded, setBirthLoaded] = useState(false)
   const [soundOverrides, setSoundOverrides] = useState<Map<string, SoundOverride>>(new Map())
   const [currentIndex, setCurrentIndex] = useState(0)
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
+  const [editingAge, setEditingAge] = useState(false)
 
   // Load persisted state on mount
   useEffect(() => {
-    setChildAgeMonths(loadAge())
+    setBirthDate(loadBirth())
+    setBirthLoaded(true)
     setSoundOverrides(loadOverrides())
   }, [])
 
+  const childAgeMonths = birthDate ? computeAgeMonths(birthDate) : 24
+
   // Compute cards
   const { cards, stats } = useCards({
-    childAgeMonths: childAgeMonths ?? 24,
+    childAgeMonths,
     soundOverrides,
     filters,
   })
@@ -96,9 +128,10 @@ function AppRoute() {
   }, [speak])
 
   // Handle age submission
-  const handleAgeSubmit = useCallback((age: number) => {
-    setChildAgeMonths(age)
-    saveAge(age)
+  const handleAgeSubmit = useCallback((ageMonths: number, birthMonth: number, birthYear: number) => {
+    saveBirth(birthMonth, birthYear)
+    setBirthDate({ month: birthMonth, year: birthYear })
+    setEditingAge(false)
     setCurrentIndex(0)
   }, [])
 
@@ -131,9 +164,18 @@ function AppRoute() {
   const currentCard = cards[currentIndex]
   usePrefetchAudio(currentCard)
 
-  // Age not set → show age entry
-  if (childAgeMonths === null) {
-    return <AgeEntry onSubmit={handleAgeSubmit} />
+  // Wait for localStorage to load before rendering
+  if (!birthLoaded) return null
+
+  // No birth date set, or editing → show age entry
+  if (!birthDate || editingAge) {
+    return (
+      <AgeEntry
+        onSubmit={handleAgeSubmit}
+        initialBirthMonth={birthDate?.month}
+        initialBirthYear={birthDate?.year}
+      />
+    )
   }
 
   return (
@@ -180,14 +222,14 @@ function AppRoute() {
         </span>
 
         <button
-          onClick={() => setChildAgeMonths(null)}
+          onClick={() => setEditingAge(true)}
           style={{
             fontSize: '14px',
             fontWeight: 600,
             color: 'var(--color-text-muted)',
           }}
         >
-          ⚙ {childAgeMonths}mo
+          ⚙ {formatAgeShort(childAgeMonths)}
         </button>
       </header>
 
