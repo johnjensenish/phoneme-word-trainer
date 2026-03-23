@@ -14,12 +14,10 @@ import { TextToSpeechClient } from '@google-cloud/text-to-speech'
 import { writeFile, mkdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 
-import { sounds } from '../src/data/sounds'
 import { words } from '../src/data/words'
 import { PHONEME_LABELS } from '../src/engine/drillMode'
-import type { Sound } from '../src/data/types'
 
-const VOICE = { languageCode: 'en-US', name: 'en-US-Neural2-C' } as const
+const VOICE = { languageCode: 'en-US', name: 'en-US-Studio-O' } as const
 const AUDIO_CONFIG = { audioEncoding: 'MP3' as const }
 
 const PHONEMES_DIR = join(import.meta.dir, '..', 'public', 'audio', 'phonemes')
@@ -27,46 +25,55 @@ const WORDS_DIR = join(import.meta.dir, '..', 'public', 'audio', 'words')
 
 const force = process.argv.includes('--force')
 
-// --- SSML generation ---
+// --- Finalized phoneme SSML (hand-tuned via generate-samples.ts) ---
+//
+// Most use consonant+vowel at 120% rate. Exceptions:
+//   NG → ŋʌ at 96% (needs slower pace for velar nasal)
+//   Z  → zə at 120% (schwa avoids rhotic artifact from ʌ)
+//   TH_VOICELESS → θə at 120% (schwa avoids rhotic artifact)
+//   TH_VOICED → ðʌ at 96% (slower pace, text="the")
+//   R  → ɹɛ at 120% ("red" vowel gives clean "ruh")
 
-/** Strip "/.../" wrapper from IPA values in sounds.ts */
-function bareIpa(ipa: string): string {
-  return ipa.replace(/^\//, '').replace(/\/$/, '')
+const PHONEME_SSML: Record<string, string> = {
+  // Stops — burst + schwa
+  P:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="pʌ">puh</phoneme></prosody></speak>',
+  B:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="bʌ">buh</phoneme></prosody></speak>',
+  T:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="tʌ">tuh</phoneme></prosody></speak>',
+  D:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="dʌ">duh</phoneme></prosody></speak>',
+  K:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="kʌ">kuh</phoneme></prosody></speak>',
+  G:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="ɡʌ">guh</phoneme></prosody></speak>',
+
+  // Nasals
+  M:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="mːʌ">mmuh</phoneme></prosody></speak>',
+  N:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="nːʌ">nnuh</phoneme></prosody></speak>',
+  NG: '<speak><prosody rate="96%"><phoneme alphabet="ipa" ph="ŋʌ">nguh</phoneme></prosody></speak>',
+
+  // Fricatives
+  H:            '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="hʌ">huh</phoneme></prosody></speak>',
+  F:            '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="fːʌ">ffuh</phoneme></prosody></speak>',
+  V:            '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="vːʌ">vvuh</phoneme></prosody></speak>',
+  S:            '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="sə">suh</phoneme></prosody></speak>',
+  Z:            '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="zə">zuh</phoneme></prosody></speak>',
+  SH:           '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="ʃːʌ">sshuh</phoneme></prosody></speak>',
+  TH_VOICELESS: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="θə">thuh</phoneme></prosody></speak>',
+  TH_VOICED:    '<speak><prosody rate="96%"><phoneme alphabet="ipa" ph="ðʌ">the</phoneme></prosody></speak>',
+
+  // Glides
+  W: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="wʌ">wuh</phoneme></prosody></speak>',
+  Y: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="jʌ">yuh</phoneme></prosody></speak>',
+
+  // Liquids
+  L: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="lːʌ">lluh</phoneme></prosody></speak>',
+  R: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="ɹɛ">reh</phoneme></prosody></speak>',
+
+  // Affricates
+  CH: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="tʃʌ">chuh</phoneme></prosody></speak>',
+  J:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="dʒʌ">juh</phoneme></prosody></speak>',
 }
 
-/** Burst + schwa release for sounds that can't be sustained */
-function burstSsml(bare: string, label: string): string {
-  return `<speak><prosody rate="slow"><phoneme alphabet="ipa" ph="${bare}ʌ">${label}</phoneme></prosody></speak>`
-}
-
-/** Sustained sound with configurable duration */
-function sustainedSsml(bare: string, label: string, durationMs: number): string {
-  return `<speak><prosody duration="${durationMs}ms"><phoneme alphabet="ipa" ph="${bare}ːː">${label}</phoneme></prosody></speak>`
-}
-
-/** Build SSML for an isolated phoneme sound, using the sound's type from sounds.ts */
-function phonemeSsml(sound: Sound, label: string): string {
-  const bare = bareIpa(sound.ipa)
-
-  switch (sound.type) {
-    case 'stop_voiceless':
-    case 'stop_voiced':
-    case 'affricate':
-    case 'glide':
-      return burstSsml(bare, label)
-    case 'fricative':
-      return sustainedSsml(bare, label, 800)
-    case 'nasal':
-    case 'liquid':
-      return sustainedSsml(bare, label, 700)
-    default:
-      return `<speak><prosody rate="slow">${label}</prosody></speak>`
-  }
-}
-
-/** Build SSML for a word */
+/** Build SSML for a word (natural rate) */
 function wordSsml(word: string, ipa: string): string {
-  return `<speak><prosody rate="85%"><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></prosody></speak>`
+  return `<speak><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></speak>`
 }
 
 async function fileExists(path: string): Promise<boolean> {
@@ -108,6 +115,13 @@ async function synthesize(
   console.log(`  OK   ${label}`)
 }
 
+/** Process items in batches of `size`, running each batch concurrently */
+async function batch<T>(items: T[], size: number, fn: (item: T) => Promise<void>) {
+  for (let i = 0; i < items.length; i += size) {
+    await Promise.all(items.slice(i, i + size).map(fn))
+  }
+}
+
 // --- Main ---
 
 async function main() {
@@ -116,34 +130,28 @@ async function main() {
   await mkdir(PHONEMES_DIR, { recursive: true })
   await mkdir(WORDS_DIR, { recursive: true })
 
-  // Build a lookup: sound_id -> Sound
-  const soundMap = new Map(sounds.map(s => [s.sound_id, s]))
-
   // --- Phonemes ---
   const phonemeIds = Object.keys(PHONEME_LABELS)
   console.log(`\nGenerating ${phonemeIds.length} phoneme files...`)
 
-  for (const soundId of phonemeIds) {
-    const sound = soundMap.get(soundId)
-    if (!sound) {
-      console.warn(`  WARN No sound data for ${soundId}, skipping`)
-      continue
+  await batch(phonemeIds, 5, async (soundId) => {
+    const ssml = PHONEME_SSML[soundId]
+    if (!ssml) {
+      console.warn(`  WARN No SSML for ${soundId}, skipping`)
+      return
     }
-
-    const label = PHONEME_LABELS[soundId]!
-    const ssml = phonemeSsml(sound, label)
     const outPath = join(PHONEMES_DIR, `${soundId}.mp3`)
     await synthesize(client, ssml, outPath, `phoneme/${soundId}`)
-  }
+  })
 
   // --- Words ---
   console.log(`\nGenerating ${words.length} word files...`)
 
-  for (const word of words) {
+  await batch(words, 5, async (word) => {
     const ssml = wordSsml(word.word, word.ipa)
-    const outPath = join(WORDS_DIR, `${word.word_id}.mp3`)
-    await synthesize(client, ssml, outPath, `word/${word.word_id} (${word.word})`)
-  }
+    const outPath = join(WORDS_DIR, `${word.word}.mp3`)
+    await synthesize(client, ssml, outPath, `word/${word.word}`)
+  })
 
   console.log('\nDone!')
 }
