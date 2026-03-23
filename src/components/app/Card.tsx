@@ -5,7 +5,7 @@ import styles from './Card.module.css'
 
 interface CardProps {
   card: ComputedWordCard
-  onAudioPlay: (wordId: string) => void
+  onAudioPlay: (word: string) => void
   onPhonemePlay: (soundId: string) => void
 }
 
@@ -51,7 +51,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay }: CardProps) {
         <div className={styles.audioRow}>
           <button
             className={styles.audioButton}
-            onClick={() => onAudioPlay(card.word.word_id)}
+            onClick={() => onAudioPlay(card.word.word)}
             aria-label={`Play pronunciation of ${card.word.word}`}
           >
             🔊 Word

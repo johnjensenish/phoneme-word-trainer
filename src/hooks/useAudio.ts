@@ -42,12 +42,12 @@ export function useAudio() {
     })
   }, [])
 
-  /** Play a word's audio file */
-  const speak = useCallback((wordId: string, fallbackText?: string) => {
+  /** Play a word's audio file (filename is the word text, e.g. "truck.mp3") */
+  const speak = useCallback((word: string) => {
     if (typeof window === 'undefined') return
     stopAll()
-    playTracked(audioUrl('words', wordId)).catch(() => {
-      if (fallbackText) speakFallback(fallbackText)
+    playTracked(audioUrl('words', word)).catch(() => {
+      speakFallback(word)
     })
   }, [stopAll, playTracked])
 
@@ -61,15 +61,15 @@ export function useAudio() {
   }, [stopAll, playTracked])
 
   /** Play phoneme, pause, then word (for phoneme display prompts) */
-  const speakPhonemeDisplay = useCallback(async (soundId: string, wordId: string, fallbackText?: string) => {
+  const speakPhonemeDisplay = useCallback(async (soundId: string, word: string) => {
     if (typeof window === 'undefined') return
     stopAll()
     try {
       await playTracked(audioUrl('phonemes', soundId))
       await new Promise(r => setTimeout(r, 400))
-      await playTracked(audioUrl('words', wordId))
+      await playTracked(audioUrl('words', word))
     } catch {
-      if (fallbackText) speakFallback(fallbackText)
+      speakFallback(word)
     }
   }, [stopAll, playTracked])
 
@@ -92,7 +92,7 @@ export function usePrefetchAudio(card: ComputedWordCard | undefined) {
   useEffect(() => {
     if (!card || typeof document === 'undefined') return
 
-    const urls = [audioUrl('words', card.word.word_id)]
+    const urls = [audioUrl('words', card.word.word)]
     if (soundId) urls.push(audioUrl('phonemes', soundId))
 
     const links: HTMLLinkElement[] = []
@@ -106,5 +106,5 @@ export function usePrefetchAudio(card: ComputedWordCard | undefined) {
     }
 
     return () => { links.forEach(l => l.remove()) }
-  }, [card?.word.word_id, soundId])
+  }, [card?.word.word, soundId])
 }

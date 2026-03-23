@@ -88,7 +88,7 @@ function AppRoute() {
       if (e.key === ' ' && c.length > 0) {
         e.preventDefault()
         const card = c[i]
-        if (card) speak(card.word.word_id, card.word.word)
+        if (card) speak(card.word.word)
       }
     }
     window.addEventListener('keydown', handleKeyDown)
@@ -206,7 +206,7 @@ function AppRoute() {
           <div style={{ width: '100%', maxWidth: 'var(--card-max-width)' }}>
             <Card
               card={currentCard}
-              onAudioPlay={(wordId) => speak(wordId, currentCard.word.word)}
+              onAudioPlay={speak}
               onPhonemePlay={speakPhoneme}
             />
             <p style={{
