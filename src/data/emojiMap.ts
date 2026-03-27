@@ -404,4 +404,11 @@ export const emojiMap: Record<string, string> = {
   photo_snow: "❄️",
   photo_thunder: "⚡",
   photo_wind: "💨",
+  // User-requested words
+  photo_firetruck: "🚒",
+  photo_garbage_truck: "🚛",
+  photo_stars: "⭐",
+  photo_food: "🍽️",
+  photo_cracker: "🍘",
+  photo_fig_bar: "🍪",
 };

@@ -71,4 +71,6 @@ export interface ComputedWordCard {
   phoneme_display: string;
   expected_approximation: string;
   active_processes: PhonologicalProcess[];
+  /** Per-sound tier map: sound_id → Tier (1/2/3) for coloring phoneme pills */
+  soundTiers: Record<string, Tier>;
 }

@@ -5,6 +5,7 @@ import { words } from '~/data/words'
 import { processes } from '~/data/processes'
 import {
   buildSoundsMap,
+  computeSoundTier,
   computeWordTier,
   tierToDrillMode,
 } from '~/engine/tierComputation'
@@ -42,6 +43,14 @@ export function useCards({ childAgeMonths, soundOverrides, filters }: UseCardsOp
       const relevantProcesses = getRelevantProcesses(word, activeProcesses)
       const expected_approximation = predictApproximation(word, relevantProcesses)
 
+      // Compute per-sound tier for coloring individual phoneme pills
+      const soundTiers: Record<string, Tier> = {}
+      for (const cid of word.consonant_ids) {
+        if (soundTiers[cid] !== undefined) continue // already computed
+        const s = soundsMap.get(cid)
+        if (s) soundTiers[cid] = computeSoundTier(s, childAgeMonths, soundOverrides)
+      }
+
       return {
         word,
         tier,
@@ -49,6 +58,7 @@ export function useCards({ childAgeMonths, soundOverrides, filters }: UseCardsOp
         phoneme_display,
         expected_approximation,
         active_processes: relevantProcesses,
+        soundTiers,
       }
     })
   }, [soundsMap, childAgeMonths, soundOverrides, activeProcesses])
@@ -71,5 +81,5 @@ export function useCards({ childAgeMonths, soundOverrides, filters }: UseCardsOp
     }
   }, [allCards, filteredCards])
 
-  return { cards: filteredCards, stats }
+  return { cards: filteredCards, allCards, stats }
 }
