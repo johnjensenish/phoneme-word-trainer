@@ -410,5 +410,5 @@ export const emojiMap: Record<string, string> = {
   photo_stars: "⭐",
   photo_food: "🍽️",
   photo_cracker: "🍘",
-  photo_fig_bar: "🍫",
+  photo_fig_bar: "🍪",
 };
