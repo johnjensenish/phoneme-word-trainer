@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import type { Tier, SoundOverride } from '~/data/types'
 import { DEFAULT_FILTERS, type FilterState } from '~/engine/cardOrdering'
 import { useCards } from '~/hooks/useCards'
@@ -79,6 +79,7 @@ function AppRoute() {
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
   const [editingAge, setEditingAge] = useState(false)
+  const [jumpTarget, setDevJumpTarget] = useState<string | null>(null)
 
   // Load persisted state on mount
   useEffect(() => {
@@ -90,11 +91,21 @@ function AppRoute() {
   const childAgeMonths = birthDate ? computeAgeMonths(birthDate) : 24
 
   // Compute cards
-  const { cards, stats } = useCards({
+  const { cards, allCards, stats } = useCards({
     childAgeMonths,
     soundOverrides,
     filters,
   })
+
+  // Dev mode: resolve pending jump-to-word after filters update
+  useEffect(() => {
+    if (!jumpTarget) return
+    const idx = cards.findIndex(c =>
+      c.word.word.toLowerCase() === jumpTarget || c.word.word.toLowerCase().startsWith(jumpTarget),
+    )
+    if (idx !== -1) setCurrentIndex(idx)
+    setDevJumpTarget(null)
+  }, [jumpTarget, cards])
 
   const { speak, speakPhoneme } = useAudio()
 
@@ -111,21 +122,7 @@ function AppRoute() {
     onSwipeRight: goPrev,
   })
 
-  // Keyboard: space for audio (stabilized with ref to avoid re-registering on every navigation)
-  const stateRef = useRef({ cards, currentIndex })
-  useEffect(() => { stateRef.current = { cards, currentIndex } }, [cards, currentIndex])
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const { cards: c, currentIndex: i } = stateRef.current
-      if (e.key === ' ' && c.length > 0) {
-        e.preventDefault()
-        const card = c[i]
-        if (card) speak(card.word.word)
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [speak])
+  // Keyboard controls removed — use on-screen buttons and swipe only
 
   // Handle age submission
   const handleAgeSubmit = useCallback((ageMonths: number, birthMonth: number, birthYear: number) => {
@@ -214,12 +211,45 @@ function AppRoute() {
           )}
         </button>
 
-        <span style={{
-          fontSize: 'var(--font-size-xs)',
-          color: 'var(--color-text-light)',
-        }}>
-          {cards.length > 0 ? `${currentIndex + 1} / ${cards.length}` : '0 cards'}
-        </span>
+        <input
+          type="text"
+          placeholder={cards.length > 0 ? `${currentIndex + 1}/${cards.length} — jump to word` : '0 cards'}
+          style={{
+            fontSize: '12px',
+            color: 'var(--color-text-muted)',
+            background: 'var(--color-surface-sunken)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '6px',
+            padding: '4px 8px',
+            width: '160px',
+            textAlign: 'center',
+          }}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              const input = e.target as HTMLInputElement
+              const query = input.value.trim().toLowerCase()
+              if (!query) return
+              const match = (c: typeof cards[0]) =>
+                c.word.word.toLowerCase() === query || c.word.word.toLowerCase().startsWith(query)
+              // Try filtered cards first
+              const idx = cards.findIndex(match)
+              if (idx !== -1) {
+                setCurrentIndex(idx)
+                input.value = ''
+                input.blur()
+                return
+              }
+              // Try all cards — clear filters & disable shuffle to show it
+              const allMatch = allCards.find(match)
+              if (allMatch) {
+                setFilters({ ...DEFAULT_FILTERS, tiers: [1, 2, 3], shuffle: false })
+                setDevJumpTarget(allMatch.word.word.toLowerCase())
+                input.value = ''
+                input.blur()
+              }
+            }
+          }}
+        />
 
         <button
           onClick={() => setEditingAge(true)}
@@ -242,24 +272,89 @@ function AppRoute() {
           justifyContent: 'center',
           minHeight: 'calc(100vh - var(--nav-height) - 40px)',
           padding: 'var(--space-md)',
+          position: 'relative',
         }}
       >
         {currentCard ? (
-          <div style={{ width: '100%', maxWidth: 'var(--card-max-width)' }}>
-            <Card
-              card={currentCard}
-              onAudioPlay={speak}
-              onPhonemePlay={speakPhoneme}
-            />
-            <p style={{
-              textAlign: 'center',
-              color: 'var(--color-text-light)',
-              fontSize: 'var(--font-size-xs)',
-              marginTop: 'var(--space-md)',
-            }}>
-              ← swipe or use arrow keys →
-            </p>
-          </div>
+          <>
+            {/* Previous button */}
+            <button
+              onClick={goPrev}
+              aria-label="Previous word"
+              style={{
+                position: 'absolute',
+                left: 'max(8px, calc(50% - var(--card-max-width) / 2 - 52px))',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: 'rgba(0,0,0,0.06)',
+                color: 'var(--color-text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                fontWeight: 300,
+                lineHeight: 1,
+                transition: 'background 150ms ease, color 150ms ease',
+                zIndex: 2,
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(0,0,0,0.12)'
+                e.currentTarget.style.color = 'var(--color-text)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(0,0,0,0.06)'
+                e.currentTarget.style.color = 'var(--color-text-muted)'
+              }}
+            >
+              ‹
+            </button>
+
+            <div style={{ width: '100%', maxWidth: 'var(--card-max-width)' }}>
+              <Card
+                card={currentCard}
+                onAudioPlay={speak}
+                onPhonemePlay={speakPhoneme}
+              />
+            </div>
+
+            {/* Next button */}
+            <button
+              onClick={goNext}
+              aria-label="Next word"
+              style={{
+                position: 'absolute',
+                right: 'max(8px, calc(50% - var(--card-max-width) / 2 - 52px))',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                background: 'rgba(0,0,0,0.06)',
+                color: 'var(--color-text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                fontWeight: 300,
+                lineHeight: 1,
+                transition: 'background 150ms ease, color 150ms ease',
+                zIndex: 2,
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(0,0,0,0.12)'
+                e.currentTarget.style.color = 'var(--color-text)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(0,0,0,0.06)'
+                e.currentTarget.style.color = 'var(--color-text-muted)'
+              }}
+            >
+              ›
+            </button>
+          </>
         ) : (
           <div style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>
             <p style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</p>

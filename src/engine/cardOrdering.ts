@@ -11,7 +11,7 @@ for (const [i, group] of staticRhymeGroups.entries()) {
   }
 }
 
-export const ALL_CATEGORIES = ['actions', 'animals', 'body', 'colors', 'describing', 'food', 'house', 'people', 'vehicles'] as const
+export const ALL_CATEGORIES = ['actions', 'animals', 'body', 'colors', 'describing', 'food', 'house', 'numbers', 'people', 'vehicles'] as const
 
 export interface FilterState {
   categories: string[]

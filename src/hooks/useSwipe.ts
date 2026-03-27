@@ -42,21 +42,7 @@ export function useSwipe({ onSwipeLeft, onSwipeRight, threshold = 50 }: UseSwipe
     }
   }, [handleTouchStart, handleTouchEnd])
 
-  // Keyboard events (global)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault()
-        onSwipeRight() // left arrow → previous
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault()
-        onSwipeLeft() // right arrow → next
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onSwipeLeft, onSwipeRight])
+  // Keyboard navigation removed — touch/swipe and on-screen buttons only
 
   return { containerRef }
 }

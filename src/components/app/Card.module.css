@@ -60,102 +60,87 @@
   text-align: center;
 }
 
-/* ─── Audio Controls ─────────────────────────────────────────────── */
-.audioRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
-}
-
-.audioButton {
+/* ─── Word Audio Button (primary action) ─────────────────────────── */
+.wordButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  height: 36px;
-  padding: 0 12px;
-  border-radius: 18px;
-  background: var(--color-accent-light);
-  color: var(--color-accent);
-  font-size: 14px;
-  font-weight: 600;
-  flex-shrink: 0;
-  transition: background var(--transition-fast),
-              transform var(--transition-fast);
-}
-
-.audioButton:hover {
+  gap: 6px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 22px;
   background: var(--color-accent);
   color: var(--color-text-inverse);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: background var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.25);
 }
 
-.audioButton:active {
-  transform: scale(0.92);
+.wordButton:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 4px 12px rgba(74, 144, 217, 0.35);
 }
 
+.wordButton:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(74, 144, 217, 0.2);
+}
+
+/* ─── Phoneme Pills Row ─────────────────────────────────────────── */
+.phonemeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ─── Phoneme Pill (base) ────────────────────────────────────────── */
 .phonemePill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  height: 36px;
+  height: 32px;
   padding: 0 12px;
-  border-radius: 18px;
-  background: var(--color-tier-guided-bg, #fefcbf);
-  color: #B7791F;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   flex-shrink: 0;
-  transition: background var(--transition-fast),
-              transform var(--transition-fast);
+  transition: transform var(--transition-fast),
+              filter var(--transition-fast);
 }
 
 .phonemePill:hover {
-  background: #ecc94b;
-  color: #744210;
+  filter: brightness(0.92);
 }
 
 .phonemePill:active {
   transform: scale(0.92);
 }
 
-/* ─── Tier Indicator ─────────────────────────────────────────────── */
-.tier {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: 20px;
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.tierDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.tierProduce {
+/* ─── Tier 1 (Mastered) — Green ──────────────────────────────────── */
+.phonemeTier1 {
   background: var(--color-tier-produce-bg);
-  color: var(--color-tier-produce);
+  color: #276749;
 }
-.tierProduce .tierDot { background: var(--color-tier-produce); }
 
-.tierGuided {
+/* ─── Tier 2 (Emerging) — Amber ──────────────────────────────────── */
+.phonemeTier2 {
   background: var(--color-tier-guided-bg);
-  color: #B7791F;
+  color: #975A16;
 }
-.tierGuided .tierDot { background: var(--color-tier-guided); }
 
-.tierExpose {
+/* ─── Tier 3 (Future) — Soft Pink ────────────────────────────────── */
+.phonemeTier3 {
   background: var(--color-tier-expose-bg);
   color: #C53030;
 }
-.tierExpose .tierDot { background: var(--color-tier-expose); }
 
 /* ─── Swipe hint ─────────────────────────────────────────────────── */
 .swipeHint {
@@ -181,6 +166,18 @@
 
   .content {
     padding: var(--space-md) var(--space-sm) var(--space-lg);
+  }
+
+  .wordButton {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 15px;
+  }
+
+  .phonemePill {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
   }
 }
 

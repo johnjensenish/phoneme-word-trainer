@@ -5,7 +5,7 @@ import { getTargetSoundId } from '~/engine/drillMode'
 const noop = () => {}
 
 function audioUrl(type: 'words' | 'phonemes', id: string): string {
-  return `/audio/${type}/${id}.mp3`
+  return `/audio/${type}/${encodeURIComponent(id)}.mp3`
 }
 
 /** Fallback: speak text via Web Speech API */
