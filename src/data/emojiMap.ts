@@ -435,6 +435,7 @@ export const emojiMap: Record<string, string> = {
   photo_bridge: "🌉",
   photo_coffee: "☕",
   photo_battery: "🔋",
+  photo_fries: "🍟",
   photo_remote: "📺",
   photo_controller: "🎮",
   photo_computer: "💻",
