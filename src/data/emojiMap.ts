@@ -447,6 +447,6 @@ export const emojiMap: Record<string, string> = {
   photo_velcro: "👟",
   photo_messy: "🫠",
   photo_pet: "🐾",
-  photo_sweater: "🧥",
+  photo_sweater: "🧶",
   photo_clean: "🧹",
 };
