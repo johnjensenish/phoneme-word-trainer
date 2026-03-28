@@ -411,4 +411,17 @@ export const emojiMap: Record<string, string> = {
   photo_food: "🍽️",
   photo_cracker: "🍘",
   photo_fig_bar: "🍪",
+  // New word emojis
+  photo_yam: "🍠",
+  photo_zebra: "🦓",
+  photo_zoo: "🏛️",
+  photo_shark: "🦈",
+  // User-requested word emojis
+  photo_hippo: "🦛",
+  photo_deer: "🦌",
+  photo_ice_cream: "🍦",
+  photo_machine: "🔧",
+  photo_vacuum: "🧹",
+  photo_phone: "📱",
+  photo_tv: "📺",
 };
