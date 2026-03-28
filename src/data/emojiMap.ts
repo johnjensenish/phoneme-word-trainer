@@ -433,6 +433,7 @@ export const emojiMap: Record<string, string> = {
   photo_nurse: "👩‍⚕️",
   photo_robot: "🤖",
   photo_bridge: "🌉",
+  photo_coffee: "☕",
   photo_remote: "📺",
   photo_controller: "🎮",
   photo_computer: "💻",
