@@ -424,4 +424,5 @@ export const emojiMap: Record<string, string> = {
   photo_vacuum: "🧹",
   photo_phone: "📱",
   photo_tv: "📺",
+  photo_fire: "🔥",
 };
