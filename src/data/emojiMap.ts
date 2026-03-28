@@ -443,4 +443,5 @@ export const emojiMap: Record<string, string> = {
   photo_computer: "💻",
   photo_vanilla: "🍦",
   photo_butter: "🧈",
+  photo_sour: "🍋",
 };
