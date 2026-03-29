@@ -452,4 +452,5 @@ export const emojiMap: Record<string, string> = {
   photo_wrong: "❌",
   photo_correct: "✅",
   photo_scoop: "🍨",
+  photo_hedgehog: "🦔",
 };
