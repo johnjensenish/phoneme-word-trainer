@@ -453,4 +453,7 @@ export const emojiMap: Record<string, string> = {
   photo_correct: "✅",
   photo_scoop: "🍨",
   photo_hedgehog: "🦔",
+  photo_timer: "⏲️",
+  photo_maple_tree: "🍁",
+  photo_tow_truck: "🚛",
 };
