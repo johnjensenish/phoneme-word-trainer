@@ -180,7 +180,7 @@ export const words: Word[] = [
   {
     word_id: "ACT012",
     word: "want",
-    ipa: "w\u0252nt",
+    ipa: "wɑːnt",
     category: "actions",
     word_type: "requesting",
     word_shape: "CVNT",
@@ -276,7 +276,7 @@ export const words: Word[] = [
   {
     word_id: "ACT018",
     word: "pop",
-    ipa: "p\u0252p",
+    ipa: "pɑːp",
     category: "actions",
     word_type: "action",
     word_shape: "CVC",
@@ -308,7 +308,7 @@ export const words: Word[] = [
   {
     word_id: "ACT020",
     word: "hop",
-    ipa: "h\u0252p",
+    ipa: "hɑːp",
     category: "actions",
     word_type: "action",
     word_shape: "CVC",
@@ -356,7 +356,7 @@ export const words: Word[] = [
   {
     word_id: "ACT023",
     word: "stop",
-    ipa: "st\u0252p",
+    ipa: "stɑːp",
     category: "actions",
     word_type: "action",
     word_shape: "CCVC",
@@ -484,7 +484,7 @@ export const words: Word[] = [
   {
     word_id: "ACT031",
     word: "on",
-    ipa: "\u0252n",
+    ipa: "ɑːn",
     category: "actions",
     word_type: "action",
     word_shape: "VC",
@@ -500,7 +500,7 @@ export const words: Word[] = [
   {
     word_id: "ACT032",
     word: "off",
-    ipa: "\u0252f",
+    ipa: "ɑːf",
     category: "actions",
     word_type: "action",
     word_shape: "VF",
@@ -660,7 +660,7 @@ export const words: Word[] = [
   {
     word_id: "ACT042",
     word: "wash",
-    ipa: "w\u0252\u0283",
+    ipa: "wɑːʃ",
     category: "actions",
     word_type: "action",
     word_shape: "CVC",
@@ -804,7 +804,7 @@ export const words: Word[] = [
   {
     word_id: "ANI003",
     word: "baa",
-    ipa: "b\u00e6\u02d0",
+    ipa: "bɑː",
     category: "animals",
     word_type: "sound",
     word_shape: "CV",
@@ -884,7 +884,7 @@ export const words: Word[] = [
   {
     word_id: "ANI008",
     word: "dog",
-    ipa: "d\u0252\u0261",
+    ipa: "dɑːɡ",
     category: "animals",
     word_type: "noun",
     word_shape: "CVC",
@@ -1028,7 +1028,7 @@ export const words: Word[] = [
   {
     word_id: "ANI017",
     word: "frog",
-    ipa: "fr\u0252\u0261",
+    ipa: "frɑːɡ",
     category: "animals",
     word_type: "noun",
     word_shape: "CCVC",
@@ -1428,7 +1428,7 @@ export const words: Word[] = [
   {
     word_id: "OBJ005",
     word: "mop",
-    ipa: "m\u0252p",
+    ipa: "mɑːp",
     category: "house",
     word_type: "noun",
     word_shape: "CVC",
@@ -1556,7 +1556,7 @@ export const words: Word[] = [
   {
     word_id: "OBJ013",
     word: "box",
-    ipa: "b\u0252ks",
+    ipa: "bɑːks",
     category: "house",
     word_type: "noun",
     word_shape: "CVCC",
@@ -1588,7 +1588,7 @@ export const words: Word[] = [
   {
     word_id: "OBJ015",
     word: "sock",
-    ipa: "s\u0252k",
+    ipa: "sɑːk",
     category: "house",
     word_type: "noun",
     word_shape: "CVC",
@@ -1844,7 +1844,7 @@ export const words: Word[] = [
   {
     word_id: "FOO007",
     word: "hot",
-    ipa: "h\u0252t",
+    ipa: "hɑːt",
     category: "food",
     word_type: "describing",
     word_shape: "CVC",
@@ -2596,7 +2596,7 @@ export const words: Word[] = [
   {
     word_id: "PPL006",
     word: "nana",
-    ipa: "n\u00e6.n\u0259",
+    ipa: "nɑː.nə",
     category: "people",
     word_type: "social",
     word_shape: "CV.CV",
@@ -2612,7 +2612,7 @@ export const words: Word[] = [
   {
     word_id: "ACT049",
     word: "nom",
-    ipa: "n\u0252m",
+    ipa: "nɑːm",
     category: "food",
     word_type: "sound",
     word_shape: "CVC",
@@ -3092,7 +3092,7 @@ export const words: Word[] = [
   {
     word_id: "DES015",
     word: "soft",
-    ipa: "s\u0252ft",
+    ipa: "sɑːft",
     category: "describing",
     word_type: "adjective",
     word_shape: "CVCC",
@@ -6959,7 +6959,7 @@ export const words: Word[] = [
   {
     word_id: "ACT071",
     word: "sorry",
-    ipa: "sɒr.i",
+    ipa: "sɑːr.i",
     category: "actions",
     word_type: "social",
     word_shape: "CV.CV",
@@ -7039,7 +7039,7 @@ export const words: Word[] = [
   {
     word_id: "VEH018",
     word: "rocket",
-    ipa: "rɒk.ɪt",
+    ipa: "rɑːk.ɪt",
     category: "vehicles",
     word_type: "noun",
     word_shape: "CVC.VC",
@@ -7071,7 +7071,7 @@ export const words: Word[] = [
   {
     word_id: "ANI042",
     word: "monster",
-    ipa: "mɒn.stɚ",
+    ipa: "mɑːn.stɚ",
     category: "animals",
     word_type: "noun",
     word_shape: "CVC.CCVC",
@@ -7151,7 +7151,7 @@ export const words: Word[] = [
   {
     word_id: "FOO058",
     word: "bottle",
-    ipa: "bɒt.əl",
+    ipa: "bɑːt.əl",
     category: "food",
     word_type: "noun",
     word_shape: "CVC.VC",
@@ -7183,7 +7183,7 @@ export const words: Word[] = [
   {
     word_id: "BOD022",
     word: "potty",
-    ipa: "pɒt.i",
+    ipa: "pɑːt.i",
     category: "body",
     word_type: "noun",
     word_shape: "CV.CV",
@@ -7327,7 +7327,7 @@ export const words: Word[] = [
   {
     word_id: "VEH019",
     word: "helicopter",
-    ipa: "hɛl.ɪˌkɒp.tɚ",
+    ipa: "hɛl.ɪˌkɑːp.tɚ",
     category: "vehicles",
     word_type: "noun",
     word_shape: "CVC.V.CVC.CVC",
@@ -7663,7 +7663,7 @@ export const words: Word[] = [
   {
     word_id: "ACT091",
     word: "jog",
-    ipa: "dʒɒɡ",
+    ipa: "dʒɑːɡ",
     category: "actions",
     word_type: "action",
     word_shape: "CVC",
@@ -8367,7 +8367,7 @@ export const words: Word[] = [
   {
     word_id: "ACT108",
     word: "drop",
-    ipa: "drɒp",
+    ipa: "drɑːp",
     category: "actions",
     word_type: "action",
     word_shape: "CCVC",
@@ -8623,7 +8623,7 @@ export const words: Word[] = [
   {
     word_id: "TOY022",
     word: "robot",
-    ipa: "roʊ.bɒt",
+    ipa: "roʊ.bɑːt",
     category: "toys",
     word_type: "noun",
     word_shape: "CV.CVC",
@@ -8767,7 +8767,7 @@ export const words: Word[] = [
   {
     word_id: "FOO065",
     word: "coffee",
-    ipa: "kɒf.i",
+    ipa: "kɑːf.i",
     category: "food",
     word_type: "noun",
     word_shape: "CVC.V",
@@ -8895,7 +8895,7 @@ export const words: Word[] = [
   {
     word_id: "FOO067",
     word: "water bottle",
-    ipa: "wɔː.tɚ bɒt.əl",
+    ipa: "wɔː.tɚ bɑːt.əl",
     category: "food",
     word_type: "noun",
     word_shape: "CV.CV CVC.VC",
@@ -9023,7 +9023,7 @@ export const words: Word[] = [
   {
     word_id: "ACT120",
     word: "borrow",
-    ipa: "bɒr.oʊ",
+    ipa: "bɑːr.oʊ",
     category: "actions",
     word_type: "action",
     word_shape: "CVC.V",
@@ -9215,7 +9215,7 @@ export const words: Word[] = [
   {
     word_id: "OBJ049",
     word: "pot",
-    ipa: "pɒt",
+    ipa: "pɑːt",
     category: "house",
     word_type: "noun",
     word_shape: "CVC",
@@ -9471,7 +9471,7 @@ export const words: Word[] = [
   {
     word_id: "DES051",
     word: "wrong",
-    ipa: "ɹɒŋ",
+    ipa: "ɹɑːŋ",
     category: "describing",
     word_type: "adjective",
     word_shape: "CVC",
@@ -9519,7 +9519,7 @@ export const words: Word[] = [
   {
     word_id: "NAT026",
     word: "moss",
-    ipa: "mɒs",
+    ipa: "mɑːs",
     category: "nature",
     word_type: "noun",
     word_shape: "CVC",
@@ -9567,7 +9567,7 @@ export const words: Word[] = [
   {
     word_id: "ANI044",
     word: "hedgehog",
-    ipa: "hɛdʒ.hɒɡ",
+    ipa: "hɛdʒ.hɑːɡ",
     category: "animals",
     word_type: "noun",
     word_shape: "CVC.CVC",
@@ -9663,7 +9663,7 @@ export const words: Word[] = [
   {
     word_id: "FUR019",
     word: "dishwasher",
-    ipa: "dɪʃ.wɒʃ.ɚ",
+    ipa: "dɪʃ.wɑːʃ.ɚ",
     category: "furniture",
     word_type: "noun",
     word_shape: "CVC.CVC.VC",

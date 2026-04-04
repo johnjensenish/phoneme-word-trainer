@@ -1,9 +1,23 @@
 /**
  * Detect IPA differences between words.ts and American English dictionary (espeak-ng).
  *
- * Compares each word's configured IPA against espeak-ng's en-us pronunciation
- * and flags mismatches. Useful for catching typos, British pronunciations, or
- * missing sounds.
+ * TARGET DIALECT: Pacific Northwest (PNW) American English
+ *
+ * This app teaches speech to young American children. All IPA must reflect
+ * actual PNW American pronunciation — never British English. Key PNW features:
+ *
+ *   - Cot-caught merger: /ɒ/ does NOT exist. Use /ɑː/ for "hot", "dog", "pot".
+ *     British /ɒ/ sounds foreign to PNW kids and will confuse TTS output.
+ *   - Rhotic: All r's are pronounced. Use /ɝː/ or /ɚ/ for "bird", "butter".
+ *     Never use non-rhotic British forms like /bɜːd/.
+ *   - Flap t: Intervocalic /t/ becomes [ɾ] ("water" = [wɔːɾɚ]).
+ *     Both /t/ and /ɾ/ are acceptable in transcription.
+ *   - No /njuː/: "new" = /nuː/, not British /njuː/.
+ *   - /æ/ before nasals: "branch" = /bræntʃ/, not British /brɑːntʃ/.
+ *
+ * Flags that should NEVER appear in words.ts:
+ *   - ɒ (British rounded open-back) → use ɑː
+ *   - njuː for "new/knew" words → use nuː
  *
  * Requires: espeak-ng (apt-get install -y espeak-ng)
  *
@@ -21,13 +35,38 @@ const AUDIO_DIR = join(import.meta.dir, "..", "public", "audio", "words");
 const majorOnly = process.argv.includes("--major");
 const shouldDelete = process.argv.includes("--delete");
 
-// Check espeak-ng is available
+// ── Pre-flight checks ───────────────────────────────────────────────
+
 try {
   execSync("which espeak-ng", { encoding: "utf-8" });
 } catch {
   console.error("ERROR: espeak-ng is not installed. Run: apt-get install -y espeak-ng");
   process.exit(1);
 }
+
+// ── British IPA detector ────────────────────────────────────────────
+// Catch any British-isms that slipped in before we even compare to the dictionary.
+
+const britishFlags: Array<{ word_id: string; word: string; ipa: string; reason: string }> = [];
+
+for (const w of words) {
+  if (w.ipa.includes("\u0252")) { // ɒ
+    britishFlags.push({ word_id: w.word_id, word: w.word, ipa: w.ipa, reason: "Contains ɒ (British). Use ɑː for PNW American." });
+  }
+  if (w.ipa.includes("njuː") && ["new", "knew"].includes(w.word)) {
+    britishFlags.push({ word_id: w.word_id, word: w.word, ipa: w.ipa, reason: "Uses njuː (British). Use nuː for PNW American." });
+  }
+}
+
+if (britishFlags.length > 0) {
+  console.log(`\n🚨 BRITISH PRONUNCIATIONS DETECTED (${britishFlags.length}) — must fix!\n`);
+  for (const f of britishFlags) {
+    console.log(`  ${f.word_id.padEnd(8)} ${f.word.padEnd(20)} ${f.ipa.padEnd(20)} ${f.reason}`);
+  }
+  console.log();
+}
+
+// ── Dictionary comparison ───────────────────────────────────────────
 
 function getEspeakIPA(word: string): string {
   try {
@@ -41,7 +80,10 @@ function getEspeakIPA(word: string): string {
 
 /**
  * Normalize IPA for comparison.
- * Maps dialect/style variants to a common form so we only flag real errors.
+ *
+ * Maps dialect/style variants to a common form so we only flag real errors,
+ * not transcription style differences (stress marking, syllable breaks,
+ * vowel length notation, rhotic vowel symbols).
  */
 function normalize(ipa: string): string {
   return ipa
@@ -51,7 +93,7 @@ function normalize(ipa: string): string {
     .replace(/\s+/g, "")          // spaces
     .replace(/ɹ/g, "r")           // r variants
     .replace(/ɾ/g, "t")           // flap t = /t/ (American allophone)
-    .replace(/ɝ/g, "ɜ")           // rhotacized = non-rhotacized (both valid)
+    .replace(/ɝ/g, "ɜ")           // rhotacized = non-rhotacized for comparison
     .replace(/ɚ/g, "ɜ")           // rhotacized schwa
     .replace(/ɜr/g, "ɜ")          // explicit ɜr = ɜ alone
     .replace(/ər/g, "ɜ")          // schwa+r = rhotacized vowel
@@ -60,6 +102,8 @@ function normalize(ipa: string): string {
     .replace(/ʔ/g, "t")           // glottal stop (allophone of t)
     .replace(/n̩/g, "ən")          // syllabic n
     .replace(/l̩/g, "əl")          // syllabic l
+    .replace(/ɒ/g, "ɑ")           // cot-caught merger (PNW)
+    .replace(/ɔ/g, "ɑ")           // caught = cot in PNW
     .trim();
 }
 
@@ -111,17 +155,19 @@ for (const w of words) {
   });
 }
 
-// Report
+// ── Report ──────────────────────────────────────────────────────────
+
 const major = mismatches.filter(m => m.severity === "MAJOR");
 const minor = mismatches.filter(m => m.severity === "MINOR");
 
-console.log(`=== IPA Dictionary Comparison ===\n`);
-console.log(`Total words:    ${words.length}`);
-console.log(`Matched:        ${matched.length}`);
-console.log(`Mismatches:     ${mismatches.length}`);
-console.log(`  MAJOR:        ${major.length} (consonant differences — likely errors)`);
-console.log(`  MINOR:        ${minor.length} (vowel/stress — likely dialect variants)`);
-console.log(`No dict result: ${noResult.length}`);
+console.log(`=== IPA Dictionary Comparison (PNW American English) ===\n`);
+console.log(`Total words:      ${words.length}`);
+console.log(`Matched:          ${matched.length}`);
+console.log(`Mismatches:       ${mismatches.length}`);
+console.log(`  MAJOR:          ${major.length} (consonant differences — likely errors)`);
+console.log(`  MINOR:          ${minor.length} (vowel/stress — likely style differences)`);
+console.log(`British flags:    ${britishFlags.length}`);
+console.log(`No dict result:   ${noResult.length}`);
 
 if (major.length > 0) {
   console.log(`\n--- MAJOR (consonant differences) ---`);
@@ -142,7 +188,8 @@ if (noResult.length > 0) {
   console.log(`  ${noResult.join(", ")}`);
 }
 
-// Delete audio for major mismatches
+// ── Delete stale audio ──────────────────────────────────────────────
+
 if (shouldDelete && major.length > 0) {
   let deleted = 0;
   for (const m of major) {
@@ -156,8 +203,10 @@ if (shouldDelete && major.length > 0) {
   if (deleted > 0) console.log(`\nDeleted ${deleted} audio files for major mismatches.`);
 }
 
-// Exit code
-if (major.length > 0) {
-  console.log(`\n${major.length} major mismatch(es) need review.`);
+// ── Exit code ───────────────────────────────────────────────────────
+
+const errors = major.length + britishFlags.length;
+if (errors > 0) {
+  console.log(`\n${errors} issue(s) need review.`);
   process.exit(1);
 }
