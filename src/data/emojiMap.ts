@@ -458,4 +458,5 @@ export const emojiMap: Record<string, string> = {
   photo_tow_truck: "🚛",
   photo_upstairs: "⬆️",
   photo_downstairs: "⬇️",
+  photo_drain: "🕳️",
 };
