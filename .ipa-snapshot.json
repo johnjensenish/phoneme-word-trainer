@@ -1,0 +1,2378 @@
+{
+  "ACT001": {
+    "word": "up",
+    "ipa": "ʌp"
+  },
+  "ACT002": {
+    "word": "no",
+    "ipa": "noʊ"
+  },
+  "ACT003": {
+    "word": "hi",
+    "ipa": "haɪ"
+  },
+  "ACT004": {
+    "word": "bye",
+    "ipa": "baɪ"
+  },
+  "ACT005": {
+    "word": "me",
+    "ipa": "miː"
+  },
+  "ACT006": {
+    "word": "my",
+    "ipa": "maɪ"
+  },
+  "ACT007": {
+    "word": "boo",
+    "ipa": "buː"
+  },
+  "ACT008": {
+    "word": "wow",
+    "ipa": "waʊ"
+  },
+  "ACT009": {
+    "word": "uh-oh",
+    "ipa": "ʌ.oʊ"
+  },
+  "ACT010": {
+    "word": "whee",
+    "ipa": "wiː"
+  },
+  "ACT011": {
+    "word": "more",
+    "ipa": "mɔːr"
+  },
+  "ACT012": {
+    "word": "want",
+    "ipa": "wɒnt"
+  },
+  "ACT013": {
+    "word": "help",
+    "ipa": "hɛlp"
+  },
+  "ACT014": {
+    "word": "mine",
+    "ipa": "maɪn"
+  },
+  "ACT015": {
+    "word": "go",
+    "ipa": "ɡoʊ"
+  },
+  "ACT016": {
+    "word": "push",
+    "ipa": "pʊʃ"
+  },
+  "ACT017": {
+    "word": "pull",
+    "ipa": "pʊl"
+  },
+  "ACT018": {
+    "word": "pop",
+    "ipa": "pɒp"
+  },
+  "ACT019": {
+    "word": "bump",
+    "ipa": "bʌmp"
+  },
+  "ACT020": {
+    "word": "hop",
+    "ipa": "hɒp"
+  },
+  "ACT021": {
+    "word": "run",
+    "ipa": "rʌn"
+  },
+  "ACT022": {
+    "word": "walk",
+    "ipa": "wɔːk"
+  },
+  "ACT023": {
+    "word": "stop",
+    "ipa": "stɒp"
+  },
+  "ACT024": {
+    "word": "eat",
+    "ipa": "iːt"
+  },
+  "ACT025": {
+    "word": "bite",
+    "ipa": "baɪt"
+  },
+  "ACT026": {
+    "word": "hide",
+    "ipa": "haɪd"
+  },
+  "ACT027": {
+    "word": "peek",
+    "ipa": "piːk"
+  },
+  "ACT028": {
+    "word": "dump",
+    "ipa": "dʌmp"
+  },
+  "ACT029": {
+    "word": "wipe",
+    "ipa": "waɪp"
+  },
+  "ACT030": {
+    "word": "down",
+    "ipa": "daʊn"
+  },
+  "ACT031": {
+    "word": "on",
+    "ipa": "ɒn"
+  },
+  "ACT032": {
+    "word": "off",
+    "ipa": "ɒf"
+  },
+  "ACT033": {
+    "word": "in",
+    "ipa": "ɪn"
+  },
+  "ACT034": {
+    "word": "out",
+    "ipa": "aʊt"
+  },
+  "ACT035": {
+    "word": "open",
+    "ipa": "oʊ.pən"
+  },
+  "ACT036": {
+    "word": "bang",
+    "ipa": "bæŋ"
+  },
+  "ACT037": {
+    "word": "jump",
+    "ipa": "dʒʌmp"
+  },
+  "ACT038": {
+    "word": "sit",
+    "ipa": "sɪt"
+  },
+  "ACT039": {
+    "word": "fall",
+    "ipa": "fɔːl"
+  },
+  "ACT040": {
+    "word": "throw",
+    "ipa": "θroʊ"
+  },
+  "ACT041": {
+    "word": "kick",
+    "ipa": "kɪk"
+  },
+  "ACT042": {
+    "word": "wash",
+    "ipa": "wɒʃ"
+  },
+  "ACT043": {
+    "word": "pour",
+    "ipa": "pɔːr"
+  },
+  "ACT044": {
+    "word": "yay",
+    "ipa": "jeɪ"
+  },
+  "PPL001": {
+    "word": "mama",
+    "ipa": "mɑː.mɑː"
+  },
+  "PPL002": {
+    "word": "dada",
+    "ipa": "dɑː.dɑː"
+  },
+  "PPL003": {
+    "word": "baby",
+    "ipa": "beɪ.bi"
+  },
+  "PPL004": {
+    "word": "night-night",
+    "ipa": "naɪt.naɪt"
+  },
+  "ANI001": {
+    "word": "bee",
+    "ipa": "biː"
+  },
+  "ANI002": {
+    "word": "moo",
+    "ipa": "muː"
+  },
+  "ANI003": {
+    "word": "baa",
+    "ipa": "bæː"
+  },
+  "ANI004": {
+    "word": "neigh",
+    "ipa": "neɪ"
+  },
+  "ANI005": {
+    "word": "woof",
+    "ipa": "wʊf"
+  },
+  "ANI006": {
+    "word": "hen",
+    "ipa": "hɛn"
+  },
+  "ANI007": {
+    "word": "bug",
+    "ipa": "bʌɡ"
+  },
+  "ANI008": {
+    "word": "dog",
+    "ipa": "dɒɡ"
+  },
+  "ANI009": {
+    "word": "duck",
+    "ipa": "dʌk"
+  },
+  "ANI010": {
+    "word": "pig",
+    "ipa": "pɪɡ"
+  },
+  "ANI011": {
+    "word": "bat",
+    "ipa": "bæt"
+  },
+  "ANI012": {
+    "word": "cat",
+    "ipa": "kæt"
+  },
+  "ANI013": {
+    "word": "goat",
+    "ipa": "ɡoʊt"
+  },
+  "ANI014": {
+    "word": "fish",
+    "ipa": "fɪʃ"
+  },
+  "ANI015": {
+    "word": "cow",
+    "ipa": "kaʊ"
+  },
+  "ANI016": {
+    "word": "bird",
+    "ipa": "bɝːd"
+  },
+  "ANI017": {
+    "word": "frog",
+    "ipa": "frɒɡ"
+  },
+  "ANI018": {
+    "word": "horse",
+    "ipa": "hɔːrs"
+  },
+  "ANI019": {
+    "word": "mouse",
+    "ipa": "maʊs"
+  },
+  "ANI020": {
+    "word": "snake",
+    "ipa": "sneɪk"
+  },
+  "ANI021": {
+    "word": "bear",
+    "ipa": "bɛːr"
+  },
+  "ANI022": {
+    "word": "hiss",
+    "ipa": "hɪs"
+  },
+  "ANI023": {
+    "word": "quack",
+    "ipa": "kwæk"
+  },
+  "VEH001": {
+    "word": "bus",
+    "ipa": "bʌs"
+  },
+  "VEH002": {
+    "word": "beep",
+    "ipa": "biːp"
+  },
+  "VEH003": {
+    "word": "boat",
+    "ipa": "boʊt"
+  },
+  "VEH004": {
+    "word": "bike",
+    "ipa": "baɪk"
+  },
+  "VEH005": {
+    "word": "car",
+    "ipa": "kɑːr"
+  },
+  "VEH006": {
+    "word": "fast",
+    "ipa": "fæst"
+  },
+  "VEH007": {
+    "word": "van",
+    "ipa": "væn"
+  },
+  "VEH008": {
+    "word": "truck",
+    "ipa": "trʌk"
+  },
+  "VEH009": {
+    "word": "train",
+    "ipa": "treɪn"
+  },
+  "VEH010": {
+    "word": "plane",
+    "ipa": "pleɪn"
+  },
+  "VEH011": {
+    "word": "zoom",
+    "ipa": "zuːm"
+  },
+  "VEH012": {
+    "word": "vroom",
+    "ipa": "vruːm"
+  },
+  "VEH013": {
+    "word": "choo-choo",
+    "ipa": "tʃuː.tʃuː"
+  },
+  "VEH014": {
+    "word": "wheel",
+    "ipa": "wiːl"
+  },
+  "OBJ001": {
+    "word": "bed",
+    "ipa": "bɛd"
+  },
+  "OBJ002": {
+    "word": "hat",
+    "ipa": "hæt"
+  },
+  "OBJ003": {
+    "word": "bath",
+    "ipa": "bæθ"
+  },
+  "OBJ004": {
+    "word": "door",
+    "ipa": "dɔːr"
+  },
+  "OBJ005": {
+    "word": "mop",
+    "ipa": "mɒp"
+  },
+  "OBJ006": {
+    "word": "pan",
+    "ipa": "pæn"
+  },
+  "OBJ007": {
+    "word": "trash",
+    "ipa": "tɹæʃ"
+  },
+  "OBJ008": {
+    "word": "nap",
+    "ipa": "næp"
+  },
+  "OBJ009": {
+    "word": "cup",
+    "ipa": "kʌp"
+  },
+  "OBJ010": {
+    "word": "key",
+    "ipa": "kiː"
+  },
+  "OBJ011": {
+    "word": "book",
+    "ipa": "bʊk"
+  },
+  "OBJ012": {
+    "word": "ball",
+    "ipa": "bɔːl"
+  },
+  "OBJ013": {
+    "word": "box",
+    "ipa": "bɒks"
+  },
+  "OBJ014": {
+    "word": "tap",
+    "ipa": "tæp"
+  },
+  "OBJ015": {
+    "word": "sock",
+    "ipa": "sɒk"
+  },
+  "OBJ016": {
+    "word": "shoe",
+    "ipa": "ʃuː"
+  },
+  "OBJ017": {
+    "word": "chair",
+    "ipa": "tʃɛːr"
+  },
+  "OBJ018": {
+    "word": "spoon",
+    "ipa": "spuːn"
+  },
+  "OBJ019": {
+    "word": "bowl",
+    "ipa": "boʊl"
+  },
+  "OBJ020": {
+    "word": "pee",
+    "ipa": "piː"
+  },
+  "OBJ021": {
+    "word": "poop",
+    "ipa": "puːp"
+  },
+  "OBJ022": {
+    "word": "light",
+    "ipa": "laɪt"
+  },
+  "OBJ023": {
+    "word": "bag",
+    "ipa": "bæɡ"
+  },
+  "OBJ024": {
+    "word": "pen",
+    "ipa": "pɛn"
+  },
+  "FOO001": {
+    "word": "yum",
+    "ipa": "jʌm"
+  },
+  "FOO002": {
+    "word": "num-num",
+    "ipa": "nʌm.nʌm"
+  },
+  "FOO003": {
+    "word": "milk",
+    "ipa": "mɪlk"
+  },
+  "FOO004": {
+    "word": "ham",
+    "ipa": "hæm"
+  },
+  "FOO005": {
+    "word": "pie",
+    "ipa": "paɪ"
+  },
+  "FOO006": {
+    "word": "dip",
+    "ipa": "dɪp"
+  },
+  "FOO007": {
+    "word": "hot",
+    "ipa": "hɒt"
+  },
+  "FOO008": {
+    "word": "egg",
+    "ipa": "ɛɡ"
+  },
+  "FOO009": {
+    "word": "nut",
+    "ipa": "nʌt"
+  },
+  "FOO010": {
+    "word": "pea",
+    "ipa": "piː"
+  },
+  "FOO011": {
+    "word": "banana",
+    "ipa": "bə.næ.nə"
+  },
+  "FOO012": {
+    "word": "water",
+    "ipa": "wɔː.tər"
+  },
+  "FOO013": {
+    "word": "juice",
+    "ipa": "dʒuːs"
+  },
+  "FOO014": {
+    "word": "cheese",
+    "ipa": "tʃiːz"
+  },
+  "FOO015": {
+    "word": "bread",
+    "ipa": "brɛd"
+  },
+  "FOO016": {
+    "word": "snack",
+    "ipa": "snæk"
+  },
+  "FOO019": {
+    "word": "yummy",
+    "ipa": "jʌ.mi"
+  },
+  "BOD001": {
+    "word": "head",
+    "ipa": "hɛd"
+  },
+  "BOD002": {
+    "word": "hand",
+    "ipa": "hænd"
+  },
+  "BOD003": {
+    "word": "nose",
+    "ipa": "noʊz"
+  },
+  "BOD004": {
+    "word": "mouth",
+    "ipa": "maʊθ"
+  },
+  "BOD005": {
+    "word": "eye",
+    "ipa": "aɪ"
+  },
+  "BOD006": {
+    "word": "toe",
+    "ipa": "toʊ"
+  },
+  "BOD007": {
+    "word": "knee",
+    "ipa": "niː"
+  },
+  "BOD008": {
+    "word": "tummy",
+    "ipa": "tʌ.mi"
+  },
+  "BOD009": {
+    "word": "bottom",
+    "ipa": "ˈbɑːtəm"
+  },
+  "BOD010": {
+    "word": "hair",
+    "ipa": "hɛːr"
+  },
+  "DES001": {
+    "word": "big",
+    "ipa": "bɪɡ"
+  },
+  "DES003": {
+    "word": "wet",
+    "ipa": "wɛt"
+  },
+  "DES004": {
+    "word": "new",
+    "ipa": "nuː"
+  },
+  "DES006": {
+    "word": "happy",
+    "ipa": "hæ.pi"
+  },
+  "DES007": {
+    "word": "ow",
+    "ipa": "aʊ"
+  },
+  "DES008": {
+    "word": "icky",
+    "ipa": "ɪ.ki"
+  },
+  "DES009": {
+    "word": "cold",
+    "ipa": "koʊld"
+  },
+  "DES010": {
+    "word": "all done",
+    "ipa": "ɔːl.dʌn"
+  },
+  "DES011": {
+    "word": "dark",
+    "ipa": "dɑːrk"
+  },
+  "DES012": {
+    "word": "nice",
+    "ipa": "naɪs"
+  },
+  "COL001": {
+    "word": "white",
+    "ipa": "waɪt"
+  },
+  "COL002": {
+    "word": "tan",
+    "ipa": "tæn"
+  },
+  "COL003": {
+    "word": "pink",
+    "ipa": "pɪŋk"
+  },
+  "COL004": {
+    "word": "yellow",
+    "ipa": "jɛ.loʊ"
+  },
+  "COL005": {
+    "word": "red",
+    "ipa": "rɛd"
+  },
+  "COL006": {
+    "word": "blue",
+    "ipa": "bluː"
+  },
+  "COL007": {
+    "word": "green",
+    "ipa": "ɡriːn"
+  },
+  "COL008": {
+    "word": "black",
+    "ipa": "blæk"
+  },
+  "COL009": {
+    "word": "brown",
+    "ipa": "braʊn"
+  },
+  "COL010": {
+    "word": "orange",
+    "ipa": "ɔːr.ɪndʒ"
+  },
+  "COL011": {
+    "word": "purple",
+    "ipa": "pɝː.pəl"
+  },
+  "ACT045": {
+    "word": "bow",
+    "ipa": "baʊ"
+  },
+  "ACT046": {
+    "word": "mow",
+    "ipa": "moʊ"
+  },
+  "ACT047": {
+    "word": "paw",
+    "ipa": "pɔː"
+  },
+  "ACT048": {
+    "word": "nah",
+    "ipa": "nɑː"
+  },
+  "PPL005": {
+    "word": "papa",
+    "ipa": "pɑː.pɑː"
+  },
+  "PPL006": {
+    "word": "nana",
+    "ipa": "næ.nə"
+  },
+  "ACT049": {
+    "word": "nom",
+    "ipa": "nɒm"
+  },
+  "ANI024": {
+    "word": "moo-moo",
+    "ipa": "muː.muː"
+  },
+  "ACT050": {
+    "word": "pee-pee",
+    "ipa": "piː.piː"
+  },
+  "ACT051": {
+    "word": "boo-boo",
+    "ipa": "buː.buː"
+  },
+  "ACT053": {
+    "word": "hug",
+    "ipa": "hʌɡ"
+  },
+  "ACT054": {
+    "word": "pat",
+    "ipa": "pæt"
+  },
+  "OBJ025": {
+    "word": "moon",
+    "ipa": "muːn"
+  },
+  "OBJ026": {
+    "word": "map",
+    "ipa": "mæp"
+  },
+  "DES013": {
+    "word": "bad",
+    "ipa": "bæd"
+  },
+  "FOO020": {
+    "word": "bean",
+    "ipa": "biːn"
+  },
+  "FOO021": {
+    "word": "meat",
+    "ipa": "miːt"
+  },
+  "FOO022": {
+    "word": "pear",
+    "ipa": "pɛːr"
+  },
+  "FOO023": {
+    "word": "peach",
+    "ipa": "piːtʃ"
+  },
+  "FOO024": {
+    "word": "cake",
+    "ipa": "keɪk"
+  },
+  "FOO025": {
+    "word": "soup",
+    "ipa": "suːp"
+  },
+  "FOO026": {
+    "word": "jam",
+    "ipa": "dʒæm"
+  },
+  "FOO027": {
+    "word": "rice",
+    "ipa": "raɪs"
+  },
+  "FOO028": {
+    "word": "corn",
+    "ipa": "kɔːrn"
+  },
+  "FOO029": {
+    "word": "grape",
+    "ipa": "ɡreɪp"
+  },
+  "FOO030": {
+    "word": "cookie",
+    "ipa": "kʊ.ki"
+  },
+  "FOO031": {
+    "word": "apple",
+    "ipa": "æ.pəl"
+  },
+  "FOO032": {
+    "word": "noodle",
+    "ipa": "nuː.dəl"
+  },
+  "FOO033": {
+    "word": "toast",
+    "ipa": "toʊst"
+  },
+  "FOO034": {
+    "word": "plum",
+    "ipa": "plʌm"
+  },
+  "FOO035": {
+    "word": "mango",
+    "ipa": "mæŋ.ɡoʊ"
+  },
+  "ACT055": {
+    "word": "look",
+    "ipa": "lʊk"
+  },
+  "ACT056": {
+    "word": "wait",
+    "ipa": "weɪt"
+  },
+  "ACT057": {
+    "word": "done",
+    "ipa": "dʌn"
+  },
+  "ACT058": {
+    "word": "again",
+    "ipa": "ə.ɡɛn"
+  },
+  "DES014": {
+    "word": "loud",
+    "ipa": "laʊd"
+  },
+  "DES015": {
+    "word": "soft",
+    "ipa": "sɒft"
+  },
+  "DES016": {
+    "word": "dirty",
+    "ipa": "dɜː.ti"
+  },
+  "DES017": {
+    "word": "clean",
+    "ipa": "kliːn"
+  },
+  "DES018": {
+    "word": "stuck",
+    "ipa": "stʌk"
+  },
+  "DES019": {
+    "word": "broken",
+    "ipa": "broʊ.kən"
+  },
+  "ACT059": {
+    "word": "gentle",
+    "ipa": "dʒɛn.təl"
+  },
+  "ACT060": {
+    "word": "ready",
+    "ipa": "rɛ.di"
+  },
+  "ACT061": {
+    "word": "come",
+    "ipa": "kʌm"
+  },
+  "ACT062": {
+    "word": "give",
+    "ipa": "ɡɪv"
+  },
+  "ACT063": {
+    "word": "read",
+    "ipa": "riːd"
+  },
+  "OBJ027": {
+    "word": "star",
+    "ipa": "stɑːr"
+  },
+  "OBJ028": {
+    "word": "rain",
+    "ipa": "reɪn"
+  },
+  "OBJ029": {
+    "word": "sun",
+    "ipa": "sʌn"
+  },
+  "OBJ030": {
+    "word": "tree",
+    "ipa": "triː"
+  },
+  "FEE001": {
+    "word": "sad",
+    "ipa": "sæd"
+  },
+  "FEE002": {
+    "word": "mad",
+    "ipa": "mæd"
+  },
+  "FEE003": {
+    "word": "scared",
+    "ipa": "skɛrd"
+  },
+  "FEE004": {
+    "word": "tired",
+    "ipa": "taɪ.ɚd"
+  },
+  "FEE005": {
+    "word": "hungry",
+    "ipa": "hʌŋ.ɡri"
+  },
+  "FEE006": {
+    "word": "silly",
+    "ipa": "sɪ.li"
+  },
+  "FEE007": {
+    "word": "shy",
+    "ipa": "ʃaɪ"
+  },
+  "FEE008": {
+    "word": "brave",
+    "ipa": "bɹeɪv"
+  },
+  "FEE009": {
+    "word": "proud",
+    "ipa": "pɹaʊd"
+  },
+  "FEE010": {
+    "word": "excited",
+    "ipa": "ɪk.saɪ.tɪd"
+  },
+  "FEE011": {
+    "word": "worried",
+    "ipa": "wʌr.id"
+  },
+  "FEE012": {
+    "word": "calm",
+    "ipa": "kɑːm"
+  },
+  "FEE013": {
+    "word": "angry",
+    "ipa": "æŋ.ɡri"
+  },
+  "FEE014": {
+    "word": "grumpy",
+    "ipa": "ɡɹʌm.pi"
+  },
+  "FEE015": {
+    "word": "sick",
+    "ipa": "sɪk"
+  },
+  "TOY001": {
+    "word": "block",
+    "ipa": "blɑːk"
+  },
+  "TOY002": {
+    "word": "doll",
+    "ipa": "dɑːl"
+  },
+  "TOY003": {
+    "word": "puzzle",
+    "ipa": "pʌ.zəl"
+  },
+  "TOY004": {
+    "word": "swing",
+    "ipa": "swɪŋ"
+  },
+  "TOY005": {
+    "word": "slide",
+    "ipa": "slaɪd"
+  },
+  "TOY006": {
+    "word": "bubbles",
+    "ipa": "bʌ.bəlz"
+  },
+  "TOY007": {
+    "word": "crayon",
+    "ipa": "kɹeɪ.ɑːn"
+  },
+  "TOY008": {
+    "word": "paint",
+    "ipa": "peɪnt"
+  },
+  "TOY009": {
+    "word": "chalk",
+    "ipa": "tʃɑːk"
+  },
+  "TOY010": {
+    "word": "sticker",
+    "ipa": "stɪ.kɚ"
+  },
+  "TOY011": {
+    "word": "drum",
+    "ipa": "dɹʌm"
+  },
+  "TOY012": {
+    "word": "teddy",
+    "ipa": "tɛ.di"
+  },
+  "TOY013": {
+    "word": "kite",
+    "ipa": "kaɪt"
+  },
+  "TOY014": {
+    "word": "balloon",
+    "ipa": "bə.luːn"
+  },
+  "TOY015": {
+    "word": "puppet",
+    "ipa": "pʌ.pɪt"
+  },
+  "SHP001": {
+    "word": "circle",
+    "ipa": "sɝː.kəl"
+  },
+  "SHP002": {
+    "word": "square",
+    "ipa": "skwɛr"
+  },
+  "SHP003": {
+    "word": "triangle",
+    "ipa": "tɹaɪ.æŋ.ɡəl"
+  },
+  "SHP004": {
+    "word": "heart",
+    "ipa": "hɑːrt"
+  },
+  "SHP005": {
+    "word": "diamond",
+    "ipa": "daɪ.ə.mənd"
+  },
+  "SHP006": {
+    "word": "oval",
+    "ipa": "oʊ.vəl"
+  },
+  "SHP007": {
+    "word": "rectangle",
+    "ipa": "rɛk.tæŋ.ɡəl"
+  },
+  "NUM001": {
+    "word": "one",
+    "ipa": "wʌn"
+  },
+  "NUM002": {
+    "word": "two",
+    "ipa": "tuː"
+  },
+  "NUM003": {
+    "word": "three",
+    "ipa": "θɹiː"
+  },
+  "NUM004": {
+    "word": "four",
+    "ipa": "fɔːr"
+  },
+  "NUM005": {
+    "word": "five",
+    "ipa": "faɪv"
+  },
+  "NUM006": {
+    "word": "six",
+    "ipa": "sɪks"
+  },
+  "NUM007": {
+    "word": "seven",
+    "ipa": "sɛ.vən"
+  },
+  "NUM008": {
+    "word": "eight",
+    "ipa": "eɪt"
+  },
+  "NUM009": {
+    "word": "nine",
+    "ipa": "naɪn"
+  },
+  "NUM010": {
+    "word": "ten",
+    "ipa": "tɛn"
+  },
+  "CLO001": {
+    "word": "shirt",
+    "ipa": "ʃɝːt"
+  },
+  "CLO002": {
+    "word": "pants",
+    "ipa": "pænts"
+  },
+  "CLO003": {
+    "word": "coat",
+    "ipa": "koʊt"
+  },
+  "CLO004": {
+    "word": "boots",
+    "ipa": "buːts"
+  },
+  "CLO005": {
+    "word": "dress",
+    "ipa": "drɛs"
+  },
+  "CLO006": {
+    "word": "pajamas",
+    "ipa": "pə.dʒɑː.məz"
+  },
+  "CLO007": {
+    "word": "zipper",
+    "ipa": "zɪ.pɚ"
+  },
+  "CLO008": {
+    "word": "button",
+    "ipa": "bʌ.tən"
+  },
+  "CLO009": {
+    "word": "mittens",
+    "ipa": "mɪ.tənz"
+  },
+  "CLO010": {
+    "word": "gloves",
+    "ipa": "ɡlʌvz"
+  },
+  "CLO011": {
+    "word": "scarf",
+    "ipa": "skɑːrf"
+  },
+  "CLO012": {
+    "word": "diaper",
+    "ipa": "daɪ.pɚ"
+  },
+  "CLO013": {
+    "word": "pocket",
+    "ipa": "pɑː.kɪt"
+  },
+  "CLO014": {
+    "word": "belt",
+    "ipa": "bɛlt"
+  },
+  "CLO015": {
+    "word": "skirt",
+    "ipa": "skɝːt"
+  },
+  "NAT001": {
+    "word": "flower",
+    "ipa": "flaʊ.ɚ"
+  },
+  "NAT002": {
+    "word": "grass",
+    "ipa": "ɡræs"
+  },
+  "NAT003": {
+    "word": "rock",
+    "ipa": "rɑːk"
+  },
+  "NAT004": {
+    "word": "leaf",
+    "ipa": "liːf"
+  },
+  "NAT005": {
+    "word": "sky",
+    "ipa": "skaɪ"
+  },
+  "NAT006": {
+    "word": "cloud",
+    "ipa": "klaʊd"
+  },
+  "NAT007": {
+    "word": "mud",
+    "ipa": "mʌd"
+  },
+  "NAT008": {
+    "word": "puddle",
+    "ipa": "pʌ.dəl"
+  },
+  "NAT009": {
+    "word": "sand",
+    "ipa": "sænd"
+  },
+  "NAT010": {
+    "word": "hill",
+    "ipa": "hɪl"
+  },
+  "NAT011": {
+    "word": "ice",
+    "ipa": "aɪs"
+  },
+  "NAT012": {
+    "word": "stick",
+    "ipa": "stɪk"
+  },
+  "NAT013": {
+    "word": "seed",
+    "ipa": "siːd"
+  },
+  "NAT014": {
+    "word": "nest",
+    "ipa": "nɛst"
+  },
+  "NAT015": {
+    "word": "wave",
+    "ipa": "weɪv"
+  },
+  "NAT016": {
+    "word": "shell",
+    "ipa": "ʃɛl"
+  },
+  "NAT017": {
+    "word": "dirt",
+    "ipa": "dɝːt"
+  },
+  "NAT018": {
+    "word": "log",
+    "ipa": "lɑːɡ"
+  },
+  "FUR001": {
+    "word": "couch",
+    "ipa": "kaʊtʃ"
+  },
+  "FUR002": {
+    "word": "table",
+    "ipa": "teɪ.bəl"
+  },
+  "FUR003": {
+    "word": "stairs",
+    "ipa": "stɛrz"
+  },
+  "FUR004": {
+    "word": "window",
+    "ipa": "wɪn.doʊ"
+  },
+  "FUR005": {
+    "word": "floor",
+    "ipa": "flɔːr"
+  },
+  "FUR006": {
+    "word": "wall",
+    "ipa": "wɑːl"
+  },
+  "FUR007": {
+    "word": "kitchen",
+    "ipa": "kɪ.tʃən"
+  },
+  "FUR008": {
+    "word": "bedroom",
+    "ipa": "bɛd.ruːm"
+  },
+  "FUR009": {
+    "word": "bathroom",
+    "ipa": "bæθ.ruːm"
+  },
+  "FUR010": {
+    "word": "closet",
+    "ipa": "klɑː.zɪt"
+  },
+  "FUR011": {
+    "word": "pillow",
+    "ipa": "pɪ.loʊ"
+  },
+  "FUR012": {
+    "word": "blanket",
+    "ipa": "blæŋ.kɪt"
+  },
+  "FUR013": {
+    "word": "lamp",
+    "ipa": "læmp"
+  },
+  "FUR014": {
+    "word": "mirror",
+    "ipa": "mɪ.rɚ"
+  },
+  "FUR015": {
+    "word": "shelf",
+    "ipa": "ʃɛlf"
+  },
+  "FUR016": {
+    "word": "sink",
+    "ipa": "sɪŋk"
+  },
+  "FUR017": {
+    "word": "shower",
+    "ipa": "ʃaʊ.ɚ"
+  },
+  "FUR018": {
+    "word": "fridge",
+    "ipa": "frɪdʒ"
+  },
+  "WEA001": {
+    "word": "snow",
+    "ipa": "snoʊ"
+  },
+  "WEA002": {
+    "word": "wind",
+    "ipa": "wɪnd"
+  },
+  "WEA003": {
+    "word": "sunny",
+    "ipa": "sʌn.i"
+  },
+  "WEA004": {
+    "word": "cloudy",
+    "ipa": "klaʊ.di"
+  },
+  "WEA005": {
+    "word": "rainbow",
+    "ipa": "reɪn.boʊ"
+  },
+  "WEA006": {
+    "word": "thunder",
+    "ipa": "θʌn.dɚ"
+  },
+  "WEA007": {
+    "word": "frost",
+    "ipa": "frɔːst"
+  },
+  "WEA008": {
+    "word": "icicle",
+    "ipa": "aɪ.sɪ.kəl"
+  },
+  "PPL007": {
+    "word": "friend",
+    "ipa": "frɛnd"
+  },
+  "PPL008": {
+    "word": "boy",
+    "ipa": "bɔɪ"
+  },
+  "PPL009": {
+    "word": "girl",
+    "ipa": "ɡɝːl"
+  },
+  "PPL010": {
+    "word": "grandma",
+    "ipa": "ɡrænd.mɑː"
+  },
+  "PPL011": {
+    "word": "grandpa",
+    "ipa": "ɡrænd.pɑː"
+  },
+  "PPL012": {
+    "word": "brother",
+    "ipa": "brʌð.ɚ"
+  },
+  "PPL013": {
+    "word": "sister",
+    "ipa": "sɪs.tɚ"
+  },
+  "PPL014": {
+    "word": "teacher",
+    "ipa": "tiː.tʃɚ"
+  },
+  "PPL015": {
+    "word": "doctor",
+    "ipa": "dɑːk.tɚ"
+  },
+  "PPL016": {
+    "word": "kid",
+    "ipa": "kɪd"
+  },
+  "PPL017": {
+    "word": "man",
+    "ipa": "mæn"
+  },
+  "PPL018": {
+    "word": "woman",
+    "ipa": "wʊm.ən"
+  },
+  "SPA001": {
+    "word": "under",
+    "ipa": "ʌn.dɚ"
+  },
+  "SPA002": {
+    "word": "behind",
+    "ipa": "bɪ.haɪnd"
+  },
+  "SPA003": {
+    "word": "next to",
+    "ipa": "nɛkst.tuː"
+  },
+  "SPA004": {
+    "word": "between",
+    "ipa": "bɪ.twiːn"
+  },
+  "SPA005": {
+    "word": "above",
+    "ipa": "ə.bʌv"
+  },
+  "SPA006": {
+    "word": "below",
+    "ipa": "bɪ.loʊ"
+  },
+  "SPA007": {
+    "word": "inside",
+    "ipa": "ɪn.saɪd"
+  },
+  "SPA008": {
+    "word": "outside",
+    "ipa": "aʊt.saɪd"
+  },
+  "SPA009": {
+    "word": "through",
+    "ipa": "θruː"
+  },
+  "SPA010": {
+    "word": "around",
+    "ipa": "ə.raʊnd"
+  },
+  "SPA011": {
+    "word": "over",
+    "ipa": "oʊ.vɚ"
+  },
+  "SPA012": {
+    "word": "toward",
+    "ipa": "tə.wɔːrd"
+  },
+  "TIM001": {
+    "word": "now",
+    "ipa": "naʊ"
+  },
+  "TIM002": {
+    "word": "later",
+    "ipa": "leɪ.tɚ"
+  },
+  "TIM003": {
+    "word": "soon",
+    "ipa": "suːn"
+  },
+  "TIM004": {
+    "word": "morning",
+    "ipa": "mɔːr.nɪŋ"
+  },
+  "TIM005": {
+    "word": "night",
+    "ipa": "naɪt"
+  },
+  "TIM006": {
+    "word": "today",
+    "ipa": "tə.deɪ"
+  },
+  "TIM007": {
+    "word": "tomorrow",
+    "ipa": "tə.mɑːr.oʊ"
+  },
+  "TIM008": {
+    "word": "bedtime",
+    "ipa": "bɛd.taɪm"
+  },
+  "ANI025": {
+    "word": "monkey",
+    "ipa": "mʌŋ.ki"
+  },
+  "ANI026": {
+    "word": "lion",
+    "ipa": "laɪ.ən"
+  },
+  "ANI027": {
+    "word": "elephant",
+    "ipa": "ɛl.ə.fənt"
+  },
+  "ANI028": {
+    "word": "turtle",
+    "ipa": "tɝ.tl̩"
+  },
+  "ANI029": {
+    "word": "butterfly",
+    "ipa": "bʌt.ɚ.flaɪ"
+  },
+  "ANI030": {
+    "word": "ant",
+    "ipa": "ænt"
+  },
+  "ANI031": {
+    "word": "spider",
+    "ipa": "spaɪ.dɚ"
+  },
+  "ANI032": {
+    "word": "whale",
+    "ipa": "weɪl"
+  },
+  "ANI033": {
+    "word": "penguin",
+    "ipa": "pɛŋ.ɡwɪn"
+  },
+  "ANI034": {
+    "word": "dinosaur",
+    "ipa": "daɪ.nə.sɔːr"
+  },
+  "ANI035": {
+    "word": "puppy",
+    "ipa": "pʌp.i"
+  },
+  "ANI036": {
+    "word": "kitten",
+    "ipa": "kɪt.ən"
+  },
+  "ANI037": {
+    "word": "squirrel",
+    "ipa": "skwɝ.əl"
+  },
+  "ANI038": {
+    "word": "owl",
+    "ipa": "aʊl"
+  },
+  "ANI039": {
+    "word": "rabbit",
+    "ipa": "ræb.ɪt"
+  },
+  "FOO036": {
+    "word": "pizza",
+    "ipa": "piːt.sə"
+  },
+  "FOO037": {
+    "word": "carrot",
+    "ipa": "kær.ət"
+  },
+  "FOO038": {
+    "word": "broccoli",
+    "ipa": "brɑː.kə.li"
+  },
+  "FOO039": {
+    "word": "strawberry",
+    "ipa": "strɔː.bɛr.i"
+  },
+  "FOO040": {
+    "word": "watermelon",
+    "ipa": "wɑː.tɚ.mɛl.ən"
+  },
+  "FOO041": {
+    "word": "yogurt",
+    "ipa": "joʊ.ɡɚt"
+  },
+  "FOO042": {
+    "word": "pancake",
+    "ipa": "pæŋ.keɪk"
+  },
+  "FOO043": {
+    "word": "sandwich",
+    "ipa": "sæn.dwɪtʃ"
+  },
+  "FOO044": {
+    "word": "popcorn",
+    "ipa": "pɑːp.kɔːrn"
+  },
+  "FOO045": {
+    "word": "candy",
+    "ipa": "kæn.di"
+  },
+  "FOO046": {
+    "word": "chocolate",
+    "ipa": "tʃɑːk.lət"
+  },
+  "FOO047": {
+    "word": "honey",
+    "ipa": "hʌn.i"
+  },
+  "FOO048": {
+    "word": "muffin",
+    "ipa": "mʌf.ɪn"
+  },
+  "FOO049": {
+    "word": "lemon",
+    "ipa": "lɛm.ən"
+  },
+  "FOO050": {
+    "word": "cherry",
+    "ipa": "tʃɛr.i"
+  },
+  "ACT064": {
+    "word": "clap",
+    "ipa": "klæp"
+  },
+  "ACT065": {
+    "word": "like",
+    "ipa": "laɪk"
+  },
+  "ACT066": {
+    "word": "hello",
+    "ipa": "hɛl.oʊ"
+  },
+  "ACT067": {
+    "word": "hear",
+    "ipa": "hɪr"
+  },
+  "ACT068": {
+    "word": "love",
+    "ipa": "lʌv"
+  },
+  "ACT069": {
+    "word": "please",
+    "ipa": "pliːz"
+  },
+  "ACT070": {
+    "word": "thank you",
+    "ipa": "θæŋk.juː"
+  },
+  "ACT071": {
+    "word": "sorry",
+    "ipa": "sɒr.i"
+  },
+  "ACT072": {
+    "word": "yes",
+    "ipa": "jɛs"
+  },
+  "ACT073": {
+    "word": "OK",
+    "ipa": "oʊˈkeɪ"
+  },
+  "ACT074": {
+    "word": "what",
+    "ipa": "wʌt"
+  },
+  "ACT075": {
+    "word": "share",
+    "ipa": "ʃɛr"
+  },
+  "ACT076": {
+    "word": "catch",
+    "ipa": "kætʃ"
+  },
+  "ACT077": {
+    "word": "blow",
+    "ipa": "bloʊ"
+  },
+  "ACT078": {
+    "word": "shake",
+    "ipa": "ʃeɪk"
+  },
+  "ACT079": {
+    "word": "cook",
+    "ipa": "kʊk"
+  },
+  "ACT080": {
+    "word": "tickle",
+    "ipa": "tɪk.əl"
+  },
+  "ACT081": {
+    "word": "count",
+    "ipa": "kaʊnt"
+  },
+  "ACT082": {
+    "word": "splash",
+    "ipa": "splæʃ"
+  },
+  "ACT083": {
+    "word": "climb",
+    "ipa": "klaɪm"
+  },
+  "BOD011": {
+    "word": "finger",
+    "ipa": "fɪŋ.ɡɚ"
+  },
+  "BOD012": {
+    "word": "thumb",
+    "ipa": "θʌm"
+  },
+  "BOD013": {
+    "word": "elbow",
+    "ipa": "ɛl.boʊ"
+  },
+  "BOD014": {
+    "word": "shoulder",
+    "ipa": "ʃoʊl.dɚ"
+  },
+  "BOD015": {
+    "word": "chin",
+    "ipa": "tʃɪn"
+  },
+  "BOD016": {
+    "word": "cheek",
+    "ipa": "tʃiːk"
+  },
+  "BOD017": {
+    "word": "arm",
+    "ipa": "ɑːrm"
+  },
+  "BOD018": {
+    "word": "leg",
+    "ipa": "lɛɡ"
+  },
+  "BOD019": {
+    "word": "neck",
+    "ipa": "nɛk"
+  },
+  "BOD020": {
+    "word": "belly",
+    "ipa": "bɛl.i"
+  },
+  "DES020": {
+    "word": "little",
+    "ipa": "lɪt.əl"
+  },
+  "DES021": {
+    "word": "tiny",
+    "ipa": "taɪ.ni"
+  },
+  "DES022": {
+    "word": "huge",
+    "ipa": "hjuːdʒ"
+  },
+  "DES023": {
+    "word": "tall",
+    "ipa": "tɑːl"
+  },
+  "DES024": {
+    "word": "short",
+    "ipa": "ʃɔːrt"
+  },
+  "DES025": {
+    "word": "heavy",
+    "ipa": "hɛv.i"
+  },
+  "DES026": {
+    "word": "bright",
+    "ipa": "braɪt"
+  },
+  "DES027": {
+    "word": "smooth",
+    "ipa": "smuːð"
+  },
+  "DES028": {
+    "word": "rough",
+    "ipa": "rʌf"
+  },
+  "DES029": {
+    "word": "full",
+    "ipa": "fʊl"
+  },
+  "DES030": {
+    "word": "empty",
+    "ipa": "ɛmp.ti"
+  },
+  "DES031": {
+    "word": "quiet",
+    "ipa": "kwaɪ.ət"
+  },
+  "VEH015": {
+    "word": "firetruck",
+    "ipa": "faɪ.ɚ.trʌk"
+  },
+  "VEH016": {
+    "word": "garbage truck",
+    "ipa": "ɡɑːr.bɪdʒ.trʌk"
+  },
+  "OBJ031": {
+    "word": "stars",
+    "ipa": "stɑːrz"
+  },
+  "FOO051": {
+    "word": "food",
+    "ipa": "fuːd"
+  },
+  "FOO052": {
+    "word": "cracker",
+    "ipa": "kræk.ɚ"
+  },
+  "FOO053": {
+    "word": "fig bar",
+    "ipa": "fɪɡ.bɑːr"
+  },
+  "ANI040": {
+    "word": "giraffe",
+    "ipa": "dʒɪˈræf"
+  },
+  "OBJ032": {
+    "word": "siren",
+    "ipa": "saɪ.rən"
+  },
+  "DES032": {
+    "word": "sound",
+    "ipa": "saʊnd"
+  },
+  "VEH017": {
+    "word": "airplane",
+    "ipa": "ɛr.pleɪn"
+  },
+  "VEH018": {
+    "word": "rocket",
+    "ipa": "rɒk.ɪt"
+  },
+  "ANI041": {
+    "word": "dragon",
+    "ipa": "dræɡ.ən"
+  },
+  "ANI042": {
+    "word": "monster",
+    "ipa": "mɒn.stɚ"
+  },
+  "FOO054": {
+    "word": "breakfast",
+    "ipa": "brɛk.fəst"
+  },
+  "FOO055": {
+    "word": "lunch",
+    "ipa": "lʌntʃ"
+  },
+  "FOO056": {
+    "word": "dinner",
+    "ipa": "dɪn.ɚ"
+  },
+  "FOO057": {
+    "word": "cinnamon",
+    "ipa": "sɪn.ə.mən"
+  },
+  "FOO058": {
+    "word": "bottle",
+    "ipa": "bɒt.əl"
+  },
+  "BOD021": {
+    "word": "teeth",
+    "ipa": "tiːθ"
+  },
+  "BOD022": {
+    "word": "potty",
+    "ipa": "pɒt.i"
+  },
+  "DES033": {
+    "word": "funny",
+    "ipa": "fʌn.i"
+  },
+  "DES034": {
+    "word": "scary",
+    "ipa": "skɛr.i"
+  },
+  "DES035": {
+    "word": "yucky",
+    "ipa": "jʌk.i"
+  },
+  "DES036": {
+    "word": "stinky",
+    "ipa": "stɪŋ.ki"
+  },
+  "DES037": {
+    "word": "pretty",
+    "ipa": "prɪt.i"
+  },
+  "DES038": {
+    "word": "cool",
+    "ipa": "kuːl"
+  },
+  "DES039": {
+    "word": "awesome",
+    "ipa": "ɔː.səm"
+  },
+  "TOY016": {
+    "word": "toy",
+    "ipa": "tɔɪ"
+  },
+  "VEH019": {
+    "word": "helicopter",
+    "ipa": "hɛl.ɪˌkɒp.tɚ"
+  },
+  "DES040": {
+    "word": "slow",
+    "ipa": "sloʊ"
+  },
+  "OBJ033": {
+    "word": "camera",
+    "ipa": "kæm.rə"
+  },
+  "NAT019": {
+    "word": "plant",
+    "ipa": "plænt"
+  },
+  "ACT084": {
+    "word": "this",
+    "ipa": "ðɪs"
+  },
+  "ACT085": {
+    "word": "that",
+    "ipa": "ðæt"
+  },
+  "ACT086": {
+    "word": "the",
+    "ipa": "ðə"
+  },
+  "ACT087": {
+    "word": "they",
+    "ipa": "ðeɪ"
+  },
+  "CLO016": {
+    "word": "leather",
+    "ipa": "lɛð.ɚ"
+  },
+  "FOO059": {
+    "word": "yam",
+    "ipa": "jæm"
+  },
+  "ACT088": {
+    "word": "yawn",
+    "ipa": "jɔːn"
+  },
+  "NAT020": {
+    "word": "yard",
+    "ipa": "jɑːrd"
+  },
+  "DES042": {
+    "word": "very",
+    "ipa": "vɛɹ.i"
+  },
+  "VEH020": {
+    "word": "vest",
+    "ipa": "vɛst"
+  },
+  "DES043": {
+    "word": "voice",
+    "ipa": "vɔɪs"
+  },
+  "ANI043": {
+    "word": "goose",
+    "ipa": "ɡuːs"
+  },
+  "ANI044": {
+    "word": "hedgehog",
+    "ipa": "hɛdʒ.hɒɡ"
+  },
+  "ACT089": {
+    "word": "zip",
+    "ipa": "zɪp"
+  },
+  "NAT021": {
+    "word": "zoo",
+    "ipa": "zuː"
+  },
+  "ACT090": {
+    "word": "zap",
+    "ipa": "zæp"
+  },
+  "FOO060": {
+    "word": "jelly",
+    "ipa": "dʒɛl.i"
+  },
+  "ACT091": {
+    "word": "jog",
+    "ipa": "dʒɒɡ"
+  },
+  "TOY017": {
+    "word": "jungle",
+    "ipa": "dʒʌŋ.ɡəl"
+  },
+  "ANI045": {
+    "word": "shark",
+    "ipa": "ʃɑːrk"
+  },
+  "ACT092": {
+    "word": "shout",
+    "ipa": "ʃaʊt"
+  },
+  "SHP008": {
+    "word": "shape",
+    "ipa": "ʃeɪp"
+  },
+  "FOO061": {
+    "word": "chips",
+    "ipa": "tʃɪps"
+  },
+  "ANI046": {
+    "word": "chick",
+    "ipa": "tʃɪk"
+  },
+  "ACT093": {
+    "word": "chase",
+    "ipa": "tʃeɪs"
+  },
+  "ACT094": {
+    "word": "hang",
+    "ipa": "hæŋ"
+  },
+  "ACT095": {
+    "word": "ring",
+    "ipa": "rɪŋ"
+  },
+  "ACT096": {
+    "word": "wing",
+    "ipa": "wɪŋ"
+  },
+  "FOO062": {
+    "word": "gum",
+    "ipa": "ɡʌm"
+  },
+  "ACT097": {
+    "word": "gulp",
+    "ipa": "ɡʌlp"
+  },
+  "ACT098": {
+    "word": "wiggle",
+    "ipa": "wɪɡ.əl"
+  },
+  "BOD023": {
+    "word": "wrist",
+    "ipa": "rɪst"
+  },
+  "FOO063": {
+    "word": "fig",
+    "ipa": "fɪɡ"
+  },
+  "ACT099": {
+    "word": "fold",
+    "ipa": "foʊld"
+  },
+  "DES044": {
+    "word": "glow",
+    "ipa": "ɡloʊ"
+  },
+  "DES045": {
+    "word": "sweet",
+    "ipa": "swiːt"
+  },
+  "ACT100": {
+    "word": "sled",
+    "ipa": "slɛd"
+  },
+  "NAT022": {
+    "word": "compost",
+    "ipa": "kɑːm.poʊst"
+  },
+  "ACT101": {
+    "word": "recycle",
+    "ipa": "riː.saɪ.kəl"
+  },
+  "ACT102": {
+    "word": "how many",
+    "ipa": "haʊ mɛn.i"
+  },
+  "ANI047": {
+    "word": "sheep",
+    "ipa": "ʃiːp"
+  },
+  "ANI048": {
+    "word": "hippo",
+    "ipa": "hɪp.oʊ"
+  },
+  "ANI049": {
+    "word": "deer",
+    "ipa": "dɪɹ"
+  },
+  "ANI050": {
+    "word": "bunny",
+    "ipa": "bʌn.i"
+  },
+  "ACT103": {
+    "word": "sleep",
+    "ipa": "sliːp"
+  },
+  "ACT104": {
+    "word": "wake up",
+    "ipa": "weɪk ʌp"
+  },
+  "TOY018": {
+    "word": "teddy bear",
+    "ipa": "tɛd.i bɛɹ"
+  },
+  "FOO064": {
+    "word": "ice cream",
+    "ipa": "aɪs kriːm"
+  },
+  "OBJ034": {
+    "word": "machine",
+    "ipa": "məˈʃiːn"
+  },
+  "OBJ035": {
+    "word": "vacuum",
+    "ipa": "væk.juːm"
+  },
+  "ACT105": {
+    "word": "stand",
+    "ipa": "stænd"
+  },
+  "OBJ036": {
+    "word": "phone",
+    "ipa": "foʊn"
+  },
+  "ACT106": {
+    "word": "try",
+    "ipa": "traɪ"
+  },
+  "ANI051": {
+    "word": "chicken",
+    "ipa": "tʃɪk.ɪn"
+  },
+  "OBJ037": {
+    "word": "TV",
+    "ipa": "tiː.viː"
+  },
+  "NAT023": {
+    "word": "fire",
+    "ipa": "faɪ.ɚ"
+  },
+  "OBJ038": {
+    "word": "remote",
+    "ipa": "rɪˈmoʊt"
+  },
+  "OBJ039": {
+    "word": "controller",
+    "ipa": "kənˈtroʊ.lɚ"
+  },
+  "TOY019": {
+    "word": "video game",
+    "ipa": "vɪd.i.oʊ ɡeɪm"
+  },
+  "OBJ040": {
+    "word": "computer",
+    "ipa": "kəmˈpjuː.tɚ"
+  },
+  "ACT107": {
+    "word": "code",
+    "ipa": "koʊd"
+  },
+  "ACT108": {
+    "word": "drop",
+    "ipa": "drɒp"
+  },
+  "OBJ041": {
+    "word": "tile",
+    "ipa": "taɪl"
+  },
+  "TOY020": {
+    "word": "lego",
+    "ipa": "lɛɡ.oʊ"
+  },
+  "TOY021": {
+    "word": "snowboard",
+    "ipa": "snoʊ.bɔːrd"
+  },
+  "NAT024": {
+    "word": "wood",
+    "ipa": "wʊd"
+  },
+  "FUR019": {
+    "word": "dishwasher",
+    "ipa": "dɪʃ.wɒʃ.ɚ"
+  },
+  "OBJ042": {
+    "word": "drill",
+    "ipa": "drɪl"
+  },
+  "OBJ043": {
+    "word": "saw",
+    "ipa": "sɔː"
+  },
+  "OBJ044": {
+    "word": "battery",
+    "ipa": "bæt.ɚ.i"
+  },
+  "OBJ045": {
+    "word": "toothbrush",
+    "ipa": "tuːθ.brʌʃ"
+  },
+  "PPL019": {
+    "word": "dentist",
+    "ipa": "dɛn.tɪst"
+  },
+  "PPL020": {
+    "word": "nurse",
+    "ipa": "nɝːs"
+  },
+  "BOD024": {
+    "word": "antidote",
+    "ipa": "æn.tɪ.doʊt"
+  },
+  "BOD025": {
+    "word": "vaccine",
+    "ipa": "væk.siːn"
+  },
+  "BOD026": {
+    "word": "medicine",
+    "ipa": "mɛd.ɪ.sɪn"
+  },
+  "FEE016": {
+    "word": "hurt",
+    "ipa": "hɝːt"
+  },
+  "TOY022": {
+    "word": "robot",
+    "ipa": "roʊ.bɒt"
+  },
+  "DES046": {
+    "word": "smart",
+    "ipa": "smɑːrt"
+  },
+  "ACT109": {
+    "word": "tiptoe",
+    "ipa": "tɪp.toʊ"
+  },
+  "VEH021": {
+    "word": "bridge",
+    "ipa": "brɪdʒ"
+  },
+  "ACT110": {
+    "word": "drive",
+    "ipa": "draɪv"
+  },
+  "VEH022": {
+    "word": "highway",
+    "ipa": "haɪ.weɪ"
+  },
+  "FEE017": {
+    "word": "relax",
+    "ipa": "rɪˈlæks"
+  },
+  "ACT111": {
+    "word": "scream",
+    "ipa": "skriːm"
+  },
+  "ACT112": {
+    "word": "yell",
+    "ipa": "jɛl"
+  },
+  "FOO065": {
+    "word": "coffee",
+    "ipa": "kɒf.i"
+  },
+  "ACT113": {
+    "word": "grind",
+    "ipa": "ɡraɪnd"
+  },
+  "FOO066": {
+    "word": "beans",
+    "ipa": "biːnz"
+  },
+  "CLO017": {
+    "word": "sandals",
+    "ipa": "sæn.dəlz"
+  },
+  "ACT114": {
+    "word": "rest",
+    "ipa": "rɛst"
+  },
+  "DES047": {
+    "word": "power",
+    "ipa": "paʊ.ɚ"
+  },
+  "ACT115": {
+    "word": "charge",
+    "ipa": "tʃɑːrdʒ"
+  },
+  "FOO067": {
+    "word": "water bottle",
+    "ipa": "wɔː.tɚ bɒt.əl"
+  },
+  "ACT116": {
+    "word": "sip",
+    "ipa": "sɪp"
+  },
+  "ACT117": {
+    "word": "drink",
+    "ipa": "drɪŋk"
+  },
+  "ACT118": {
+    "word": "keep",
+    "ipa": "kiːp"
+  },
+  "FUR020": {
+    "word": "oven",
+    "ipa": "ʌv.ən"
+  },
+  "OBJ046": {
+    "word": "sack",
+    "ipa": "sæk"
+  },
+  "ACT119": {
+    "word": "snooze",
+    "ipa": "snuːz"
+  },
+  "DES048": {
+    "word": "lazy",
+    "ipa": "leɪ.zi"
+  },
+  "ACT120": {
+    "word": "borrow",
+    "ipa": "bɒr.oʊ"
+  },
+  "BOD027": {
+    "word": "wings",
+    "ipa": "wɪŋz"
+  },
+  "FOO068": {
+    "word": "fries",
+    "ipa": "fraɪz"
+  },
+  "ACT121": {
+    "word": "umm",
+    "ipa": "ʌm"
+  },
+  "ACT122": {
+    "word": "forget",
+    "ipa": "fɚˈɡɛt"
+  },
+  "ACT123": {
+    "word": "squeeze",
+    "ipa": "skwiːz"
+  },
+  "ACT124": {
+    "word": "scratch",
+    "ipa": "skrætʃ"
+  },
+  "OBJ047": {
+    "word": "tablet",
+    "ipa": "tæb.lɪt"
+  },
+  "NAT025": {
+    "word": "world",
+    "ipa": "wɝːld"
+  },
+  "ANI052": {
+    "word": "goldfish",
+    "ipa": "ɡoʊld.fɪʃ"
+  },
+  "FUR021": {
+    "word": "stove",
+    "ipa": "stoʊv"
+  },
+  "OBJ048": {
+    "word": "stand mixer",
+    "ipa": "stænd mɪk.sɚ"
+  },
+  "OBJ049": {
+    "word": "pot",
+    "ipa": "pɒt"
+  },
+  "VEH023": {
+    "word": "tire",
+    "ipa": "taɪ.ɚ"
+  },
+  "ACT125": {
+    "word": "sleeping",
+    "ipa": "sliːp.ɪŋ"
+  },
+  "FOO069": {
+    "word": "nuts",
+    "ipa": "nʌts"
+  },
+  "FOO070": {
+    "word": "pistachio",
+    "ipa": "pɪˈstæʃ.i.oʊ"
+  },
+  "FOO071": {
+    "word": "cashew",
+    "ipa": "kæʃ.juː"
+  },
+  "FOO072": {
+    "word": "peanut",
+    "ipa": "piː.nʌt"
+  },
+  "FOO073": {
+    "word": "almond",
+    "ipa": "ɑːl.mənd"
+  },
+  "FOO074": {
+    "word": "vanilla",
+    "ipa": "vəˈnɪl.ə"
+  },
+  "FOO075": {
+    "word": "butter",
+    "ipa": "ˈbʌt.ər"
+  },
+  "DES049": {
+    "word": "sour",
+    "ipa": "saʊ.ər"
+  },
+  "OBJ050": {
+    "word": "velcro",
+    "ipa": "ˈvɛl.kroʊ"
+  },
+  "DES050": {
+    "word": "messy",
+    "ipa": "ˈmɛs.i"
+  },
+  "ACT126": {
+    "word": "pet",
+    "ipa": "pɛt"
+  },
+  "CLO018": {
+    "word": "sweater",
+    "ipa": "ˈswɛt.ər"
+  },
+  "ACT127": {
+    "word": "clean up",
+    "ipa": "kliːn ʌp"
+  },
+  "DES051": {
+    "word": "wrong",
+    "ipa": "ɹɒŋ"
+  },
+  "DES052": {
+    "word": "correct",
+    "ipa": "kəˈɹɛkt"
+  },
+  "ACT128": {
+    "word": "scoop",
+    "ipa": "skuːp"
+  },
+  "NAT026": {
+    "word": "moss",
+    "ipa": "mɒs"
+  },
+  "OBJ052": {
+    "word": "lid",
+    "ipa": "lɪd"
+  },
+  "NAT027": {
+    "word": "dirt",
+    "ipa": "dɝːt"
+  },
+  "NAT028": {
+    "word": "branch",
+    "ipa": "bræntʃ"
+  },
+  "OBJ053": {
+    "word": "lotion",
+    "ipa": "loʊ.ʃən"
+  },
+  "OBJ054": {
+    "word": "sunscreen",
+    "ipa": "sʌn.skriːn"
+  },
+  "OBJ055": {
+    "word": "laundry",
+    "ipa": "lɔːn.dri"
+  },
+  "FUR022": {
+    "word": "counter",
+    "ipa": "kaʊn.tɚ"
+  },
+  "OBJ056": {
+    "word": "timer",
+    "ipa": "ˈtaɪ.mər"
+  },
+  "NAT029": {
+    "word": "maple tree",
+    "ipa": "ˈmeɪ.pəl tɹiː"
+  },
+  "VEH024": {
+    "word": "tow truck",
+    "ipa": "toʊ tɹʌk"
+  },
+  "SPA013": {
+    "word": "upstairs",
+    "ipa": "ʌpˈstɛrz"
+  },
+  "SPA014": {
+    "word": "downstairs",
+    "ipa": "daʊnˈstɛrz"
+  }
+}
