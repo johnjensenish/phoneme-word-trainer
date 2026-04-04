@@ -1,122 +1,163 @@
 /**
- * Detect words whose IPA has changed since their audio was last generated.
+ * Detect IPA differences between words.ts and American English dictionary (espeak-ng).
  *
- * Compares current IPA values in words.ts against a stored snapshot (.ipa-snapshot.json).
- * On first run, creates the snapshot. On subsequent runs, reports diffs and optionally
- * updates the snapshot.
+ * Compares each word's configured IPA against espeak-ng's en-us pronunciation
+ * and flags mismatches. Useful for catching typos, British pronunciations, or
+ * missing sounds.
+ *
+ * Requires: espeak-ng (apt-get install -y espeak-ng)
  *
  * Usage:
- *   bun run scripts/detect-ipa-changes.ts           # report changes
- *   bun run scripts/detect-ipa-changes.ts --update   # report changes and update snapshot
- *   bun run scripts/detect-ipa-changes.ts --delete   # report, delete stale audio, update snapshot
+ *   bun run scripts/detect-ipa-changes.ts             # report all differences
+ *   bun run scripts/detect-ipa-changes.ts --major      # only show major (consonant) diffs
+ *   bun run scripts/detect-ipa-changes.ts --delete     # delete audio for major mismatches
  */
-import { readFileSync, writeFileSync, existsSync, unlinkSync } from "fs";
+import { execSync } from "child_process";
+import { existsSync, unlinkSync } from "fs";
 import { join } from "path";
 import { words } from "../src/data/words";
 
-const SNAPSHOT_PATH = join(import.meta.dir, "..", ".ipa-snapshot.json");
 const AUDIO_DIR = join(import.meta.dir, "..", "public", "audio", "words");
-
-const shouldUpdate = process.argv.includes("--update") || process.argv.includes("--delete");
+const majorOnly = process.argv.includes("--major");
 const shouldDelete = process.argv.includes("--delete");
 
-type Snapshot = Record<string, { word: string; ipa: string }>;
+// Check espeak-ng is available
+try {
+  execSync("which espeak-ng", { encoding: "utf-8" });
+} catch {
+  console.error("ERROR: espeak-ng is not installed. Run: apt-get install -y espeak-ng");
+  process.exit(1);
+}
 
-// Build current state
-const current: Snapshot = {};
+function getEspeakIPA(word: string): string {
+  try {
+    return execSync(`espeak-ng -v en-us --ipa -q "${word.replace(/"/g, '\\"')}"`, {
+      encoding: "utf-8",
+    }).trim();
+  } catch {
+    return "";
+  }
+}
+
+/**
+ * Normalize IPA for comparison.
+ * Maps dialect/style variants to a common form so we only flag real errors.
+ */
+function normalize(ipa: string): string {
+  return ipa
+    .replace(/[ˈˌ]/g, "")         // stress marks
+    .replace(/[.\-·]/g, "")        // syllable separators
+    .replace(/ː/g, "")            // length marks
+    .replace(/\s+/g, "")          // spaces
+    .replace(/ɹ/g, "r")           // r variants
+    .replace(/ɾ/g, "t")           // flap t = /t/ (American allophone)
+    .replace(/ɝ/g, "ɜ")           // rhotacized = non-rhotacized (both valid)
+    .replace(/ɚ/g, "ɜ")           // rhotacized schwa
+    .replace(/ɜr/g, "ɜ")          // explicit ɜr = ɜ alone
+    .replace(/ər/g, "ɜ")          // schwa+r = rhotacized vowel
+    .replace(/ɐ/g, "ə")           // near-open central → schwa
+    .replace(/ᵻ/g, "ɪ")           // barred i → ɪ
+    .replace(/ʔ/g, "t")           // glottal stop (allophone of t)
+    .replace(/n̩/g, "ən")          // syllabic n
+    .replace(/l̩/g, "əl")          // syllabic l
+    .trim();
+}
+
+/** Extract consonant skeleton, ignoring vowels (for major mismatch detection) */
+function consonantSkeleton(ipa: string): string {
+  return normalize(ipa).replace(/[aɑæɒʌəɛeɪiɔoʊuʉɜ]/g, "");
+}
+
+interface Mismatch {
+  word_id: string;
+  word: string;
+  configured: string;
+  dictionary: string;
+  severity: "MAJOR" | "MINOR";
+}
+
+const mismatches: Mismatch[] = [];
+const matched: string[] = [];
+const noResult: string[] = [];
+
+console.log(`Checking ${words.length} words against espeak-ng (en-us)...\n`);
+
 for (const w of words) {
-  current[w.word_id] = { word: w.word, ipa: w.ipa };
-}
+  const dictIPA = getEspeakIPA(w.word);
 
-// Load or create snapshot
-if (!existsSync(SNAPSHOT_PATH)) {
-  writeFileSync(SNAPSHOT_PATH, JSON.stringify(current, null, 2));
-  console.log(`Created initial snapshot with ${Object.keys(current).length} words.`);
-  console.log(`Path: ${SNAPSHOT_PATH}`);
-  process.exit(0);
-}
-
-const previous: Snapshot = JSON.parse(readFileSync(SNAPSHOT_PATH, "utf-8"));
-
-// Detect changes
-const changed: Array<{ id: string; word: string; oldIpa: string; newIpa: string }> = [];
-const added: Array<{ id: string; word: string; ipa: string }> = [];
-const removed: Array<{ id: string; word: string }> = [];
-
-for (const [id, entry] of Object.entries(current)) {
-  if (!(id in previous)) {
-    added.push({ id, word: entry.word, ipa: entry.ipa });
-  } else if (previous[id].ipa !== entry.ipa) {
-    changed.push({ id, word: entry.word, oldIpa: previous[id].ipa, newIpa: entry.ipa });
+  if (!dictIPA) {
+    noResult.push(w.word);
+    continue;
   }
-}
 
-for (const [id, entry] of Object.entries(previous)) {
-  if (!(id in current)) {
-    removed.push({ id, word: entry.word });
+  const normOurs = normalize(w.ipa);
+  const normDict = normalize(dictIPA);
+
+  if (normOurs === normDict) {
+    matched.push(w.word);
+    continue;
   }
+
+  const skelOurs = consonantSkeleton(w.ipa);
+  const skelDict = consonantSkeleton(dictIPA);
+  const severity = skelOurs === skelDict ? "MINOR" : "MAJOR";
+
+  mismatches.push({
+    word_id: w.word_id,
+    word: w.word,
+    configured: w.ipa,
+    dictionary: dictIPA,
+    severity,
+  });
 }
 
 // Report
-console.log(`=== IPA Change Detection ===\n`);
-console.log(`Snapshot: ${Object.keys(previous).length} words`);
-console.log(`Current:  ${Object.keys(current).length} words\n`);
+const major = mismatches.filter(m => m.severity === "MAJOR");
+const minor = mismatches.filter(m => m.severity === "MINOR");
 
-if (changed.length === 0 && added.length === 0 && removed.length === 0) {
-  console.log("No changes detected.");
-  process.exit(0);
-}
+console.log(`=== IPA Dictionary Comparison ===\n`);
+console.log(`Total words:    ${words.length}`);
+console.log(`Matched:        ${matched.length}`);
+console.log(`Mismatches:     ${mismatches.length}`);
+console.log(`  MAJOR:        ${major.length} (consonant differences — likely errors)`);
+console.log(`  MINOR:        ${minor.length} (vowel/stress — likely dialect variants)`);
+console.log(`No dict result: ${noResult.length}`);
 
-if (changed.length > 0) {
-  console.log(`--- IPA Changed (${changed.length}) - audio needs regeneration ---`);
-  for (const c of changed) {
-    console.log(`  ${c.id.padEnd(8)} ${c.word.padEnd(20)} ${c.oldIpa.padEnd(20)} → ${c.newIpa}`);
+if (major.length > 0) {
+  console.log(`\n--- MAJOR (consonant differences) ---`);
+  for (const m of major) {
+    console.log(`  ${m.word_id.padEnd(8)} ${m.word.padEnd(20)} CONFIG: ${m.configured.padEnd(20)} DICT: ${m.dictionary}`);
   }
-  console.log();
 }
 
-if (added.length > 0) {
-  console.log(`--- New Words (${added.length}) - audio needs generation ---`);
-  for (const a of added) {
-    console.log(`  ${a.id.padEnd(8)} ${a.word.padEnd(20)} ${a.ipa}`);
+if (!majorOnly && minor.length > 0) {
+  console.log(`\n--- MINOR (vowel/stress differences) ---`);
+  for (const m of minor) {
+    console.log(`  ${m.word_id.padEnd(8)} ${m.word.padEnd(20)} CONFIG: ${m.configured.padEnd(20)} DICT: ${m.dictionary}`);
   }
-  console.log();
 }
 
-if (removed.length > 0) {
-  console.log(`--- Removed Words (${removed.length}) - audio can be deleted ---`);
-  for (const r of removed) {
-    console.log(`  ${r.id.padEnd(8)} ${r.word}`);
-  }
-  console.log();
+if (noResult.length > 0) {
+  console.log(`\n--- NO DICTIONARY RESULT ---`);
+  console.log(`  ${noResult.join(", ")}`);
 }
 
-// Delete stale audio files for changed words
-if (shouldDelete) {
+// Delete audio for major mismatches
+if (shouldDelete && major.length > 0) {
   let deleted = 0;
-  for (const c of changed) {
-    const audioPath = join(AUDIO_DIR, `${c.word}.mp3`);
+  for (const m of major) {
+    const audioPath = join(AUDIO_DIR, `${m.word}.mp3`);
     if (existsSync(audioPath)) {
       unlinkSync(audioPath);
       console.log(`Deleted: ${audioPath}`);
       deleted++;
     }
   }
-  for (const r of removed) {
-    const audioPath = join(AUDIO_DIR, `${r.word}.mp3`);
-    if (existsSync(audioPath)) {
-      unlinkSync(audioPath);
-      console.log(`Deleted: ${audioPath}`);
-      deleted++;
-    }
-  }
-  if (deleted > 0) console.log(`\nDeleted ${deleted} audio files.`);
+  if (deleted > 0) console.log(`\nDeleted ${deleted} audio files for major mismatches.`);
 }
 
-// Update snapshot
-if (shouldUpdate) {
-  writeFileSync(SNAPSHOT_PATH, JSON.stringify(current, null, 2));
-  console.log("Snapshot updated.");
-} else {
-  console.log("Run with --update to update the snapshot, or --delete to also remove stale audio.");
+// Exit code
+if (major.length > 0) {
+  console.log(`\n${major.length} major mismatch(es) need review.`);
+  process.exit(1);
 }
