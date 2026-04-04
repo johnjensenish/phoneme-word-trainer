@@ -72,6 +72,73 @@ bunx wrangler login   # one-time auth
 bun run deploy
 ```
 
+## Scripts
+
+All scripts are in `scripts/` and run with `bun run scripts/<name>.ts`.
+
+### Word Management
+
+| Script | Description |
+|--------|-------------|
+| `scripts/add-word.ts` | Add a word with espeak-ng verified IPA. Auto-generates consonant analysis, clusters, word shape. Adds to both `words.ts` and `emojiMap.ts`. |
+| `scripts/detect-ipa-changes.ts` | Compare all word IPA against espeak-ng American English dictionary. Flags British pronunciations and consonant mismatches. Target dialect: **PNW American English**. |
+
+```bash
+# Add a word (preview first with --dry-run)
+bun run scripts/add-word.ts "spatula" --category house --emoji 🍳 --dry-run
+bun run scripts/add-word.ts "spatula" --category house --emoji 🍳
+
+# Check all IPA against dictionary
+bun run scripts/detect-ipa-changes.ts             # all differences
+bun run scripts/detect-ipa-changes.ts --major      # consonant diffs only
+bun run scripts/detect-ipa-changes.ts --delete     # delete audio for mismatches
+```
+
+### Audio Generation
+
+Requires Google Cloud TTS credentials (see [Audio Generation](#audio-generation) above).
+
+| Script | Description |
+|--------|-------------|
+| `scripts/generate-audio.ts` | Generate MP3 audio for all phonemes and words using Google Cloud TTS with SSML phoneme tags. Skips existing files. Use `--force` to regenerate all. |
+| `scripts/generate-samples.ts` | Generate all 23 phoneme audio samples (consonant + vowel syllables). |
+| `scripts/generate-samples-syllable.ts` | Test syllable-based phoneme synthesis approaches. |
+| `scripts/generate-samples-phoneme-debug.ts` | Debug script for testing SSML approaches for specific phonemes. |
+
+```bash
+bun run generate-audio          # generate missing audio
+bun run generate-audio:force    # regenerate all audio
+```
+
+### Data Files
+
+| File | Description |
+|------|-------------|
+| `src/data/words.ts` | All words with IPA, consonant analysis, categories, and metadata. |
+| `src/data/emojiMap.ts` | Maps `visual_hint` strings to emoji characters for flashcards. |
+| `src/data/sounds.ts` | 45+ phoneme/sound definitions with age-based acquisition timelines. |
+| `src/data/rhymes.ts` | Rhyme group definitions. |
+| `src/data/types.ts` | TypeScript interfaces for Word, Sound, RhymeGroup, etc. |
+| `src/engine/cardOrdering.ts` | Card filtering, ordering, and category definitions. |
+| `src/hooks/useCards.ts` | Main hook for computing word cards with tiers and drill modes. |
+
+### Word ID Prefixes
+
+Words use category-based ID prefixes:
+
+| Prefix | Category | Prefix | Category |
+|--------|----------|--------|----------|
+| `ACT` | actions | `NAT` | nature |
+| `ANI` | animals | `NUM` | numbers |
+| `BOD` | body | `PPL` | people |
+| `CLO` | clothing | `SHP` | shapes |
+| `COL` | colors | `SPA` | spatial |
+| `DES` | describing | `TIM` | time |
+| `FEE` | feelings | `TOY` | toys |
+| `FOO` | food | `VEH` | vehicles |
+| `FUR` | furniture | `WEA` | weather |
+| `OBJ` | house | | |
+
 ## References
 
 - [Interactive Phonemic Chart](https://www.englishclub.com/pronunciation/phonemic-chart-ia.php) — listen to all English phonemes
