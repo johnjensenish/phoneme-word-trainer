@@ -63,7 +63,7 @@ const CLUSTERS: Record<string, string> = {
   bl: "BL", br: "BR", dr: "DR", fl: "FL", fr: "FR",
   gl: "GL", gr: "GR", kl: "KL", kr: "KR", kw: "KW",
   pl: "PL", sk: "SK", sl: "SL", sn: "SN", sp: "SP",
-  st: "ST", sw: "SW", tr: "TR", θr: "THR",
+  st: "ST", sw: "SW", tr: "TR", θr: "THR", vr: "VR",
   ks: "KS", kt: "KT", ft: "FT", lk: "LK", lp: "LP",
   mp: "MP", nd: "ND", ŋk: "NGK",
 };
@@ -129,18 +129,55 @@ const cleanIPA = espeakIPA
   .replace(/ᵻ/g, "ɪ")       // barred i → ɪ
   .replace(/ʔ/g, "t");      // glottal stop → t
 
-// Add syllable breaks using stress marks as boundary hints
+// Diphthongs (count as single vowel nucleus)
+const DIPHTHONGS = ["aɪ", "aʊ", "eɪ", "oʊ", "ɔɪ", "ɪə", "ʊə", "eə"];
+
+/** Count vowel nuclei in IPA string (= syllable count) */
+function countVowelNuclei(ipa: string): number {
+  const stripped = ipa.replace(/[.ˈˌːˑ\s\-]/g, "");
+  let count = 0;
+  let i = 0;
+  while (i < stripped.length) {
+    // Check for diphthongs first
+    const pair = stripped.slice(i, i + 2);
+    if (DIPHTHONGS.includes(pair)) {
+      count++;
+      i += 2;
+      continue;
+    }
+    if (VOWELS.has(stripped[i])) {
+      count++;
+      i++;
+      // Skip consecutive vowels that aren't diphthongs (rare)
+      while (i < stripped.length && VOWELS.has(stripped[i])) i++;
+      continue;
+    }
+    i++;
+  }
+  return Math.max(1, count);
+}
+
+/**
+ * Add syllable breaks to IPA.
+ * Uses espeak stress marks as primary break hints, then fills in
+ * remaining breaks by finding vowel-consonant-vowel boundaries.
+ */
 function addSyllableBreaks(rawIpa: string, clean: string): string {
-  // espeak marks syllable boundaries with stress marks (ˈˌ)
-  // Insert dots before each stress mark position in the clean IPA
+  const nuclei = countVowelNuclei(clean);
+  if (nuclei <= 1) return clean; // single syllable, no breaks needed
+
+  // Step 1: Use stress marks from espeak as syllable boundaries
   const result: string[] = [];
-  let ci = 0; // index into clean IPA
+  let ci = 0;
+  let breakCount = 0;
 
   for (let ri = 0; ri < rawIpa.length; ri++) {
     const ch = rawIpa[ri];
     if (ch === "ˈ" || ch === "ˌ") {
-      // Insert syllable break if we're not at the start
-      if (ci > 0) result.push(".");
+      if (ci > 0) {
+        result.push(".");
+        breakCount++;
+      }
     } else {
       if (ci < clean.length) {
         result.push(clean[ci]);
@@ -148,17 +185,57 @@ function addSyllableBreaks(rawIpa: string, clean: string): string {
       }
     }
   }
-  // Append any remaining clean chars
   while (ci < clean.length) {
     result.push(clean[ci]);
     ci++;
   }
 
-  return result.join("");
+  let ipa = result.join("");
+
+  // Step 2: If we don't have enough breaks, add more at VCV boundaries
+  const currentBreaks = (ipa.match(/\./g) || []).length;
+  if (currentBreaks < nuclei - 1) {
+    // Split into chars, find VCV boundaries and insert breaks
+    const chars = [...ipa];
+    const needed = nuclei - 1 - currentBreaks;
+    let added = 0;
+
+    for (let i = 1; i < chars.length - 1 && added < needed; i++) {
+      if (chars[i] === ".") continue;
+
+      // Look for consonant(s) between two vowel regions
+      // Find if we're at a consonant between vowels
+      const isConsonant = !VOWELS.has(chars[i]) && chars[i] !== "." && chars[i] !== "ː";
+      if (!isConsonant) continue;
+
+      // Check if there's a vowel before us (scanning back past consonants)
+      let hasVowelBefore = false;
+      for (let j = i - 1; j >= 0; j--) {
+        if (chars[j] === ".") break;
+        if (VOWELS.has(chars[j])) { hasVowelBefore = true; break; }
+      }
+      if (!hasVowelBefore) continue;
+
+      // Check if there's a vowel after us (scanning forward past consonants)
+      let hasVowelAfter = false;
+      for (let j = i + 1; j < chars.length; j++) {
+        if (chars[j] === ".") break;
+        if (VOWELS.has(chars[j])) { hasVowelAfter = true; break; }
+      }
+      if (!hasVowelAfter) continue;
+
+      // Insert break before this consonant
+      chars.splice(i, 0, ".");
+      added++;
+    }
+    ipa = chars.join("");
+  }
+
+  return ipa;
 }
 
 const ipa = word.includes(" ")
-  ? word.split(" ").map((w, i) => {
+  ? word.split(" ").map((w) => {
       const partIpa = execSync(`espeak-ng -v en-us --ipa -q "${w}"`, { encoding: "utf-8" }).trim();
       const partClean = partIpa
         .replace(/[ˈˌ]/g, "").replace(/ɾ/g, "t").replace(/ɐ/g, "ə")
@@ -187,9 +264,17 @@ function analyzeConsonants(ipa: string): {
   const consonant_positions: string[] = [];
   const cluster_ids: string[] = [];
 
-  // Find clusters first
+  // Rhotacized vowels (ɝ, ɚ) contain an embedded R for speech therapy purposes
+  const rCount = (stripped.match(/[ɝɚ]/g) || []).length;
+
+  // Normalize ɹ → r for cluster detection
+  const forClusters = stripped.replace(/ɹ/g, "r");
+
+  // Find clusters in both onsets and codas
+  // Normalize IPA variants for matching against cluster patterns
+  const forClusters = stripped.replace(/ɹ/g, "r").replace(/ɡ/g, "g").replace(/dʒ/g, "J");
   for (const [pattern, id] of Object.entries(CLUSTERS)) {
-    if (stripped.includes(pattern)) {
+    if (forClusters.includes(pattern) && !cluster_ids.includes(id)) {
       cluster_ids.push(id);
     }
   }
@@ -199,15 +284,21 @@ function analyzeConsonants(ipa: string): {
   let lastVowelPos = -1;
   let firstVowelPos = stripped.length;
 
-  // Find first and last vowel positions
+  // Find first and last vowel positions (including ɝɚ as vowels)
   for (let j = 0; j < stripped.length; j++) {
-    if (VOWELS.has(stripped[j])) {
+    if (VOWELS.has(stripped[j]) || stripped[j] === "ɝ" || stripped[j] === "ɚ") {
       if (j < firstVowelPos) firstVowelPos = j;
       lastVowelPos = j;
     }
   }
 
   while (i < stripped.length) {
+    // Skip rhotacized vowels (R is added separately below)
+    if (stripped[i] === "ɝ" || stripped[i] === "ɚ") {
+      i++;
+      continue;
+    }
+
     // Try digraphs first
     const di = stripped.slice(i, i + 2);
     const mono = stripped[i];
@@ -232,12 +323,17 @@ function analyzeConsonants(ipa: string): {
       } else if (i > lastVowelPos) {
         consonant_positions.push("final");
       } else {
-        // Between vowels — check if closer to start or end of syllable
         consonant_positions.push("initial");
       }
     }
 
     i += advance;
+  }
+
+  // Add R for each rhotacized vowel
+  for (let r = 0; r < rCount; r++) {
+    consonant_ids.push("R");
+    consonant_positions.push("final");
   }
 
   // Find hardest sound
@@ -278,13 +374,7 @@ const wordShape = computeWordShape(finalIPA);
 
 // ── Compute syllable count ──────────────────────────────────────────
 
-function countSyllables(ipa: string): number {
-  const stripped = ipa.replace(/[\s]/g, ".");
-  const syllables = stripped.split(".").filter(Boolean);
-  return Math.max(1, syllables.length);
-}
-
-const syllableCount = countSyllables(finalIPA);
+const syllableCount = countVowelNuclei(finalIPA);
 
 // ── Determine category and type ─────────────────────────────────────
 
