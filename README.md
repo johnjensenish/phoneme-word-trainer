@@ -82,6 +82,7 @@ All scripts are in `scripts/` and run with `bun run scripts/<name>.ts`.
 |--------|-------------|
 | `scripts/add-word.ts` | Add a word with espeak-ng verified IPA. Auto-generates consonant analysis, clusters, word shape. Adds to both `words.ts` and `emojiMap.ts`. |
 | `scripts/detect-ipa-changes.ts` | Compare all word IPA against espeak-ng American English dictionary. Flags British pronunciations and consonant mismatches. Target dialect: **PNW American English**. |
+| `scripts/validate-words.ts` | Validate word metadata (syllable counts, consonant IDs, clusters, hardest sound) against computed values from IPA. Use `--summary` for counts only, `--field <name>` to check one field. |
 
 ```bash
 # Add a word (preview first with --dry-run)
