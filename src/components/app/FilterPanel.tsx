@@ -14,9 +14,9 @@ interface FilterPanelProps {
 }
 
 const TIER_OPTIONS: { value: Tier; label: string; description: string }[] = [
-  { value: 1, label: 'Produce', description: 'Sounds your child has mastered — encourage saying the word' },
-  { value: 2, label: 'Guided', description: 'Emerging sounds — model the word clearly, celebrate attempts' },
-  { value: 3, label: 'Listen', description: 'Future sounds — just expose, no pressure to repeat' },
+  { value: 1, label: 'In reach', description: 'Sounds your child has mastered — encourage saying the word' },
+  { value: 2, label: 'Stretch', description: 'Emerging sounds — model the word clearly, celebrate attempts' },
+  { value: 3, label: 'Out of reach', description: 'Future sounds — just expose, no pressure to repeat' },
 ]
 
 export function FilterPanel({

@@ -3,9 +3,13 @@ import type { Sound, Word, Tier, DrillMode, SoundOverride } from '~/data/types'
 /**
  * Compute the tier for a single sound given the child's age and any parent overrides.
  *
- * Tier 1 (Mastered): child_age >= mastery_months, or parent marked "mastered"
+ * Tier 1 (Mastered): child_age >= fifty_pct_by_months (50% of children have it)
  * Tier 2 (Emerging): child_age >= onset_months
  * Tier 3 (Future):   child_age < onset_months, or parent marked "not-yet"
+ *
+ * We use the 50th-percentile milestone rather than the 90th because waiting until
+ * 90% mastery makes Tier 1 nearly empty until age 3, which is too conservative
+ * for typical practice.
  */
 export function computeSoundTier(
   sound: Sound,
@@ -15,9 +19,8 @@ export function computeSoundTier(
   const override = overrides.get(sound.sound_id)
   if (override === 'mastered') return 1
   if (override === 'not-yet') return 3
-  // "age-based" or no override → use the timeline
 
-  if (childAgeMonths >= sound.mastery_months) return 1
+  if (childAgeMonths >= sound.fifty_pct_by_months) return 1
   if (childAgeMonths >= sound.onset_months) return 2
   return 3
 }

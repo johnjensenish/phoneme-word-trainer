@@ -1,33 +1,43 @@
 :root {
   /* ─── Palette ──────────────────────────────────────────────────── */
-  /* Warm off-whites to keep the app feeling friendly, not clinical */
-  --color-bg: #FAFAF8;
+  --color-bg: #FAF9F6;
   --color-surface: #FFFFFF;
   --color-surface-raised: #FFFFFF;
-  --color-surface-sunken: #F5F5F0;
+  --color-surface-sunken: #F3F1EC;
 
-  /* Text hierarchy: strong contrast for words, softer for parent-facing UI */
-  --color-text: #2D3748;
-  --color-text-muted: #718096;
-  --color-text-light: #A0AEC0;
+  /* Text hierarchy */
+  --color-text: #1A2332;
+  --color-text-muted: #64748B;
+  --color-text-light: #94A3B8;
   --color-text-inverse: #FFFFFF;
 
-  /* Tier indicators — the three key states of the app */
-  --color-tier-produce: #48BB78;       /* green: mastered, go ahead */
-  --color-tier-produce-bg: #F0FFF4;
-  --color-tier-guided: #ECC94B;        /* amber: emerging, model carefully */
-  --color-tier-guided-bg: #FFFFF0;
-  --color-tier-expose: #FC8181;        /* soft pink: future, just listen */
-  --color-tier-expose-bg: #FFF5F5;
+  /* Tier indicators — the three key states */
+  --color-tier-produce: #22C55E;       /* green: mastered */
+  --color-tier-produce-bg: #DCFCE7;
+  --color-tier-produce-text: #166534;
+  --color-tier-guided: #F59E0B;        /* amber: emerging */
+  --color-tier-guided-bg: #FEF3C7;
+  --color-tier-guided-text: #92400E;
+  --color-tier-expose: #F87171;        /* soft red: future */
+  --color-tier-expose-bg: #FEE2E2;
+  --color-tier-expose-text: #991B1B;
 
-  /* Accent for interactive elements */
-  --color-accent: #4A90D9;
-  --color-accent-hover: #3A7BC8;
-  --color-accent-light: #EBF4FF;
+  /* Accent — warm coral-orange for primary actions */
+  --color-accent: #F97316;
+  --color-accent-hover: #EA580C;
+  --color-accent-light: #FFF7ED;
+
+  /* Secondary accent — cool blue for info/links */
+  --color-secondary: #3B82F6;
+  --color-secondary-hover: #2563EB;
 
   /* Borders and dividers */
   --color-border: #E2E8F0;
-  --color-border-light: #EDF2F7;
+  --color-border-light: #F1F5F9;
+
+  /* Letter segment backgrounds (for spelling-phoneme connection) */
+  --color-segment-vowel: transparent;
+  --color-segment-vowel-text: var(--color-text-light);
 
   /* ─── Spacing ──────────────────────────────────────────────────── */
   --space-xs: 4px;
@@ -43,11 +53,11 @@
     "Helvetica Neue", sans-serif;
 
   /* The word on the card — big, clear, unmistakable */
-  --font-size-word: clamp(48px, 8vw, 96px);
+  --font-size-word: clamp(44px, 7vw, 80px);
   --font-weight-word: 800;
 
   /* Phoneme breakdown — parent reads this aloud */
-  --font-size-phoneme: clamp(18px, 3vw, 28px);
+  --font-size-phoneme: clamp(16px, 2.5vw, 24px);
   --font-weight-phoneme: 600;
 
   /* Body text, labels, filter UI */
@@ -60,14 +70,18 @@
   --font-size-subhero: clamp(18px, 2.5vw, 24px);
 
   /* ─── Card ─────────────────────────────────────────────────────── */
-  --card-max-width: 640px;
-  --card-radius: 20px;
-  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --card-max-width: 600px;
+  --card-radius: 24px;
+  --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  /* ─── Action bar ───────────────────────────────────────────────── */
+  --action-bar-height: 72px;
+  --action-button-radius: 16px;
 
   /* ─── Layout ───────────────────────────────────────────────────── */
   --content-max-width: 1200px;
-  --nav-height: 56px;
+  --nav-height: 52px;
 
   /* ─── Transitions ──────────────────────────────────────────────── */
   --transition-fast: 150ms ease;
@@ -76,6 +90,7 @@
 
   /* ─── Z-index layers ───────────────────────────────────────────── */
   --z-card: 1;
+  --z-action-bar: 5;
   --z-filter: 10;
   --z-overlay: 20;
   --z-modal: 30;

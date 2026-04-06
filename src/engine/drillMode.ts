@@ -1,4 +1,5 @@
 import type { Word, DrillMode } from '~/data/types'
+import { SOUND_GRAPHEMES } from '~/engine/wordSegmentation'
 
 /**
  * Speakable phoneme labels for each sound_id.
@@ -141,16 +142,9 @@ function generateStretchedWord(word: string, hardestSoundId: string): string {
     return `${w}!`
   }
 
-  // Map sound_id to the character(s) we'll look for in the word string.
-  // This handles digraphs (SH, TH, CH) and single characters.
-  const soundToChars: Record<string, string> = {
-    S: 's', Z: 'z', F: 'f', V: 'v',
-    SH: 'sh', TH_VOICELESS: 'th', TH_VOICED: 'th',
-    L: 'l', R: 'r', M: 'm', N: 'n',
-    NG: 'ng', H: 'h', W: 'w',
-  }
-
-  const targetChars = soundToChars[hardestSoundId]
+  // Use the last (shortest/simplest) grapheme for stretching
+  const graphemes = SOUND_GRAPHEMES[hardestSoundId]
+  const targetChars = graphemes?.[graphemes.length - 1]
   if (!targetChars) return `${w}!`
 
   // Find the target in the word (case-insensitive)

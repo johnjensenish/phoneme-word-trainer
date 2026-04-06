@@ -12,11 +12,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: pan-y;
-  transition: box-shadow var(--transition-normal);
-}
-
-.card:hover {
-  box-shadow: var(--card-shadow-hover);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
 /* ─── Image Area ─────────────────────────────────────────────────── */
@@ -24,10 +20,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 280px;
+  height: 240px;
   background: var(--color-surface-sunken);
-  border-bottom: 1px solid var(--color-border-light);
-  font-size: 120px;
+  font-size: 110px;
   line-height: 1;
 }
 
@@ -36,19 +31,61 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-lg) var(--space-md) var(--space-xl);
-  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md) var(--space-lg);
+  gap: var(--space-sm);
 }
 
-/* ─── Word ───────────────────────────────────────────────────────── */
-.word {
+/* ─── Word Row (segmented letters) ───────────────────────────────── */
+.wordRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
   font-size: var(--font-size-word);
   font-weight: var(--font-weight-word);
-  color: var(--color-text);
-  text-transform: capitalize;
-  text-align: center;
-  letter-spacing: -0.02em;
   line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.letterGroup {
+  position: relative;
+  padding: 0 1px;
+  border-radius: 6px;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.letterGroupConsonant {
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.letterGroupConsonant:hover {
+  transform: scale(1.05);
+}
+
+.letterGroupConsonant:active {
+  transform: scale(0.97);
+}
+
+.letterGroupVowel {
+  color: var(--color-text);
+}
+
+/* ─── Tier coloring for letter segments and pills ────────────────── */
+.tier1.letterGroupConsonant {
+  color: var(--color-tier-produce-text);
+  border-bottom-color: var(--color-tier-produce);
+}
+
+.tier2.letterGroupConsonant {
+  color: var(--color-tier-guided-text);
+  border-bottom-color: var(--color-tier-guided);
+}
+
+.tier3.letterGroupConsonant {
+  color: var(--color-tier-expose-text);
+  border-bottom-color: var(--color-tier-expose);
 }
 
 /* ─── Phoneme Display ────────────────────────────────────────────── */
@@ -58,36 +95,7 @@
   color: var(--color-text-muted);
   letter-spacing: 0.02em;
   text-align: center;
-}
-
-/* ─── Word Audio Button (primary action) ─────────────────────────── */
-.wordButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 44px;
-  padding: 0 24px;
-  border-radius: 22px;
-  background: var(--color-accent);
-  color: var(--color-text-inverse);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  transition: background var(--transition-fast),
-              transform var(--transition-fast),
-              box-shadow var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.25);
-}
-
-.wordButton:hover {
-  background: var(--color-accent-hover);
-  box-shadow: 0 4px 12px rgba(74, 144, 217, 0.35);
-}
-
-.wordButton:active {
-  transform: scale(0.95);
-  box-shadow: 0 1px 4px rgba(74, 144, 217, 0.2);
+  margin-top: var(--space-xs);
 }
 
 /* ─── Phoneme Pills Row ─────────────────────────────────────────── */
@@ -97,23 +105,23 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  margin-top: var(--space-xs);
 }
 
-/* ─── Phoneme Pill (base) ────────────────────────────────────────── */
+/* ─── Phoneme Pill ───────────────────────────────────────────────── */
 .phonemePill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 16px;
-  font-size: 13px;
+  gap: 3px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 14px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.01em;
   flex-shrink: 0;
-  transition: transform var(--transition-fast),
-              filter var(--transition-fast);
+  transition: transform var(--transition-fast), filter var(--transition-fast);
 }
 
 .phonemePill:hover {
@@ -124,30 +132,80 @@
   transform: scale(0.92);
 }
 
-/* ─── Tier 1 (Mastered) — Green ──────────────────────────────────── */
-.phonemeTier1 {
+.phonemePill.tier1 {
   background: var(--color-tier-produce-bg);
-  color: #276749;
+  color: var(--color-tier-produce-text);
 }
 
-/* ─── Tier 2 (Emerging) — Amber ──────────────────────────────────── */
-.phonemeTier2 {
+.phonemePill.tier2 {
   background: var(--color-tier-guided-bg);
-  color: #975A16;
+  color: var(--color-tier-guided-text);
 }
 
-/* ─── Tier 3 (Future) — Soft Pink ────────────────────────────────── */
-.phonemeTier3 {
+.phonemePill.tier3 {
   background: var(--color-tier-expose-bg);
-  color: #C53030;
+  color: var(--color-tier-expose-text);
 }
 
-/* ─── Swipe hint ─────────────────────────────────────────────────── */
-.swipeHint {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-light);
-  text-align: center;
+/* ─── Action Bar (prev / hear it / next) ─────────────────────────── */
+.actionBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
   margin-top: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.navButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform 100ms ease;
+}
+
+.navButton:hover {
+  background: var(--color-border);
+}
+
+.navButton:active {
+  transform: scale(0.93);
+}
+
+.hearItButton {
+  flex: 1;
+  max-width: 200px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 3px 12px rgba(249, 115, 22, 0.25);
+  transition: background var(--transition-fast), transform 100ms ease, box-shadow var(--transition-fast);
+}
+
+.hearItButton:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 5px 16px rgba(249, 115, 22, 0.35);
+}
+
+.hearItButton:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
@@ -155,55 +213,49 @@
 /* Phone */
 @media (max-width: 767px) {
   .card {
-    border-radius: 16px;
-    margin: 0 var(--space-md);
+    border-radius: 20px;
+    margin: 0 var(--space-sm);
   }
 
   .imageArea {
-    height: 200px;
+    height: 180px;
     font-size: 80px;
   }
 
   .content {
-    padding: var(--space-md) var(--space-sm) var(--space-lg);
-  }
-
-  .wordButton {
-    height: 40px;
-    padding: 0 20px;
-    font-size: 15px;
+    padding: var(--space-md) var(--space-sm) var(--space-md);
   }
 
   .phonemePill {
-    height: 30px;
-    padding: 0 10px;
-    font-size: 12px;
+    height: 26px;
+    padding: 0 8px;
+    font-size: 11px;
   }
 }
 
 /* Tablet portrait */
 @media (min-width: 768px) and (max-width: 1023px) {
   .imageArea {
-    height: 300px;
-    font-size: 140px;
+    height: 280px;
+    font-size: 130px;
   }
 }
 
 /* Tablet landscape / desktop */
 @media (min-width: 1024px) {
   .imageArea {
-    height: 350px;
-    font-size: 160px;
+    height: 320px;
+    font-size: 150px;
   }
 
   .content {
-    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+    padding: var(--space-xl) var(--space-lg) var(--space-xl);
   }
 }
 
 /* Large desktop */
 @media (min-width: 1200px) {
   .card {
-    max-width: 700px;
+    max-width: 680px;
   }
 }
