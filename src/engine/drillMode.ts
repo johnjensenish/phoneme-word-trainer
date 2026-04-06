@@ -1,4 +1,5 @@
 import type { Word, DrillMode } from '~/data/types'
+import { SOUND_GRAPHEMES } from '~/engine/wordSegmentation'
 
 /**
  * Speakable phoneme labels for each sound_id.
@@ -79,6 +80,39 @@ export function getTargetSoundId(word: Word, drillMode: DrillMode): string | nul
 }
 
 /**
+ * Generate a short coaching tip for the parent based on drill mode.
+ * Returns a full sentence explaining what to emphasize.
+ */
+export function generateCoachingTip(
+  word: Word,
+  drillMode: DrillMode,
+): string | null {
+  switch (drillMode) {
+    case 'produce': {
+      const firstConsonant = word.consonant_ids[0]
+      if (!firstConsonant) return null
+      const label = PHONEME_LABELS[firstConsonant]
+      if (!label) return null
+      return `Say "${label}" clearly, then the whole word. Encourage them to try!`
+    }
+    case 'guided': {
+      const hardest = word.hardest_sound_id
+      if (hardest === '—') return null
+      const label = PHONEME_LABELS[hardest]
+      if (!label) return null
+      return `Emphasize the "${label}" sound — model it slowly, celebrate any attempt.`
+    }
+    case 'expose': {
+      const hardest = word.hardest_sound_id
+      if (hardest === '—') return null
+      const label = PHONEME_LABELS[hardest]
+      if (!label) return `Just say the word naturally — no pressure to repeat.`
+      return `Stretch the "${label}" sound so they hear it — no pressure to repeat.`
+    }
+  }
+}
+
+/**
  * Generate the phoneme display line for a card based on the drill mode.
  *
  * Produce (Tier 1):  "Buh · Ball"     — isolate first phoneme, then word
@@ -141,16 +175,9 @@ function generateStretchedWord(word: string, hardestSoundId: string): string {
     return `${w}!`
   }
 
-  // Map sound_id to the character(s) we'll look for in the word string.
-  // This handles digraphs (SH, TH, CH) and single characters.
-  const soundToChars: Record<string, string> = {
-    S: 's', Z: 'z', F: 'f', V: 'v',
-    SH: 'sh', TH_VOICELESS: 'th', TH_VOICED: 'th',
-    L: 'l', R: 'r', M: 'm', N: 'n',
-    NG: 'ng', H: 'h', W: 'w',
-  }
-
-  const targetChars = soundToChars[hardestSoundId]
+  // Use the last (shortest/simplest) grapheme for stretching
+  const graphemes = SOUND_GRAPHEMES[hardestSoundId]
+  const targetChars = graphemes?.[graphemes.length - 1]
   if (!targetChars) return `${w}!`
 
   // Find the target in the word (case-insensitive)

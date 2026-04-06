@@ -10,6 +10,7 @@ import * as React from 'react'
 import globalCss from '~/styles/global.css?url'
 
 export const Route = createRootRoute({
+  notFoundComponent: NotFound,
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -45,4 +46,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return <Outlet />
+}
+
+function NotFound() {
+  return (
+    <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-family)', color: 'var(--color-text)' }}>
+      <p style={{ fontSize: '64px', marginBottom: '16px' }}>🔍</p>
+      <h1 style={{ fontSize: '24px', fontWeight: 800, marginBottom: '8px' }}>Page not found</h1>
+      <Link to="/app" style={{ color: 'var(--color-accent)', fontWeight: 700 }}>Go to the app</Link>
+    </div>
+  )
 }

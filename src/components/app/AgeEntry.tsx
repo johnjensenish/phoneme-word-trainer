@@ -1,4 +1,7 @@
 import { useState, useMemo } from 'react'
+import type { SoundOverride } from '~/data/types'
+import { computeAgeMonths, formatAge } from '~/engine/ageUtils'
+import { WordOverview } from './WordOverview'
 import styles from './AgeEntry.module.css'
 
 const MONTH_NAMES = [
@@ -9,26 +12,25 @@ const MONTH_NAMES = [
 const MIN_AGE_MONTHS = 12
 const MAX_AGE_MONTHS = 60
 
-function computeAgeMonths(birthMonth: number, birthYear: number): number {
-  const now = new Date()
-  return (now.getFullYear() - birthYear) * 12 + (now.getMonth() + 1 - birthMonth)
-}
+const REACH_OPTIONS = [
+  { value: 0, label: 'On track' },
+  { value: 3, label: '+3 mo' },
+  { value: 6, label: '+6 mo' },
+  { value: 9, label: '+9 mo' },
+  { value: 12, label: '+12 mo' },
+]
 
-function formatAge(months: number): string {
-  if (months < 24) return `${months} months old`
-  const y = Math.floor(months / 12)
-  const m = months % 12
-  if (m === 0) return `${y} year${y > 1 ? 's' : ''} old`
-  return `${y} year${y > 1 ? 's' : ''}, ${m} month${m !== 1 ? 's' : ''} old`
-}
+const EMPTY_OVERRIDES = new Map<string, SoundOverride>()
 
 interface AgeEntryProps {
-  onSubmit: (ageMonths: number, birthMonth: number, birthYear: number) => void
+  onSubmit: (birthMonth: number, birthYear: number, reach: number) => void
   initialBirthMonth?: number
   initialBirthYear?: number
+  initialReach?: number
+  soundOverrides?: Map<string, SoundOverride>
 }
 
-export function AgeEntry({ onSubmit, initialBirthMonth, initialBirthYear }: AgeEntryProps) {
+export function AgeEntry({ onSubmit, initialBirthMonth, initialBirthYear, initialReach, soundOverrides }: AgeEntryProps) {
   const now = new Date()
   const currentYear = now.getFullYear()
   const currentMonth = now.getMonth() + 1
@@ -38,6 +40,7 @@ export function AgeEntry({ onSubmit, initialBirthMonth, initialBirthYear }: AgeE
 
   const [birthMonth, setBirthMonth] = useState(defaultMonth)
   const [birthYear, setBirthYear] = useState(defaultYear)
+  const [reach, setReach] = useState(initialReach ?? 0)
 
   const years = useMemo(() => {
     const result: number[] = []
@@ -48,6 +51,7 @@ export function AgeEntry({ onSubmit, initialBirthMonth, initialBirthYear }: AgeE
   }, [currentYear])
 
   const ageMonths = computeAgeMonths(birthMonth, birthYear)
+  const effectiveAge = ageMonths + reach
   const inRange = ageMonths >= MIN_AGE_MONTHS && ageMonths <= MAX_AGE_MONTHS
   const isFuture = ageMonths < 0
 
@@ -88,19 +92,54 @@ export function AgeEntry({ onSubmit, initialBirthMonth, initialBirthYear }: AgeE
           : formatAge(ageMonths)}
       </div>
 
+      {inRange && (
+        <div className={styles.reachSection}>
+          <p className={styles.reachLabel}>Ready for more?</p>
+          <p className={styles.reachHint}>
+            If your child is ahead, show words for older kids too.
+          </p>
+          <div className={styles.reachOptions}>
+            {REACH_OPTIONS.map(opt => (
+              <button
+                key={opt.value}
+                className={`${styles.reachButton} ${reach === opt.value ? styles.reachButtonActive : ''}`}
+                onClick={() => setReach(opt.value)}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+          {reach > 0 && (
+            <p className={styles.reachEffect}>
+              Showing words for {formatAge(effectiveAge).replace(' old', '')} level
+            </p>
+          )}
+        </div>
+      )}
+
       {!isFuture && !inRange && (
         <p className={styles.hint}>
-          This app is designed for children 1–5 years old.
+          This app is designed for children 1-5 years old.
         </p>
       )}
 
       <button
         className={styles.startButton}
         disabled={!inRange}
-        onClick={() => onSubmit(ageMonths, birthMonth, birthYear)}
+        onClick={() => onSubmit(birthMonth, birthYear, reach)}
       >
-        Start practicing
+        {initialBirthMonth ? 'Save changes' : 'Start practicing'}
       </button>
+
+      {inRange && initialBirthMonth && (
+        <div className={styles.overviewSection}>
+          <h2 className={styles.overviewTitle}>Word overview</h2>
+          <WordOverview
+            childAgeMonths={effectiveAge}
+            soundOverrides={soundOverrides ?? EMPTY_OVERRIDES}
+          />
+        </div>
+      )}
     </div>
   )
 }

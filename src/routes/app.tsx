@@ -1,13 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useCallback, useEffect } from 'react'
-import type { Tier, SoundOverride } from '~/data/types'
+import type { Tier, SoundOverride, ComputedWordCard } from '~/data/types'
 import { DEFAULT_FILTERS, type FilterState } from '~/engine/cardOrdering'
+import { computeAgeMonths, formatAgeShort } from '~/engine/ageUtils'
 import { useCards } from '~/hooks/useCards'
 import { useAudio, usePrefetchAudio } from '~/hooks/useAudio'
 import { useSwipe } from '~/hooks/useSwipe'
 import { AgeEntry } from '~/components/app/AgeEntry'
 import { Card } from '~/components/app/Card'
 import { FilterPanel } from '~/components/app/FilterPanel'
+import { WordSearch } from '~/components/app/WordSearch'
 
 export const Route = createFileRoute('/app')({
   component: AppRoute,
@@ -15,6 +17,7 @@ export const Route = createFileRoute('/app')({
 
 const STORAGE_KEY_BIRTH = 'phoneme-trainer-birth'
 const STORAGE_KEY_OVERRIDES = 'phoneme-trainer-overrides'
+const STORAGE_KEY_REACH = 'phoneme-trainer-reach'
 
 interface BirthDate {
   month: number
@@ -40,17 +43,18 @@ function saveBirth(month: number, year: number) {
   localStorage.setItem(STORAGE_KEY_BIRTH, JSON.stringify({ month, year }))
 }
 
-function computeAgeMonths(birth: BirthDate): number {
-  const now = new Date()
-  return (now.getFullYear() - birth.year) * 12 + (now.getMonth() + 1 - birth.month)
+function loadReach(): number {
+  if (typeof window === 'undefined') return 0
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY_REACH)
+    return stored ? Number(stored) : 0
+  } catch {
+    return 0
+  }
 }
 
-function formatAgeShort(months: number): string {
-  const y = Math.floor(months / 12)
-  const m = months % 12
-  if (y === 0) return `${m}m`
-  if (m === 0) return `${y}y`
-  return `${y}y ${m}m`
+function saveReach(months: number) {
+  localStorage.setItem(STORAGE_KEY_REACH, String(months))
 }
 
 function loadOverrides(): Map<string, SoundOverride> {
@@ -74,21 +78,24 @@ function saveOverrides(overrides: Map<string, SoundOverride>) {
 function AppRoute() {
   const [birthDate, setBirthDate] = useState<BirthDate | null>(null)
   const [birthLoaded, setBirthLoaded] = useState(false)
+  const [reachMonths, setReachMonths] = useState(0)
   const [soundOverrides, setSoundOverrides] = useState<Map<string, SoundOverride>>(new Map())
   const [currentIndex, setCurrentIndex] = useState(0)
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
   const [editingAge, setEditingAge] = useState(false)
-  const [jumpTarget, setDevJumpTarget] = useState<string | null>(null)
+  const [pinnedCard, setPinnedCard] = useState<ComputedWordCard | null>(null)
 
   // Load persisted state on mount
   useEffect(() => {
     setBirthDate(loadBirth())
     setBirthLoaded(true)
     setSoundOverrides(loadOverrides())
+    setReachMonths(loadReach())
   }, [])
 
-  const childAgeMonths = birthDate ? computeAgeMonths(birthDate) : 24
+  const baseAgeMonths = birthDate ? computeAgeMonths(birthDate.month, birthDate.year) : 24
+  const childAgeMonths = baseAgeMonths + reachMonths
 
   // Compute cards
   const { cards, allCards, stats } = useCards({
@@ -97,23 +104,15 @@ function AppRoute() {
     filters,
   })
 
-  // Dev mode: resolve pending jump-to-word after filters update
-  useEffect(() => {
-    if (!jumpTarget) return
-    const idx = cards.findIndex(c =>
-      c.word.word.toLowerCase() === jumpTarget || c.word.word.toLowerCase().startsWith(jumpTarget),
-    )
-    if (idx !== -1) setCurrentIndex(idx)
-    setDevJumpTarget(null)
-  }, [jumpTarget, cards])
-
   const { speak, speakPhoneme } = useAudio()
 
   const goNext = useCallback(() => {
+    setPinnedCard(null)
     setCurrentIndex(i => (cards.length > 0 ? (i + 1) % cards.length : 0))
   }, [cards.length])
 
   const goPrev = useCallback(() => {
+    setPinnedCard(null)
     setCurrentIndex(i => (cards.length > 0 ? (i - 1 + cards.length) % cards.length : 0))
   }, [cards.length])
 
@@ -122,12 +121,32 @@ function AppRoute() {
     onSwipeRight: goPrev,
   })
 
-  // Keyboard controls removed — use on-screen buttons and swipe only
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't navigate when typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+      if (e.key === 'ArrowRight') goNext()
+      else if (e.key === 'ArrowLeft') goPrev()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [goNext, goPrev])
+
+  const handleSearchSelect = useCallback((card: ComputedWordCard, filteredIndex: number | null) => {
+    if (filteredIndex !== null) {
+      setPinnedCard(null)
+      setCurrentIndex(filteredIndex)
+    } else {
+      setPinnedCard(card)
+    }
+  }, [])
 
   // Handle age submission
-  const handleAgeSubmit = useCallback((ageMonths: number, birthMonth: number, birthYear: number) => {
+  const handleAgeSubmit = useCallback((birthMonth: number, birthYear: number, reach: number) => {
     saveBirth(birthMonth, birthYear)
+    saveReach(reach)
     setBirthDate({ month: birthMonth, year: birthYear })
+    setReachMonths(reach)
     setEditingAge(false)
     setCurrentIndex(0)
   }, [])
@@ -158,7 +177,7 @@ function AppRoute() {
     setCurrentIndex(0)
   }, [])
 
-  const currentCard = cards[currentIndex]
+  const currentCard = pinnedCard ?? cards[currentIndex]
   usePrefetchAudio(currentCard)
 
   // Wait for localStorage to load before rendering
@@ -171,95 +190,90 @@ function AppRoute() {
         onSubmit={handleAgeSubmit}
         initialBirthMonth={birthDate?.month}
         initialBirthYear={birthDate?.year}
+        initialReach={reachMonths}
+        soundOverrides={soundOverrides}
       />
     )
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-bg)' }}>
-      {/* Top bar */}
+    <div style={{ minHeight: '100dvh', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column' }}>
+      {/* Top bar — minimal, stays out of the way */}
       <header style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 'var(--space-sm) var(--space-md)',
+        padding: '0 var(--space-md)',
         height: 'var(--nav-height)',
+        flexShrink: 0,
       }}>
         <button
           onClick={() => setFilterOpen(true)}
           style={{
-            fontSize: '14px',
-            fontWeight: 600,
+            fontSize: '13px',
+            fontWeight: 700,
             color: 'var(--color-text-muted)',
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
+            padding: '6px 10px',
+            borderRadius: '10px',
+            background: 'var(--color-surface-sunken)',
+            transition: 'background 150ms ease',
           }}
         >
-          <span>☰</span> Filter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="16" y2="12" />
+            <line x1="4" y1="18" x2="12" y2="18" />
+          </svg>
+          Filter
           {stats.filtered < stats.total && (
             <span style={{
               background: 'var(--color-accent)',
               color: 'white',
-              borderRadius: '10px',
+              borderRadius: '8px',
               padding: '1px 6px',
-              fontSize: '11px',
-              marginLeft: '4px',
+              fontSize: '10px',
+              fontWeight: 800,
             }}>
               {stats.filtered}
             </span>
           )}
         </button>
 
-        <input
-          type="text"
-          placeholder={cards.length > 0 ? `${currentIndex + 1}/${cards.length} — jump to word` : '0 cards'}
-          style={{
-            fontSize: '12px',
-            color: 'var(--color-text-muted)',
-            background: 'var(--color-surface-sunken)',
-            border: '1px solid var(--color-border)',
-            borderRadius: '6px',
-            padding: '4px 8px',
-            width: '160px',
-            textAlign: 'center',
-          }}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              const input = e.target as HTMLInputElement
-              const query = input.value.trim().toLowerCase()
-              if (!query) return
-              const match = (c: typeof cards[0]) =>
-                c.word.word.toLowerCase() === query || c.word.word.toLowerCase().startsWith(query)
-              // Try filtered cards first
-              const idx = cards.findIndex(match)
-              if (idx !== -1) {
-                setCurrentIndex(idx)
-                input.value = ''
-                input.blur()
-                return
-              }
-              // Try all cards — clear filters & disable shuffle to show it
-              const allMatch = allCards.find(match)
-              if (allMatch) {
-                setFilters({ ...DEFAULT_FILTERS, tiers: [1, 2, 3], shuffle: false })
-                setDevJumpTarget(allMatch.word.word.toLowerCase())
-                input.value = ''
-                input.blur()
-              }
-            }
-          }}
+        <WordSearch
+          allCards={allCards}
+          filteredCards={cards}
+          currentIndex={currentIndex}
+          filteredCount={cards.length}
+          onSelect={handleSearchSelect}
         />
 
         <button
           onClick={() => setEditingAge(true)}
           style={{
-            fontSize: '14px',
-            fontWeight: 600,
+            fontSize: '13px',
+            fontWeight: 700,
             color: 'var(--color-text-muted)',
+            padding: '6px 10px',
+            borderRadius: '10px',
+            background: 'var(--color-surface-sunken)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
           }}
         >
-          ⚙ {formatAgeShort(childAgeMonths)}
+          {formatAgeShort(baseAgeMonths)}
+          {reachMonths > 0 && (
+            <span style={{
+              color: 'var(--color-accent)',
+              fontSize: '11px',
+              fontWeight: 800,
+            }}>
+              +{reachMonths}
+            </span>
+          )}
         </button>
       </header>
 
@@ -267,94 +281,21 @@ function AppRoute() {
       <div
         ref={containerRef}
         style={{
+          flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: 'calc(100vh - var(--nav-height) - 40px)',
-          padding: 'var(--space-md)',
-          position: 'relative',
+          padding: 'var(--space-sm) var(--space-md)',
         }}
       >
         {currentCard ? (
-          <>
-            {/* Previous button */}
-            <button
-              onClick={goPrev}
-              aria-label="Previous word"
-              style={{
-                position: 'absolute',
-                left: 'max(8px, calc(50% - var(--card-max-width) / 2 - 52px))',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
-                background: 'rgba(0,0,0,0.06)',
-                color: 'var(--color-text-muted)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '24px',
-                fontWeight: 300,
-                lineHeight: 1,
-                transition: 'background 150ms ease, color 150ms ease',
-                zIndex: 2,
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(0,0,0,0.12)'
-                e.currentTarget.style.color = 'var(--color-text)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'rgba(0,0,0,0.06)'
-                e.currentTarget.style.color = 'var(--color-text-muted)'
-              }}
-            >
-              ‹
-            </button>
-
-            <div style={{ width: '100%', maxWidth: 'var(--card-max-width)' }}>
-              <Card
-                card={currentCard}
-                onAudioPlay={speak}
-                onPhonemePlay={speakPhoneme}
-              />
-            </div>
-
-            {/* Next button */}
-            <button
-              onClick={goNext}
-              aria-label="Next word"
-              style={{
-                position: 'absolute',
-                right: 'max(8px, calc(50% - var(--card-max-width) / 2 - 52px))',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
-                background: 'rgba(0,0,0,0.06)',
-                color: 'var(--color-text-muted)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '24px',
-                fontWeight: 300,
-                lineHeight: 1,
-                transition: 'background 150ms ease, color 150ms ease',
-                zIndex: 2,
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(0,0,0,0.12)'
-                e.currentTarget.style.color = 'var(--color-text)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'rgba(0,0,0,0.06)'
-                e.currentTarget.style.color = 'var(--color-text-muted)'
-              }}
-            >
-              ›
-            </button>
-          </>
+          <Card
+            card={currentCard}
+            onAudioPlay={speak}
+            onPhonemePlay={speakPhoneme}
+            onPrev={goPrev}
+            onNext={goNext}
+          />
         ) : (
           <div style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>
             <p style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</p>
@@ -364,7 +305,7 @@ function AppRoute() {
               style={{
                 marginTop: '12px',
                 color: 'var(--color-accent)',
-                fontWeight: 600,
+                fontWeight: 700,
               }}
             >
               Clear all filters

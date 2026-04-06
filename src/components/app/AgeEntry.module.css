@@ -3,57 +3,55 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100dvh;
   padding: var(--space-xl) var(--space-md);
-  background: linear-gradient(
-    180deg,
-    var(--color-bg) 0%,
-    var(--color-surface-sunken) 100%
-  );
+  padding-top: clamp(40px, 8vh, 80px);
+  padding-bottom: var(--space-2xl);
+  background: var(--color-bg);
   font-family: var(--font-family);
+  overflow-y: auto;
 }
 
 /* ─── Heading ─────────────────────────────────────────────────────── */
 .title {
-  font-size: var(--font-size-hero);
+  font-size: clamp(28px, 5vw, 48px);
   font-weight: 800;
   color: var(--color-text);
   letter-spacing: -0.02em;
   text-align: center;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
   max-width: 600px;
 }
 
 .subtitle {
-  font-size: var(--font-size-subhero);
+  font-size: clamp(16px, 2vw, 20px);
   color: var(--color-text-muted);
   font-weight: 400;
   text-align: center;
   max-width: 480px;
   line-height: 1.5;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
 }
 
 /* ─── Selects ─────────────────────────────────────────────────────── */
 .selectGroup {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
   margin-bottom: var(--space-lg);
 }
 
 .select {
   flex: 1;
-  padding: var(--space-sm) var(--space-md);
+  padding: 10px var(--space-md);
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--color-text);
   background: var(--color-surface);
   border: 2px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
@@ -72,18 +70,107 @@
 .select:focus-visible {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.2);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 /* ─── Age display ─────────────────────────────────────────────────── */
 .ageDisplay {
-  font-size: clamp(22px, 4vw, 32px);
+  font-size: clamp(20px, 3.5vw, 28px);
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-text);
   text-align: center;
   letter-spacing: -0.01em;
   min-height: 1.4em;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+/* ─── Reach modifier ─────────────────────────────────────────────── */
+.reachSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-md);
+  background: var(--color-surface-sunken);
+  border-radius: 16px;
+}
+
+.reachLabel {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.reachHint {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-bottom: var(--space-md);
+  line-height: 1.4;
+}
+
+.reachOptions {
+  display: flex;
+  gap: 4px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 3px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.reachButton {
+  padding: 8px 14px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  border-radius: 10px;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.reachButton:hover {
+  color: var(--color-text);
+  background: var(--color-surface-sunken);
+}
+
+.reachButtonActive {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.25);
+}
+
+.reachButtonActive:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-text-inverse);
+}
+
+.reachEffect {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-top: var(--space-sm);
+  text-align: center;
+}
+
+/* ─── Word Overview ──────────────────────────────────────────────── */
+.overviewSection {
+  width: 100%;
+  max-width: 600px;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.overviewTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+  text-align: center;
 }
 
 /* ─── Hint ────────────────────────────────────────────────────────── */
@@ -99,32 +186,32 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-md) var(--space-xl);
+  padding: 14px var(--space-xl);
   font-family: var(--font-family);
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   color: var(--color-text-inverse);
   background: var(--color-accent);
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   cursor: pointer;
   transition: background var(--transition-fast),
               transform var(--transition-fast),
               box-shadow var(--transition-fast),
               opacity var(--transition-fast);
-  box-shadow: 0 4px 16px rgba(74, 144, 217, 0.35);
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
   margin-top: var(--space-md);
 }
 
 .startButton:hover:not(:disabled) {
   background: var(--color-accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(74, 144, 217, 0.45);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
 }
 
 .startButton:active:not(:disabled) {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.25);
 }
 
 .startButton:focus-visible {
@@ -142,21 +229,29 @@
   .container {
     padding: var(--space-xl) var(--space-md);
     justify-content: flex-start;
-    padding-top: clamp(48px, 15vh, 80px);
+    padding-top: clamp(48px, 12vh, 80px);
   }
 
   .subtitle {
-    font-size: 16px;
-    margin-bottom: var(--space-xl);
+    font-size: 15px;
+    margin-bottom: var(--space-lg);
   }
 
   .selectGroup {
     margin-bottom: var(--space-md);
   }
 
+  .reachSection {
+    padding: var(--space-md);
+  }
+
+  .reachButton {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
   .startButton {
     width: 100%;
-    max-width: 360px;
-    font-size: 17px;
+    max-width: 380px;
   }
 }

@@ -71,8 +71,19 @@ const PHONEME_SSML: Record<string, string> = {
   J:  '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="dʒʌ">juh</phoneme></prosody></speak>',
 }
 
-/** Build SSML for a word (natural rate) */
-function wordSsml(word: string, ipa: string): string {
+/**
+ * Final stops and affricates — these get clipped on short words
+ * because the burst has no trailing vowel to sustain.
+ */
+const FINAL_STOP_SOUNDS = new Set(['P', 'B', 'T', 'D', 'K', 'G', 'CH', 'J'])
+
+/** Build SSML for a word, slowing short words with final stops to avoid clipping */
+function wordSsml(word: string, ipa: string, syllables: number, lastConsonant: string | null): string {
+  // Short words ending in stops clip easily — slow them down and add a breath pause
+  const needsSlowdown = syllables <= 2 && lastConsonant && FINAL_STOP_SOUNDS.has(lastConsonant)
+  if (needsSlowdown) {
+    return `<speak><prosody rate="92%"><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></prosody><break time="150ms"/></speak>`
+  }
   return `<speak><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></speak>`
 }
 
@@ -148,7 +159,10 @@ async function main() {
   console.log(`\nGenerating ${words.length} word files...`)
 
   await batch(words, 5, async (word) => {
-    const ssml = wordSsml(word.word, word.ipa)
+    const lastConsonant = word.consonant_ids.length > 0
+      ? word.consonant_ids[word.consonant_ids.length - 1]
+      : null
+    const ssml = wordSsml(word.word, word.ipa, word.syllable_count, lastConsonant)
     const outPath = join(WORDS_DIR, `${word.word}.mp3`)
     await synthesize(client, ssml, outPath, `word/${word.word}`)
   })

@@ -1,0 +1,163 @@
+/* ─── Container ──────────────────────────────────────────────────── */
+.container {
+  position: relative;
+}
+
+/* ─── Input ──────────────────────────────────────────────────────── */
+.input {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface-sunken);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  width: 120px;
+  text-align: center;
+  transition: width var(--transition-fast), background var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.input:focus {
+  outline: none;
+  width: 200px;
+  text-align: left;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 2px var(--color-accent), 0 4px 16px rgba(0, 0, 0, 0.08);
+  color: var(--color-text);
+}
+
+/* ─── Backdrop ───────────────────────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+
+/* ─── Dropdown ───────────────────────────────────────────────────── */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  z-index: var(--z-modal);
+  padding: 4px;
+  overscroll-behavior: contain;
+
+  /* Animate in */
+  animation: dropdownIn 150ms ease;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ─── Result Row ─────────────────────────────────────────────────── */
+.result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 80ms ease;
+}
+
+.result:hover,
+.resultHighlighted {
+  background: var(--color-surface-sunken);
+}
+
+.resultDivider {
+  margin-top: 4px;
+  position: relative;
+}
+
+.resultDivider::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background: var(--color-border-light);
+}
+
+.resultWord {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resultPinned {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* ─── Tier Dot ───────────────────────────────────────────────────── */
+.tierDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tierDot[data-tier="1"] {
+  background: var(--color-tier-produce);
+}
+
+.tierDot[data-tier="2"] {
+  background: var(--color-tier-guided);
+}
+
+.tierDot[data-tier="3"] {
+  background: var(--color-tier-expose);
+}
+
+/* ─── No Results ─────────────────────────────────────────────────── */
+.noResults {
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .input {
+    width: 90px;
+  }
+
+  .input:focus {
+    width: 160px;
+  }
+
+  .dropdown {
+    width: 260px;
+  }
+}
