@@ -40,8 +40,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-lg) var(--space-md) var(--space-md);
-  gap: var(--space-md);
+  padding: var(--space-xl) var(--space-md) var(--space-md);
+  gap: var(--space-lg);
 }
 
 /* ─── Word Row (segmented letters) ───────────────────────────────── */
@@ -97,11 +97,11 @@
   border-bottom-color: var(--color-tier-expose);
 }
 
-/* ─── Hear It Button ─────────────────────────────────────────────── */
+/* ─── Listen Button ──────────────────────────────────────────────── */
 .hearItButton {
   width: 100%;
-  max-width: 280px;
-  height: 56px;
+  max-width: 320px;
+  height: 60px;
   border-radius: 16px;
   background: var(--color-accent);
   color: var(--color-text-inverse);
@@ -109,7 +109,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
   letter-spacing: 0.01em;
   box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
@@ -141,11 +141,13 @@
 .actionBar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
   width: 100%;
   padding-top: var(--space-sm);
   border-top: 1px solid var(--color-border-light);
+}
+
+.actionBarSpacer {
+  flex: 1;
 }
 
 .navButton {
@@ -186,37 +188,68 @@
 
   .content {
     padding: var(--space-md) var(--space-sm) var(--space-sm);
+    gap: var(--space-md);
   }
 
   .hearItButton {
-    height: 52px;
+    height: 54px;
     font-size: 17px;
+  }
+
+  .imageLabel {
+    font-size: 24px;
   }
 }
 
 /* Tablet portrait */
 @media (min-width: 768px) and (max-width: 1023px) {
   .imageArea {
-    height: 280px;
+    height: 300px;
     font-size: 130px;
+  }
+
+  .content {
+    padding: var(--space-xl) var(--space-lg) var(--space-md);
+    gap: var(--space-xl);
+  }
+
+  .hearItButton {
+    height: 64px;
+    max-width: 340px;
+    font-size: 20px;
+  }
+
+  .tipText {
+    font-size: 15px;
   }
 }
 
 /* Tablet landscape / desktop */
 @media (min-width: 1024px) {
   .imageArea {
-    height: 320px;
+    height: 340px;
     font-size: 150px;
   }
 
   .content {
-    padding: var(--space-xl) var(--space-lg) var(--space-md);
+    padding: var(--space-xl) var(--space-xl) var(--space-md);
+    gap: var(--space-xl);
+  }
+
+  .hearItButton {
+    height: 64px;
+    max-width: 340px;
+    font-size: 20px;
+  }
+
+  .tipText {
+    font-size: 15px;
   }
 }
 
 /* Large desktop */
 @media (min-width: 1200px) {
   .card {
-    max-width: 680px;
+    max-width: 700px;
   }
 }

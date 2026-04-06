@@ -9,6 +9,7 @@ import { useSwipe } from '~/hooks/useSwipe'
 import { AgeEntry } from '~/components/app/AgeEntry'
 import { Card } from '~/components/app/Card'
 import { FilterPanel } from '~/components/app/FilterPanel'
+import { WordSearch } from '~/components/app/WordSearch'
 
 export const Route = createFileRoute('/app')({
   component: AppRoute,
@@ -122,12 +123,23 @@ function AppRoute() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't navigate when typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
       if (e.key === 'ArrowRight') goNext()
       else if (e.key === 'ArrowLeft') goPrev()
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [goNext, goPrev])
+
+  const handleSearchSelect = useCallback((card: ComputedWordCard, filteredIndex: number | null) => {
+    if (filteredIndex !== null) {
+      setPinnedCard(null)
+      setCurrentIndex(filteredIndex)
+    } else {
+      setPinnedCard(card)
+    }
+  }, [])
 
   // Handle age submission
   const handleAgeSubmit = useCallback((birthMonth: number, birthYear: number, reach: number) => {
@@ -230,41 +242,12 @@ function AppRoute() {
           )}
         </button>
 
-        <input
-          type="text"
-          placeholder={cards.length > 0 ? `${currentIndex + 1} / ${cards.length}` : '0 cards'}
-          style={{
-            fontSize: '12px',
-            fontWeight: 600,
-            color: 'var(--color-text-muted)',
-            background: 'var(--color-surface-sunken)',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '6px 12px',
-            width: '100px',
-            textAlign: 'center',
-          }}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              const input = e.target as HTMLInputElement
-              const query = input.value.trim().toLowerCase()
-              if (!query) return
-              const match = (c: ComputedWordCard) =>
-                c.word.word.toLowerCase() === query || c.word.word.toLowerCase().startsWith(query)
-              // Try filtered cards first
-              const idx = cards.findIndex(match)
-              if (idx !== -1) {
-                setPinnedCard(null)
-                setCurrentIndex(idx)
-              } else {
-                // Search all cards — pin it without changing filters
-                const found = allCards.find(match)
-                if (found) setPinnedCard(found)
-              }
-              input.value = ''
-              input.blur()
-            }
-          }}
+        <WordSearch
+          allCards={allCards}
+          filteredCards={cards}
+          currentIndex={currentIndex}
+          filteredCount={cards.length}
+          onSelect={handleSearchSelect}
         />
 
         <button

@@ -91,6 +91,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
           <button className={styles.navButton} onClick={onPrev} aria-label="Previous word">
             <ArrowIcon direction="left" />
           </button>
+          <div className={styles.actionBarSpacer} />
           <button className={styles.navButton} onClick={onNext} aria-label="Next word">
             <ArrowIcon direction="right" />
           </button>
