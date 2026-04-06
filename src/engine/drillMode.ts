@@ -80,6 +80,39 @@ export function getTargetSoundId(word: Word, drillMode: DrillMode): string | nul
 }
 
 /**
+ * Generate a short coaching tip for the parent based on drill mode.
+ * Returns a full sentence explaining what to emphasize.
+ */
+export function generateCoachingTip(
+  word: Word,
+  drillMode: DrillMode,
+): string | null {
+  switch (drillMode) {
+    case 'produce': {
+      const firstConsonant = word.consonant_ids[0]
+      if (!firstConsonant) return null
+      const label = PHONEME_LABELS[firstConsonant]
+      if (!label) return null
+      return `Say "${label}" clearly, then the whole word. Encourage them to try!`
+    }
+    case 'guided': {
+      const hardest = word.hardest_sound_id
+      if (hardest === '—') return null
+      const label = PHONEME_LABELS[hardest]
+      if (!label) return null
+      return `Emphasize the "${label}" sound — model it slowly, celebrate any attempt.`
+    }
+    case 'expose': {
+      const hardest = word.hardest_sound_id
+      if (hardest === '—') return null
+      const label = PHONEME_LABELS[hardest]
+      if (!label) return `Just say the word naturally — no pressure to repeat.`
+      return `Stretch the "${label}" sound so they hear it — no pressure to repeat.`
+    }
+  }
+}
+
+/**
  * Generate the phoneme display line for a card based on the drill mode.
  *
  * Produce (Tier 1):  "Buh · Ball"     — isolate first phoneme, then word

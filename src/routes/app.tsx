@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useCallback, useEffect } from 'react'
-import type { Tier, SoundOverride } from '~/data/types'
+import type { Tier, SoundOverride, ComputedWordCard } from '~/data/types'
 import { DEFAULT_FILTERS, type FilterState } from '~/engine/cardOrdering'
 import { computeAgeMonths, formatAgeShort } from '~/engine/ageUtils'
 import { useCards } from '~/hooks/useCards'
@@ -83,7 +83,7 @@ function AppRoute() {
   const [filterOpen, setFilterOpen] = useState(false)
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
   const [editingAge, setEditingAge] = useState(false)
-  const [jumpTarget, setDevJumpTarget] = useState<string | null>(null)
+  const [pinnedCard, setPinnedCard] = useState<ComputedWordCard | null>(null)
 
   // Load persisted state on mount
   useEffect(() => {
@@ -103,23 +103,15 @@ function AppRoute() {
     filters,
   })
 
-  // Dev mode: resolve pending jump-to-word after filters update
-  useEffect(() => {
-    if (!jumpTarget) return
-    const idx = cards.findIndex(c =>
-      c.word.word.toLowerCase() === jumpTarget || c.word.word.toLowerCase().startsWith(jumpTarget),
-    )
-    if (idx !== -1) setCurrentIndex(idx)
-    setDevJumpTarget(null)
-  }, [jumpTarget, cards])
-
   const { speak, speakPhoneme } = useAudio()
 
   const goNext = useCallback(() => {
+    setPinnedCard(null)
     setCurrentIndex(i => (cards.length > 0 ? (i + 1) % cards.length : 0))
   }, [cards.length])
 
   const goPrev = useCallback(() => {
+    setPinnedCard(null)
     setCurrentIndex(i => (cards.length > 0 ? (i - 1 + cards.length) % cards.length : 0))
   }, [cards.length])
 
@@ -127,6 +119,15 @@ function AppRoute() {
     onSwipeLeft: goNext,
     onSwipeRight: goPrev,
   })
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goNext()
+      else if (e.key === 'ArrowLeft') goPrev()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [goNext, goPrev])
 
   // Handle age submission
   const handleAgeSubmit = useCallback((birthMonth: number, birthYear: number, reach: number) => {
@@ -164,7 +165,7 @@ function AppRoute() {
     setCurrentIndex(0)
   }, [])
 
-  const currentCard = cards[currentIndex]
+  const currentCard = pinnedCard ?? cards[currentIndex]
   usePrefetchAudio(currentCard)
 
   // Wait for localStorage to load before rendering
@@ -248,22 +249,20 @@ function AppRoute() {
               const input = e.target as HTMLInputElement
               const query = input.value.trim().toLowerCase()
               if (!query) return
-              const match = (c: typeof cards[0]) =>
+              const match = (c: ComputedWordCard) =>
                 c.word.word.toLowerCase() === query || c.word.word.toLowerCase().startsWith(query)
+              // Try filtered cards first
               const idx = cards.findIndex(match)
               if (idx !== -1) {
+                setPinnedCard(null)
                 setCurrentIndex(idx)
-                input.value = ''
-                input.blur()
-                return
+              } else {
+                // Search all cards — pin it without changing filters
+                const found = allCards.find(match)
+                if (found) setPinnedCard(found)
               }
-              const allMatch = allCards.find(match)
-              if (allMatch) {
-                setFilters({ ...DEFAULT_FILTERS, tiers: [1, 2, 3], shuffle: false })
-                setDevJumpTarget(allMatch.word.word.toLowerCase())
-                input.value = ''
-                input.blur()
-              }
+              input.value = ''
+              input.blur()
             }
           }}
         />

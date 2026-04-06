@@ -1,5 +1,5 @@
 import type { ComputedWordCard, Tier } from '~/data/types'
-import { PHONEME_LABELS } from '~/engine/drillMode'
+import { PHONEME_LABELS, generateCoachingTip } from '~/engine/drillMode'
 import { segmentWord } from '~/engine/wordSegmentation'
 import { emojiMap } from '~/data/emojiMap'
 import styles from './Card.module.css'
@@ -47,14 +47,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
     card.soundTiers,
   )
 
-  const uniqueSounds: string[] = []
-  const seen = new Set<string>()
-  for (const cid of card.word.consonant_ids) {
-    if (!seen.has(cid)) {
-      seen.add(cid)
-      uniqueSounds.push(cid)
-    }
-  }
+  const coachingTip = generateCoachingTip(card.word, card.drill_mode)
 
   return (
     <div className={styles.card}>
@@ -62,6 +55,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
         <span className="emoji" role="img" aria-label={card.word.visual_hint}>
           {emoji}
         </span>
+        <span className={styles.imageLabel}>{card.word.word}</span>
       </div>
 
       <div className={styles.content}>
@@ -80,40 +74,22 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
           ))}
         </div>
 
-        <div className={styles.phonemeText}>{card.phoneme_display}</div>
+        <button
+          className={styles.hearItButton}
+          onClick={() => onAudioPlay(card.word.word)}
+          aria-label={`Play pronunciation of ${card.word.word}`}
+        >
+          <SpeakerIcon size={20} />
+          <span>Listen</span>
+        </button>
 
-        {uniqueSounds.length > 0 && (
-          <div className={styles.phonemeRow}>
-            {uniqueSounds.map(soundId => {
-              const label = PHONEME_LABELS[soundId]
-              if (!label) return null
-              const tier = card.soundTiers[soundId] ?? 2
-              return (
-                <button
-                  key={soundId}
-                  className={`${styles.phonemePill} ${TIER_CLASSES[tier]}`}
-                  onClick={() => onPhonemePlay(soundId)}
-                  aria-label={`Play ${label} sound`}
-                >
-                  <SpeakerIcon size={11} />
-                  <span>{label}</span>
-                </button>
-              )
-            })}
-          </div>
+        {coachingTip && (
+          <p className={styles.tipText}>{coachingTip}</p>
         )}
 
         <div className={styles.actionBar}>
           <button className={styles.navButton} onClick={onPrev} aria-label="Previous word">
             <ArrowIcon direction="left" />
-          </button>
-          <button
-            className={styles.hearItButton}
-            onClick={() => onAudioPlay(card.word.word)}
-            aria-label={`Play pronunciation of ${card.word.word}`}
-          >
-            <SpeakerIcon size={18} />
-            <span>Hear it</span>
           </button>
           <button className={styles.navButton} onClick={onNext} aria-label="Next word">
             <ArrowIcon direction="right" />

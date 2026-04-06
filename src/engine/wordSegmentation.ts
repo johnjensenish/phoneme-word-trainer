@@ -17,7 +17,7 @@ export const SOUND_GRAPHEMES: Record<string, string[]> = {
   TH_VOICED: ['th'],
   NG: ['ng'],
   K: ['ck', 'k', 'c'],
-  S: ['ss', 'ce', 's'],
+  S: ['ss', 'ce', 's', 'c'],
   Z: ['zz', 'z'],
   F: ['ff', 'ph', 'f'],
   L: ['ll', 'l'],

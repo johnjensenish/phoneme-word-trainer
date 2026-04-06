@@ -9,8 +9,6 @@
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
   overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
   touch-action: pan-y;
   transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
@@ -18,12 +16,23 @@
 /* ─── Image Area ─────────────────────────────────────────────────── */
 .imageArea {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 240px;
+  gap: var(--space-sm);
+  height: 260px;
   background: var(--color-surface-sunken);
   font-size: 110px;
   line-height: 1;
+}
+
+.imageLabel {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-top: var(--space-md);
 }
 
 /* ─── Content Area ───────────────────────────────────────────────── */
@@ -31,8 +40,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-lg) var(--space-md) var(--space-lg);
-  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+  gap: var(--space-md);
 }
 
 /* ─── Word Row (segmented letters) ───────────────────────────────── */
@@ -72,7 +81,7 @@
   color: var(--color-text);
 }
 
-/* ─── Tier coloring for letter segments and pills ────────────────── */
+/* ─── Tier coloring for letter segments ──────────────────────────── */
 .tier1.letterGroupConsonant {
   color: var(--color-tier-produce-text);
   border-bottom-color: var(--color-tier-produce);
@@ -88,74 +97,54 @@
   border-bottom-color: var(--color-tier-expose);
 }
 
-/* ─── Phoneme Display ────────────────────────────────────────────── */
-.phonemeText {
-  font-size: var(--font-size-phoneme);
-  font-weight: var(--font-weight-phoneme);
-  color: var(--color-text-muted);
-  letter-spacing: 0.02em;
-  text-align: center;
-  margin-top: var(--space-xs);
-}
-
-/* ─── Phoneme Pills Row ─────────────────────────────────────────── */
-.phonemeRow {
+/* ─── Hear It Button ─────────────────────────────────────────────── */
+.hearItButton {
+  width: 100%;
+  max-width: 280px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin-top: var(--space-xs);
-}
-
-/* ─── Phoneme Pill ───────────────────────────────────────────────── */
-.phonemePill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  height: 28px;
-  padding: 0 10px;
-  border-radius: 14px;
-  font-size: 12px;
-  font-weight: 700;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 800;
   letter-spacing: 0.01em;
-  flex-shrink: 0;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
+  transition: background var(--transition-fast), transform 100ms ease, box-shadow var(--transition-fast);
+  cursor: pointer;
 }
 
-.phonemePill:hover {
-  filter: brightness(0.92);
+.hearItButton:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
 }
 
-.phonemePill:active {
-  transform: scale(0.92);
+.hearItButton:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
 }
 
-.phonemePill.tier1 {
-  background: var(--color-tier-produce-bg);
-  color: var(--color-tier-produce-text);
+/* ─── Coaching Tip ───────────────────────────────────────────────── */
+.tipText {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  text-align: center;
+  max-width: 400px;
+  min-height: calc(2 * 1.5 * 14px);
 }
 
-.phonemePill.tier2 {
-  background: var(--color-tier-guided-bg);
-  color: var(--color-tier-guided-text);
-}
-
-.phonemePill.tier3 {
-  background: var(--color-tier-expose-bg);
-  color: var(--color-tier-expose-text);
-}
-
-/* ─── Action Bar (prev / hear it / next) ─────────────────────────── */
+/* ─── Action Bar (prev / next) ───────────────────────────────────── */
 .actionBar {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   width: 100%;
-  margin-top: var(--space-sm);
-  padding-top: var(--space-md);
+  padding-top: var(--space-sm);
   border-top: 1px solid var(--color-border-light);
 }
 
@@ -170,6 +159,7 @@
   justify-content: center;
   flex-shrink: 0;
   transition: background var(--transition-fast), transform 100ms ease;
+  cursor: pointer;
 }
 
 .navButton:hover {
@@ -178,34 +168,6 @@
 
 .navButton:active {
   transform: scale(0.93);
-}
-
-.hearItButton {
-  flex: 1;
-  max-width: 200px;
-  height: 48px;
-  border-radius: 14px;
-  background: var(--color-accent);
-  color: var(--color-text-inverse);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  box-shadow: 0 3px 12px rgba(249, 115, 22, 0.25);
-  transition: background var(--transition-fast), transform 100ms ease, box-shadow var(--transition-fast);
-}
-
-.hearItButton:hover {
-  background: var(--color-accent-hover);
-  box-shadow: 0 5px 16px rgba(249, 115, 22, 0.35);
-}
-
-.hearItButton:active {
-  transform: scale(0.97);
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
@@ -218,18 +180,17 @@
   }
 
   .imageArea {
-    height: 180px;
+    height: 200px;
     font-size: 80px;
   }
 
   .content {
-    padding: var(--space-md) var(--space-sm) var(--space-md);
+    padding: var(--space-md) var(--space-sm) var(--space-sm);
   }
 
-  .phonemePill {
-    height: 26px;
-    padding: 0 8px;
-    font-size: 11px;
+  .hearItButton {
+    height: 52px;
+    font-size: 17px;
   }
 }
 
@@ -249,7 +210,7 @@
   }
 
   .content {
-    padding: var(--space-xl) var(--space-lg) var(--space-xl);
+    padding: var(--space-xl) var(--space-lg) var(--space-md);
   }
 }
 
