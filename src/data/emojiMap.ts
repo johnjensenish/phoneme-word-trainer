@@ -460,4 +460,7 @@ export const emojiMap: Record<string, string> = {
   photo_downstairs: "⬇️",
   photo_drain: "🕳️",
   photo_take: "🤲",
+  photo_ketchup: "🍅",
+  photo_football: "🏈",
+  photo_vitamin: "💊",
 };
