@@ -64,7 +64,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
             <span
               key={i}
               className={`${styles.letterGroup} ${seg.soundId ? styles.letterGroupConsonant : styles.letterGroupVowel} ${seg.tier ? TIER_CLASSES[seg.tier] : ''}`}
-              onClick={seg.soundId ? () => onPhonemePlay(seg.soundId!) : undefined}
+              onPointerDown={seg.soundId ? () => onPhonemePlay(seg.soundId!) : undefined}
               role={seg.soundId ? 'button' : undefined}
               tabIndex={seg.soundId ? 0 : undefined}
               aria-label={seg.soundId ? `Play ${PHONEME_LABELS[seg.soundId]} sound` : undefined}
@@ -76,7 +76,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
 
         <button
           className={styles.hearItButton}
-          onClick={() => onAudioPlay(card.word.word)}
+          onPointerDown={() => onAudioPlay(card.word.word)}
           aria-label={`Play pronunciation of ${card.word.word}`}
         >
           <SpeakerIcon size={20} />
