@@ -267,9 +267,6 @@ function analyzeConsonants(ipa: string): {
   // Rhotacized vowels (ɝ, ɚ) contain an embedded R for speech therapy purposes
   const rCount = (stripped.match(/[ɝɚ]/g) || []).length;
 
-  // Normalize ɹ → r for cluster detection
-  const forClusters = stripped.replace(/ɹ/g, "r");
-
   // Find clusters in both onsets and codas
   // Normalize IPA variants for matching against cluster patterns
   const forClusters = stripped.replace(/ɹ/g, "r").replace(/ɡ/g, "g").replace(/dʒ/g, "J");
