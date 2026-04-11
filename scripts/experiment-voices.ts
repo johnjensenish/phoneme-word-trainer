@@ -21,8 +21,19 @@ import { join } from 'node:path'
 // ── Voices to experiment with ──────────────────────────────────────────
 // Add or remove voices here. Each entry is { name, label }.
 // Current production voice is en-US-Studio-O.
+//
+// Variants that share a ttsName (e.g. Casual-K-slow → en-US-Casual-K) are
+// generated with interleaved API calls to avoid Google TTS server-side caching,
+// which ignores audioConfig.speakingRate when the same SSML is sent twice quickly.
 
-const VOICES = [
+type Voice = {
+  name: string          // directory name under voice-experiments/
+  ttsName?: string      // actual Google TTS voice name (defaults to name)
+  label: string
+  speakingRate?: number  // audioConfig.speakingRate override (default 1.0)
+}
+
+const VOICES: Voice[] = [
   { name: 'en-US-Studio-O',   label: 'Studio-O (current)' },
   { name: 'en-US-Studio-Q',   label: 'Studio-Q' },
   { name: 'en-US-Neural2-C',  label: 'Neural2-C' },
@@ -30,28 +41,49 @@ const VOICES = [
   { name: 'en-US-Wavenet-F',  label: 'Wavenet-F' },
   { name: 'en-US-Wavenet-C',  label: 'Wavenet-C' },
   { name: 'en-US-News-K',     label: 'News-K' },
-  { name: 'en-US-Casual-K',   label: 'Casual-K' },
+  { name: 'en-US-Casual-K',   label: 'Casual-K', speakingRate: 0.85 },
   // Journey voices excluded — they don't support SSML phoneme tags,
   // which are critical for precise IPA pronunciation in speech therapy.
 ]
 
-// ── Representative phonemes to test ────────────────────────────────────
-// Covers the tricky ones (R, S, Z, TH, SH) plus a few easy ones for contrast.
+// ── All phonemes ───────────────────────────────────────────────────────
+// Matches the production SSML from generate-audio.ts
 
 const TEST_PHONEMES: { id: string; ssml: string; text: string }[] = [
-  // Easy reference sounds
-  { id: 'P',  ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="pʌ">puh</phoneme></prosody></speak>', text: 'puh' },
-  { id: 'M',  ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="mːʌ">mmuh</phoneme></prosody></speak>', text: 'mmuh' },
-  { id: 'L',  ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="lːʌ">lluh</phoneme></prosody></speak>', text: 'lluh' },
+  // Stops
+  { id: 'P',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="pʌ">puh</phoneme></prosody><break time="150ms"/></speak>', text: 'puh' },
+  { id: 'B',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="bʌ">buh</phoneme></prosody><break time="150ms"/></speak>', text: 'buh' },
+  { id: 'T',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="tʌ">tuh</phoneme></prosody><break time="150ms"/></speak>', text: 'tuh' },
+  { id: 'D',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="dʌ">duh</phoneme></prosody><break time="150ms"/></speak>', text: 'duh' },
+  { id: 'K',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="kʌ">kuh</phoneme></prosody><break time="150ms"/></speak>', text: 'kuh' },
+  { id: 'G',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="ɡʌ">guh</phoneme></prosody><break time="150ms"/></speak>', text: 'guh' },
 
-  // Tricky sounds — the ones that matter most
-  { id: 'R',            ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="ɹɛ">reh</phoneme></prosody></speak>', text: 'reh' },
-  { id: 'S',            ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="sə">suh</phoneme></prosody></speak>', text: 'suh' },
-  { id: 'Z',            ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="zə">zuh</phoneme></prosody></speak>', text: 'zuh' },
-  { id: 'SH',           ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="ʃːʌ">sshuh</phoneme></prosody></speak>', text: 'shuh' },
-  { id: 'CH',           ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="tʃʌ">chuh</phoneme></prosody></speak>', text: 'chuh' },
-  { id: 'TH_VOICELESS', ssml: '<speak><prosody rate="120%"><phoneme alphabet="ipa" ph="θə">thuh</phoneme></prosody></speak>', text: 'thuh' },
-  { id: 'TH_VOICED',    ssml: '<speak><prosody rate="96%"><phoneme alphabet="ipa" ph="ðʌ">the</phoneme></prosody></speak>', text: 'the' },
+  // Nasals
+  { id: 'M',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="mːʌ">mmuh</phoneme></prosody><break time="150ms"/></speak>', text: 'mmuh' },
+  { id: 'N',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="nːʌ">nnuh</phoneme></prosody><break time="150ms"/></speak>', text: 'nnuh' },
+  { id: 'NG', ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="ŋʌ">nguh</phoneme></prosody><break time="150ms"/></speak>', text: 'nguh' },
+
+  // Fricatives
+  { id: 'H',            ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="hʌ">huh</phoneme></prosody><break time="150ms"/></speak>', text: 'huh' },
+  { id: 'F',            ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="fːʌ">ffuh</phoneme></prosody><break time="150ms"/></speak>', text: 'ffuh' },
+  { id: 'V',            ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="vːʌ">vvuh</phoneme></prosody><break time="150ms"/></speak>', text: 'vvuh' },
+  { id: 'S',            ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="sə">suh</phoneme></prosody><break time="150ms"/></speak>', text: 'suh' },
+  { id: 'Z',            ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="zə">zuh</phoneme></prosody><break time="150ms"/></speak>', text: 'zuh' },
+  { id: 'SH',           ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="ʃːʌ">sshuh</phoneme></prosody><break time="150ms"/></speak>', text: 'shuh' },
+  { id: 'TH_VOICELESS', ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="θə">thuh</phoneme></prosody><break time="150ms"/></speak>', text: 'thuh' },
+  { id: 'TH_VOICED',    ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="ðʌ">the</phoneme></prosody><break time="150ms"/></speak>', text: 'the' },
+
+  // Glides
+  { id: 'W',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="wʌ">wuh</phoneme></prosody><break time="150ms"/></speak>', text: 'wuh' },
+  { id: 'Y',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="jʌ">yuh</phoneme></prosody><break time="150ms"/></speak>', text: 'yuh' },
+
+  // Liquids
+  { id: 'L',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="lːʌ">lluh</phoneme></prosody><break time="150ms"/></speak>', text: 'lluh' },
+  { id: 'R',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="ɹɛ">reh</phoneme></prosody><break time="150ms"/></speak>', text: 'reh' },
+
+  // Affricates
+  { id: 'CH', ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="tʃʌ">chuh</phoneme></prosody><break time="150ms"/></speak>', text: 'chuh' },
+  { id: 'J',  ssml: '<speak><prosody rate="80%"><phoneme alphabet="ipa" ph="dʒʌ">juh</phoneme></prosody><break time="150ms"/></speak>', text: 'juh' },
 ]
 
 // ── Representative words to test ───────────────────────────────────────
@@ -75,19 +107,18 @@ const TEST_WORDS: { word: string; ipa: string; syllables: number; lastConsonant:
 const FINAL_STOP_SOUNDS = new Set(['P', 'B', 'T', 'D', 'K', 'G', 'CH', 'J'])
 
 function wordSsml(word: string, ipa: string, syllables: number, lastConsonant: string | null): string {
-  const needsSlowdown = syllables <= 2 && lastConsonant && FINAL_STOP_SOUNDS.has(lastConsonant)
-  if (needsSlowdown) {
-    return `<speak><prosody rate="92%"><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></prosody><break time="150ms"/></speak>`
+  const isStopFinal = syllables <= 2 && lastConsonant && FINAL_STOP_SOUNDS.has(lastConsonant)
+  if (isStopFinal) {
+    return `<speak><prosody rate="92%"><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></prosody><break time="300ms"/></speak>`
   }
-  return `<speak><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme></speak>`
+  return `<speak><phoneme alphabet="ipa" ph="${ipa}">${word}</phoneme><break time="150ms"/></speak>`
 }
 
 async function fileExists(path: string): Promise<boolean> {
   try { await stat(path); return true } catch { return false }
 }
 
-const AUDIO_CONFIG = { audioEncoding: 'MP3' as const }
-
+/** Synthesize one audio file. Returns true if the file was generated. */
 async function synthesize(
   client: TextToSpeechClient,
   ssml: string,
@@ -96,10 +127,16 @@ async function synthesize(
   outPath: string,
   label: string,
   force: boolean,
-): Promise<void> {
+  speakingRate?: number,
+): Promise<boolean> {
   if (!force && await fileExists(outPath)) {
     console.log(`  SKIP ${label}`)
-    return
+    return false
+  }
+
+  const audioConfig = {
+    audioEncoding: 'MP3' as const,
+    ...(speakingRate != null && { speakingRate }),
   }
 
   // Try SSML first, fall back to plain text if voice doesn't support phoneme tags
@@ -109,25 +146,25 @@ async function synthesize(
     ;[response] = await client.synthesizeSpeech({
       input: { ssml },
       voice: { languageCode: 'en-US', name: voiceName },
-      audioConfig: AUDIO_CONFIG,
+      audioConfig,
     })
   } catch {
     try {
       ;[response] = await client.synthesizeSpeech({
         input: { text: plainText },
         voice: { languageCode: 'en-US', name: voiceName },
-        audioConfig: AUDIO_CONFIG,
+        audioConfig,
       })
       usedFallback = true
     } catch (e2: any) {
       console.error(`  FAIL ${label} — ${e2.message?.split('\n')[0] ?? 'unknown error'}`)
-      return
+      return false
     }
   }
 
   if (!response?.audioContent) {
     console.error(`  FAIL ${label} — no audio content`)
-    return
+    return false
   }
 
   const buffer = response.audioContent instanceof Uint8Array
@@ -136,12 +173,7 @@ async function synthesize(
 
   await writeFile(outPath, buffer)
   console.log(`  OK   ${label}${usedFallback ? ' (plain text)' : ''}`)
-}
-
-async function batch<T>(items: T[], size: number, fn: (item: T) => Promise<void>) {
-  for (let i = 0; i < items.length; i += size) {
-    await Promise.all(items.slice(i, i + size).map(fn))
-  }
+  return true
 }
 
 // ── Main ────────────────────────────────────────────────────────────────
@@ -160,45 +192,67 @@ async function main() {
 
   const force = args.includes('--force')
 
-  // Filter to specific voice if requested
+  // Filter to specific voice if requested (also includes variants sharing the same TTS voice)
   const voiceFlag = args.indexOf('--voice')
   let voices = VOICES
   if (voiceFlag !== -1 && args[voiceFlag + 1]) {
     const requested = args[voiceFlag + 1]
-    voices = VOICES.filter(v => v.name === requested)
-    if (voices.length === 0) {
+    const exact = VOICES.filter(v => v.name === requested)
+    if (exact.length === 0) {
       console.error(`Unknown voice: ${requested}. Use --list to see available voices.`)
       process.exit(1)
     }
+    // Include variants that share the same underlying TTS voice
+    const ttsName = exact[0].ttsName ?? exact[0].name
+    voices = VOICES.filter(v => v.name === requested || v.ttsName === requested || (v.ttsName ?? v.name) === ttsName)
   }
 
   const client = new TextToSpeechClient()
   const baseDir = join(import.meta.dir, '..', 'public', 'audio', 'voice-experiments')
 
+  // Group voices by TTS voice name so variants sharing the same underlying voice
+  // can be generated with interleaved API calls (avoids Google TTS server-side
+  // caching that ignores audioConfig differences for identical SSML).
+  const groups = new Map<string, Voice[]>()
   for (const voice of voices) {
-    const voiceDir = join(baseDir, voice.name)
-    const phonemesDir = join(voiceDir, 'phonemes')
-    const wordsDir = join(voiceDir, 'words')
+    const key = voice.ttsName ?? voice.name
+    const group = groups.get(key) ?? []
+    group.push(voice)
+    groups.set(key, group)
+  }
 
-    await mkdir(phonemesDir, { recursive: true })
-    await mkdir(wordsDir, { recursive: true })
+  for (const [ttsVoice, group] of groups) {
+    // Prepare output directories
+    const dirs = await Promise.all(group.map(async (voice) => {
+      const voiceDir = join(baseDir, voice.name)
+      const phonemesDir = join(voiceDir, 'phonemes')
+      const wordsDir = join(voiceDir, 'words')
+      await mkdir(phonemesDir, { recursive: true })
+      await mkdir(wordsDir, { recursive: true })
+      return { voice, phonemesDir, wordsDir }
+    }))
 
-    console.log(`\n━━━ ${voice.label} (${voice.name}) ━━━`)
+    const labels = group.map(v => v.label).join(', ')
+    console.log(`\n━━━ ${labels} (${ttsVoice}) ━━━`)
 
-    // Phonemes
+    // Phonemes — interleave variants per phoneme
     console.log(`  Phonemes (${TEST_PHONEMES.length}):`)
-    await batch(TEST_PHONEMES, 5, async (p) => {
-      const outPath = join(phonemesDir, `${p.id}.mp3`)
-      await synthesize(client, p.ssml, p.text, voice.name, outPath, `${p.id}`, force)
-    })
+    for (const p of TEST_PHONEMES) {
+      for (const { voice, phonemesDir } of dirs) {
+        const outPath = join(phonemesDir, `${p.id}.mp3`)
+        await synthesize(client, p.ssml, p.text, ttsVoice, outPath, `${voice.label} ${p.id}`, force, voice.speakingRate)
+      }
+    }
 
-    // Words
+    // Words — interleave variants per word
     console.log(`  Words (${TEST_WORDS.length}):`)
-    await batch(TEST_WORDS, 5, async (w) => {
+    for (const w of TEST_WORDS) {
       const ssml = wordSsml(w.word, w.ipa, w.syllables, w.lastConsonant)
-      const outPath = join(wordsDir, `${w.word}.mp3`)
-      await synthesize(client, ssml, w.word, voice.name, outPath, `${w.word}`, force)
-    })
+      for (const { voice, wordsDir } of dirs) {
+        const outPath = join(wordsDir, `${w.word}.mp3`)
+        await synthesize(client, ssml, w.word, ttsVoice, outPath, `${w.word} (${voice.label})`, force, voice.speakingRate)
+      }
+    }
   }
 
   console.log('\n✓ Done! Files in public/audio/voice-experiments/<voice-name>/')

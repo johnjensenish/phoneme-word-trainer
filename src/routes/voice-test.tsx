@@ -11,8 +11,6 @@ const VOICES = [
   { name: 'en-US-Wavenet-C', label: 'Wavenet-C' },
   { name: 'en-US-News-K', label: 'News-K' },
   { name: 'en-US-Casual-K', label: 'Casual-K' },
-  { name: 'en-US-Casual-K-padded', label: 'Casual-K (padded)' },
-  { name: 'en-US-Casual-K-slow', label: 'Casual-K (slow)' },
 ]
 
 const PHONEMES = [
