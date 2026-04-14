@@ -10,6 +10,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overscroll-behavior: none;
 }
 
 body {
@@ -46,6 +47,11 @@ button {
   border: none;
   cursor: pointer;
   padding: 0;
+  touch-action: manipulation;
+}
+
+a, [role="button"] {
+  touch-action: manipulation;
 }
 
 button:focus-visible,

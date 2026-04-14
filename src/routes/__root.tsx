@@ -14,7 +14,7 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover' },
       { title: 'Phoneme Word Trainer — Help Your Toddler Hear and Say New Sounds' },
       { name: 'description', content: 'A parent-led flashcard app for toddler speech development, based on speech sound acquisition research.' },
     ],
