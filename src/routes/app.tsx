@@ -197,7 +197,7 @@ function AppRoute() {
   }
 
   return (
-    <div style={{ minHeight: '100dvh', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100svh', overflow: 'hidden', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column' }}>
       {/* Top bar — minimal, stays out of the way */}
       <header style={{
         display: 'flex',
