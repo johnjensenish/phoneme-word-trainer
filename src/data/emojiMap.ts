@@ -463,4 +463,9 @@ export const emojiMap: Record<string, string> = {
   photo_ketchup: "🍅",
   photo_football: "🏈",
   photo_vitamin: "💊",
+  photo_trade: "🤝",
+  photo_monster_truck: "🛻",
+  photo_dump_truck: "🚚",
+  photo_semi_truck: "🚛",
+  photo_construction: "🏗️",
 };
