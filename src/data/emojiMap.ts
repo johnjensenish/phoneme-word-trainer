@@ -468,4 +468,5 @@ export const emojiMap: Record<string, string> = {
   photo_dump_truck: "🚚",
   photo_semi_truck: "🚛",
   photo_construction: "🏗️",
+  photo_yeah: "👍",
 };
