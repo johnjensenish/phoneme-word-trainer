@@ -6,7 +6,16 @@ type Source = {
   id: string
   label: string
   sublabel: string
-  urlFor: (phonemeId: string) => string
+  urlFor: (phoneme: Phoneme) => string
+  captionFor?: (phoneme: Phoneme) => string
+}
+
+type Phoneme = {
+  id: string
+  label: string
+  group: string
+  /** Example English word used for the Dictionary column. */
+  dictWord: string
 }
 
 const SOURCES: Source[] = [
@@ -14,40 +23,47 @@ const SOURCES: Source[] = [
     id: 'studio-o',
     label: 'Studio-O (current)',
     sublabel: 'Google TTS — generated',
-    urlFor: id => `/audio/phonemes/${encodeURIComponent(id)}.mp3`,
+    urlFor: p => `/audio/phonemes/${encodeURIComponent(p.id)}.mp3`,
   },
   {
     id: 'wikimedia',
     label: 'Wikimedia IPA',
-    sublabel: 'Real human, bare IPA',
-    urlFor: id => `/audio/voice-samples/wikimedia/${encodeURIComponent(id)}.mp3`,
+    sublabel: 'Mixed speakers, bare IPA',
+    urlFor: p => `/audio/voice-samples/wikimedia/${encodeURIComponent(p.id)}.mp3`,
+  },
+  {
+    id: 'dictionary',
+    label: 'Oxford / Google Dict.',
+    sublabel: 'US speaker, example word',
+    urlFor: p => `/audio/voice-samples/dictionary/${encodeURIComponent(p.id)}.mp3`,
+    captionFor: p => `"${p.dictWord}"`,
   },
 ]
 
-const PHONEMES = [
-  { id: 'P', label: 'Puh', group: 'Stops' },
-  { id: 'B', label: 'Buh', group: 'Stops' },
-  { id: 'T', label: 'Tuh', group: 'Stops' },
-  { id: 'D', label: 'Duh', group: 'Stops' },
-  { id: 'K', label: 'Kuh', group: 'Stops' },
-  { id: 'G', label: 'Guh', group: 'Stops' },
-  { id: 'M', label: 'Mmm', group: 'Nasals' },
-  { id: 'N', label: 'Nnn', group: 'Nasals' },
-  { id: 'NG', label: 'Nng', group: 'Nasals' },
-  { id: 'H', label: 'Hhh', group: 'Fricatives' },
-  { id: 'F', label: 'Fff', group: 'Fricatives' },
-  { id: 'V', label: 'Vvv', group: 'Fricatives' },
-  { id: 'S', label: 'Sss', group: 'Fricatives' },
-  { id: 'Z', label: 'Zzz', group: 'Fricatives' },
-  { id: 'SH', label: 'Shh', group: 'Fricatives' },
-  { id: 'TH_VOICELESS', label: 'Thh (voiceless)', group: 'Fricatives' },
-  { id: 'TH_VOICED', label: 'Thh (voiced)', group: 'Fricatives' },
-  { id: 'W', label: 'Wuh', group: 'Glides' },
-  { id: 'Y', label: 'Yuh', group: 'Glides' },
-  { id: 'L', label: 'Lll', group: 'Liquids' },
-  { id: 'R', label: 'Rrr', group: 'Liquids' },
-  { id: 'CH', label: 'Chuh', group: 'Affricates' },
-  { id: 'J', label: 'Juh', group: 'Affricates' },
+const PHONEMES: Phoneme[] = [
+  { id: 'P',            label: 'Puh',             group: 'Stops',      dictWord: 'pig' },
+  { id: 'B',            label: 'Buh',             group: 'Stops',      dictWord: 'bob' },
+  { id: 'T',            label: 'Tuh',             group: 'Stops',      dictWord: 'two' },
+  { id: 'D',            label: 'Duh',             group: 'Stops',      dictWord: 'day' },
+  { id: 'K',            label: 'Kuh',             group: 'Stops',      dictWord: 'kick' },
+  { id: 'G',            label: 'Guh',             group: 'Stops',      dictWord: 'go' },
+  { id: 'M',            label: 'Mmm',             group: 'Nasals',     dictWord: 'me' },
+  { id: 'N',            label: 'Nnn',             group: 'Nasals',     dictWord: 'nun' },
+  { id: 'NG',           label: 'Nng',             group: 'Nasals',     dictWord: 'sing' },
+  { id: 'H',            label: 'Hhh',             group: 'Fricatives', dictWord: 'he' },
+  { id: 'F',            label: 'Fff',             group: 'Fricatives', dictWord: 'fun' },
+  { id: 'V',            label: 'Vvv',             group: 'Fricatives', dictWord: 'van' },
+  { id: 'S',            label: 'Sss',             group: 'Fricatives', dictWord: 'say' },
+  { id: 'Z',            label: 'Zzz',             group: 'Fricatives', dictWord: 'zoo' },
+  { id: 'SH',           label: 'Shh',             group: 'Fricatives', dictWord: 'she' },
+  { id: 'TH_VOICELESS', label: 'Thh (voiceless)', group: 'Fricatives', dictWord: 'thin' },
+  { id: 'TH_VOICED',    label: 'Thh (voiced)',    group: 'Fricatives', dictWord: 'this' },
+  { id: 'W',            label: 'Wuh',             group: 'Glides',     dictWord: 'wish' },
+  { id: 'Y',            label: 'Yuh',             group: 'Glides',     dictWord: 'yard' },
+  { id: 'L',            label: 'Lll',             group: 'Liquids',    dictWord: 'look' },
+  { id: 'R',            label: 'Rrr',             group: 'Liquids',    dictWord: 'red' },
+  { id: 'CH',           label: 'Chuh',            group: 'Affricates', dictWord: 'chip' },
+  { id: 'J',            label: 'Juh',             group: 'Affricates', dictWord: 'juice' },
 ]
 
 export const Route = createFileRoute('/voice-samples')({
@@ -100,14 +116,24 @@ function VoiceSamplesPage() {
           human recording of the same IPA sound.
         </p>
         <div className={styles.note}>
-          <strong>About the samples.</strong> The &ldquo;Wikimedia IPA&rdquo;
-          column pulls from Wikipedia&apos;s IPA consonant chart recordings.
-          These are authentic human recordings, but: speakers are mixed (not
-          all female, not PNW-specific), and the sound is usually the bare IPA
-          phoneme (e.g. just <em>p</em>), not the &ldquo;puh&rdquo;
-          consonant-plus-schwa we use in training. It&apos;s a starting point
-          for the experiment — we can source better samples (e.g. a recorded
-          PNW female voice talent) if this direction feels right.
+          <strong>About the samples.</strong> Neither human source is a PNW
+          female voice — we&apos;d need to record one. What&apos;s here is two
+          different free real-human sources, so you can judge whether real
+          audio wins clearly enough to be worth the effort.
+          <ul style={{ margin: '8px 0 0', paddingLeft: '20px' }}>
+            <li>
+              <strong>Wikimedia IPA</strong> — mixed volunteer speakers from
+              the <a href="https://en.wikipedia.org/wiki/IPA_consonant_chart_with_audio" target="_blank" rel="noreferrer">IPA consonant chart</a>,
+              isolated bare phonemes (e.g. just <em>p</em>, not <em>puh</em>).
+              CC BY-SA.
+            </li>
+            <li>
+              <strong>Oxford / Google Dictionary</strong> — US-English speaker,
+              full example word (e.g. <em>pig</em> for P). Real dictionary
+              audio, but whole-word rather than isolated phoneme, and
+              Google/Oxford copyright so redistribution-restricted.
+            </li>
+          </ul>
         </div>
       </header>
 
@@ -137,14 +163,16 @@ function VoiceSamplesPage() {
                   </div>
                   {SOURCES.map(s => {
                     const key = `${s.id}/${p.id}`
+                    const caption = s.captionFor?.(p)
                     return (
                       <button
                         key={key}
                         className={`${styles.playBtn} ${playing === key ? styles.playing : ''}`}
-                        onClick={() => play(s.id, p.id, s.urlFor(p.id))}
-                        aria-label={`Play ${p.id} from ${s.label}`}
+                        onClick={() => play(s.id, p.id, s.urlFor(p))}
+                        aria-label={`Play ${p.id} from ${s.label}${caption ? ` — ${caption}` : ''}`}
                       >
-                        {playing === key ? '⏹' : '▶'}
+                        <span>{playing === key ? '⏹' : '▶'}</span>
+                        {caption && <span className={styles.caption}>{caption}</span>}
                       </button>
                     )
                   })}
@@ -156,16 +184,23 @@ function VoiceSamplesPage() {
       </div>
 
       <div className={styles.footer}>
-        Wikimedia samples are sourced from the{' '}
-        <a
-          href="https://en.wikipedia.org/wiki/IPA_consonant_chart_with_audio"
-          target="_blank"
-          rel="noreferrer"
-        >
-          IPA consonant chart with audio
-        </a>{' '}
-        on Wikipedia, licensed under CC&nbsp;BY-SA. Transcoded from OGG to MP3
-        by Wikimedia Commons.
+        <div>
+          <strong>Wikimedia IPA</strong> — sourced from the{' '}
+          <a
+            href="https://en.wikipedia.org/wiki/IPA_consonant_chart_with_audio"
+            target="_blank"
+            rel="noreferrer"
+          >
+            IPA consonant chart with audio
+          </a>{' '}
+          on Wikipedia. CC&nbsp;BY-SA. Transcoded to MP3 by Wikimedia Commons.
+        </div>
+        <div style={{ marginTop: 8 }}>
+          <strong>Oxford / Google Dictionary</strong> — audio served from{' '}
+          <code>ssl.gstatic.com/dictionary</code> (real human US-English
+          speaker, Oxford Languages). Included here for
+          comparison/evaluation; not cleared for redistribution.
+        </div>
       </div>
     </div>
   )
