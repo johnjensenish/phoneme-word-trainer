@@ -28,8 +28,8 @@ jobs:
         run: bun run scripts/generate-audio.ts
       - name: Commit new audio
         run: |
-          git config user.name  "Claude"
-          git config user.email "noreply@anthropic.com"
+          git config user.name  "generate-audio workflow"
+          git config user.email "generate-audio@users.noreply.github.com"
           git add public/audio
           if ! git diff --cached --quiet; then
             git commit -m "Generate audio for new words"
