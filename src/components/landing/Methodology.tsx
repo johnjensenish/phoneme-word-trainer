@@ -40,7 +40,7 @@ export function Methodology() {
           <div className={`${styles.tierCard} ${styles.tierCardProduce}`}>
             <div>
               <span className={`${styles.tierDot} ${styles.tierDotProduce}`} />
-              <span className={styles.tierLabel}>Produce</span>
+              <span className={styles.tierLabel}>In reach</span>
             </div>
             <p className={styles.tierDesc}>
               Your child can make this sound. Isolate the first phoneme, then
@@ -50,7 +50,7 @@ export function Methodology() {
           <div className={`${styles.tierCard} ${styles.tierCardGuided}`}>
             <div>
               <span className={`${styles.tierDot} ${styles.tierDotGuided}`} />
-              <span className={styles.tierLabel}>Guided</span>
+              <span className={styles.tierLabel}>Stretch</span>
             </div>
             <p className={styles.tierDesc}>
               This sound is emerging. Model with emphasis: "Kuh... Cat!" Accept
@@ -60,10 +60,10 @@ export function Methodology() {
           <div className={`${styles.tierCard} ${styles.tierCardExpose}`}>
             <div>
               <span className={`${styles.tierDot} ${styles.tierDotExpose}`} />
-              <span className={styles.tierLabel}>Listen</span>
+              <span className={styles.tierLabel}>Out of reach</span>
             </div>
             <p className={styles.tierDesc}>
-              Not expected yet. Stretch the sound: "Bllllue." Your child will
+              Not expected yet. Draw out the sound: "Bllllue." Your child will
               simplify, and that's perfectly normal.
             </p>
           </div>
@@ -81,13 +81,13 @@ export function Methodology() {
               consonant development.
             </li>
             <li className={styles.scienceItem}>
-              212 words tagged by constituent consonant sounds, acquisition
+              635 words tagged by constituent consonant sounds, acquisition
               difficulty, and common simplification patterns.
             </li>
             <li className={styles.scienceItem}>
               Uses recasting — modeling the correct form without correcting —
-              which research shows is the most effective parent technique for
-              speech development.
+              one of the most well-supported parent techniques in the speech
+              development literature.
             </li>
             <li className={styles.scienceItem}>
               Phonological processes like fronting ("cat" → "tat") and cluster
