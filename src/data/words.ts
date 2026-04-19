@@ -9405,7 +9405,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "ACT133",
     word: "bob",
     ipa: "bɑːb",
     category: "actions",
@@ -9421,7 +9420,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "TIM009",
     word: "day",
     ipa: "deɪ",
     category: "time",
@@ -9437,7 +9435,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "PPL021",
     word: "nun",
     ipa: "nʌn",
     category: "people",
@@ -9453,7 +9450,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "PPL022",
     word: "he",
     ipa: "hiː",
     category: "people",
@@ -9469,7 +9465,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "FEE018",
     word: "fun",
     ipa: "fʌn",
     category: "feelings",
@@ -9485,7 +9480,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "ACT134",
     word: "say",
     ipa: "seɪ",
     category: "actions",
@@ -9501,7 +9495,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "PPL023",
     word: "she",
     ipa: "ʃiː",
     category: "people",
@@ -9517,7 +9510,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "DES055",
     word: "thin",
     ipa: "θɪn",
     category: "describing",
@@ -9533,7 +9525,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "ACT135",
     word: "wish",
     ipa: "wɪʃ",
     category: "actions",
@@ -9549,7 +9540,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "FOO078",
     word: "chip",
     ipa: "tʃɪp",
     category: "food",
