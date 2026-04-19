@@ -1,7 +1,10 @@
 /**
  * Generate MP3 audio files for all phonemes and words using Google Cloud TTS.
  *
- * Prerequisites:
+ * Runs automatically in CI via .github/workflows/generate-audio.yml when
+ * src/data/words.ts, this script, or public/audio/** changes in a PR.
+ *
+ * Prerequisites (local runs only):
  *   1. Enable Cloud Text-to-Speech API in your GCP project
  *   2. Run: gcloud auth application-default login
  *   3. Run: bun run generate-audio

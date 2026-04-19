@@ -28,6 +28,40 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Audio files are pre-generated and committed to the repo (~5-10 KB each), so most developers won't need to run this unless sounds or words change.
 
+> **CI generates audio automatically.** When a PR modifies `src/data/words.ts`, the `Generate Audio` workflow synthesizes any missing MP3s and pushes them back to the PR branch. Local generation is only needed for offline work or when iterating on SSML templates in `generate-audio.ts`.
+
+### Rotating the CI credential (`GCP_TTS_SA_KEY`)
+
+The workflow authenticates as the `pwt-tts-ci` service account in the `phoneme-word-trainer` GCP project. To rotate the key (e.g., if the secret is lost or leaked):
+
+```sh
+SA=pwt-tts-ci@phoneme-word-trainer.iam.gserviceaccount.com
+KEY=$(mktemp).json
+
+# Create a fresh key
+gcloud iam service-accounts keys create "$KEY" --iam-account "$SA"
+
+# Upload it as the repo secret
+gh secret set GCP_TTS_SA_KEY --repo johnjensenish/phoneme-word-trainer < "$KEY"
+rm "$KEY"
+
+# List existing keys and delete the old one(s) once the new key is confirmed working
+gcloud iam service-accounts keys list --iam-account "$SA"
+gcloud iam service-accounts keys delete <OLD_KEY_ID> --iam-account "$SA"
+```
+
+The service account has `roles/serviceusage.serviceUsageConsumer` on the project — enough to call the TTS API, nothing more. If the service account is missing entirely, recreate it:
+
+```sh
+gcloud iam service-accounts create pwt-tts-ci \
+  --display-name "Phoneme Trainer TTS CI" \
+  --project phoneme-word-trainer
+
+gcloud projects add-iam-policy-binding phoneme-word-trainer \
+  --member "serviceAccount:pwt-tts-ci@phoneme-word-trainer.iam.gserviceaccount.com" \
+  --role roles/serviceusage.serviceUsageConsumer
+```
+
 ### Prerequisites
 
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) (`brew install google-cloud-sdk`)
