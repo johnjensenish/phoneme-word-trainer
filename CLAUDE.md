@@ -1,0 +1,3 @@
+- Add words with `bun run scripts/add-word.ts "<word>" --category <cat> --emoji <e>` — never hand-edit `src/data/words.ts`. CI generates audio on push.
+- Typecheck with `bun run build` (not `npx tsc`).
+- Prefer Grep / Glob / Read / Edit over Bash `grep`/`cat`/`sed`.
