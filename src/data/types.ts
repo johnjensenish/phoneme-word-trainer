@@ -12,7 +12,6 @@ export interface Sound {
 }
 
 export interface Word {
-  word_id: string;
   word: string;
   ipa: string;
   category: string;
@@ -54,8 +53,7 @@ export interface PhonologicalProcess {
 export interface RhymeGroup {
   rhyme_group_id: string;
   rhyme_pattern: string;
-  word_ids: string[];
-  words: string;
+  words: string[];
   target_sounds: string;
   notes: string;
 }

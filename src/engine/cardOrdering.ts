@@ -6,8 +6,8 @@ const wordToGroup = new Map<string, string>()
 const groupOrder = new Map<string, number>()
 for (const [i, group] of staticRhymeGroups.entries()) {
   groupOrder.set(group.rhyme_group_id, i)
-  for (const wid of group.word_ids) {
-    wordToGroup.set(wid, group.rhyme_group_id)
+  for (const w of group.words) {
+    wordToGroup.set(w, group.rhyme_group_id)
   }
 }
 
@@ -84,7 +84,7 @@ function orderByRhymeGroups(
   const ungrouped: ComputedWordCard[] = []
 
   for (const card of cards) {
-    const gid = wordToGroup.get(card.word.word_id)
+    const gid = wordToGroup.get(card.word.word)
     if (gid) {
       grouped.push(card)
     } else {
@@ -94,8 +94,8 @@ function orderByRhymeGroups(
 
   // Sort grouped cards by their rhyme group order
   grouped.sort((a, b) => {
-    const ga = wordToGroup.get(a.word.word_id) ?? ''
-    const gb = wordToGroup.get(b.word.word_id) ?? ''
+    const ga = wordToGroup.get(a.word.word) ?? ''
+    const gb = wordToGroup.get(b.word.word) ?? ''
     return (groupOrder.get(ga) ?? 999) - (groupOrder.get(gb) ?? 999)
   })
 

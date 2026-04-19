@@ -33,7 +33,7 @@ function searchWords(
 
   // Build a filtered index lookup
   const filteredIndexMap = new Map<string, number>()
-  filteredCards.forEach((c, i) => filteredIndexMap.set(c.word.word_id, i))
+  filteredCards.forEach((c, i) => filteredIndexMap.set(c.word.word, i))
 
   const prefix: SearchResult[] = []
   const contains: SearchResult[] = []
@@ -42,7 +42,7 @@ function searchWords(
   for (const card of allCards) {
     const word = card.word.word.toLowerCase()
     const cat = card.word.category.toLowerCase()
-    const filteredIndex = filteredIndexMap.get(card.word.word_id) ?? null
+    const filteredIndex = filteredIndexMap.get(card.word.word) ?? null
 
     if (word.startsWith(q)) {
       prefix.push({ card, filteredIndex, matchType: 'prefix' })
@@ -162,7 +162,7 @@ export function WordSearch({
 
               return (
                 <button
-                  key={result.card.word.word_id}
+                  key={result.card.word.word}
                   className={`${styles.result} ${isHighlighted ? styles.resultHighlighted : ''} ${showDivider ? styles.resultDivider : ''}`}
                   onClick={() => selectResult(result)}
                   onMouseEnter={() => setHighlightIndex(i)}
