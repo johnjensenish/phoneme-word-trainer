@@ -4,6 +4,7 @@ on:
     paths:
       - 'src/data/words.ts'
       - 'scripts/generate-audio.ts'
+      - 'public/audio/**'
 
 jobs:
   generate-audio:
@@ -27,8 +28,8 @@ jobs:
         run: bun run scripts/generate-audio.ts
       - name: Commit new audio
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name  "Claude"
+          git config user.email "noreply@anthropic.com"
           git add public/audio
           if ! git diff --cached --quiet; then
             git commit -m "Generate audio for new words"
