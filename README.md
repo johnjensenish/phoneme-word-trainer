@@ -129,6 +129,12 @@ bun run scripts/detect-ipa-changes.ts --major      # consonant diffs only
 bun run scripts/detect-ipa-changes.ts --delete     # delete audio for mismatches
 ```
 
+> **Always use `add-word.ts` rather than hand-editing `src/data/words.ts`.** The
+> script derives IPA via espeak-ng (PNW American English) and fills in all the
+> metadata (consonants, positions, clusters, word shape, syllable count, ID).
+> Audio for new words is generated automatically in CI on PRs that touch
+> `src/data/words.ts`.
+
 ### Audio Generation
 
 Requires Google Cloud TTS credentials (see [Audio Generation](#audio-generation) above).
