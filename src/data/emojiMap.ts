@@ -471,4 +471,5 @@ export const emojiMap: Record<string, string> = {
   photo_yeah: "👍",
   photo_warm: "☀️",
   photo_delivery_truck: "📦",
+  photo_tuck: "🛏️",
 };
