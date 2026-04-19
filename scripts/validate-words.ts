@@ -129,7 +129,6 @@ function analyzeConsonants(ipa: string): {
 // ── Run validation ──────────────────────────────────────────────────
 
 interface Issue {
-  word_id: string;
   word: string;
   field: string;
   stored: string;
@@ -144,7 +143,7 @@ for (const w of words) {
     const computed = countVowelNuclei(w.ipa);
     if (computed !== w.syllable_count) {
       issues.push({
-        word_id: w.word_id, word: w.word, field: "syllable_count",
+        word: w.word, field: "syllable_count",
         stored: String(w.syllable_count), computed: String(computed),
       });
     }
@@ -158,7 +157,7 @@ for (const w of words) {
     const computed = [...analysis.consonant_ids].sort().join(",");
     if (stored !== computed) {
       issues.push({
-        word_id: w.word_id, word: w.word, field: "consonant_ids",
+        word: w.word, field: "consonant_ids",
         stored, computed,
       });
     }
@@ -168,7 +167,7 @@ for (const w of words) {
   if (!fieldFilter || fieldFilter === "hardest_sound_id") {
     if (analysis.hardest_sound_id !== w.hardest_sound_id) {
       issues.push({
-        word_id: w.word_id, word: w.word, field: "hardest_sound_id",
+        word: w.word, field: "hardest_sound_id",
         stored: w.hardest_sound_id, computed: analysis.hardest_sound_id,
       });
     }
@@ -180,7 +179,7 @@ for (const w of words) {
     const computed = [...analysis.cluster_ids].sort().join(",");
     if (stored !== computed) {
       issues.push({
-        word_id: w.word_id, word: w.word, field: "cluster_ids",
+        word: w.word, field: "cluster_ids",
         stored: stored || "(none)", computed: computed || "(none)",
       });
     }
@@ -212,7 +211,7 @@ if (!summaryOnly) {
     const fieldIssues = issues.filter(i => i.field === field);
     console.log(`--- ${field} (${fieldIssues.length} differences) ---`);
     for (const issue of fieldIssues.slice(0, 40)) {
-      console.log(`  ${issue.word_id.padEnd(8)} ${issue.word.padEnd(20)} stored: ${issue.stored.padEnd(30)} computed: ${issue.computed}`);
+      console.log(`  ${issue.word.padEnd(22)} stored: ${issue.stored.padEnd(30)} computed: ${issue.computed}`);
     }
     if (fieldIssues.length > 40) {
       console.log(`  ... and ${fieldIssues.length - 40} more`);

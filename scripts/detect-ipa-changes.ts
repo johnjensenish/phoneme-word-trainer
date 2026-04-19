@@ -47,21 +47,21 @@ try {
 // ── British IPA detector ────────────────────────────────────────────
 // Catch any British-isms that slipped in before we even compare to the dictionary.
 
-const britishFlags: Array<{ word_id: string; word: string; ipa: string; reason: string }> = [];
+const britishFlags: Array<{ word: string; ipa: string; reason: string }> = [];
 
 for (const w of words) {
   if (w.ipa.includes("\u0252")) { // ɒ
-    britishFlags.push({ word_id: w.word_id, word: w.word, ipa: w.ipa, reason: "Contains ɒ (British). Use ɑː for PNW American." });
+    britishFlags.push({ word: w.word, ipa: w.ipa, reason: "Contains ɒ (British). Use ɑː for PNW American." });
   }
   if (w.ipa.includes("njuː") && ["new", "knew"].includes(w.word)) {
-    britishFlags.push({ word_id: w.word_id, word: w.word, ipa: w.ipa, reason: "Uses njuː (British). Use nuː for PNW American." });
+    britishFlags.push({ word: w.word, ipa: w.ipa, reason: "Uses njuː (British). Use nuː for PNW American." });
   }
 }
 
 if (britishFlags.length > 0) {
   console.log(`\n🚨 BRITISH PRONUNCIATIONS DETECTED (${britishFlags.length}) — must fix!\n`);
   for (const f of britishFlags) {
-    console.log(`  ${f.word_id.padEnd(8)} ${f.word.padEnd(20)} ${f.ipa.padEnd(20)} ${f.reason}`);
+    console.log(`  ${f.word.padEnd(22)} ${f.ipa.padEnd(20)} ${f.reason}`);
   }
   console.log();
 }
@@ -113,7 +113,6 @@ function consonantSkeleton(ipa: string): string {
 }
 
 interface Mismatch {
-  word_id: string;
   word: string;
   configured: string;
   dictionary: string;
@@ -147,7 +146,6 @@ for (const w of words) {
   const severity = skelOurs === skelDict ? "MINOR" : "MAJOR";
 
   mismatches.push({
-    word_id: w.word_id,
     word: w.word,
     configured: w.ipa,
     dictionary: dictIPA,
@@ -172,14 +170,14 @@ console.log(`No dict result:   ${noResult.length}`);
 if (major.length > 0) {
   console.log(`\n--- MAJOR (consonant differences) ---`);
   for (const m of major) {
-    console.log(`  ${m.word_id.padEnd(8)} ${m.word.padEnd(20)} CONFIG: ${m.configured.padEnd(20)} DICT: ${m.dictionary}`);
+    console.log(`  ${m.word.padEnd(22)} CONFIG: ${m.configured.padEnd(20)} DICT: ${m.dictionary}`);
   }
 }
 
 if (!majorOnly && minor.length > 0) {
   console.log(`\n--- MINOR (vowel/stress differences) ---`);
   for (const m of minor) {
-    console.log(`  ${m.word_id.padEnd(8)} ${m.word.padEnd(20)} CONFIG: ${m.configured.padEnd(20)} DICT: ${m.dictionary}`);
+    console.log(`  ${m.word.padEnd(22)} CONFIG: ${m.configured.padEnd(20)} DICT: ${m.dictionary}`);
   }
 }
 

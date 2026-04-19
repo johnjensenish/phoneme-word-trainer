@@ -2,7 +2,6 @@ import type { Word } from './types'
 
 export const words: Word[] = [
   {
-    word_id: "ACT001",
     word: "up",
     ipa: "\u028cp",
     category: "prepositions",
@@ -18,7 +17,6 @@ export const words: Word[] = [
     notes: "Vowel + P. About as easy as it gets.",
   },
   {
-    word_id: "ACT002",
     word: "no",
     ipa: "no\u028a",
     category: "social",
@@ -34,7 +32,6 @@ export const words: Word[] = [
     notes: "CV with early N. Top 5 toddler word.",
   },
   {
-    word_id: "ACT003",
     word: "hi",
     ipa: "ha\u026a",
     category: "social",
@@ -50,7 +47,6 @@ export const words: Word[] = [
     notes: "CV with early H.",
   },
   {
-    word_id: "ACT004",
     word: "bye",
     ipa: "ba\u026a",
     category: "social",
@@ -66,7 +62,6 @@ export const words: Word[] = [
     notes: "CV with early B.",
   },
   {
-    word_id: "ACT005",
     word: "me",
     ipa: "mi\u02d0",
     category: "pronouns",
@@ -82,7 +77,6 @@ export const words: Word[] = [
     notes: "CV with early M.",
   },
   {
-    word_id: "ACT006",
     word: "my",
     ipa: "ma\u026a",
     category: "pronouns",
@@ -98,7 +92,6 @@ export const words: Word[] = [
     notes: "Possessive. CV with early M.",
   },
   {
-    word_id: "ACT007",
     word: "boo",
     ipa: "bu\u02d0",
     category: "exclamations",
@@ -114,7 +107,6 @@ export const words: Word[] = [
     notes: "Fun and engaging.",
   },
   {
-    word_id: "ACT008",
     word: "wow",
     ipa: "wa\u028a",
     category: "exclamations",
@@ -130,7 +122,6 @@ export const words: Word[] = [
     notes: "Exclamation.",
   },
   {
-    word_id: "ACT009",
     word: "uh-oh",
     ipa: "\u028c.o\u028a",
     category: "exclamations",
@@ -146,7 +137,6 @@ export const words: Word[] = [
     notes: "No consonants! Pure vowels.",
   },
   {
-    word_id: "ACT010",
     word: "whee",
     ipa: "wi\u02d0",
     category: "exclamations",
@@ -162,7 +152,6 @@ export const words: Word[] = [
     notes: "Fun exclamation.",
   },
   {
-    word_id: "ACT011",
     word: "more",
     ipa: "m\u0254\u02d0r",
     category: "requests",
@@ -178,7 +167,6 @@ export const words: Word[] = [
     notes: "M easy, R late. Essential word. Accept 'moh'.",
   },
   {
-    word_id: "ACT012",
     word: "want",
     ipa: "wɑːnt",
     category: "requests",
@@ -194,7 +182,6 @@ export const words: Word[] = [
     notes: "W solid, T emerging.",
   },
   {
-    word_id: "ACT013",
     word: "help",
     ipa: "h\u025blp",
     category: "requests",
@@ -210,7 +197,6 @@ export const words: Word[] = [
     notes: "H solid, L late. Accept 'hep'.",
   },
   {
-    word_id: "ACT014",
     word: "mine",
     ipa: "ma\u026an",
     category: "requests",
@@ -226,7 +212,6 @@ export const words: Word[] = [
     notes: "Both early sounds.",
   },
   {
-    word_id: "ACT015",
     word: "go",
     ipa: "\u0261o\u028a",
     category: "verbs",
@@ -242,7 +227,6 @@ export const words: Word[] = [
     notes: "G emerging. High-value.",
   },
   {
-    word_id: "ACT016",
     word: "push",
     ipa: "p\u028a\u0283",
     category: "verbs",
@@ -258,7 +242,6 @@ export const words: Word[] = [
     notes: "P solid, SH late.",
   },
   {
-    word_id: "ACT017",
     word: "pull",
     ipa: "p\u028al",
     category: "verbs",
@@ -274,7 +257,6 @@ export const words: Word[] = [
     notes: "P solid, L late.",
   },
   {
-    word_id: "ACT018",
     word: "pop",
     ipa: "pɑːp",
     category: "verbs",
@@ -290,7 +272,6 @@ export const words: Word[] = [
     notes: "Same consonant both ends. Very easy.",
   },
   {
-    word_id: "ACT019",
     word: "bump",
     ipa: "b\u028cmp",
     category: "verbs",
@@ -306,7 +287,6 @@ export const words: Word[] = [
     notes: "B and M solid. Final cluster harder.",
   },
   {
-    word_id: "ACT020",
     word: "hop",
     ipa: "hɑːp",
     category: "verbs",
@@ -322,7 +302,6 @@ export const words: Word[] = [
     notes: "Both early.",
   },
   {
-    word_id: "ACT021",
     word: "run",
     ipa: "r\u028cn",
     category: "verbs",
@@ -338,7 +317,6 @@ export const words: Word[] = [
     notes: "R late. Accept 'wun'.",
   },
   {
-    word_id: "ACT022",
     word: "walk",
     ipa: "w\u0254\u02d0k",
     category: "verbs",
@@ -354,7 +332,6 @@ export const words: Word[] = [
     notes: "W solid, K emerging.",
   },
   {
-    word_id: "ACT023",
     word: "stop",
     ipa: "stɑːp",
     category: "verbs",
@@ -370,7 +347,6 @@ export const words: Word[] = [
     notes: "ST cluster late. Accept 'top'.",
   },
   {
-    word_id: "ACT024",
     word: "eat",
     ipa: "i\u02d0t",
     category: "verbs",
@@ -386,7 +362,6 @@ export const words: Word[] = [
     notes: "Almost entirely vowel.",
   },
   {
-    word_id: "ACT025",
     word: "bite",
     ipa: "ba\u026at",
     category: "verbs",
@@ -402,7 +377,6 @@ export const words: Word[] = [
     notes: "B solid, T emerging.",
   },
   {
-    word_id: "ACT026",
     word: "hide",
     ipa: "ha\u026ad",
     category: "verbs",
@@ -418,7 +392,6 @@ export const words: Word[] = [
     notes: "Both early sounds.",
   },
   {
-    word_id: "ACT027",
     word: "peek",
     ipa: "pi\u02d0k",
     category: "verbs",
@@ -434,7 +407,6 @@ export const words: Word[] = [
     notes: "P solid, K emerging.",
   },
   {
-    word_id: "ACT028",
     word: "dump",
     ipa: "d\u028cmp",
     category: "verbs",
@@ -450,7 +422,6 @@ export const words: Word[] = [
     notes: "D solid. Final cluster harder.",
   },
   {
-    word_id: "ACT029",
     word: "wipe",
     ipa: "wa\u026ap",
     category: "verbs",
@@ -466,7 +437,6 @@ export const words: Word[] = [
     notes: "Both early. Daily routine.",
   },
   {
-    word_id: "ACT030",
     word: "down",
     ipa: "da\u028an",
     category: "prepositions",
@@ -482,7 +452,6 @@ export const words: Word[] = [
     notes: "Both early. Pair with 'up'.",
   },
   {
-    word_id: "ACT031",
     word: "on",
     ipa: "ɑːn",
     category: "prepositions",
@@ -498,7 +467,6 @@ export const words: Word[] = [
     notes: "Vowel + N. Very easy.",
   },
   {
-    word_id: "ACT032",
     word: "off",
     ipa: "ɑːf",
     category: "prepositions",
@@ -514,7 +482,6 @@ export const words: Word[] = [
     notes: "F emerging. Pair with 'on'.",
   },
   {
-    word_id: "ACT033",
     word: "in",
     ipa: "\u026an",
     category: "prepositions",
@@ -530,7 +497,6 @@ export const words: Word[] = [
     notes: "Vowel + N. Very easy.",
   },
   {
-    word_id: "ACT034",
     word: "out",
     ipa: "a\u028at",
     category: "prepositions",
@@ -546,7 +512,6 @@ export const words: Word[] = [
     notes: "Vowel + T. Pair with 'in'.",
   },
   {
-    word_id: "ACT035",
     word: "open",
     ipa: "o\u028a.p\u0259n",
     category: "verbs",
@@ -562,7 +527,6 @@ export const words: Word[] = [
     notes: "Both early. Good syllable clapping word.",
   },
   {
-    word_id: "ACT036",
     word: "bang",
     ipa: "b\u00e6\u014b",
     category: "verbs",
@@ -578,7 +542,6 @@ export const words: Word[] = [
     notes: "B solid. NG emerging.",
   },
   {
-    word_id: "ACT037",
     word: "jump",
     ipa: "d\u0292\u028cmp",
     category: "verbs",
@@ -594,7 +557,6 @@ export const words: Word[] = [
     notes: "J late. Accept 'dump'.",
   },
   {
-    word_id: "ACT038",
     word: "sit",
     ipa: "s\u026at",
     category: "verbs",
@@ -610,7 +572,6 @@ export const words: Word[] = [
     notes: "S late. Accept 'tit'.",
   },
   {
-    word_id: "ACT039",
     word: "fall",
     ipa: "f\u0254\u02d0l",
     category: "verbs",
@@ -626,7 +587,6 @@ export const words: Word[] = [
     notes: "F emerging, L late.",
   },
   {
-    word_id: "ACT040",
     word: "throw",
     ipa: "\u03b8ro\u028a",
     category: "verbs",
@@ -642,7 +602,6 @@ export const words: Word[] = [
     notes: "TH and R both very late.",
   },
   {
-    word_id: "ACT041",
     word: "kick",
     ipa: "k\u026ak",
     category: "verbs",
@@ -658,7 +617,6 @@ export const words: Word[] = [
     notes: "K in both positions. Good fronting practice.",
   },
   {
-    word_id: "ACT042",
     word: "wash",
     ipa: "wɑːʃ",
     category: "verbs",
@@ -674,7 +632,6 @@ export const words: Word[] = [
     notes: "W solid, SH late. Routine word.",
   },
   {
-    word_id: "ACT043",
     word: "pour",
     ipa: "p\u0254\u02d0r",
     category: "verbs",
@@ -690,7 +647,6 @@ export const words: Word[] = [
     notes: "P solid, R late.",
   },
   {
-    word_id: "ACT044",
     word: "yay",
     ipa: "je\u026a",
     category: "exclamations",
@@ -706,7 +662,6 @@ export const words: Word[] = [
     notes: "CV. Celebration word.",
   },
   {
-    word_id: "PPL001",
     word: "mama",
     ipa: "m\u0251\u02d0.m\u0251\u02d0",
     category: "people",
@@ -722,7 +677,6 @@ export const words: Word[] = [
     notes: "Reduplicative. Usually first word.",
   },
   {
-    word_id: "PPL002",
     word: "dada",
     ipa: "d\u0251\u02d0.d\u0251\u02d0",
     category: "people",
@@ -738,7 +692,6 @@ export const words: Word[] = [
     notes: "Reduplicative.",
   },
   {
-    word_id: "PPL003",
     word: "baby",
     ipa: "be\u026a.bi",
     category: "people",
@@ -754,7 +707,6 @@ export const words: Word[] = [
     notes: "Both B. Easy production.",
   },
   {
-    word_id: "PPL004",
     word: "night-night",
     ipa: "na\u026at.na\u026at",
     category: "social",
@@ -770,7 +722,6 @@ export const words: Word[] = [
     notes: "Reduplicative. Bedtime routine.",
   },
   {
-    word_id: "ANI001",
     word: "bee",
     ipa: "bi\u02d0",
     category: "animals",
@@ -786,7 +737,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "ANI002",
     word: "moo",
     ipa: "mu\u02d0",
     category: "exclamations",
@@ -802,7 +752,6 @@ export const words: Word[] = [
     notes: "Animal sound.",
   },
   {
-    word_id: "ANI003",
     word: "baa",
     ipa: "bɑː",
     category: "exclamations",
@@ -818,7 +767,6 @@ export const words: Word[] = [
     notes: "Animal sound.",
   },
   {
-    word_id: "ANI004",
     word: "neigh",
     ipa: "ne\u026a",
     category: "exclamations",
@@ -834,7 +782,6 @@ export const words: Word[] = [
     notes: "Animal sound.",
   },
   {
-    word_id: "ANI005",
     word: "woof",
     ipa: "w\u028af",
     category: "exclamations",
@@ -850,7 +797,6 @@ export const words: Word[] = [
     notes: "W solid, F emerging.",
   },
   {
-    word_id: "ANI006",
     word: "hen",
     ipa: "h\u025bn",
     category: "animals",
@@ -866,7 +812,6 @@ export const words: Word[] = [
     notes: "Both early.",
   },
   {
-    word_id: "ANI007",
     word: "bug",
     ipa: "b\u028c\u0261",
     category: "animals",
@@ -882,7 +827,6 @@ export const words: Word[] = [
     notes: "B solid, G emerging.",
   },
   {
-    word_id: "ANI008",
     word: "dog",
     ipa: "dɑːɡ",
     category: "animals",
@@ -898,7 +842,6 @@ export const words: Word[] = [
     notes: "High-value word.",
   },
   {
-    word_id: "ANI009",
     word: "duck",
     ipa: "d\u028ck",
     category: "animals",
@@ -914,7 +857,6 @@ export const words: Word[] = [
     notes: "D solid, K emerging.",
   },
   {
-    word_id: "ANI010",
     word: "pig",
     ipa: "p\u026a\u0261",
     category: "animals",
@@ -930,7 +872,6 @@ export const words: Word[] = [
     notes: "P solid, G emerging.",
   },
   {
-    word_id: "ANI011",
     word: "bat",
     ipa: "b\u00e6t",
     category: "animals",
@@ -946,7 +887,6 @@ export const words: Word[] = [
     notes: "B solid, T emerging.",
   },
   {
-    word_id: "ANI012",
     word: "cat",
     ipa: "k\u00e6t",
     category: "animals",
@@ -962,7 +902,6 @@ export const words: Word[] = [
     notes: "Classic fronting target.",
   },
   {
-    word_id: "ANI013",
     word: "goat",
     ipa: "\u0261o\u028at",
     category: "animals",
@@ -978,7 +917,6 @@ export const words: Word[] = [
     notes: "Both emerging.",
   },
   {
-    word_id: "ANI014",
     word: "fish",
     ipa: "f\u026a\u0283",
     category: "animals",
@@ -994,7 +932,6 @@ export const words: Word[] = [
     notes: "F emerging, SH late.",
   },
   {
-    word_id: "ANI015",
     word: "cow",
     ipa: "ka\u028a",
     category: "animals",
@@ -1010,7 +947,6 @@ export const words: Word[] = [
     notes: "K emerging.",
   },
   {
-    word_id: "ANI016",
     word: "bird",
     ipa: "bɝːd",
     category: "animals",
@@ -1026,7 +962,6 @@ export const words: Word[] = [
     notes: "B solid, R late.",
   },
   {
-    word_id: "ANI017",
     word: "frog",
     ipa: "frɑːɡ",
     category: "animals",
@@ -1042,7 +977,6 @@ export const words: Word[] = [
     notes: "FR cluster.",
   },
   {
-    word_id: "ANI018",
     word: "horse",
     ipa: "h\u0254\u02d0rs",
     category: "animals",
@@ -1058,7 +992,6 @@ export const words: Word[] = [
     notes: "H easy, R and S late.",
   },
   {
-    word_id: "ANI019",
     word: "mouse",
     ipa: "ma\u028as",
     category: "animals",
@@ -1074,7 +1007,6 @@ export const words: Word[] = [
     notes: "M solid, S late.",
   },
   {
-    word_id: "ANI020",
     word: "snake",
     ipa: "sne\u026ak",
     category: "animals",
@@ -1090,7 +1022,6 @@ export const words: Word[] = [
     notes: "SN cluster. Fun hissing sound.",
   },
   {
-    word_id: "ANI021",
     word: "bear",
     ipa: "b\u025b\u02d0r",
     category: "animals",
@@ -1106,7 +1037,6 @@ export const words: Word[] = [
     notes: "B solid, R late. Teddy bears.",
   },
   {
-    word_id: "ANI022",
     word: "hiss",
     ipa: "h\u026as",
     category: "exclamations",
@@ -1122,7 +1052,6 @@ export const words: Word[] = [
     notes: "Snake sound. H solid, S late.",
   },
   {
-    word_id: "ANI023",
     word: "quack",
     ipa: "kw\u00e6k",
     category: "exclamations",
@@ -1138,7 +1067,6 @@ export const words: Word[] = [
     notes: "KW cluster.",
   },
   {
-    word_id: "VEH001",
     word: "bus",
     ipa: "b\u028cs",
     category: "vehicles",
@@ -1154,7 +1082,6 @@ export const words: Word[] = [
     notes: "B solid, S late.",
   },
   {
-    word_id: "VEH002",
     word: "beep",
     ipa: "bi\u02d0p",
     category: "exclamations",
@@ -1170,7 +1097,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "VEH003",
     word: "boat",
     ipa: "bo\u028at",
     category: "vehicles",
@@ -1186,7 +1112,6 @@ export const words: Word[] = [
     notes: "B solid, T emerging.",
   },
   {
-    word_id: "VEH004",
     word: "bike",
     ipa: "ba\u026ak",
     category: "vehicles",
@@ -1202,7 +1127,6 @@ export const words: Word[] = [
     notes: "B solid, K emerging.",
   },
   {
-    word_id: "VEH005",
     word: "car",
     ipa: "k\u0251\u02d0r",
     category: "vehicles",
@@ -1218,7 +1142,6 @@ export const words: Word[] = [
     notes: "K emerging, R late. Very high frequency.",
   },
   {
-    word_id: "VEH006",
     word: "fast",
     ipa: "f\u00e6st",
     category: "condition",
@@ -1234,7 +1157,6 @@ export const words: Word[] = [
     notes: "F emerging. ST cluster late.",
   },
   {
-    word_id: "VEH007",
     word: "van",
     ipa: "v\u00e6n",
     category: "vehicles",
@@ -1250,7 +1172,6 @@ export const words: Word[] = [
     notes: "V late, N solid.",
   },
   {
-    word_id: "VEH008",
     word: "truck",
     ipa: "tr\u028ck",
     category: "vehicles",
@@ -1266,7 +1187,6 @@ export const words: Word[] = [
     notes: "TR cluster. Very motivating.",
   },
   {
-    word_id: "VEH009",
     word: "train",
     ipa: "tre\u026an",
     category: "vehicles",
@@ -1282,7 +1202,6 @@ export const words: Word[] = [
     notes: "TR cluster.",
   },
   {
-    word_id: "VEH010",
     word: "plane",
     ipa: "ple\u026an",
     category: "vehicles",
@@ -1298,7 +1217,6 @@ export const words: Word[] = [
     notes: "PL cluster.",
   },
   {
-    word_id: "VEH011",
     word: "zoom",
     ipa: "zu\u02d0m",
     category: "exclamations",
@@ -1314,7 +1232,6 @@ export const words: Word[] = [
     notes: "Z late. Fun sound.",
   },
   {
-    word_id: "VEH012",
     word: "vroom",
     ipa: "vru\u02d0m",
     category: "exclamations",
@@ -1330,7 +1247,6 @@ export const words: Word[] = [
     notes: "VR cluster.",
   },
   {
-    word_id: "VEH013",
     word: "choo-choo",
     ipa: "t\u0283u\u02d0.t\u0283u\u02d0",
     category: "exclamations",
@@ -1346,7 +1262,6 @@ export const words: Word[] = [
     notes: "Reduplicative.",
   },
   {
-    word_id: "VEH014",
     word: "wheel",
     ipa: "wi\u02d0l",
     category: "vehicles",
@@ -1362,7 +1277,6 @@ export const words: Word[] = [
     notes: "W solid, L late.",
   },
   {
-    word_id: "OBJ001",
     word: "bed",
     ipa: "b\u025bd",
     category: "furniture",
@@ -1378,7 +1292,6 @@ export const words: Word[] = [
     notes: "Both early.",
   },
   {
-    word_id: "OBJ002",
     word: "hat",
     ipa: "h\u00e6t",
     category: "clothing",
@@ -1394,7 +1307,6 @@ export const words: Word[] = [
     notes: "H solid, T emerging.",
   },
   {
-    word_id: "OBJ003",
     word: "bath",
     ipa: "b\u00e6\u03b8",
     category: "household",
@@ -1410,7 +1322,6 @@ export const words: Word[] = [
     notes: "B solid, TH very late.",
   },
   {
-    word_id: "OBJ004",
     word: "door",
     ipa: "d\u0254\u02d0r",
     category: "household",
@@ -1426,7 +1337,6 @@ export const words: Word[] = [
     notes: "D solid, R late.",
   },
   {
-    word_id: "OBJ005",
     word: "mop",
     ipa: "mɑːp",
     category: "household",
@@ -1442,7 +1352,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "OBJ006",
     word: "pan",
     ipa: "p\u00e6n",
     category: "household",
@@ -1458,7 +1367,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "OBJ007",
     word: "trash",
     ipa: "tɹæʃ",
     category: "household",
@@ -1474,7 +1382,6 @@ export const words: Word[] = [
     notes: "US-friendly replacement for 'bin'.",
   },
   {
-    word_id: "OBJ008",
     word: "nap",
     ipa: "n\u00e6p",
     category: "verbs",
@@ -1490,7 +1397,6 @@ export const words: Word[] = [
     notes: "Both Tier 1. Routine word.",
   },
   {
-    word_id: "OBJ009",
     word: "cup",
     ipa: "k\u028cp",
     category: "household",
@@ -1506,7 +1412,6 @@ export const words: Word[] = [
     notes: "K emerging, P solid. Very common.",
   },
   {
-    word_id: "OBJ010",
     word: "key",
     ipa: "ki\u02d0",
     category: "household",
@@ -1522,7 +1427,6 @@ export const words: Word[] = [
     notes: "K emerging.",
   },
   {
-    word_id: "OBJ011",
     word: "book",
     ipa: "b\u028ak",
     category: "household",
@@ -1538,7 +1442,6 @@ export const words: Word[] = [
     notes: "B solid, K emerging. High value.",
   },
   {
-    word_id: "OBJ012",
     word: "ball",
     ipa: "b\u0254\u02d0l",
     category: "toys",
@@ -1554,7 +1457,6 @@ export const words: Word[] = [
     notes: "B solid, L late. Essential word.",
   },
   {
-    word_id: "OBJ013",
     word: "box",
     ipa: "bɑːks",
     category: "household",
@@ -1570,7 +1472,6 @@ export const words: Word[] = [
     notes: "B solid. KS cluster.",
   },
   {
-    word_id: "OBJ014",
     word: "tap",
     ipa: "t\u00e6p",
     category: "household",
@@ -1586,7 +1487,6 @@ export const words: Word[] = [
     notes: "T emerging, P solid.",
   },
   {
-    word_id: "OBJ015",
     word: "sock",
     ipa: "sɑːk",
     category: "clothing",
@@ -1602,7 +1502,6 @@ export const words: Word[] = [
     notes: "S late. Dressing routine.",
   },
   {
-    word_id: "OBJ016",
     word: "shoe",
     ipa: "\u0283u\u02d0",
     category: "clothing",
@@ -1618,7 +1517,6 @@ export const words: Word[] = [
     notes: "SH late. Daily routine.",
   },
   {
-    word_id: "OBJ017",
     word: "chair",
     ipa: "t\u0283\u025b\u02d0r",
     category: "furniture",
@@ -1634,7 +1532,6 @@ export const words: Word[] = [
     notes: "Both late.",
   },
   {
-    word_id: "OBJ018",
     word: "spoon",
     ipa: "spu\u02d0n",
     category: "household",
@@ -1650,7 +1547,6 @@ export const words: Word[] = [
     notes: "SP cluster.",
   },
   {
-    word_id: "OBJ019",
     word: "bowl",
     ipa: "bo\u028al",
     category: "household",
@@ -1666,7 +1562,6 @@ export const words: Word[] = [
     notes: "B solid, L late.",
   },
   {
-    word_id: "OBJ020",
     word: "pee",
     ipa: "pi\u02d0",
     category: "health",
@@ -1682,7 +1577,6 @@ export const words: Word[] = [
     notes: "Potty training word.",
   },
   {
-    word_id: "OBJ021",
     word: "poop",
     ipa: "pu\u02d0p",
     category: "health",
@@ -1698,7 +1592,6 @@ export const words: Word[] = [
     notes: "Same sound both ends.",
   },
   {
-    word_id: "OBJ022",
     word: "light",
     ipa: "la\u026at",
     category: "household",
@@ -1714,7 +1607,6 @@ export const words: Word[] = [
     notes: "L late, T emerging.",
   },
   {
-    word_id: "OBJ023",
     word: "bag",
     ipa: "b\u00e6\u0261",
     category: "household",
@@ -1730,7 +1622,6 @@ export const words: Word[] = [
     notes: "B solid, G emerging.",
   },
   {
-    word_id: "OBJ024",
     word: "pen",
     ipa: "p\u025bn",
     category: "household",
@@ -1746,7 +1637,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "FOO001",
     word: "yum",
     ipa: "j\u028cm",
     category: "exclamations",
@@ -1762,7 +1652,6 @@ export const words: Word[] = [
     notes: "Both early-ish.",
   },
   {
-    word_id: "FOO002",
     word: "num-num",
     ipa: "n\u028cm.n\u028cm",
     category: "exclamations",
@@ -1778,7 +1667,6 @@ export const words: Word[] = [
     notes: "Reduplicative. All Tier 1.",
   },
   {
-    word_id: "FOO003",
     word: "milk",
     ipa: "m\u026alk",
     category: "food",
@@ -1794,7 +1682,6 @@ export const words: Word[] = [
     notes: "M solid. LK cluster late.",
   },
   {
-    word_id: "FOO004",
     word: "ham",
     ipa: "h\u00e6m",
     category: "food",
@@ -1810,7 +1697,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "FOO005",
     word: "pie",
     ipa: "pa\u026a",
     category: "food",
@@ -1826,7 +1712,6 @@ export const words: Word[] = [
     notes: "CV with Tier 1 P.",
   },
   {
-    word_id: "FOO006",
     word: "dip",
     ipa: "d\u026ap",
     category: "food",
@@ -1842,7 +1727,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "FOO007",
     word: "hot",
     ipa: "hɑːt",
     category: "sensory",
@@ -1858,7 +1742,6 @@ export const words: Word[] = [
     notes: "Safety word. H solid, T emerging.",
   },
   {
-    word_id: "FOO008",
     word: "egg",
     ipa: "\u025b\u0261",
     category: "food",
@@ -1874,7 +1757,6 @@ export const words: Word[] = [
     notes: "G in final. Emerging.",
   },
   {
-    word_id: "FOO009",
     word: "nut",
     ipa: "n\u028ct",
     category: "food",
@@ -1890,7 +1772,6 @@ export const words: Word[] = [
     notes: "N solid, T emerging.",
   },
   {
-    word_id: "FOO010",
     word: "pea",
     ipa: "pi\u02d0",
     category: "food",
@@ -1906,7 +1787,6 @@ export const words: Word[] = [
     notes: "CV with Tier 1 P.",
   },
   {
-    word_id: "FOO011",
     word: "banana",
     ipa: "b\u0259.n\u00e6.n\u0259",
     category: "food",
@@ -1922,7 +1802,6 @@ export const words: Word[] = [
     notes: "Classic weak syllable deletion: 'nana'.",
   },
   {
-    word_id: "FOO012",
     word: "water",
     ipa: "w\u0254\u02d0.t\u0259r",
     category: "food",
@@ -1938,7 +1817,6 @@ export const words: Word[] = [
     notes: "Often 'wawa' (reduplication).",
   },
   {
-    word_id: "FOO013",
     word: "juice",
     ipa: "d\u0292u\u02d0s",
     category: "food",
@@ -1954,7 +1832,6 @@ export const words: Word[] = [
     notes: "J and S both late.",
   },
   {
-    word_id: "FOO014",
     word: "cheese",
     ipa: "t\u0283i\u02d0z",
     category: "food",
@@ -1970,7 +1847,6 @@ export const words: Word[] = [
     notes: "Both late. Motivating food.",
   },
   {
-    word_id: "FOO015",
     word: "bread",
     ipa: "br\u025bd",
     category: "food",
@@ -1986,7 +1862,6 @@ export const words: Word[] = [
     notes: "BR cluster.",
   },
   {
-    word_id: "FOO016",
     word: "snack",
     ipa: "sn\u00e6k",
     category: "food",
@@ -2002,7 +1877,6 @@ export const words: Word[] = [
     notes: "SN cluster.",
   },
   {
-    word_id: "FOO019",
     word: "yummy",
     ipa: "j\u028c.mi",
     category: "exclamations",
@@ -2018,7 +1892,6 @@ export const words: Word[] = [
     notes: "Both early. Syllable clapping.",
   },
   {
-    word_id: "BOD001",
     word: "head",
     ipa: "h\u025bd",
     category: "body",
@@ -2034,7 +1907,6 @@ export const words: Word[] = [
     notes: "Both early.",
   },
   {
-    word_id: "BOD002",
     word: "hand",
     ipa: "h\u00e6nd",
     category: "body",
@@ -2050,7 +1922,6 @@ export const words: Word[] = [
     notes: "H solid. ND cluster mild.",
   },
   {
-    word_id: "BOD003",
     word: "nose",
     ipa: "no\u028az",
     category: "body",
@@ -2066,7 +1937,6 @@ export const words: Word[] = [
     notes: "N solid, Z late.",
   },
   {
-    word_id: "BOD004",
     word: "mouth",
     ipa: "ma\u028a\u03b8",
     category: "body",
@@ -2082,7 +1952,6 @@ export const words: Word[] = [
     notes: "M solid, TH very late.",
   },
   {
-    word_id: "BOD005",
     word: "eye",
     ipa: "a\u026a",
     category: "body",
@@ -2098,7 +1967,6 @@ export const words: Word[] = [
     notes: "Pure vowel! No consonants.",
   },
   {
-    word_id: "BOD006",
     word: "toe",
     ipa: "to\u028a",
     category: "body",
@@ -2114,7 +1982,6 @@ export const words: Word[] = [
     notes: "CV. T emerging.",
   },
   {
-    word_id: "BOD007",
     word: "knee",
     ipa: "ni\u02d0",
     category: "body",
@@ -2130,7 +1997,6 @@ export const words: Word[] = [
     notes: "CV. N solid.",
   },
   {
-    word_id: "BOD008",
     word: "tummy",
     ipa: "t\u028c.mi",
     category: "body",
@@ -2146,7 +2012,6 @@ export const words: Word[] = [
     notes: "T emerging, M solid.",
   },
   {
-    word_id: "BOD009",
     word: "bottom",
     ipa: "ˈbɑːtəm",
     category: "body",
@@ -2162,7 +2027,6 @@ export const words: Word[] = [
     notes: "US-friendly replacement for 'bum'.",
   },
   {
-    word_id: "BOD010",
     word: "hair",
     ipa: "h\u025b\u02d0r",
     category: "body",
@@ -2178,7 +2042,6 @@ export const words: Word[] = [
     notes: "H solid, R late.",
   },
   {
-    word_id: "DES001",
     word: "big",
     ipa: "b\u026a\u0261",
     category: "size",
@@ -2194,7 +2057,6 @@ export const words: Word[] = [
     notes: "B solid, G emerging.",
   },
   {
-    word_id: "DES003",
     word: "wet",
     ipa: "w\u025bt",
     category: "condition",
@@ -2210,7 +2072,6 @@ export const words: Word[] = [
     notes: "W solid, T emerging.",
   },
   {
-    word_id: "DES004",
     word: "new",
     ipa: "nuː",
     category: "condition",
@@ -2226,7 +2087,6 @@ export const words: Word[] = [
     notes: "Simple CV.",
   },
   {
-    word_id: "DES006",
     word: "happy",
     ipa: "h\u00e6.pi",
     category: "feelings",
@@ -2242,7 +2102,6 @@ export const words: Word[] = [
     notes: "Both early.",
   },
   {
-    word_id: "DES007",
     word: "ow",
     ipa: "a\u028a",
     category: "exclamations",
@@ -2258,7 +2117,6 @@ export const words: Word[] = [
     notes: "Pure vowel.",
   },
   {
-    word_id: "DES008",
     word: "icky",
     ipa: "\u026a.ki",
     category: "evaluative",
@@ -2274,7 +2132,6 @@ export const words: Word[] = [
     notes: "K emerging.",
   },
   {
-    word_id: "DES009",
     word: "cold",
     ipa: "ko\u028ald",
     category: "sensory",
@@ -2290,7 +2147,6 @@ export const words: Word[] = [
     notes: "K emerging, L late.",
   },
   {
-    word_id: "DES010",
     word: "all done",
     ipa: "\u0254\u02d0l.d\u028cn",
     category: "requests",
@@ -2306,7 +2162,6 @@ export const words: Word[] = [
     notes: "Essential mealtime phrase.",
   },
   {
-    word_id: "DES011",
     word: "dark",
     ipa: "d\u0251\u02d0rk",
     category: "sensory",
@@ -2322,7 +2177,6 @@ export const words: Word[] = [
     notes: "D solid, R late, K emerging.",
   },
   {
-    word_id: "DES012",
     word: "nice",
     ipa: "na\u026as",
     category: "evaluative",
@@ -2338,7 +2192,6 @@ export const words: Word[] = [
     notes: "N solid, S late.",
   },
   {
-    word_id: "COL001",
     word: "white",
     ipa: "wa\u026at",
     category: "colors",
@@ -2354,7 +2207,6 @@ export const words: Word[] = [
     notes: "W solid, T emerging. Easiest color.",
   },
   {
-    word_id: "COL002",
     word: "tan",
     ipa: "t\u00e6n",
     category: "colors",
@@ -2370,7 +2222,6 @@ export const words: Word[] = [
     notes: "T emerging, N solid.",
   },
   {
-    word_id: "COL003",
     word: "pink",
     ipa: "p\u026a\u014bk",
     category: "colors",
@@ -2386,7 +2237,6 @@ export const words: Word[] = [
     notes: "P solid. NG+K tricky.",
   },
   {
-    word_id: "COL004",
     word: "yellow",
     ipa: "j\u025b.lo\u028a",
     category: "colors",
@@ -2402,7 +2252,6 @@ export const words: Word[] = [
     notes: "Y early, L late.",
   },
   {
-    word_id: "COL005",
     word: "red",
     ipa: "r\u025bd",
     category: "colors",
@@ -2418,7 +2267,6 @@ export const words: Word[] = [
     notes: "R late, D solid.",
   },
   {
-    word_id: "COL006",
     word: "blue",
     ipa: "blu\u02d0",
     category: "colors",
@@ -2434,7 +2282,6 @@ export const words: Word[] = [
     notes: "BL cluster. The OG word.",
   },
   {
-    word_id: "COL007",
     word: "green",
     ipa: "\u0261ri\u02d0n",
     category: "colors",
@@ -2450,7 +2297,6 @@ export const words: Word[] = [
     notes: "GR cluster + fronting risk.",
   },
   {
-    word_id: "COL008",
     word: "black",
     ipa: "bl\u00e6k",
     category: "colors",
@@ -2466,7 +2312,6 @@ export const words: Word[] = [
     notes: "BL cluster + K final.",
   },
   {
-    word_id: "COL009",
     word: "brown",
     ipa: "bra\u028an",
     category: "colors",
@@ -2482,7 +2327,6 @@ export const words: Word[] = [
     notes: "BR cluster.",
   },
   {
-    word_id: "COL010",
     word: "orange",
     ipa: "\u0254\u02d0r.\u026and\u0292",
     category: "colors",
@@ -2498,7 +2342,6 @@ export const words: Word[] = [
     notes: "Phonetically complex.",
   },
   {
-    word_id: "COL011",
     word: "purple",
     ipa: "pɝː.pəl",
     category: "colors",
@@ -2514,7 +2357,6 @@ export const words: Word[] = [
     notes: "P solid, R and L late.",
   },
   {
-    word_id: "ACT045",
     word: "bow",
     ipa: "ba\u028a",
     category: "verbs",
@@ -2530,7 +2372,6 @@ export const words: Word[] = [
     notes: "CV with Tier 1 B. Also 'take a bow'.",
   },
   {
-    word_id: "ACT046",
     word: "mow",
     ipa: "mo\u028a",
     category: "verbs",
@@ -2546,7 +2387,6 @@ export const words: Word[] = [
     notes: "CV with Tier 1 M. Fun sound to imitate.",
   },
   {
-    word_id: "ACT047",
     word: "paw",
     ipa: "p\u0254\u02d0",
     category: "animals",
@@ -2562,7 +2402,6 @@ export const words: Word[] = [
     notes: "CV with Tier 1 P. Dog/cat paw.",
   },
   {
-    word_id: "ACT048",
     word: "nah",
     ipa: "n\u0251\u02d0",
     category: "exclamations",
@@ -2578,7 +2417,6 @@ export const words: Word[] = [
     notes: "CV with Tier 1 N. Casual 'no'.",
   },
   {
-    word_id: "PPL005",
     word: "papa",
     ipa: "p\u0251\u02d0.p\u0251\u02d0",
     category: "people",
@@ -2594,7 +2432,6 @@ export const words: Word[] = [
     notes: "Reduplicative. All Tier 1.",
   },
   {
-    word_id: "PPL006",
     word: "nana",
     ipa: "nɑː.nə",
     category: "people",
@@ -2610,7 +2447,6 @@ export const words: Word[] = [
     notes: "Reduplicative. All Tier 1. Grandparent or banana.",
   },
   {
-    word_id: "ACT049",
     word: "nom",
     ipa: "nɑːm",
     category: "exclamations",
@@ -2626,7 +2462,6 @@ export const words: Word[] = [
     notes: "Eating sound. Both Tier 1.",
   },
   {
-    word_id: "ANI024",
     word: "moo-moo",
     ipa: "mu\u02d0.mu\u02d0",
     category: "exclamations",
@@ -2642,7 +2477,6 @@ export const words: Word[] = [
     notes: "Reduplicative. Easier than single 'moo' for youngest.",
   },
   {
-    word_id: "ACT050",
     word: "pee-pee",
     ipa: "pi\u02d0.pi\u02d0",
     category: "health",
@@ -2658,7 +2492,6 @@ export const words: Word[] = [
     notes: "Reduplicative. Potty training. All Tier 1.",
   },
   {
-    word_id: "ACT051",
     word: "boo-boo",
     ipa: "bu\u02d0.bu\u02d0",
     category: "health",
@@ -2674,7 +2507,6 @@ export const words: Word[] = [
     notes: "Reduplicative. Injury/owie word. All Tier 1.",
   },
   {
-    word_id: "ACT053",
     word: "hug",
     ipa: "h\u028c\u0261",
     category: "verbs",
@@ -2690,7 +2522,6 @@ export const words: Word[] = [
     notes: "H solid, G emerging. Important social action.",
   },
   {
-    word_id: "ACT054",
     word: "pat",
     ipa: "p\u00e6t",
     category: "verbs",
@@ -2706,7 +2537,6 @@ export const words: Word[] = [
     notes: "P solid, T emerging. Gentle touch word.",
   },
   {
-    word_id: "OBJ025",
     word: "moon",
     ipa: "mu\u02d0n",
     category: "nature",
@@ -2722,7 +2552,6 @@ export const words: Word[] = [
     notes: "Both Tier 1! Night routine word.",
   },
   {
-    word_id: "OBJ026",
     word: "map",
     ipa: "m\u00e6p",
     category: "household",
@@ -2738,7 +2567,6 @@ export const words: Word[] = [
     notes: "Both Tier 1.",
   },
   {
-    word_id: "DES013",
     word: "bad",
     ipa: "b\u00e6d",
     category: "evaluative",
@@ -2754,7 +2582,6 @@ export const words: Word[] = [
     notes: "Both Tier 1. Concept word.",
   },
   {
-    word_id: "FOO020",
     word: "bean",
     ipa: "bi\u02d0n",
     category: "food",
@@ -2770,7 +2597,6 @@ export const words: Word[] = [
     notes: "Both Tier 1. Common toddler food.",
   },
   {
-    word_id: "FOO021",
     word: "meat",
     ipa: "mi\u02d0t",
     category: "food",
@@ -2786,7 +2612,6 @@ export const words: Word[] = [
     notes: "M solid, T emerging. Mealtime word.",
   },
   {
-    word_id: "FOO022",
     word: "pear",
     ipa: "p\u025b\u02d0r",
     category: "food",
@@ -2802,7 +2627,6 @@ export const words: Word[] = [
     notes: "P solid, R late. Common fruit.",
   },
   {
-    word_id: "FOO023",
     word: "peach",
     ipa: "pi\u02d0t\u0283",
     category: "food",
@@ -2818,7 +2642,6 @@ export const words: Word[] = [
     notes: "P solid, CH late. Common fruit.",
   },
   {
-    word_id: "FOO024",
     word: "cake",
     ipa: "ke\u026ak",
     category: "food",
@@ -2834,7 +2657,6 @@ export const words: Word[] = [
     notes: "K both positions. Emerging. Very motivating.",
   },
   {
-    word_id: "FOO025",
     word: "soup",
     ipa: "su\u02d0p",
     category: "food",
@@ -2850,7 +2672,6 @@ export const words: Word[] = [
     notes: "S late, P solid. Winter food.",
   },
   {
-    word_id: "FOO026",
     word: "jam",
     ipa: "d\u0292\u00e6m",
     category: "food",
@@ -2866,7 +2687,6 @@ export const words: Word[] = [
     notes: "J late, M solid. Goes with bread/toast.",
   },
   {
-    word_id: "FOO027",
     word: "rice",
     ipa: "ra\u026as",
     category: "food",
@@ -2882,7 +2702,6 @@ export const words: Word[] = [
     notes: "R late, S late. Common staple.",
   },
   {
-    word_id: "FOO028",
     word: "corn",
     ipa: "k\u0254\u02d0rn",
     category: "food",
@@ -2898,7 +2717,6 @@ export const words: Word[] = [
     notes: "K emerging, R late. Fun to eat.",
   },
   {
-    word_id: "FOO029",
     word: "grape",
     ipa: "\u0261re\u026ap",
     category: "food",
@@ -2914,7 +2732,6 @@ export const words: Word[] = [
     notes: "GR cluster. Common toddler snack.",
   },
   {
-    word_id: "FOO030",
     word: "cookie",
     ipa: "k\u028a.ki",
     category: "food",
@@ -2930,7 +2747,6 @@ export const words: Word[] = [
     notes: "K both syllables. Extremely motivating.",
   },
   {
-    word_id: "FOO031",
     word: "apple",
     ipa: "\u00e6.p\u0259l",
     category: "food",
@@ -2946,7 +2762,6 @@ export const words: Word[] = [
     notes: "P solid, L late. Top toddler fruit.",
   },
   {
-    word_id: "FOO032",
     word: "noodle",
     ipa: "nu\u02d0.d\u0259l",
     category: "food",
@@ -2962,7 +2777,6 @@ export const words: Word[] = [
     notes: "N and D solid, L late. Fun to say and eat.",
   },
   {
-    word_id: "FOO033",
     word: "toast",
     ipa: "to\u028ast",
     category: "food",
@@ -2978,7 +2792,6 @@ export const words: Word[] = [
     notes: "T emerging, ST cluster late. Breakfast word.",
   },
   {
-    word_id: "FOO034",
     word: "plum",
     ipa: "pl\u028cm",
     category: "food",
@@ -2994,7 +2807,6 @@ export const words: Word[] = [
     notes: "PL cluster. P solid, L late.",
   },
   {
-    word_id: "FOO035",
     word: "mango",
     ipa: "m\u00e6\u014b.\u0261o\u028a",
     category: "food",
@@ -3010,7 +2822,6 @@ export const words: Word[] = [
     notes: "M solid, NG and G emerging.",
   },
   {
-    word_id: "ACT055",
     word: "look",
     ipa: "l\u028ak",
     category: "verbs",
@@ -3026,7 +2837,6 @@ export const words: Word[] = [
     notes: "L late, K emerging. One of the most common toddler directives.",
   },
   {
-    word_id: "ACT056",
     word: "wait",
     ipa: "we\u026at",
     category: "requests",
@@ -3042,7 +2852,6 @@ export const words: Word[] = [
     notes: "W solid, T emerging. Important self-regulation word.",
   },
   {
-    word_id: "ACT057",
     word: "done",
     ipa: "d\u028cn",
     category: "requests",
@@ -3058,7 +2867,6 @@ export const words: Word[] = [
     notes: "Both Tier 1. Mealtime essential. See also 'all done'.",
   },
   {
-    word_id: "ACT058",
     word: "again",
     ipa: "\u0259.\u0261\u025bn",
     category: "requests",
@@ -3074,7 +2882,6 @@ export const words: Word[] = [
     notes: "G emerging. Toddlers say this 400 times a day.",
   },
   {
-    word_id: "DES014",
     word: "loud",
     ipa: "la\u028ad",
     category: "sensory",
@@ -3090,7 +2897,6 @@ export const words: Word[] = [
     notes: "L late, D solid. Sensory word.",
   },
   {
-    word_id: "DES015",
     word: "soft",
     ipa: "sɑːft",
     category: "sensory",
@@ -3106,7 +2912,6 @@ export const words: Word[] = [
     notes: "S late, F emerging. Sensory/texture word.",
   },
   {
-    word_id: "DES016",
     word: "dirty",
     ipa: "dɝː.ti",
     category: "condition",
@@ -3122,7 +2927,6 @@ export const words: Word[] = [
     notes: "D solid, R late. Very common toddler context.",
   },
   {
-    word_id: "DES017",
     word: "clean",
     ipa: "kli\u02d0n",
     category: "condition",
@@ -3138,7 +2942,6 @@ export const words: Word[] = [
     notes: "KL cluster. Pair with 'dirty'.",
   },
   {
-    word_id: "DES018",
     word: "stuck",
     ipa: "st\u028ck",
     category: "condition",
@@ -3154,7 +2957,6 @@ export const words: Word[] = [
     notes: "ST cluster. Toddlers get stuck constantly.",
   },
   {
-    word_id: "DES019",
     word: "broken",
     ipa: "bro\u028a.k\u0259n",
     category: "condition",
@@ -3170,7 +2972,6 @@ export const words: Word[] = [
     notes: "BR cluster. Very useful concept.",
   },
   {
-    word_id: "ACT059",
     word: "gentle",
     ipa: "d\u0292\u025bn.t\u0259l",
     category: "requests",
@@ -3186,7 +2987,6 @@ export const words: Word[] = [
     notes: "J late. Essential word for toddlers learning touch.",
   },
   {
-    word_id: "ACT060",
     word: "ready",
     ipa: "r\u025b.di",
     category: "requests",
@@ -3202,7 +3002,6 @@ export const words: Word[] = [
     notes: "R late, D solid. 'Ready, set, go!' ritual.",
   },
   {
-    word_id: "ACT061",
     word: "come",
     ipa: "k\u028cm",
     category: "verbs",
@@ -3218,7 +3017,6 @@ export const words: Word[] = [
     notes: "K emerging, M solid. Directive word.",
   },
   {
-    word_id: "ACT062",
     word: "give",
     ipa: "\u0261\u026av",
     category: "verbs",
@@ -3234,7 +3032,6 @@ export const words: Word[] = [
     notes: "G emerging, V late. Sharing/requesting.",
   },
   {
-    word_id: "ACT063",
     word: "read",
     ipa: "ri\u02d0d",
     category: "verbs",
@@ -3250,7 +3047,6 @@ export const words: Word[] = [
     notes: "R late, D solid. 'Read book!' is a top toddler request.",
   },
   {
-    word_id: "OBJ027",
     word: "star",
     ipa: "st\u0251\u02d0r",
     category: "nature",
@@ -3266,7 +3062,6 @@ export const words: Word[] = [
     notes: "ST cluster + R. Very appealing visual.",
   },
   {
-    word_id: "OBJ028",
     word: "rain",
     ipa: "re\u026an",
     category: "weather",
@@ -3282,7 +3077,6 @@ export const words: Word[] = [
     notes: "R late, N solid. Weather word.",
   },
   {
-    word_id: "OBJ029",
     word: "sun",
     ipa: "s\u028cn",
     category: "nature",
@@ -3298,7 +3092,6 @@ export const words: Word[] = [
     notes: "S late, N solid. Daily concept.",
   },
   {
-    word_id: "OBJ030",
     word: "tree",
     ipa: "tri\u02d0",
     category: "nature",
@@ -3316,7 +3109,6 @@ export const words: Word[] = [
 
   // ─── FEELINGS / EMOTIONS ─────────────────────────────────────
   {
-    word_id: "FEE001",
     word: "sad",
     ipa: "sæd",
     category: "feelings",
@@ -3332,7 +3124,6 @@ export const words: Word[] = [
     notes: "S is 24mo. Rhymes with mad, bad, dad.",
   },
   {
-    word_id: "FEE002",
     word: "mad",
     ipa: "mæd",
     category: "feelings",
@@ -3348,7 +3139,6 @@ export const words: Word[] = [
     notes: "M early, D emerging. Core emotion word.",
   },
   {
-    word_id: "FEE003",
     word: "scared",
     ipa: "skɛrd",
     category: "feelings",
@@ -3364,7 +3154,6 @@ export const words: Word[] = [
     notes: "SK cluster + R. Late sounds but important emotion word.",
   },
   {
-    word_id: "FEE004",
     word: "tired",
     ipa: "taɪ.ɚd",
     category: "feelings",
@@ -3380,7 +3169,6 @@ export const words: Word[] = [
     notes: "R is late (36mo). Important self-regulation word.",
   },
   {
-    word_id: "FEE005",
     word: "hungry",
     ipa: "hʌŋ.ɡri",
     category: "feelings",
@@ -3396,7 +3184,6 @@ export const words: Word[] = [
     notes: "GR cluster. Essential needs word despite late R.",
   },
   {
-    word_id: "FEE006",
     word: "silly",
     ipa: "sɪ.li",
     category: "feelings",
@@ -3412,7 +3199,6 @@ export const words: Word[] = [
     notes: "S and L both 24mo. Fun descriptive word.",
   },
   {
-    word_id: "FEE007",
     word: "shy",
     ipa: "ʃaɪ",
     category: "feelings",
@@ -3428,7 +3214,6 @@ export const words: Word[] = [
     notes: "SH is late (36mo). Simple CV shape helps.",
   },
   {
-    word_id: "FEE008",
     word: "brave",
     ipa: "bɹeɪv",
     category: "feelings",
@@ -3444,7 +3229,6 @@ export const words: Word[] = [
     notes: "BR cluster + final V. Both late sounds.",
   },
   {
-    word_id: "FEE009",
     word: "proud",
     ipa: "pɹaʊd",
     category: "feelings",
@@ -3460,7 +3244,6 @@ export const words: Word[] = [
     notes: "PR cluster (not in standard list). R is late.",
   },
   {
-    word_id: "FEE010",
     word: "excited",
     ipa: "ɪk.saɪ.tɪd",
     category: "feelings",
@@ -3476,7 +3259,6 @@ export const words: Word[] = [
     notes: "3 syllables. Advanced but highly motivating word.",
   },
   {
-    word_id: "FEE011",
     word: "worried",
     ipa: "wʌr.id",
     category: "feelings",
@@ -3492,7 +3274,6 @@ export const words: Word[] = [
     notes: "R is late. Important anxiety-related emotion.",
   },
   {
-    word_id: "FEE012",
     word: "calm",
     ipa: "kɑːm",
     category: "feelings",
@@ -3508,7 +3289,6 @@ export const words: Word[] = [
     notes: "L is silent. K emerging, M early. Self-regulation word.",
   },
   {
-    word_id: "FEE013",
     word: "angry",
     ipa: "æŋ.ɡri",
     category: "feelings",
@@ -3524,7 +3304,6 @@ export const words: Word[] = [
     notes: "GR cluster. More advanced synonym for mad.",
   },
   {
-    word_id: "FEE014",
     word: "grumpy",
     ipa: "ɡɹʌm.pi",
     category: "feelings",
@@ -3540,7 +3319,6 @@ export const words: Word[] = [
     notes: "GR cluster. Fun word for toddlers.",
   },
   {
-    word_id: "FEE015",
     word: "sick",
     ipa: "sɪk",
     category: "health",
@@ -3558,7 +3336,6 @@ export const words: Word[] = [
 
   // ─── TOYS / PLAY ─────────────────────────────────────────────
   {
-    word_id: "TOY001",
     word: "block",
     ipa: "blɑːk",
     category: "toys",
@@ -3574,7 +3351,6 @@ export const words: Word[] = [
     notes: "BL cluster. Very common play word.",
   },
   {
-    word_id: "TOY002",
     word: "doll",
     ipa: "dɑːl",
     category: "toys",
@@ -3590,7 +3366,6 @@ export const words: Word[] = [
     notes: "D emerging, final L is 24mo.",
   },
   {
-    word_id: "TOY003",
     word: "puzzle",
     ipa: "pʌ.zəl",
     category: "toys",
@@ -3606,7 +3381,6 @@ export const words: Word[] = [
     notes: "Z and L both 24mo. Common play activity.",
   },
   {
-    word_id: "TOY004",
     word: "swing",
     ipa: "swɪŋ",
     category: "toys",
@@ -3622,7 +3396,6 @@ export const words: Word[] = [
     notes: "SW cluster + final NG. Playground word.",
   },
   {
-    word_id: "TOY005",
     word: "slide",
     ipa: "slaɪd",
     category: "toys",
@@ -3638,7 +3411,6 @@ export const words: Word[] = [
     notes: "SL cluster. High-motivation playground word.",
   },
   {
-    word_id: "TOY006",
     word: "bubbles",
     ipa: "bʌ.bəlz",
     category: "toys",
@@ -3654,7 +3426,6 @@ export const words: Word[] = [
     notes: "Repeated B is great practice. L and Z are 24mo.",
   },
   {
-    word_id: "TOY007",
     word: "crayon",
     ipa: "kɹeɪ.ɑːn",
     category: "toys",
@@ -3670,7 +3441,6 @@ export const words: Word[] = [
     notes: "KR cluster. R is late but highly functional art word.",
   },
   {
-    word_id: "TOY008",
     word: "paint",
     ipa: "peɪnt",
     category: "toys",
@@ -3686,7 +3456,6 @@ export const words: Word[] = [
     notes: "Final NT cluster. All early-to-emerging sounds.",
   },
   {
-    word_id: "TOY009",
     word: "chalk",
     ipa: "tʃɑːk",
     category: "toys",
@@ -3702,7 +3471,6 @@ export const words: Word[] = [
     notes: "CH is late (36mo). Outdoor art activity.",
   },
   {
-    word_id: "TOY010",
     word: "sticker",
     ipa: "stɪ.kɚ",
     category: "toys",
@@ -3718,7 +3486,6 @@ export const words: Word[] = [
     notes: "ST cluster. R is late. Very motivating reward word.",
   },
   {
-    word_id: "TOY011",
     word: "drum",
     ipa: "dɹʌm",
     category: "toys",
@@ -3734,7 +3501,6 @@ export const words: Word[] = [
     notes: "DR cluster. Music play word.",
   },
   {
-    word_id: "TOY012",
     word: "teddy",
     ipa: "tɛ.di",
     category: "toys",
@@ -3750,7 +3516,6 @@ export const words: Word[] = [
     notes: "Both 18mo sounds. Comfort object word.",
   },
   {
-    word_id: "TOY013",
     word: "kite",
     ipa: "kaɪt",
     category: "toys",
@@ -3766,7 +3531,6 @@ export const words: Word[] = [
     notes: "K and T both 18mo. Fronting contrast opportunity.",
   },
   {
-    word_id: "TOY014",
     word: "balloon",
     ipa: "bə.luːn",
     category: "toys",
@@ -3782,7 +3546,6 @@ export const words: Word[] = [
     notes: "B early, L is 24mo. High-interest word for toddlers.",
   },
   {
-    word_id: "TOY015",
     word: "puppet",
     ipa: "pʌ.pɪt",
     category: "toys",
@@ -3800,7 +3563,6 @@ export const words: Word[] = [
 
   // ─── SHAPES ──────────────────────────────────────────────────
   {
-    word_id: "SHP001",
     word: "circle",
     ipa: "sɝː.kəl",
     category: "shapes",
@@ -3816,7 +3578,6 @@ export const words: Word[] = [
     notes: "S, R, L all present. High-frequency shape word.",
   },
   {
-    word_id: "SHP002",
     word: "square",
     ipa: "skwɛr",
     category: "shapes",
@@ -3832,7 +3593,6 @@ export const words: Word[] = [
     notes: "SKW cluster. Challenging but common shape word.",
   },
   {
-    word_id: "SHP003",
     word: "triangle",
     ipa: "tɹaɪ.æŋ.ɡəl",
     category: "shapes",
@@ -3848,7 +3608,6 @@ export const words: Word[] = [
     notes: "TR cluster + 3 syllables. Advanced shape word.",
   },
   {
-    word_id: "SHP004",
     word: "heart",
     ipa: "hɑːrt",
     category: "shapes",
@@ -3864,7 +3623,6 @@ export const words: Word[] = [
     notes: "H early, R late. Emotionally salient shape.",
   },
   {
-    word_id: "SHP005",
     word: "diamond",
     ipa: "daɪ.ə.mənd",
     category: "shapes",
@@ -3880,7 +3638,6 @@ export const words: Word[] = [
     notes: "All early-to-emerging sounds. Accessible shape word.",
   },
   {
-    word_id: "SHP006",
     word: "oval",
     ipa: "oʊ.vəl",
     category: "shapes",
@@ -3896,7 +3653,6 @@ export const words: Word[] = [
     notes: "V is late (36mo). L is 24mo.",
   },
   {
-    word_id: "SHP007",
     word: "rectangle",
     ipa: "rɛk.tæŋ.ɡəl",
     category: "shapes",
@@ -3914,7 +3670,6 @@ export const words: Word[] = [
 
   // ─── NUMBERS ─────────────────────────────────────────────────
   {
-    word_id: "NUM001",
     word: "one",
     ipa: "wʌn",
     category: "numbers",
@@ -3930,7 +3685,6 @@ export const words: Word[] = [
     notes: "W early, N early. Easiest number to say.",
   },
   {
-    word_id: "NUM002",
     word: "two",
     ipa: "tuː",
     category: "numbers",
@@ -3946,7 +3700,6 @@ export const words: Word[] = [
     notes: "Simple CV. T is 18mo.",
   },
   {
-    word_id: "NUM003",
     word: "three",
     ipa: "θɹiː",
     category: "numbers",
@@ -3962,7 +3715,6 @@ export const words: Word[] = [
     notes: "TH + R cluster. One of the hardest numbers to say.",
   },
   {
-    word_id: "NUM004",
     word: "four",
     ipa: "fɔːr",
     category: "numbers",
@@ -3978,7 +3730,6 @@ export const words: Word[] = [
     notes: "F is 18mo, R is late.",
   },
   {
-    word_id: "NUM005",
     word: "five",
     ipa: "faɪv",
     category: "numbers",
@@ -3994,7 +3745,6 @@ export const words: Word[] = [
     notes: "F is 18mo, V is late (36mo).",
   },
   {
-    word_id: "NUM006",
     word: "six",
     ipa: "sɪks",
     category: "numbers",
@@ -4010,7 +3760,6 @@ export const words: Word[] = [
     notes: "Final KS cluster. S is 24mo.",
   },
   {
-    word_id: "NUM007",
     word: "seven",
     ipa: "sɛ.vən",
     category: "numbers",
@@ -4026,7 +3775,6 @@ export const words: Word[] = [
     notes: "S is 24mo, V is late (36mo).",
   },
   {
-    word_id: "NUM008",
     word: "eight",
     ipa: "eɪt",
     category: "numbers",
@@ -4042,7 +3790,6 @@ export const words: Word[] = [
     notes: "Vowel-initial + final T. Very accessible.",
   },
   {
-    word_id: "NUM009",
     word: "nine",
     ipa: "naɪn",
     category: "numbers",
@@ -4058,7 +3805,6 @@ export const words: Word[] = [
     notes: "Repeated N. Both early sounds. Easy number.",
   },
   {
-    word_id: "NUM010",
     word: "ten",
     ipa: "tɛn",
     category: "numbers",
@@ -4076,7 +3822,6 @@ export const words: Word[] = [
 
   // ── CLOTHING (CLO001–CLO015) ──────────────────────────────────
   {
-    word_id: "CLO001",
     word: "shirt",
     ipa: "ʃɝːt",
     category: "clothing",
@@ -4092,7 +3837,6 @@ export const words: Word[] = [
     notes: "Late SH + R combo. Expect 'surt' or 'turt'.",
   },
   {
-    word_id: "CLO002",
     word: "pants",
     ipa: "pænts",
     category: "clothing",
@@ -4108,7 +3852,6 @@ export const words: Word[] = [
     notes: "Final -nts cluster. Expect cluster reduction to 'pant'.",
   },
   {
-    word_id: "CLO003",
     word: "coat",
     ipa: "koʊt",
     category: "clothing",
@@ -4124,7 +3867,6 @@ export const words: Word[] = [
     notes: "CVC with velar K. Fronting → 'toat'. Rhymes with goat/boat.",
   },
   {
-    word_id: "CLO004",
     word: "boots",
     ipa: "buːts",
     category: "clothing",
@@ -4140,7 +3882,6 @@ export const words: Word[] = [
     notes: "Final -ts cluster. May reduce to 'boot'. Early B initial.",
   },
   {
-    word_id: "CLO005",
     word: "dress",
     ipa: "drɛs",
     category: "clothing",
@@ -4156,7 +3897,6 @@ export const words: Word[] = [
     notes: "DR cluster + final S. Expect 'dess' via cluster reduction.",
   },
   {
-    word_id: "CLO006",
     word: "pajamas",
     ipa: "pə.dʒɑː.məz",
     category: "clothing",
@@ -4172,7 +3912,6 @@ export const words: Word[] = [
     notes: "3-syllable word. Late J sound. Expect weak syllable deletion → 'jamas'.",
   },
   {
-    word_id: "CLO007",
     word: "zipper",
     ipa: "zɪ.pɚ",
     category: "clothing",
@@ -4188,7 +3927,6 @@ export const words: Word[] = [
     notes: "Late Z initial + vocalic R. Expect 'dipper' or 'tipper'.",
   },
   {
-    word_id: "CLO008",
     word: "button",
     ipa: "bʌ.tən",
     category: "clothing",
@@ -4204,7 +3942,6 @@ export const words: Word[] = [
     notes: "All early-mid sounds. Good functional word for dressing routines.",
   },
   {
-    word_id: "CLO009",
     word: "mittens",
     ipa: "mɪ.tənz",
     category: "clothing",
@@ -4220,7 +3957,6 @@ export const words: Word[] = [
     notes: "Early M initial. Final -nz cluster may reduce. Good winter word.",
   },
   {
-    word_id: "CLO010",
     word: "gloves",
     ipa: "ɡlʌvz",
     category: "clothing",
@@ -4236,7 +3972,6 @@ export const words: Word[] = [
     notes: "GL cluster + late V and Z. Expect 'guv' via cluster reduction + final deletion.",
   },
   {
-    word_id: "CLO011",
     word: "scarf",
     ipa: "skɑːrf",
     category: "clothing",
@@ -4252,7 +3987,6 @@ export const words: Word[] = [
     notes: "SK cluster + R. Very complex. Expect heavy simplification → 'carf' or 'tarf'.",
   },
   {
-    word_id: "CLO012",
     word: "diaper",
     ipa: "daɪ.pɚ",
     category: "clothing",
@@ -4268,7 +4002,6 @@ export const words: Word[] = [
     notes: "Functional routine word. Vocalic R final. Early D and P.",
   },
   {
-    word_id: "CLO013",
     word: "pocket",
     ipa: "pɑː.kɪt",
     category: "clothing",
@@ -4284,7 +4017,6 @@ export const words: Word[] = [
     notes: "Early P + velar K. Fronting target → 'pottet'. Fun hide-and-seek word.",
   },
   {
-    word_id: "CLO014",
     word: "belt",
     ipa: "bɛlt",
     category: "clothing",
@@ -4300,7 +4032,6 @@ export const words: Word[] = [
     notes: "Final -lt cluster. L may be glided → 'bewt'. Early B initial.",
   },
   {
-    word_id: "CLO015",
     word: "skirt",
     ipa: "skɝːt",
     category: "clothing",
@@ -4318,7 +4049,6 @@ export const words: Word[] = [
 
   // ── OUTDOOR / NATURE (NAT001–NAT018) ─────────────────────────
   {
-    word_id: "NAT001",
     word: "flower",
     ipa: "flaʊ.ɚ",
     category: "nature",
@@ -4334,7 +4064,6 @@ export const words: Word[] = [
     notes: "FL cluster + vocalic R. Expect 'fow-uh' or 'pow-uh'.",
   },
   {
-    word_id: "NAT002",
     word: "grass",
     ipa: "ɡræs",
     category: "nature",
@@ -4350,7 +4079,6 @@ export const words: Word[] = [
     notes: "GR cluster + final S. Expect 'gass' or 'dass'.",
   },
   {
-    word_id: "NAT003",
     word: "rock",
     ipa: "rɑːk",
     category: "nature",
@@ -4366,7 +4094,6 @@ export const words: Word[] = [
     notes: "Late R initial + velar K. Expect 'wock' or 'wot'.",
   },
   {
-    word_id: "NAT004",
     word: "leaf",
     ipa: "liːf",
     category: "nature",
@@ -4382,7 +4109,6 @@ export const words: Word[] = [
     notes: "L initial may glide → 'weef'. Good fall vocabulary.",
   },
   {
-    word_id: "NAT005",
     word: "sky",
     ipa: "skaɪ",
     category: "nature",
@@ -4398,7 +4124,6 @@ export const words: Word[] = [
     notes: "SK cluster. Expect 'kai' or 'tai' via cluster reduction + fronting.",
   },
   {
-    word_id: "NAT006",
     word: "cloud",
     ipa: "klaʊd",
     category: "nature",
@@ -4414,7 +4139,6 @@ export const words: Word[] = [
     notes: "KL cluster (not in defined list). Expect 'kowd' or 'towd'.",
   },
   {
-    word_id: "NAT007",
     word: "mud",
     ipa: "mʌd",
     category: "nature",
@@ -4430,7 +4154,6 @@ export const words: Word[] = [
     notes: "All early sounds. Great sensory play word.",
   },
   {
-    word_id: "NAT008",
     word: "puddle",
     ipa: "pʌ.dəl",
     category: "nature",
@@ -4446,7 +4169,6 @@ export const words: Word[] = [
     notes: "Early P and D. Final dark L may glide → 'puddow'.",
   },
   {
-    word_id: "NAT009",
     word: "sand",
     ipa: "sænd",
     category: "nature",
@@ -4462,7 +4184,6 @@ export const words: Word[] = [
     notes: "Final -nd cluster. Expect 'tand' or 'tan' via stopping + cluster reduction.",
   },
   {
-    word_id: "NAT010",
     word: "hill",
     ipa: "hɪl",
     category: "nature",
@@ -4478,7 +4199,6 @@ export const words: Word[] = [
     notes: "Early H initial. Final L may glide → 'hiw'.",
   },
   {
-    word_id: "NAT011",
     word: "ice",
     ipa: "aɪs",
     category: "nature",
@@ -4494,7 +4214,6 @@ export const words: Word[] = [
     notes: "Simple VC. Final S may be stopped → 'ait'. Good winter word.",
   },
   {
-    word_id: "NAT012",
     word: "stick",
     ipa: "stɪk",
     category: "nature",
@@ -4510,7 +4229,6 @@ export const words: Word[] = [
     notes: "ST cluster + velar K. Expect 'tick' or 'tit' via cluster reduction + fronting.",
   },
   {
-    word_id: "NAT013",
     word: "seed",
     ipa: "siːd",
     category: "nature",
@@ -4526,7 +4244,6 @@ export const words: Word[] = [
     notes: "Late S initial. Expect 'teed' via stopping. Good gardening word.",
   },
   {
-    word_id: "NAT014",
     word: "nest",
     ipa: "nɛst",
     category: "nature",
@@ -4542,7 +4259,6 @@ export const words: Word[] = [
     notes: "Final -st cluster. Expect 'net' via cluster reduction. Bird theme.",
   },
   {
-    word_id: "NAT015",
     word: "wave",
     ipa: "weɪv",
     category: "nature",
@@ -4558,7 +4274,6 @@ export const words: Word[] = [
     notes: "Early W + late V. Expect 'wabe' via stopping V → B.",
   },
   {
-    word_id: "NAT016",
     word: "shell",
     ipa: "ʃɛl",
     category: "nature",
@@ -4574,7 +4289,6 @@ export const words: Word[] = [
     notes: "Late SH initial. Expect 'tell' or 'sell'. Beach vocabulary.",
   },
   {
-    word_id: "NAT017",
     word: "dirt",
     ipa: "dɝːt",
     category: "nature",
@@ -4590,7 +4304,6 @@ export const words: Word[] = [
     notes: "Early D + late R. Expect 'dut'. Great sensory play word.",
   },
   {
-    word_id: "NAT018",
     word: "log",
     ipa: "lɑːɡ",
     category: "nature",
@@ -4608,7 +4321,6 @@ export const words: Word[] = [
 
   // ── FURNITURE / ROOMS (FUR001–FUR018) ─────────────────────────
   {
-    word_id: "FUR001",
     word: "couch",
     ipa: "kaʊtʃ",
     category: "furniture",
@@ -4624,7 +4336,6 @@ export const words: Word[] = [
     notes: "Velar K + late CH. Expect 'towt' via fronting + stopping.",
   },
   {
-    word_id: "FUR002",
     word: "table",
     ipa: "teɪ.bəl",
     category: "furniture",
@@ -4640,7 +4351,6 @@ export const words: Word[] = [
     notes: "Early T and B. Final dark L may glide → 'tay-bow'.",
   },
   {
-    word_id: "FUR003",
     word: "stairs",
     ipa: "stɛrz",
     category: "rooms",
@@ -4656,7 +4366,6 @@ export const words: Word[] = [
     notes: "ST cluster + R + final Z. Very complex. Expect 'tairz' or 'tez'.",
   },
   {
-    word_id: "FUR004",
     word: "window",
     ipa: "wɪn.doʊ",
     category: "household",
@@ -4672,7 +4381,6 @@ export const words: Word[] = [
     notes: "All early sounds. Great pointing word. 'Look out the window!'",
   },
   {
-    word_id: "FUR005",
     word: "floor",
     ipa: "flɔːr",
     category: "household",
@@ -4688,7 +4396,6 @@ export const words: Word[] = [
     notes: "FL cluster + final R. Expect 'for' or 'pow'. Rhymes with door/more.",
   },
   {
-    word_id: "FUR006",
     word: "wall",
     ipa: "wɑːl",
     category: "household",
@@ -4704,7 +4411,6 @@ export const words: Word[] = [
     notes: "Early W + final L. L may glide → 'waw'. Rhymes with ball/fall.",
   },
   {
-    word_id: "FUR007",
     word: "kitchen",
     ipa: "kɪ.tʃən",
     category: "rooms",
@@ -4720,7 +4426,6 @@ export const words: Word[] = [
     notes: "Velar K + late CH. Expect 'tittin' via fronting + stopping.",
   },
   {
-    word_id: "FUR008",
     word: "bedroom",
     ipa: "bɛd.ruːm",
     category: "rooms",
@@ -4736,7 +4441,6 @@ export const words: Word[] = [
     notes: "Compound word. Late R in second syllable. Expect 'bed-woom'.",
   },
   {
-    word_id: "FUR009",
     word: "bathroom",
     ipa: "bæθ.ruːm",
     category: "rooms",
@@ -4752,7 +4456,6 @@ export const words: Word[] = [
     notes: "Late TH + R. Expect 'baf-woom'. Routine vocabulary.",
   },
   {
-    word_id: "FUR010",
     word: "closet",
     ipa: "klɑː.zɪt",
     category: "rooms",
@@ -4768,7 +4471,6 @@ export const words: Word[] = [
     notes: "KL cluster (not in defined list) + late Z. Expect 'tah-dit'.",
   },
   {
-    word_id: "FUR011",
     word: "pillow",
     ipa: "pɪ.loʊ",
     category: "furniture",
@@ -4784,7 +4486,6 @@ export const words: Word[] = [
     notes: "Early P + L glide target → 'pih-wow'. Bedtime word.",
   },
   {
-    word_id: "FUR012",
     word: "blanket",
     ipa: "blæŋ.kɪt",
     category: "furniture",
@@ -4800,7 +4501,6 @@ export const words: Word[] = [
     notes: "BL cluster + NG + velar K. Complex. Expect 'bankit' via cluster reduction + fronting.",
   },
   {
-    word_id: "FUR013",
     word: "lamp",
     ipa: "læmp",
     category: "furniture",
@@ -4816,7 +4516,6 @@ export const words: Word[] = [
     notes: "L initial + final -mp cluster. Expect 'wamp' via L gliding.",
   },
   {
-    word_id: "FUR014",
     word: "mirror",
     ipa: "mɪ.rɚ",
     category: "furniture",
@@ -4832,7 +4531,6 @@ export const words: Word[] = [
     notes: "Early M + double R. Expect 'mih-wuh'. Good self-awareness word.",
   },
   {
-    word_id: "FUR015",
     word: "shelf",
     ipa: "ʃɛlf",
     category: "furniture",
@@ -4848,7 +4546,6 @@ export const words: Word[] = [
     notes: "Late SH + L + final -lf cluster. Expect 'sef' or 'tef'.",
   },
   {
-    word_id: "FUR016",
     word: "sink",
     ipa: "sɪŋk",
     category: "furniture",
@@ -4864,7 +4561,6 @@ export const words: Word[] = [
     notes: "Late S + velar NG/K. Expect 'tink' via stopping. Bathroom word.",
   },
   {
-    word_id: "FUR017",
     word: "shower",
     ipa: "ʃaʊ.ɚ",
     category: "furniture",
@@ -4880,7 +4576,6 @@ export const words: Word[] = [
     notes: "Late SH + vocalic R. Expect 'sow-uh' or 'tow-uh'. Rhymes with flower.",
   },
   {
-    word_id: "FUR018",
     word: "fridge",
     ipa: "frɪdʒ",
     category: "furniture",
@@ -4898,7 +4593,6 @@ export const words: Word[] = [
 
   // ── WEATHER ──────────────────────────────────────────────
   {
-    word_id: "WEA001",
     word: "snow",
     ipa: "snoʊ",
     category: "weather",
@@ -4914,7 +4608,6 @@ export const words: Word[] = [
     notes: "SN cluster. High visual appeal in winter.",
   },
   {
-    word_id: "WEA002",
     word: "wind",
     ipa: "wɪnd",
     category: "weather",
@@ -4930,7 +4623,6 @@ export const words: Word[] = [
     notes: "Final ND cluster (not in defined list). W is early.",
   },
   {
-    word_id: "WEA003",
     word: "sunny",
     ipa: "sʌn.i",
     category: "weather",
@@ -4946,7 +4638,6 @@ export const words: Word[] = [
     notes: "S initial. Familiar concept for toddlers.",
   },
   {
-    word_id: "WEA004",
     word: "cloudy",
     ipa: "klaʊ.di",
     category: "weather",
@@ -4962,7 +4653,6 @@ export const words: Word[] = [
     notes: "KL cluster (not in defined list). L is later-developing.",
   },
   {
-    word_id: "WEA005",
     word: "rainbow",
     ipa: "reɪn.boʊ",
     category: "weather",
@@ -4978,7 +4668,6 @@ export const words: Word[] = [
     notes: "R initial is late. High motivator for many toddlers.",
   },
   {
-    word_id: "WEA006",
     word: "thunder",
     ipa: "θʌn.dɚ",
     category: "weather",
@@ -4994,7 +4683,6 @@ export const words: Word[] = [
     notes: "TH initial is very late (36mo+). Expect fronting to 'funder'.",
   },
   {
-    word_id: "WEA007",
     word: "frost",
     ipa: "frɔːst",
     category: "weather",
@@ -5010,7 +4698,6 @@ export const words: Word[] = [
     notes: "FR cluster + final ST. Complex word; late target.",
   },
   {
-    word_id: "WEA008",
     word: "icicle",
     ipa: "aɪ.sɪ.kəl",
     category: "weather",
@@ -5028,7 +4715,6 @@ export const words: Word[] = [
 
   // ── PEOPLE/SOCIAL expanded ───────────────────────────────
   {
-    word_id: "PPL007",
     word: "friend",
     ipa: "frɛnd",
     category: "people",
@@ -5044,7 +4730,6 @@ export const words: Word[] = [
     notes: "FR cluster + final ND. Complex but high-value social word.",
   },
   {
-    word_id: "PPL008",
     word: "boy",
     ipa: "bɔɪ",
     category: "people",
@@ -5060,7 +4745,6 @@ export const words: Word[] = [
     notes: "CV with early B. Simple structure.",
   },
   {
-    word_id: "PPL009",
     word: "girl",
     ipa: "ɡɝːl",
     category: "people",
@@ -5076,7 +4760,6 @@ export const words: Word[] = [
     notes: "R-colored vowel + final L. Both late sounds.",
   },
   {
-    word_id: "PPL010",
     word: "grandma",
     ipa: "ɡrænd.mɑː",
     category: "people",
@@ -5092,7 +4775,6 @@ export const words: Word[] = [
     notes: "GR cluster. Often reduced to 'gamma' or 'gramma'.",
   },
   {
-    word_id: "PPL011",
     word: "grandpa",
     ipa: "ɡrænd.pɑː",
     category: "people",
@@ -5108,7 +4790,6 @@ export const words: Word[] = [
     notes: "GR cluster. Often reduced to 'gampa' or 'grampa'.",
   },
   {
-    word_id: "PPL012",
     word: "brother",
     ipa: "brʌð.ɚ",
     category: "people",
@@ -5124,7 +4805,6 @@ export const words: Word[] = [
     notes: "BR cluster + voiced TH. Very late target. Expect 'budder'.",
   },
   {
-    word_id: "PPL013",
     word: "sister",
     ipa: "sɪs.tɚ",
     category: "people",
@@ -5140,7 +4820,6 @@ export const words: Word[] = [
     notes: "ST cluster in medial position. Final R. Expect 'titter' early on.",
   },
   {
-    word_id: "PPL014",
     word: "teacher",
     ipa: "tiː.tʃɚ",
     category: "people",
@@ -5156,7 +4835,6 @@ export const words: Word[] = [
     notes: "CH is late (36mo). High-frequency social word for daycare kids.",
   },
   {
-    word_id: "PPL015",
     word: "doctor",
     ipa: "dɑːk.tɚ",
     category: "health",
@@ -5172,7 +4850,6 @@ export const words: Word[] = [
     notes: "KT cluster medially (not in defined list). Final R.",
   },
   {
-    word_id: "PPL016",
     word: "kid",
     ipa: "kɪd",
     category: "people",
@@ -5188,7 +4865,6 @@ export const words: Word[] = [
     notes: "CVC with Tier 2 sounds. Fronting target for K.",
   },
   {
-    word_id: "PPL017",
     word: "man",
     ipa: "mæn",
     category: "people",
@@ -5204,7 +4880,6 @@ export const words: Word[] = [
     notes: "All Tier 1 sounds. Simple CVC.",
   },
   {
-    word_id: "PPL018",
     word: "woman",
     ipa: "wʊm.ən",
     category: "people",
@@ -5222,7 +4897,6 @@ export const words: Word[] = [
 
   // ── PREPOSITIONS/SPATIAL ─────────────────────────────────
   {
-    word_id: "SPA001",
     word: "under",
     ipa: "ʌn.dɚ",
     category: "prepositions",
@@ -5238,7 +4912,6 @@ export const words: Word[] = [
     notes: "Final R. Great for spatial play routines.",
   },
   {
-    word_id: "SPA002",
     word: "behind",
     ipa: "bɪ.haɪnd",
     category: "prepositions",
@@ -5254,7 +4927,6 @@ export const words: Word[] = [
     notes: "All early sounds. Links to hide-and-seek play.",
   },
   {
-    word_id: "SPA003",
     word: "next to",
     ipa: "nɛkst.tuː",
     category: "prepositions",
@@ -5270,7 +4942,6 @@ export const words: Word[] = [
     notes: "Complex final cluster KST. Two-word phrase; treat as unit.",
   },
   {
-    word_id: "SPA004",
     word: "between",
     ipa: "bɪ.twiːn",
     category: "prepositions",
@@ -5286,7 +4957,6 @@ export const words: Word[] = [
     notes: "TW cluster (not in defined list). Abstract concept; late comprehension.",
   },
   {
-    word_id: "SPA005",
     word: "above",
     ipa: "ə.bʌv",
     category: "prepositions",
@@ -5302,7 +4972,6 @@ export const words: Word[] = [
     notes: "Final V is late (36mo). Abstract; pair with 'below'.",
   },
   {
-    word_id: "SPA006",
     word: "below",
     ipa: "bɪ.loʊ",
     category: "prepositions",
@@ -5318,7 +4987,6 @@ export const words: Word[] = [
     notes: "L initial (24mo). Pair with 'above' for contrast.",
   },
   {
-    word_id: "SPA007",
     word: "inside",
     ipa: "ɪn.saɪd",
     category: "prepositions",
@@ -5334,7 +5002,6 @@ export const words: Word[] = [
     notes: "S initial (24mo). Pair with 'outside'. Common in play.",
   },
   {
-    word_id: "SPA008",
     word: "outside",
     ipa: "aʊt.saɪd",
     category: "prepositions",
@@ -5350,7 +5017,6 @@ export const words: Word[] = [
     notes: "TS boundary. Very motivating word for toddlers.",
   },
   {
-    word_id: "SPA009",
     word: "through",
     ipa: "θruː",
     category: "prepositions",
@@ -5366,7 +5032,6 @@ export const words: Word[] = [
     notes: "THR cluster (not in defined list). Very late. Expect 'fwoo'.",
   },
   {
-    word_id: "SPA010",
     word: "around",
     ipa: "ə.raʊnd",
     category: "prepositions",
@@ -5382,7 +5047,6 @@ export const words: Word[] = [
     notes: "R initial (36mo). Good for movement games.",
   },
   {
-    word_id: "SPA011",
     word: "over",
     ipa: "oʊ.vɚ",
     category: "prepositions",
@@ -5398,7 +5062,6 @@ export const words: Word[] = [
     notes: "V and R both late (36mo). Common in 'game over', 'roll over'.",
   },
   {
-    word_id: "SPA012",
     word: "toward",
     ipa: "tə.wɔːrd",
     category: "prepositions",
@@ -5416,7 +5079,6 @@ export const words: Word[] = [
 
   // ── TIME CONCEPTS ────────────────────────────────────────
   {
-    word_id: "TIM001",
     word: "now",
     ipa: "naʊ",
     category: "time",
@@ -5432,7 +5094,6 @@ export const words: Word[] = [
     notes: "CV with early N. Among first time words toddlers learn.",
   },
   {
-    word_id: "TIM002",
     word: "later",
     ipa: "leɪ.tɚ",
     category: "time",
@@ -5448,7 +5109,6 @@ export const words: Word[] = [
     notes: "L initial (24mo), final R (36mo). Abstract time concept.",
   },
   {
-    word_id: "TIM003",
     word: "soon",
     ipa: "suːn",
     category: "time",
@@ -5464,7 +5124,6 @@ export const words: Word[] = [
     notes: "S initial (24mo). Useful for waiting routines.",
   },
   {
-    word_id: "TIM004",
     word: "morning",
     ipa: "mɔːr.nɪŋ",
     category: "time",
@@ -5480,7 +5139,6 @@ export const words: Word[] = [
     notes: "R medial + final NG. Routine word; high frequency.",
   },
   {
-    word_id: "TIM005",
     word: "night",
     ipa: "naɪt",
     category: "time",
@@ -5496,7 +5154,6 @@ export const words: Word[] = [
     notes: "Early sounds only. Bedtime routine staple.",
   },
   {
-    word_id: "TIM006",
     word: "today",
     ipa: "tə.deɪ",
     category: "time",
@@ -5512,7 +5169,6 @@ export const words: Word[] = [
     notes: "All Tier 2 consonants. Useful for daily routines.",
   },
   {
-    word_id: "TIM007",
     word: "tomorrow",
     ipa: "tə.mɑːr.oʊ",
     category: "time",
@@ -5528,7 +5184,6 @@ export const words: Word[] = [
     notes: "3 syllables. R medial. Abstract; comprehension develops ~2.5yr.",
   },
   {
-    word_id: "TIM008",
     word: "bedtime",
     ipa: "bɛd.taɪm",
     category: "time",
@@ -5547,7 +5202,6 @@ export const words: Word[] = [
   // ─── ADDITIONAL ANIMALS ──────────────────────────────────────
 
   {
-    word_id: "ANI025",
     word: "monkey",
     ipa: "mʌŋ.ki",
     category: "animals",
@@ -5563,7 +5217,6 @@ export const words: Word[] = [
     notes: "M solid, NG emerging, K emerging. Fun animal.",
   },
   {
-    word_id: "ANI026",
     word: "lion",
     ipa: "laɪ.ən",
     category: "animals",
@@ -5579,7 +5232,6 @@ export const words: Word[] = [
     notes: "L late. Roaring is great oral-motor fun.",
   },
   {
-    word_id: "ANI027",
     word: "elephant",
     ipa: "ɛl.ə.fənt",
     category: "animals",
@@ -5595,7 +5247,6 @@ export const words: Word[] = [
     notes: "3 syllables. L late, F emerging. Trunk gesture aids recall.",
   },
   {
-    word_id: "ANI028",
     word: "turtle",
     ipa: "tɝ.tl̩",
     category: "animals",
@@ -5611,7 +5262,6 @@ export const words: Word[] = [
     notes: "T emerging, R late, L late. Slow movement is fun to act out.",
   },
   {
-    word_id: "ANI029",
     word: "butterfly",
     ipa: "bʌt.ɚ.flaɪ",
     category: "animals",
@@ -5627,7 +5277,6 @@ export const words: Word[] = [
     notes: "3 syllables, FL cluster. B solid, R/L late. Wing gesture helps.",
   },
   {
-    word_id: "ANI030",
     word: "ant",
     ipa: "ænt",
     category: "animals",
@@ -5643,7 +5292,6 @@ export const words: Word[] = [
     notes: "Short word. N solid, T emerging. Tiny creature concept.",
   },
   {
-    word_id: "ANI031",
     word: "spider",
     ipa: "spaɪ.dɚ",
     category: "animals",
@@ -5659,7 +5307,6 @@ export const words: Word[] = [
     notes: "SP cluster, R late. 'Itsy Bitsy Spider' song tie-in.",
   },
   {
-    word_id: "ANI032",
     word: "whale",
     ipa: "weɪl",
     category: "animals",
@@ -5675,7 +5322,6 @@ export const words: Word[] = [
     notes: "W solid, L late. Big ocean animal concept.",
   },
   {
-    word_id: "ANI033",
     word: "penguin",
     ipa: "pɛŋ.ɡwɪn",
     category: "animals",
@@ -5691,7 +5337,6 @@ export const words: Word[] = [
     notes: "P solid, NG emerging, G emerging. Waddle action fun.",
   },
   {
-    word_id: "ANI034",
     word: "dinosaur",
     ipa: "daɪ.nə.sɔːr",
     category: "animals",
@@ -5707,7 +5352,6 @@ export const words: Word[] = [
     notes: "3 syllables. D solid, S late, R late. Extremely motivating topic.",
   },
   {
-    word_id: "ANI035",
     word: "puppy",
     ipa: "pʌp.i",
     category: "animals",
@@ -5723,7 +5367,6 @@ export const words: Word[] = [
     notes: "Reduplicated P. Very early consonant. High motivation.",
   },
   {
-    word_id: "ANI036",
     word: "kitten",
     ipa: "kɪt.ən",
     category: "animals",
@@ -5739,7 +5382,6 @@ export const words: Word[] = [
     notes: "K and T emerging, N solid. Baby cat concept.",
   },
   {
-    word_id: "ANI037",
     word: "squirrel",
     ipa: "skwɝ.əl",
     category: "animals",
@@ -5755,7 +5397,6 @@ export const words: Word[] = [
     notes: "SK cluster, R late, L late. Challenging but motivating outdoor word.",
   },
   {
-    word_id: "ANI038",
     word: "owl",
     ipa: "aʊl",
     category: "animals",
@@ -5771,7 +5412,6 @@ export const words: Word[] = [
     notes: "L late. 'Hoo hoo' sound is fun to pair.",
   },
   {
-    word_id: "ANI039",
     word: "rabbit",
     ipa: "ræb.ɪt",
     category: "animals",
@@ -5790,7 +5430,6 @@ export const words: Word[] = [
   // ─── ADDITIONAL FOOD ─────────────────────────────────────────
 
   {
-    word_id: "FOO036",
     word: "pizza",
     ipa: "piːt.sə",
     category: "food",
@@ -5806,7 +5445,6 @@ export const words: Word[] = [
     notes: "P solid, /ts/ affricate. Extremely motivating food word.",
   },
   {
-    word_id: "FOO037",
     word: "carrot",
     ipa: "kær.ət",
     category: "food",
@@ -5822,7 +5460,6 @@ export const words: Word[] = [
     notes: "K emerging, R late. Common veggie.",
   },
   {
-    word_id: "FOO038",
     word: "broccoli",
     ipa: "brɑː.kə.li",
     category: "food",
@@ -5838,7 +5475,6 @@ export const words: Word[] = [
     notes: "BR cluster. 3 syllables. R and L late. 'Little trees' concept.",
   },
   {
-    word_id: "FOO039",
     word: "strawberry",
     ipa: "strɔː.bɛr.i",
     category: "food",
@@ -5854,7 +5490,6 @@ export const words: Word[] = [
     notes: "STR cluster (complex). R late. Very motivating fruit.",
   },
   {
-    word_id: "FOO040",
     word: "watermelon",
     ipa: "wɑː.tɚ.mɛl.ən",
     category: "food",
@@ -5870,7 +5505,6 @@ export const words: Word[] = [
     notes: "4 syllables. W solid, R/L late. Summer fruit, very fun.",
   },
   {
-    word_id: "FOO041",
     word: "yogurt",
     ipa: "joʊ.ɡɚt",
     category: "food",
@@ -5886,7 +5520,6 @@ export const words: Word[] = [
     notes: "Y early, G emerging, R late. Common snack.",
   },
   {
-    word_id: "FOO042",
     word: "pancake",
     ipa: "pæŋ.keɪk",
     category: "food",
@@ -5902,7 +5535,6 @@ export const words: Word[] = [
     notes: "P solid, N solid, K emerging. Breakfast word.",
   },
   {
-    word_id: "FOO043",
     word: "sandwich",
     ipa: "sæn.dwɪtʃ",
     category: "food",
@@ -5918,7 +5550,6 @@ export const words: Word[] = [
     notes: "S late, CH late. Common lunch word.",
   },
   {
-    word_id: "FOO044",
     word: "popcorn",
     ipa: "pɑːp.kɔːrn",
     category: "food",
@@ -5934,7 +5565,6 @@ export const words: Word[] = [
     notes: "P solid (x2), K emerging, R late. Fun popping sound.",
   },
   {
-    word_id: "FOO045",
     word: "candy",
     ipa: "kæn.di",
     category: "food",
@@ -5950,7 +5580,6 @@ export const words: Word[] = [
     notes: "K emerging, N solid, D solid. High-interest treat word.",
   },
   {
-    word_id: "FOO046",
     word: "chocolate",
     ipa: "tʃɑːk.lət",
     category: "food",
@@ -5966,7 +5595,6 @@ export const words: Word[] = [
     notes: "CH late, K emerging, L late. Extremely motivating.",
   },
   {
-    word_id: "FOO047",
     word: "honey",
     ipa: "hʌn.i",
     category: "food",
@@ -5982,7 +5610,6 @@ export const words: Word[] = [
     notes: "H and N both early. Sweet, easy word.",
   },
   {
-    word_id: "FOO048",
     word: "muffin",
     ipa: "mʌf.ɪn",
     category: "food",
@@ -5998,7 +5625,6 @@ export const words: Word[] = [
     notes: "M solid, F emerging. Snack word.",
   },
   {
-    word_id: "FOO049",
     word: "lemon",
     ipa: "lɛm.ən",
     category: "food",
@@ -6014,7 +5640,6 @@ export const words: Word[] = [
     notes: "L late, M solid. Sour face reaction is engaging.",
   },
   {
-    word_id: "FOO050",
     word: "cherry",
     ipa: "tʃɛr.i",
     category: "food",
@@ -6033,7 +5658,6 @@ export const words: Word[] = [
   // ─── ADDITIONAL ACTIONS ──────────────────────────────────────
 
   {
-    word_id: "ACT064",
     word: "clap",
     ipa: "klæp",
     category: "verbs",
@@ -6049,7 +5673,6 @@ export const words: Word[] = [
     notes: "KL cluster. P solid, L late. Natural gesture pairing.",
   },
   {
-    word_id: "ACT065",
     word: "stomp",
     ipa: "stɑːmp",
     category: "verbs",
@@ -6065,7 +5688,6 @@ export const words: Word[] = [
     notes: "ST cluster. S late. Great gross-motor pairing.",
   },
   {
-    word_id: "ACT066",
     word: "spin",
     ipa: "spɪn",
     category: "verbs",
@@ -6081,7 +5703,6 @@ export const words: Word[] = [
     notes: "SP cluster. S late, P solid. Toddlers love spinning.",
   },
   {
-    word_id: "ACT067",
     word: "dance",
     ipa: "dæns",
     category: "verbs",
@@ -6097,7 +5718,6 @@ export const words: Word[] = [
     notes: "D solid, N solid, S late. Music pairing.",
   },
   {
-    word_id: "ACT068",
     word: "crawl",
     ipa: "krɑːl",
     category: "verbs",
@@ -6113,7 +5733,6 @@ export const words: Word[] = [
     notes: "KR cluster. R late, L late. Movement word.",
   },
   {
-    word_id: "ACT069",
     word: "dig",
     ipa: "dɪɡ",
     category: "verbs",
@@ -6129,7 +5748,6 @@ export const words: Word[] = [
     notes: "D solid, G emerging. Sandbox play word.",
   },
   {
-    word_id: "ACT070",
     word: "swim",
     ipa: "swɪm",
     category: "verbs",
@@ -6145,7 +5763,6 @@ export const words: Word[] = [
     notes: "SW cluster. S late. Bath/pool word.",
   },
   {
-    word_id: "ACT071",
     word: "fly",
     ipa: "flaɪ",
     category: "verbs",
@@ -6161,7 +5778,6 @@ export const words: Word[] = [
     notes: "FL cluster. F emerging, L late. Airplane play.",
   },
   {
-    word_id: "ACT072",
     word: "sing",
     ipa: "sɪŋ",
     category: "verbs",
@@ -6177,7 +5793,6 @@ export const words: Word[] = [
     notes: "S late, NG emerging. Music activity.",
   },
   {
-    word_id: "ACT073",
     word: "draw",
     ipa: "drɑː",
     category: "verbs",
@@ -6193,7 +5808,6 @@ export const words: Word[] = [
     notes: "DR cluster. D solid, R late. Art activity.",
   },
   {
-    word_id: "ACT074",
     word: "build",
     ipa: "bɪld",
     category: "verbs",
@@ -6209,7 +5823,6 @@ export const words: Word[] = [
     notes: "B solid, L late, D solid. Block play word.",
   },
   {
-    word_id: "ACT075",
     word: "share",
     ipa: "ʃɛr",
     category: "verbs",
@@ -6225,7 +5838,6 @@ export const words: Word[] = [
     notes: "SH late, R late. Key social skill word.",
   },
   {
-    word_id: "ACT076",
     word: "catch",
     ipa: "kætʃ",
     category: "verbs",
@@ -6241,7 +5853,6 @@ export const words: Word[] = [
     notes: "K emerging, CH late. Ball play word.",
   },
   {
-    word_id: "ACT077",
     word: "blow",
     ipa: "bloʊ",
     category: "verbs",
@@ -6257,7 +5868,6 @@ export const words: Word[] = [
     notes: "BL cluster. B solid, L late. Bubble play, great oral-motor.",
   },
   {
-    word_id: "ACT078",
     word: "shake",
     ipa: "ʃeɪk",
     category: "verbs",
@@ -6273,7 +5883,6 @@ export const words: Word[] = [
     notes: "SH late, K emerging. Instrument/rattle play.",
   },
   {
-    word_id: "ACT079",
     word: "cook",
     ipa: "kʊk",
     category: "verbs",
@@ -6289,7 +5898,6 @@ export const words: Word[] = [
     notes: "K both positions. Pretend-play kitchen word.",
   },
   {
-    word_id: "ACT080",
     word: "tickle",
     ipa: "tɪk.əl",
     category: "verbs",
@@ -6305,7 +5913,6 @@ export const words: Word[] = [
     notes: "T emerging, K emerging, L late. High engagement word.",
   },
   {
-    word_id: "ACT081",
     word: "count",
     ipa: "kaʊnt",
     category: "verbs",
@@ -6321,7 +5928,6 @@ export const words: Word[] = [
     notes: "K emerging, N solid. Number concept introduction.",
   },
   {
-    word_id: "ACT082",
     word: "splash",
     ipa: "splæʃ",
     category: "verbs",
@@ -6337,7 +5943,6 @@ export const words: Word[] = [
     notes: "SPL cluster (complex). S and SH late. Bath-time word.",
   },
   {
-    word_id: "ACT083",
     word: "climb",
     ipa: "klaɪm",
     category: "verbs",
@@ -6356,7 +5961,6 @@ export const words: Word[] = [
   // ─── ADDITIONAL BODY PARTS ───────────────────────────────────
 
   {
-    word_id: "BOD011",
     word: "finger",
     ipa: "fɪŋ.ɡɚ",
     category: "body",
@@ -6372,7 +5976,6 @@ export const words: Word[] = [
     notes: "F emerging, NG emerging, R late. Pointing is natural gesture.",
   },
   {
-    word_id: "BOD012",
     word: "thumb",
     ipa: "θʌm",
     category: "body",
@@ -6388,7 +5991,6 @@ export const words: Word[] = [
     notes: "TH very late, M solid. Thumbs-up gesture pairing.",
   },
   {
-    word_id: "BOD013",
     word: "elbow",
     ipa: "ɛl.boʊ",
     category: "body",
@@ -6404,7 +6006,6 @@ export const words: Word[] = [
     notes: "L late, B solid. Body awareness word.",
   },
   {
-    word_id: "BOD014",
     word: "shoulder",
     ipa: "ʃoʊl.dɚ",
     category: "body",
@@ -6420,7 +6021,6 @@ export const words: Word[] = [
     notes: "SH late, L late, R late. 'Head Shoulders Knees Toes' tie-in.",
   },
   {
-    word_id: "BOD015",
     word: "chin",
     ipa: "tʃɪn",
     category: "body",
@@ -6436,7 +6036,6 @@ export const words: Word[] = [
     notes: "CH late, N solid. Face identification.",
   },
   {
-    word_id: "BOD016",
     word: "cheek",
     ipa: "tʃiːk",
     category: "body",
@@ -6452,7 +6051,6 @@ export const words: Word[] = [
     notes: "CH late, K emerging. Kiss-on-cheek concept.",
   },
   {
-    word_id: "BOD017",
     word: "arm",
     ipa: "ɑːrm",
     category: "body",
@@ -6468,7 +6066,6 @@ export const words: Word[] = [
     notes: "R late, M solid. Simple body part.",
   },
   {
-    word_id: "BOD018",
     word: "leg",
     ipa: "lɛɡ",
     category: "body",
@@ -6484,7 +6081,6 @@ export const words: Word[] = [
     notes: "L late, G emerging. Body awareness.",
   },
   {
-    word_id: "BOD019",
     word: "neck",
     ipa: "nɛk",
     category: "body",
@@ -6500,7 +6096,6 @@ export const words: Word[] = [
     notes: "N solid, K emerging. Simple CVC.",
   },
   {
-    word_id: "BOD020",
     word: "belly",
     ipa: "bɛl.i",
     category: "body",
@@ -6519,7 +6114,6 @@ export const words: Word[] = [
   // ─── ADDITIONAL DESCRIBING ───────────────────────────────────
 
   {
-    word_id: "DES020",
     word: "little",
     ipa: "lɪt.əl",
     category: "size",
@@ -6535,7 +6129,6 @@ export const words: Word[] = [
     notes: "L (x2) late, T emerging. Pairs with 'big'.",
   },
   {
-    word_id: "DES021",
     word: "tiny",
     ipa: "taɪ.ni",
     category: "size",
@@ -6551,7 +6144,6 @@ export const words: Word[] = [
     notes: "T emerging, N solid. Size concept.",
   },
   {
-    word_id: "DES022",
     word: "huge",
     ipa: "hjuːdʒ",
     category: "size",
@@ -6567,7 +6159,6 @@ export const words: Word[] = [
     notes: "H early, J late. Dramatic size concept.",
   },
   {
-    word_id: "DES023",
     word: "tall",
     ipa: "tɑːl",
     category: "size",
@@ -6583,7 +6174,6 @@ export const words: Word[] = [
     notes: "T emerging, L late. Pair with 'short'.",
   },
   {
-    word_id: "DES024",
     word: "short",
     ipa: "ʃɔːrt",
     category: "size",
@@ -6599,7 +6189,6 @@ export const words: Word[] = [
     notes: "SH late, R late. Pair with 'tall'.",
   },
   {
-    word_id: "DES025",
     word: "heavy",
     ipa: "hɛv.i",
     category: "size",
@@ -6615,7 +6204,6 @@ export const words: Word[] = [
     notes: "H early, V late. Weight concept.",
   },
   {
-    word_id: "DES026",
     word: "bright",
     ipa: "braɪt",
     category: "sensory",
@@ -6631,7 +6219,6 @@ export const words: Word[] = [
     notes: "BR cluster. R late. Describes light/colors.",
   },
   {
-    word_id: "DES027",
     word: "smooth",
     ipa: "smuːð",
     category: "sensory",
@@ -6647,7 +6234,6 @@ export const words: Word[] = [
     notes: "SM cluster, TH_VOICED very late. Texture word.",
   },
   {
-    word_id: "DES028",
     word: "rough",
     ipa: "rʌf",
     category: "sensory",
@@ -6663,7 +6249,6 @@ export const words: Word[] = [
     notes: "R late, F emerging. Texture word. Pair with 'smooth'.",
   },
   {
-    word_id: "DES029",
     word: "full",
     ipa: "fʊl",
     category: "condition",
@@ -6679,7 +6264,6 @@ export const words: Word[] = [
     notes: "F emerging, L late. Mealtime concept. Pair with 'empty'.",
   },
   {
-    word_id: "DES030",
     word: "empty",
     ipa: "ɛmp.ti",
     category: "condition",
@@ -6695,7 +6279,6 @@ export const words: Word[] = [
     notes: "M solid, P solid, T emerging. Pair with 'full'.",
   },
   {
-    word_id: "DES031",
     word: "quiet",
     ipa: "kwaɪ.ət",
     category: "sensory",
@@ -6714,7 +6297,6 @@ export const words: Word[] = [
   // ─── ADDITIONAL WORDS (user-requested) ──────────────────────────
 
   {
-    word_id: "VEH015",
     word: "firetruck",
     ipa: "faɪ.ɚ.trʌk",
     category: "vehicles",
@@ -6730,7 +6312,6 @@ export const words: Word[] = [
     notes: "Compound: fire + truck. F early, R late, TR cluster.",
   },
   {
-    word_id: "VEH016",
     word: "garbage truck",
     ipa: "ɡɑːr.bɪdʒ.trʌk",
     category: "vehicles",
@@ -6746,7 +6327,6 @@ export const words: Word[] = [
     notes: "Compound: garbage + truck. Many consonants, R hardest.",
   },
   {
-    word_id: "OBJ031",
     word: "stars",
     ipa: "stɑːrz",
     category: "nature",
@@ -6762,7 +6342,6 @@ export const words: Word[] = [
     notes: "ST cluster, R late, Z final. Night-sky association.",
   },
   {
-    word_id: "FOO051",
     word: "food",
     ipa: "fuːd",
     category: "food",
@@ -6778,7 +6357,6 @@ export const words: Word[] = [
     notes: "F emerging, D early. Generic food label.",
   },
   {
-    word_id: "FOO052",
     word: "cracker",
     ipa: "kræk.ɚ",
     category: "food",
@@ -6794,7 +6372,6 @@ export const words: Word[] = [
     notes: "KR cluster, K solid, R late. Common snack request.",
   },
   {
-    word_id: "FOO053",
     word: "fig bar",
     ipa: "fɪɡ.bɑːr",
     category: "food",
@@ -6810,7 +6387,6 @@ export const words: Word[] = [
     notes: "Compound: fig + bar. F emerging, G early, B early, R late.",
   },
   {
-    word_id: "ACT133",
     word: "like",
     ipa: "laɪk",
     category: "verbs",
@@ -6826,7 +6402,6 @@ export const words: Word[] = [
     notes: "L late, K early. High-frequency preference word.",
   },
   {
-    word_id: "ACT134",
     word: "hello",
     ipa: "hɛl.oʊ",
     category: "social",
@@ -6842,7 +6417,6 @@ export const words: Word[] = [
     notes: "H early, L late. Common greeting.",
   },
   {
-    word_id: "ANI040",
     word: "giraffe",
     ipa: "dʒɪˈræf",
     category: "animals",
@@ -6858,7 +6432,6 @@ export const words: Word[] = [
     notes: "J late, R late, F emerging. Kids love the tall animal.",
   },
   {
-    word_id: "OBJ032",
     word: "siren",
     ipa: "saɪ.rən",
     category: "vehicles",
@@ -6874,7 +6447,6 @@ export const words: Word[] = [
     notes: "S emerging, R late, N early. Goes with firetruck play.",
   },
   {
-    word_id: "DES032",
     word: "sound",
     ipa: "saʊnd",
     category: "sensory",
@@ -6890,7 +6462,6 @@ export const words: Word[] = [
     notes: "S emerging, N early, D early. Auditory concept.",
   },
   {
-    word_id: "ACT135",
     word: "hear",
     ipa: "hɪr",
     category: "verbs",
@@ -6906,7 +6477,6 @@ export const words: Word[] = [
     notes: "H early, R late. Pairs with sound/listen.",
   },
   {
-    word_id: "ACT136",
     word: "love",
     ipa: "lʌv",
     category: "verbs",
@@ -6925,7 +6495,6 @@ export const words: Word[] = [
   // ─── BATCH: daily words, routine, play, sensory ─────────────────
 
   {
-    word_id: "ACT137",
     word: "please",
     ipa: "pliːz",
     category: "social",
@@ -6941,7 +6510,6 @@ export const words: Word[] = [
     notes: "PL cluster, Z final. Key manners word.",
   },
   {
-    word_id: "ACT138",
     word: "thank you",
     ipa: "θæŋk.juː",
     category: "social",
@@ -6957,7 +6525,6 @@ export const words: Word[] = [
     notes: "TH very late, NG emerging. Essential manners phrase.",
   },
   {
-    word_id: "ACT139",
     word: "sorry",
     ipa: "sɑːr.i",
     category: "social",
@@ -6973,7 +6540,6 @@ export const words: Word[] = [
     notes: "S emerging, R late. Important social word.",
   },
   {
-    word_id: "ACT140",
     word: "yes",
     ipa: "jɛs",
     category: "social",
@@ -6989,7 +6555,6 @@ export const words: Word[] = [
     notes: "Y early, S emerging. Affirmative response.",
   },
   {
-    word_id: "ACT141",
     word: "OK",
     ipa: "oʊˈkeɪ",
     category: "social",
@@ -7005,7 +6570,6 @@ export const words: Word[] = [
     notes: "K only consonant. Very common agreement word.",
   },
   {
-    word_id: "ACT142",
     word: "what",
     ipa: "wʌt",
     category: "pronouns",
@@ -7021,7 +6585,6 @@ export const words: Word[] = [
     notes: "W early, T emerging. High-frequency question word.",
   },
   {
-    word_id: "VEH017",
     word: "airplane",
     ipa: "ɛr.pleɪn",
     category: "vehicles",
@@ -7037,7 +6600,6 @@ export const words: Word[] = [
     notes: "R late, PL cluster. Compound: air + plane.",
   },
   {
-    word_id: "VEH018",
     word: "rocket",
     ipa: "rɑːk.ɪt",
     category: "vehicles",
@@ -7053,7 +6615,6 @@ export const words: Word[] = [
     notes: "R late, K emerging, T emerging. Space play.",
   },
   {
-    word_id: "ANI041",
     word: "dragon",
     ipa: "dræɡ.ən",
     category: "animals",
@@ -7069,7 +6630,6 @@ export const words: Word[] = [
     notes: "DR cluster, R late. Fantasy creature kids love.",
   },
   {
-    word_id: "ANI042",
     word: "monster",
     ipa: "mɑːn.stɚ",
     category: "animals",
@@ -7085,7 +6645,6 @@ export const words: Word[] = [
     notes: "ST cluster, R late. Playful scare word.",
   },
   {
-    word_id: "FOO054",
     word: "breakfast",
     ipa: "brɛk.fəst",
     category: "food",
@@ -7101,7 +6660,6 @@ export const words: Word[] = [
     notes: "BR cluster, many consonants. Mealtime routine word.",
   },
   {
-    word_id: "FOO055",
     word: "lunch",
     ipa: "lʌntʃ",
     category: "food",
@@ -7117,7 +6675,6 @@ export const words: Word[] = [
     notes: "L late, CH late. Mealtime routine word.",
   },
   {
-    word_id: "FOO056",
     word: "dinner",
     ipa: "dɪn.ɚ",
     category: "food",
@@ -7133,7 +6690,6 @@ export const words: Word[] = [
     notes: "D early, N early, R late. Mealtime routine word.",
   },
   {
-    word_id: "FOO057",
     word: "cinnamon",
     ipa: "sɪn.ə.mən",
     category: "food",
@@ -7149,7 +6705,6 @@ export const words: Word[] = [
     notes: "S emerging, N and M early. Spice kids recognize from toast.",
   },
   {
-    word_id: "FOO058",
     word: "bottle",
     ipa: "bɑːt.əl",
     category: "food",
@@ -7165,7 +6720,6 @@ export const words: Word[] = [
     notes: "B early, T emerging, L late. Common request word.",
   },
   {
-    word_id: "BOD021",
     word: "teeth",
     ipa: "tiːθ",
     category: "body",
@@ -7181,7 +6735,6 @@ export const words: Word[] = [
     notes: "T emerging, TH very late. Brushing teeth routine.",
   },
   {
-    word_id: "BOD022",
     word: "potty",
     ipa: "pɑːt.i",
     category: "health",
@@ -7197,7 +6750,6 @@ export const words: Word[] = [
     notes: "P early, T emerging. Toilet training word.",
   },
   {
-    word_id: "DES033",
     word: "funny",
     ipa: "fʌn.i",
     category: "evaluative",
@@ -7213,7 +6765,6 @@ export const words: Word[] = [
     notes: "F emerging, N early. Humor concept.",
   },
   {
-    word_id: "DES034",
     word: "scary",
     ipa: "skɛr.i",
     category: "evaluative",
@@ -7229,7 +6780,6 @@ export const words: Word[] = [
     notes: "SK cluster, R late. Emotional label for fears.",
   },
   {
-    word_id: "DES035",
     word: "yucky",
     ipa: "jʌk.i",
     category: "evaluative",
@@ -7245,7 +6795,6 @@ export const words: Word[] = [
     notes: "Y early, K emerging. Sensory rejection word.",
   },
   {
-    word_id: "DES036",
     word: "stinky",
     ipa: "stɪŋ.ki",
     category: "sensory",
@@ -7261,7 +6810,6 @@ export const words: Word[] = [
     notes: "ST cluster, NG emerging. Diaper-change classic.",
   },
   {
-    word_id: "DES037",
     word: "pretty",
     ipa: "prɪt.i",
     category: "evaluative",
@@ -7277,7 +6825,6 @@ export const words: Word[] = [
     notes: "PR onset, R late. Aesthetic appreciation word.",
   },
   {
-    word_id: "DES038",
     word: "cool",
     ipa: "kuːl",
     category: "evaluative",
@@ -7293,7 +6840,6 @@ export const words: Word[] = [
     notes: "K emerging, L late. Toddler enthusiasm word.",
   },
   {
-    word_id: "DES039",
     word: "awesome",
     ipa: "ɔː.səm",
     category: "evaluative",
@@ -7309,7 +6855,6 @@ export const words: Word[] = [
     notes: "S emerging, M early. Enthusiastic praise word.",
   },
   {
-    word_id: "TOY016",
     word: "toy",
     ipa: "tɔɪ",
     category: "toys",
@@ -7325,7 +6870,6 @@ export const words: Word[] = [
     notes: "T only consonant. Generic play object label.",
   },
   {
-    word_id: "VEH019",
     word: "helicopter",
     ipa: "hɛl.ɪˌkɑːp.tɚ",
     category: "vehicles",
@@ -7341,7 +6885,6 @@ export const words: Word[] = [
     notes: "Many consonants, 4 syllables. R late. Kids love saying this one.",
   },
   {
-    word_id: "DES040",
     word: "slow",
     ipa: "sloʊ",
     category: "condition",
@@ -7357,7 +6900,6 @@ export const words: Word[] = [
     notes: "SL cluster. Opposite of fast — natural pair.",
   },
   {
-    word_id: "OBJ033",
     word: "camera",
     ipa: "kæm.rə",
     category: "household",
@@ -7373,7 +6915,6 @@ export const words: Word[] = [
     notes: "K emerging, M early, R late. Photo-taking play.",
   },
   {
-    word_id: "NAT019",
     word: "plant",
     ipa: "plænt",
     category: "nature",
@@ -7389,7 +6930,6 @@ export const words: Word[] = [
     notes: "PL cluster, N early, T emerging. Garden/nature word.",
   },
   {
-    word_id: "ACT084",
     word: "this",
     ipa: "ðɪs",
     category: "pronouns",
@@ -7405,7 +6945,6 @@ export const words: Word[] = [
     notes: "TH (voiced) initial. Extremely common toddler deictic word.",
   },
   {
-    word_id: "ACT085",
     word: "that",
     ipa: "ðæt",
     category: "pronouns",
@@ -7421,7 +6960,6 @@ export const words: Word[] = [
     notes: "TH (voiced) initial. High-frequency pointing word.",
   },
   {
-    word_id: "ACT086",
     word: "the",
     ipa: "ðə",
     category: "pronouns",
@@ -7437,7 +6975,6 @@ export const words: Word[] = [
     notes: "TH (voiced). Most common English word. Good exposure target.",
   },
   {
-    word_id: "ACT087",
     word: "they",
     ipa: "ðeɪ",
     category: "pronouns",
@@ -7453,7 +6990,6 @@ export const words: Word[] = [
     notes: "TH (voiced) initial. Pronoun; good for pointing at groups.",
   },
   {
-    word_id: "CLO016",
     word: "leather",
     ipa: "lɛð.ɚ",
     category: "clothing",
@@ -7469,7 +7005,6 @@ export const words: Word[] = [
     notes: "TH (voiced) medial. Texture word — leather boots, belt.",
   },
   {
-    word_id: "FOO059",
     word: "yam",
     ipa: "jæm",
     category: "food",
@@ -7485,7 +7020,6 @@ export const words: Word[] = [
     notes: "Y initial, M final. Both early sounds. Simple CVC food.",
   },
   {
-    word_id: "ACT088",
     word: "yawn",
     ipa: "jɔːn",
     category: "verbs",
@@ -7501,7 +7035,6 @@ export const words: Word[] = [
     notes: "Y initial, N final. Bedtime routine word.",
   },
   {
-    word_id: "NAT020",
     word: "yard",
     ipa: "jɑːrd",
     category: "nature",
@@ -7517,7 +7050,6 @@ export const words: Word[] = [
     notes: "Y initial. Outdoor play location word.",
   },
   {
-    word_id: "DES042",
     word: "very",
     ipa: "vɛɹ.i",
     category: "evaluative",
@@ -7533,7 +7065,6 @@ export const words: Word[] = [
     notes: "V initial. Intensifier toddlers love: very big, very hot.",
   },
   {
-    word_id: "VEH020",
     word: "vest",
     ipa: "vɛst",
     category: "clothing",
@@ -7549,7 +7080,6 @@ export const words: Word[] = [
     notes: "V initial + ST final cluster. Dressing routine word.",
   },
   {
-    word_id: "DES043",
     word: "voice",
     ipa: "vɔɪs",
     category: "body",
@@ -7565,7 +7095,6 @@ export const words: Word[] = [
     notes: "V initial. Talk about loud voice, quiet voice.",
   },
   {
-    word_id: "ANI043",
     word: "vulture",
     ipa: "vʌl.tʃɚ",
     category: "animals",
@@ -7581,7 +7110,6 @@ export const words: Word[] = [
     notes: "V initial. Big bird for animal lovers.",
   },
   {
-    word_id: "ANI044",
     word: "zebra",
     ipa: "ziː.brə",
     category: "animals",
@@ -7597,7 +7125,6 @@ export const words: Word[] = [
     notes: "Z initial + BR cluster. Popular animal.",
   },
   {
-    word_id: "ACT089",
     word: "zip",
     ipa: "zɪp",
     category: "verbs",
@@ -7613,7 +7140,6 @@ export const words: Word[] = [
     notes: "Z initial, P final. Dressing action — zip up coat.",
   },
   {
-    word_id: "NAT021",
     word: "zoo",
     ipa: "zuː",
     category: "nature",
@@ -7629,7 +7155,6 @@ export const words: Word[] = [
     notes: "Z initial. Simple CV. Toddlers love the zoo.",
   },
   {
-    word_id: "ACT090",
     word: "zap",
     ipa: "zæp",
     category: "verbs",
@@ -7645,7 +7170,6 @@ export const words: Word[] = [
     notes: "Z initial, P final. Fun sound-effect word.",
   },
   {
-    word_id: "FOO060",
     word: "jelly",
     ipa: "dʒɛl.i",
     category: "food",
@@ -7661,7 +7185,6 @@ export const words: Word[] = [
     notes: "J initial. PB&J is a toddler staple.",
   },
   {
-    word_id: "ACT091",
     word: "jog",
     ipa: "dʒɑːɡ",
     category: "verbs",
@@ -7677,7 +7200,6 @@ export const words: Word[] = [
     notes: "J initial, G final. Movement word.",
   },
   {
-    word_id: "TOY017",
     word: "jungle",
     ipa: "dʒʌŋ.ɡəl",
     category: "toys",
@@ -7693,7 +7215,6 @@ export const words: Word[] = [
     notes: "J initial, NG medial. Imaginative play word.",
   },
   {
-    word_id: "ANI045",
     word: "shark",
     ipa: "ʃɑːrk",
     category: "animals",
@@ -7709,7 +7230,6 @@ export const words: Word[] = [
     notes: "SH initial. Baby Shark is a toddler phenomenon.",
   },
   {
-    word_id: "ACT092",
     word: "shout",
     ipa: "ʃaʊt",
     category: "verbs",
@@ -7725,7 +7245,6 @@ export const words: Word[] = [
     notes: "SH initial. Loud vs quiet voice contrast.",
   },
   {
-    word_id: "SHP008",
     word: "shape",
     ipa: "ʃeɪp",
     category: "shapes",
@@ -7741,7 +7260,6 @@ export const words: Word[] = [
     notes: "SH initial. Category label for shape-sorting toys.",
   },
   {
-    word_id: "FOO061",
     word: "chips",
     ipa: "tʃɪps",
     category: "food",
@@ -7757,7 +7275,6 @@ export const words: Word[] = [
     notes: "CH initial. Common snack word.",
   },
   {
-    word_id: "ANI046",
     word: "chick",
     ipa: "tʃɪk",
     category: "animals",
@@ -7773,7 +7290,6 @@ export const words: Word[] = [
     notes: "CH initial, K final. Baby chicken — fun farm word.",
   },
   {
-    word_id: "ACT093",
     word: "chase",
     ipa: "tʃeɪs",
     category: "verbs",
@@ -7789,7 +7305,6 @@ export const words: Word[] = [
     notes: "CH initial. Toddler playground favorite.",
   },
   {
-    word_id: "ACT094",
     word: "hang",
     ipa: "hæŋ",
     category: "verbs",
@@ -7805,7 +7320,6 @@ export const words: Word[] = [
     notes: "H early, NG medial-final. Hang up coat routine.",
   },
   {
-    word_id: "ACT095",
     word: "ring",
     ipa: "rɪŋ",
     category: "verbs",
@@ -7821,7 +7335,6 @@ export const words: Word[] = [
     notes: "R initial, NG final. Ring-around-the-rosie or ring a bell.",
   },
   {
-    word_id: "ACT096",
     word: "wing",
     ipa: "wɪŋ",
     category: "verbs",
@@ -7837,7 +7350,6 @@ export const words: Word[] = [
     notes: "W early, NG final. Bird wings, airplane wings.",
   },
   {
-    word_id: "FOO062",
     word: "gum",
     ipa: "ɡʌm",
     category: "food",
@@ -7853,7 +7365,6 @@ export const words: Word[] = [
     notes: "G initial. CVC with early M. Good fronting practice.",
   },
   {
-    word_id: "ACT097",
     word: "gulp",
     ipa: "ɡʌlp",
     category: "verbs",
@@ -7869,7 +7380,6 @@ export const words: Word[] = [
     notes: "G initial. Fun drinking sound-effect word.",
   },
   {
-    word_id: "ACT098",
     word: "wiggle",
     ipa: "wɪɡ.əl",
     category: "verbs",
@@ -7885,7 +7395,6 @@ export const words: Word[] = [
     notes: "W early. Fun movement word — wiggle your toes!",
   },
   {
-    word_id: "BOD023",
     word: "wrist",
     ipa: "rɪst",
     category: "body",
@@ -7901,7 +7410,6 @@ export const words: Word[] = [
     notes: "R initial + ST cluster. Body part word.",
   },
   {
-    word_id: "FOO063",
     word: "fig",
     ipa: "fɪɡ",
     category: "food",
@@ -7917,7 +7425,6 @@ export const words: Word[] = [
     notes: "F initial, G final. CVC food. Rhymes with pig/big.",
   },
   {
-    word_id: "ACT099",
     word: "fold",
     ipa: "foʊld",
     category: "verbs",
@@ -7933,7 +7440,6 @@ export const words: Word[] = [
     notes: "F initial. Laundry/paper folding action.",
   },
   {
-    word_id: "DES044",
     word: "glow",
     ipa: "ɡloʊ",
     category: "sensory",
@@ -7949,7 +7455,6 @@ export const words: Word[] = [
     notes: "GL cluster. Stars glow, fireflies glow.",
   },
   {
-    word_id: "DES045",
     word: "sweet",
     ipa: "swiːt",
     category: "sensory",
@@ -7965,7 +7470,6 @@ export const words: Word[] = [
     notes: "SW cluster. Taste word — sweet candy, sweet baby.",
   },
   {
-    word_id: "ACT100",
     word: "sled",
     ipa: "slɛd",
     category: "verbs",
@@ -7981,7 +7485,6 @@ export const words: Word[] = [
     notes: "SL cluster. Winter play word. Rhymes with bed/red.",
   },
   {
-    word_id: "NAT022",
     word: "compost",
     ipa: "kɑːm.poʊst",
     category: "nature",
@@ -7997,7 +7500,6 @@ export const words: Word[] = [
     notes: "K, M early; ST cluster. Earth-friendly routine word.",
   },
   {
-    word_id: "ACT101",
     word: "recycle",
     ipa: "riː.saɪ.kəl",
     category: "verbs",
@@ -8013,7 +7515,6 @@ export const words: Word[] = [
     notes: "R initial. 3 syllables. Earth routine word.",
   },
   {
-    word_id: "ACT102",
     word: "how many",
     ipa: "haʊ mɛn.i",
     category: "pronouns",
@@ -8029,7 +7530,6 @@ export const words: Word[] = [
     notes: "All early sounds. Key question phrase for counting.",
   },
   {
-    word_id: "ANI047",
     word: "sheep",
     ipa: "ʃiːp",
     category: "animals",
@@ -8045,7 +7545,6 @@ export const words: Word[] = [
     notes: "SH initial. Farm animal. Baa baa black sheep.",
   },
   {
-    word_id: "ANI048",
     word: "hippo",
     ipa: "hɪp.oʊ",
     category: "animals",
@@ -8061,7 +7560,6 @@ export const words: Word[] = [
     notes: "H and P both early. Simple 2-syllable animal.",
   },
   {
-    word_id: "ANI049",
     word: "deer",
     ipa: "dɪɹ",
     category: "animals",
@@ -8077,7 +7575,6 @@ export const words: Word[] = [
     notes: "D early, R late. Woodland animal.",
   },
   {
-    word_id: "ANI050",
     word: "bunny",
     ipa: "bʌn.i",
     category: "animals",
@@ -8093,7 +7590,6 @@ export const words: Word[] = [
     notes: "B and N both early. Child-friendly version of rabbit.",
   },
   {
-    word_id: "ACT103",
     word: "sleep",
     ipa: "sliːp",
     category: "verbs",
@@ -8109,7 +7605,6 @@ export const words: Word[] = [
     notes: "SL cluster. Essential bedtime routine word.",
   },
   {
-    word_id: "ACT104",
     word: "wake up",
     ipa: "weɪk ʌp",
     category: "verbs",
@@ -8125,7 +7620,6 @@ export const words: Word[] = [
     notes: "W early, K emerging. Morning routine opposite of sleep.",
   },
   {
-    word_id: "TOY018",
     word: "teddy bear",
     ipa: "tɛd.i bɛɹ",
     category: "toys",
@@ -8141,7 +7635,6 @@ export const words: Word[] = [
     notes: "T/D emerging, B early, R late. Beloved comfort object.",
   },
   {
-    word_id: "FOO064",
     word: "ice cream",
     ipa: "aɪs kriːm",
     category: "food",
@@ -8157,7 +7650,6 @@ export const words: Word[] = [
     notes: "KR cluster, S and R late. Top toddler treat.",
   },
   {
-    word_id: "OBJ034",
     word: "machine",
     ipa: "məˈʃiːn",
     category: "household",
@@ -8173,7 +7665,6 @@ export const words: Word[] = [
     notes: "M early, SH late. Washing machine, machine sounds.",
   },
   {
-    word_id: "OBJ035",
     word: "vacuum",
     ipa: "væk.juːm",
     category: "household",
@@ -8189,7 +7680,6 @@ export const words: Word[] = [
     notes: "V initial. Toddlers love/fear the vacuum. Vroom sound.",
   },
   {
-    word_id: "ACT105",
     word: "stand",
     ipa: "stænd",
     category: "verbs",
@@ -8205,7 +7695,6 @@ export const words: Word[] = [
     notes: "ST cluster. Motor milestone word — stand up!",
   },
   {
-    word_id: "OBJ036",
     word: "phone",
     ipa: "foʊn",
     category: "household",
@@ -8221,7 +7710,6 @@ export const words: Word[] = [
     notes: "F emerging, N early. Toddlers love pretend phone calls.",
   },
   {
-    word_id: "ACT106",
     word: "try",
     ipa: "traɪ",
     category: "verbs",
@@ -8237,7 +7725,6 @@ export const words: Word[] = [
     notes: "TR cluster. Encouraging word — try again!",
   },
   {
-    word_id: "ANI051",
     word: "chicken",
     ipa: "tʃɪk.ɪn",
     category: "animals",
@@ -8253,7 +7740,6 @@ export const words: Word[] = [
     notes: "CH initial, K medial. Farm animal / food word.",
   },
   {
-    word_id: "OBJ037",
     word: "TV",
     ipa: "tiː.viː",
     category: "household",
@@ -8269,7 +7755,6 @@ export const words: Word[] = [
     notes: "T emerging, V late. Common household item toddlers request.",
   },
   {
-    word_id: "NAT023",
     word: "fire",
     ipa: "faɪ.ɚ",
     category: "nature",
@@ -8285,7 +7770,6 @@ export const words: Word[] = [
     notes: "F emerging, R late. Safety word — hot! don't touch fire.",
   },
   {
-    word_id: "OBJ038",
     word: "remote",
     ipa: "rɪˈmoʊt",
     category: "household",
@@ -8301,7 +7785,6 @@ export const words: Word[] = [
     notes: "R late, M early, T emerging. Toddlers love grabbing the remote.",
   },
   {
-    word_id: "OBJ039",
     word: "controller",
     ipa: "kənˈtroʊ.lɚ",
     category: "household",
@@ -8317,7 +7800,6 @@ export const words: Word[] = [
     notes: "TR cluster, R late. 3 syllables. Game controller.",
   },
   {
-    word_id: "TOY019",
     word: "video game",
     ipa: "vɪd.i.oʊ ɡeɪm",
     category: "toys",
@@ -8333,7 +7815,6 @@ export const words: Word[] = [
     notes: "V late, D early, G emerging. 4 syllables. Modern play word.",
   },
   {
-    word_id: "OBJ040",
     word: "computer",
     ipa: "kəmˈpjuː.tɚ",
     category: "household",
@@ -8349,7 +7830,6 @@ export const words: Word[] = [
     notes: "Many consonants, 3 syllables. R late. Common household object.",
   },
   {
-    word_id: "ACT107",
     word: "code",
     ipa: "koʊd",
     category: "verbs",
@@ -8365,7 +7845,6 @@ export const words: Word[] = [
     notes: "K emerging, D early. Simple CVC. Secret code, computer code.",
   },
   {
-    word_id: "ACT108",
     word: "drop",
     ipa: "drɑːp",
     category: "verbs",
@@ -8381,7 +7860,6 @@ export const words: Word[] = [
     notes: "DR cluster. Common action — drop the ball, uh-oh I dropped it.",
   },
   {
-    word_id: "OBJ041",
     word: "tile",
     ipa: "taɪl",
     category: "household",
@@ -8397,7 +7875,6 @@ export const words: Word[] = [
     notes: "T emerging, L late. Floor tile, bathroom tile.",
   },
   {
-    word_id: "TOY020",
     word: "lego",
     ipa: "lɛɡ.oʊ",
     category: "toys",
@@ -8413,7 +7890,6 @@ export const words: Word[] = [
     notes: "L late, G emerging. Beloved building toy.",
   },
   {
-    word_id: "TOY021",
     word: "snowboard",
     ipa: "snoʊ.bɔːrd",
     category: "toys",
@@ -8429,7 +7905,6 @@ export const words: Word[] = [
     notes: "SN cluster, R late. Winter sports word.",
   },
   {
-    word_id: "NAT024",
     word: "wood",
     ipa: "wʊd",
     category: "nature",
@@ -8445,7 +7920,6 @@ export const words: Word[] = [
     notes: "W early, D early. Simple CVC. Building material.",
   },
   {
-    word_id: "FUR019",
     word: "cabinet",
     ipa: "kæb.ɪ.nɪt",
     category: "furniture",
@@ -8461,7 +7935,6 @@ export const words: Word[] = [
     notes: "K emerging, B/N early. Kitchen cabinet — toddlers love opening them.",
   },
   {
-    word_id: "OBJ042",
     word: "drill",
     ipa: "drɪl",
     category: "household",
@@ -8477,7 +7950,6 @@ export const words: Word[] = [
     notes: "DR cluster, L late. Power tool — loud and exciting.",
   },
   {
-    word_id: "OBJ043",
     word: "saw",
     ipa: "sɔː",
     category: "household",
@@ -8493,7 +7965,6 @@ export const words: Word[] = [
     notes: "S initial. Simple CV tool word.",
   },
   {
-    word_id: "OBJ044",
     word: "brush",
     ipa: "brʌʃ",
     category: "household",
@@ -8509,7 +7980,6 @@ export const words: Word[] = [
     notes: "BR cluster, SH final. Hairbrush, paintbrush — routine word.",
   },
   {
-    word_id: "OBJ045",
     word: "toothbrush",
     ipa: "tuːθ.brʌʃ",
     category: "household",
@@ -8525,7 +7995,6 @@ export const words: Word[] = [
     notes: "TH (voiceless) + BR cluster. Bedtime/morning routine essential.",
   },
   {
-    word_id: "PPL019",
     word: "dentist",
     ipa: "dɛn.tɪst",
     category: "health",
@@ -8541,7 +8010,6 @@ export const words: Word[] = [
     notes: "D/N early, ST cluster. Prepares for dentist visits.",
   },
   {
-    word_id: "PPL020",
     word: "nurse",
     ipa: "nɝːs",
     category: "health",
@@ -8557,7 +8025,6 @@ export const words: Word[] = [
     notes: "N early, R late. Healthcare person word.",
   },
   {
-    word_id: "BOD024",
     word: "antidote",
     ipa: "æn.tɪ.doʊt",
     category: "health",
@@ -8573,7 +8040,6 @@ export const words: Word[] = [
     notes: "N early, T/D emerging. 3 syllables. Medicine/healing word.",
   },
   {
-    word_id: "BOD025",
     word: "vaccine",
     ipa: "væk.siːn",
     category: "health",
@@ -8589,7 +8055,6 @@ export const words: Word[] = [
     notes: "V late, K emerging, S late. Healthcare word — brave at the doctor.",
   },
   {
-    word_id: "BOD026",
     word: "medicine",
     ipa: "mɛd.ɪ.sɪn",
     category: "health",
@@ -8605,7 +8070,6 @@ export const words: Word[] = [
     notes: "M/D/N early, S late. 3 syllables. Taking medicine routine.",
   },
   {
-    word_id: "FEE016",
     word: "hurt",
     ipa: "hɝːt",
     category: "health",
@@ -8621,7 +8085,6 @@ export const words: Word[] = [
     notes: "H early, R late. Essential word for communicating pain.",
   },
   {
-    word_id: "TOY022",
     word: "robot",
     ipa: "roʊ.bɑːt",
     category: "toys",
@@ -8637,7 +8100,6 @@ export const words: Word[] = [
     notes: "R late, B early, T emerging. Toddlers love robot play.",
   },
   {
-    word_id: "DES046",
     word: "smart",
     ipa: "smɑːrt",
     category: "evaluative",
@@ -8653,7 +8115,6 @@ export const words: Word[] = [
     notes: "S late, M early, R late. Encouraging praise word.",
   },
   {
-    word_id: "ACT109",
     word: "tiptoe",
     ipa: "tɪp.toʊ",
     category: "verbs",
@@ -8669,7 +8130,6 @@ export const words: Word[] = [
     notes: "T emerging, P early. Fun quiet movement word — tiptoe like a mouse!",
   },
   {
-    word_id: "VEH021",
     word: "bridge",
     ipa: "brɪdʒ",
     category: "vehicles",
@@ -8685,7 +8145,6 @@ export const words: Word[] = [
     notes: "BR cluster, J final. Trains and cars go over the bridge.",
   },
   {
-    word_id: "ACT110",
     word: "drive",
     ipa: "draɪv",
     category: "verbs",
@@ -8701,7 +8160,6 @@ export const words: Word[] = [
     notes: "DR cluster, V late. Let's drive the car!",
   },
   {
-    word_id: "VEH022",
     word: "highway",
     ipa: "haɪ.weɪ",
     category: "vehicles",
@@ -8717,7 +8175,6 @@ export const words: Word[] = [
     notes: "H and W both early. Simple 2-syllable compound. Cars on the highway.",
   },
   {
-    word_id: "FEE017",
     word: "relax",
     ipa: "rɪˈlæks",
     category: "verbs",
@@ -8733,7 +8190,6 @@ export const words: Word[] = [
     notes: "R late, L late. Calming word — relax, take a deep breath.",
   },
   {
-    word_id: "ACT111",
     word: "scream",
     ipa: "skriːm",
     category: "verbs",
@@ -8749,7 +8205,6 @@ export const words: Word[] = [
     notes: "SK cluster + R. Complex onset. Loud voice word.",
   },
   {
-    word_id: "ACT112",
     word: "yell",
     ipa: "jɛl",
     category: "verbs",
@@ -8765,7 +8220,6 @@ export const words: Word[] = [
     notes: "Y early, L late. Simple CVC. Indoor voice vs yelling.",
   },
   {
-    word_id: "FOO065",
     word: "coffee",
     ipa: "kɑːf.i",
     category: "food",
@@ -8781,7 +8235,6 @@ export const words: Word[] = [
     notes: "K emerging, F emerging. Mama's coffee! Don't touch, hot.",
   },
   {
-    word_id: "ACT113",
     word: "grind",
     ipa: "ɡraɪnd",
     category: "verbs",
@@ -8797,7 +8250,6 @@ export const words: Word[] = [
     notes: "GR cluster. Grind coffee beans, grind pepper.",
   },
   {
-    word_id: "FOO066",
     word: "beans",
     ipa: "biːnz",
     category: "food",
@@ -8813,7 +8265,6 @@ export const words: Word[] = [
     notes: "B early, N early, Z late. Green beans, coffee beans.",
   },
   {
-    word_id: "CLO017",
     word: "sandals",
     ipa: "sæn.dəlz",
     category: "clothing",
@@ -8829,7 +8280,6 @@ export const words: Word[] = [
     notes: "S late, N/D early, L late. Summer shoe — put on your sandals!",
   },
   {
-    word_id: "ACT114",
     word: "rest",
     ipa: "rɛst",
     category: "verbs",
@@ -8845,7 +8295,6 @@ export const words: Word[] = [
     notes: "R late, ST cluster. Time to rest — naptime/bedtime word.",
   },
   {
-    word_id: "OBJ059",
     word: "battery",
     ipa: "bæt.ɚ.i",
     category: "household",
@@ -8861,7 +8310,6 @@ export const words: Word[] = [
     notes: "B early, T emerging, R late. 3 syllables. Toy needs batteries!",
   },
   {
-    word_id: "DES047",
     word: "power",
     ipa: "paʊ.ɚ",
     category: "household",
@@ -8877,7 +8325,6 @@ export const words: Word[] = [
     notes: "P early, R late. Power on, power off, super power!",
   },
   {
-    word_id: "ACT115",
     word: "charge",
     ipa: "tʃɑːrdʒ",
     category: "verbs",
@@ -8893,7 +8340,6 @@ export const words: Word[] = [
     notes: "CH late, R late. Charge the tablet, charge the phone.",
   },
   {
-    word_id: "FOO067",
     word: "water bottle",
     ipa: "wɔː.tɚ bɑːt.əl",
     category: "food",
@@ -8909,7 +8355,6 @@ export const words: Word[] = [
     notes: "W early, T emerging, R late, B early, L late. Common request word.",
   },
   {
-    word_id: "ACT116",
     word: "sip",
     ipa: "sɪp",
     category: "verbs",
@@ -8925,7 +8370,6 @@ export const words: Word[] = [
     notes: "S late, P early. Simple CVC. Take a sip!",
   },
   {
-    word_id: "ACT117",
     word: "drink",
     ipa: "drɪŋk",
     category: "verbs",
@@ -8941,7 +8385,6 @@ export const words: Word[] = [
     notes: "DR cluster, NG final. Essential mealtime action word.",
   },
   {
-    word_id: "ACT118",
     word: "keep",
     ipa: "kiːp",
     category: "verbs",
@@ -8957,7 +8400,6 @@ export const words: Word[] = [
     notes: "K emerging, P early. Simple CVC. I want to keep it!",
   },
   {
-    word_id: "FUR020",
     word: "crib",
     ipa: "krɪb",
     category: "furniture",
@@ -8973,7 +8415,6 @@ export const words: Word[] = [
     notes: "KR cluster, B early. Baby's bed — bedtime routine word.",
   },
   {
-    word_id: "OBJ046",
     word: "sack",
     ipa: "sæk",
     category: "household",
@@ -8989,7 +8430,6 @@ export const words: Word[] = [
     notes: "S late, K emerging. Simple CVC. Sleep sack, sack of toys.",
   },
   {
-    word_id: "ACT119",
     word: "snooze",
     ipa: "snuːz",
     category: "verbs",
@@ -9005,7 +8445,6 @@ export const words: Word[] = [
     notes: "SN cluster, Z final. Silly sleep word — time to snooze!",
   },
   {
-    word_id: "DES048",
     word: "lazy",
     ipa: "leɪ.zi",
     category: "evaluative",
@@ -9021,7 +8460,6 @@ export const words: Word[] = [
     notes: "L late, Z late. Lazy cat, lazy day.",
   },
   {
-    word_id: "ACT120",
     word: "borrow",
     ipa: "bɑːr.oʊ",
     category: "verbs",
@@ -9037,7 +8475,6 @@ export const words: Word[] = [
     notes: "B early, R late. Sharing concept — can I borrow that?",
   },
   {
-    word_id: "BOD027",
     word: "wings",
     ipa: "wɪŋz",
     category: "body",
@@ -9053,7 +8490,6 @@ export const words: Word[] = [
     notes: "W early, NG medial-final, Z late. Bird wings, butterfly wings, chicken wings!",
   },
   {
-    word_id: "FOO068",
     word: "fries",
     ipa: "fraɪz",
     category: "food",
@@ -9069,7 +8505,6 @@ export const words: Word[] = [
     notes: "FR cluster, Z final. French fries — toddler favorite food.",
   },
   {
-    word_id: "ACT121",
     word: "umm",
     ipa: "ʌm",
     category: "exclamations",
@@ -9085,7 +8520,6 @@ export const words: Word[] = [
     notes: "M early. Filler word — toddlers use it while thinking!",
   },
   {
-    word_id: "ACT122",
     word: "forget",
     ipa: "fɚˈɡɛt",
     category: "verbs",
@@ -9101,7 +8535,6 @@ export const words: Word[] = [
     notes: "F emerging, R late, G emerging. I forget! Don't forget!",
   },
   {
-    word_id: "ACT123",
     word: "squeeze",
     ipa: "skwiːz",
     category: "verbs",
@@ -9117,7 +8550,6 @@ export const words: Word[] = [
     notes: "SK cluster + W, Z final. Squeeze a hug, squeeze the tube.",
   },
   {
-    word_id: "ACT124",
     word: "scratch",
     ipa: "skrætʃ",
     category: "verbs",
@@ -9133,7 +8565,6 @@ export const words: Word[] = [
     notes: "SK cluster + R, CH final. Complex onset. Scratch an itch!",
   },
   {
-    word_id: "OBJ047",
     word: "tablet",
     ipa: "tæb.lɪt",
     category: "household",
@@ -9149,7 +8580,6 @@ export const words: Word[] = [
     notes: "T emerging, B early, L late. Screen time word — toddler favorite.",
   },
   {
-    word_id: "NAT025",
     word: "world",
     ipa: "wɝːld",
     category: "nature",
@@ -9165,7 +8595,6 @@ export const words: Word[] = [
     notes: "W early, R/L late. Big concept word — the whole world!",
   },
   {
-    word_id: "ANI052",
     word: "goldfish",
     ipa: "ɡoʊld.fɪʃ",
     category: "animals",
@@ -9181,7 +8610,6 @@ export const words: Word[] = [
     notes: "G emerging, L late, F emerging, SH late. Pet fish!",
   },
   {
-    word_id: "FUR021",
     word: "house",
     ipa: "haʊs",
     category: "rooms",
@@ -9197,7 +8625,6 @@ export const words: Word[] = [
     notes: "H early, S late. Simple CVC. My house, your house.",
   },
   {
-    word_id: "OBJ048",
     word: "stand mixer",
     ipa: "stænd mɪk.sɚ",
     category: "furniture",
@@ -9213,7 +8640,6 @@ export const words: Word[] = [
     notes: "ST cluster, many consonants. Kitchen appliance — loud and exciting!",
   },
   {
-    word_id: "OBJ049",
     word: "pot",
     ipa: "pɑːt",
     category: "household",
@@ -9229,7 +8655,6 @@ export const words: Word[] = [
     notes: "P early, T emerging. Simple CVC. Cooking pot, flower pot.",
   },
   {
-    word_id: "VEH023",
     word: "tire",
     ipa: "taɪ.ɚ",
     category: "vehicles",
@@ -9245,7 +8670,6 @@ export const words: Word[] = [
     notes: "T emerging, R late. Car tire, bike tire — goes with wheel.",
   },
   {
-    word_id: "ACT125",
     word: "sleeping",
     ipa: "sliːp.ɪŋ",
     category: "verbs",
@@ -9261,7 +8685,6 @@ export const words: Word[] = [
     notes: "SL cluster, NG final. Baby is sleeping! Shh!",
   },
   {
-    word_id: "FOO069",
     word: "nuts",
     ipa: "nʌts",
     category: "food",
@@ -9277,7 +8700,6 @@ export const words: Word[] = [
     notes: "N early, T emerging, S late. Plural of nut — mixed nuts!",
   },
   {
-    word_id: "FOO070",
     word: "pistachio",
     ipa: "pɪˈstæʃ.i.oʊ",
     category: "food",
@@ -9293,7 +8715,6 @@ export const words: Word[] = [
     notes: "ST cluster, SH late. 4 syllables — fun big word for toddlers.",
   },
   {
-    word_id: "FOO071",
     word: "cashew",
     ipa: "kæʃ.juː",
     category: "food",
@@ -9309,7 +8730,6 @@ export const words: Word[] = [
     notes: "K emerging, SH late. Nut variety.",
   },
   {
-    word_id: "FOO072",
     word: "peanut",
     ipa: "piː.nʌt",
     category: "food",
@@ -9325,7 +8745,6 @@ export const words: Word[] = [
     notes: "P early, N early, T emerging. Peanut butter!",
   },
   {
-    word_id: "FOO073",
     word: "almond",
     ipa: "ɑːl.mənd",
     category: "food",
@@ -9341,7 +8760,6 @@ export const words: Word[] = [
     notes: "L emerging, M/N/D early. American pron with L.",
   },
   {
-    word_id: "FOO074",
     word: "vanilla",
     ipa: "vəˈnɪl.ə",
     category: "food",
@@ -9357,7 +8775,6 @@ export const words: Word[] = [
     notes: "V late, N early, L emerging. Fun flavor word.",
   },
   {
-    word_id: "FOO075",
     word: "butter",
     ipa: "ˈbʌt.ər",
     category: "food",
@@ -9373,7 +8790,6 @@ export const words: Word[] = [
     notes: "B early, T emerging, R late. Common kitchen word.",
   },
   {
-    word_id: "DES049",
     word: "sour",
     ipa: "saʊ.ər",
     category: "sensory",
@@ -9389,7 +8805,6 @@ export const words: Word[] = [
     notes: "S emerging, R late. Pairs well with sweet.",
   },
   {
-    word_id: "OBJ050",
     word: "velcro",
     ipa: "ˈvɛl.kroʊ",
     category: "household",
@@ -9405,7 +8820,6 @@ export const words: Word[] = [
     notes: "V late, L emerging, KR cluster late. Fun shoe/clothing word.",
   },
   {
-    word_id: "DES050",
     word: "messy",
     ipa: "ˈmɛs.i",
     category: "condition",
@@ -9421,7 +8835,6 @@ export const words: Word[] = [
     notes: "M early, S emerging. Toddlers know this one well!",
   },
   {
-    word_id: "ACT126",
     word: "pet",
     ipa: "pɛt",
     category: "verbs",
@@ -9437,7 +8850,6 @@ export const words: Word[] = [
     notes: "P early, T emerging. Gentle touch word.",
   },
   {
-    word_id: "CLO018",
     word: "sweater",
     ipa: "ˈswɛt.ər",
     category: "clothing",
@@ -9453,7 +8865,6 @@ export const words: Word[] = [
     notes: "SW cluster emerging, T emerging, R late. Cozy clothing word.",
   },
   {
-    word_id: "ACT127",
     word: "clean up",
     ipa: "kliːn ʌp",
     category: "verbs",
@@ -9469,7 +8880,6 @@ export const words: Word[] = [
     notes: "KL cluster late, N early, P early. Great routine word.",
   },
   {
-    word_id: "DES051",
     word: "wrong",
     ipa: "ɹɑːŋ",
     category: "evaluative",
@@ -9485,7 +8895,6 @@ export const words: Word[] = [
     notes: "R late, NG emerging. Important concept word.",
   },
   {
-    word_id: "DES052",
     word: "correct",
     ipa: "kəˈɹɛkt",
     category: "evaluative",
@@ -9501,7 +8910,6 @@ export const words: Word[] = [
     notes: "K emerging, R late, KT cluster. Pairs with wrong.",
   },
   {
-    word_id: "ACT128",
     word: "scoop",
     ipa: "skuːp",
     category: "verbs",
@@ -9517,7 +8925,6 @@ export const words: Word[] = [
     notes: "SK cluster emerging, P early. Fun food/sand action.",
   },
   {
-    word_id: "NAT026",
     word: "moss",
     ipa: "mɑːs",
     category: "nature",
@@ -9533,7 +8940,6 @@ export const words: Word[] = [
     notes: "M early, S emerging. Soft texture kids like to touch.",
   },
   {
-    word_id: "OBJ052",
     word: "lid",
     ipa: "lɪd",
     category: "household",
@@ -9549,7 +8955,6 @@ export const words: Word[] = [
     notes: "L late, D early. Cups, jars, boxes — kids love opening lids.",
   },
   {
-    word_id: "ANI053",
     word: "goose",
     ipa: "ɡuːs",
     category: "animals",
@@ -9565,7 +8970,6 @@ export const words: Word[] = [
     notes: "G early, S emerging. Duck's big cousin — fun comparison.",
   },
   {
-    word_id: "ANI054",
     word: "hedgehog",
     ipa: "hɛdʒ.hɑːɡ",
     category: "animals",
@@ -9581,7 +8985,6 @@ export const words: Word[] = [
     notes: "H early, J late, G early. Spiky animal kids adore.",
   },
   {
-    word_id: "NAT028",
     word: "branch",
     ipa: "bræntʃ",
     category: "nature",
@@ -9597,7 +9000,6 @@ export const words: Word[] = [
     notes: "BR cluster, CH late. Sticks and branches on walks.",
   },
   {
-    word_id: "OBJ053",
     word: "lotion",
     ipa: "loʊ.ʃən",
     category: "household",
@@ -9613,7 +9015,6 @@ export const words: Word[] = [
     notes: "L late, SH late. Daily skin care routine.",
   },
   {
-    word_id: "OBJ054",
     word: "sunscreen",
     ipa: "sʌn.skriːn",
     category: "household",
@@ -9629,7 +9030,6 @@ export const words: Word[] = [
     notes: "SK cluster, R late. Before-going-outside routine.",
   },
   {
-    word_id: "OBJ055",
     word: "laundry",
     ipa: "lɔːn.dri",
     category: "household",
@@ -9645,7 +9045,6 @@ export const words: Word[] = [
     notes: "L late, DR cluster, R late. Daily household routine.",
   },
   {
-    word_id: "FUR023",
     word: "dishwasher",
     ipa: "dɪʃ.wɑːʃ.ɚ",
     category: "furniture",
@@ -9661,7 +9060,6 @@ export const words: Word[] = [
     notes: "D early, SH late, W early, R late. Kitchen appliance kids hear running.",
   },
   {
-    word_id: "FUR024",
     word: "oven",
     ipa: "ʌv.ən",
     category: "furniture",
@@ -9677,7 +9075,6 @@ export const words: Word[] = [
     notes: "V late, N early. Hot — good safety word too.",
   },
   {
-    word_id: "FUR025",
     word: "stove",
     ipa: "stoʊv",
     category: "furniture",
@@ -9693,7 +9090,6 @@ export const words: Word[] = [
     notes: "ST cluster, V late. Hot/danger safety word.",
   },
   {
-    word_id: "FUR022",
     word: "counter",
     ipa: "kaʊn.tɚ",
     category: "furniture",
@@ -9709,7 +9105,6 @@ export const words: Word[] = [
     notes: "K emerging, N early, T emerging, R late. Kitchen surface.",
   },
   {
-    word_id: "OBJ056",
     word: "timer",
     ipa: "ˈtaɪ.mər",
     category: "household",
@@ -9725,7 +9120,6 @@ export const words: Word[] = [
     notes: "T emerging, M early, R late. Useful routine word.",
   },
   {
-    word_id: "NAT029",
     word: "maple tree",
     ipa: "ˈmeɪ.pəl tɹiː",
     category: "nature",
@@ -9741,7 +9135,6 @@ export const words: Word[] = [
     notes: "M early, P early, L emerging, TR cluster late. Beautiful nature word.",
   },
   {
-    word_id: "VEH024",
     word: "tow truck",
     ipa: "toʊ tɹʌk",
     category: "vehicles",
@@ -9757,7 +9150,6 @@ export const words: Word[] = [
     notes: "T emerging, TR cluster late, K emerging. Exciting vehicle word.",
   },
   {
-    word_id: "SPA013",
     word: "upstairs",
     ipa: "ʌpˈstɛrz",
     category: "prepositions",
@@ -9773,7 +9165,6 @@ export const words: Word[] = [
     notes: "P early, ST cluster emerging, R late. Direction word.",
   },
   {
-    word_id: "SPA014",
     word: "downstairs",
     ipa: "daʊnˈstɛrz",
     category: "prepositions",
@@ -9789,7 +9180,6 @@ export const words: Word[] = [
     notes: "D early, N early, ST cluster emerging, R late. Pairs with upstairs.",
   },
   {
-    word_id: "OBJ057",
     word: "drain",
     ipa: "dɹeɪn",
     category: "household",
@@ -9805,7 +9195,6 @@ export const words: Word[] = [
     notes: "DR cluster late, N early. Bath/sink word.",
   },
   {
-    word_id: "ACT129",
     word: "take",
     ipa: "teɪk",
     category: "verbs",
@@ -9821,7 +9210,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "FOO076",
     word: "ketchup",
     ipa: "k.ɛtʃʌp",
     category: "food",
@@ -9837,7 +9225,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "TOY023",
     word: "football",
     ipa: "f.ʊtbɔːl",
     category: "toys",
@@ -9853,7 +9240,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "FOO077",
     word: "vitamin",
     ipa: "v.aɪ.təmɪn",
     category: "health",
@@ -9869,7 +9255,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "ACT130",
     word: "trade",
     ipa: "tɹeɪd",
     category: "verbs",
@@ -9885,7 +9270,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "VEH025",
     word: "monster truck",
     ipa: "mɑn.stɚ tɹʌk",
     category: "vehicles",
@@ -9901,7 +9285,6 @@ export const words: Word[] = [
     notes: "Compound: monster + truck. PNW cot-caught merger (ɑ). ST and TR clusters, R late.",
   },
   {
-    word_id: "VEH026",
     word: "dump truck",
     ipa: "dʌmp tɹʌk",
     category: "vehicles",
@@ -9917,7 +9300,6 @@ export const words: Word[] = [
     notes: "Compound: dump + truck. MP and TR clusters, R late.",
   },
   {
-    word_id: "VEH027",
     word: "semi truck",
     ipa: "sɛ.mi tɹʌk",
     category: "vehicles",
@@ -9933,7 +9315,6 @@ export const words: Word[] = [
     notes: "Compound: semi + truck. PNW pronunciation /ˈsɛmi/ (seh-mee). S early, TR cluster late, K emerging.",
   },
   {
-    word_id: "DES053",
     word: "construction",
     ipa: "kən.stɹʌk.ʃən",
     category: "vehicles",
@@ -9949,7 +9330,6 @@ export const words: Word[] = [
     notes: "3 syllables, STR cluster (S+TR), R late, SH late. Construction site/vehicle context.",
   },
   {
-    word_id: "ACT131",
     word: "yeah",
     ipa: "jɛə",
     category: "social",
@@ -9965,7 +9345,6 @@ export const words: Word[] = [
     notes: "Y early. Casual affirmative — PNW pronunciation /jɛə/ with schwa offglide.",
   },
   {
-    word_id: "DES054",
     word: "warm",
     ipa: "wɔːɹm",
     category: "sensory",
@@ -9981,7 +9360,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "VEH028",
     word: "delivery truck",
     ipa: "dɪ.lɪv.ə.ɹi tɹʌk",
     category: "vehicles",
@@ -9997,7 +9375,6 @@ export const words: Word[] = [
     notes: "Compound: delivery + truck. 5 syllables, V late, R late (twice — medial and TR cluster).",
   },
   {
-    word_id: "ACT132",
     word: "tuck",
     ipa: "tʌk",
     category: "verbs",
@@ -10013,7 +9390,6 @@ export const words: Word[] = [
     notes: "",
   },
   {
-    word_id: "OBJ058",
     word: "ramp",
     ipa: "ɹæmp",
     category: "household",

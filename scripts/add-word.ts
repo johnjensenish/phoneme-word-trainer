@@ -35,16 +35,6 @@ const CATEGORIES = [
   "vehicles", "verbs", "weather",
 ] as const;
 
-const CATEGORY_PREFIXES: Record<string, string> = {
-  animals: "ANI", body: "BOD", clothing: "CLO", colors: "COL",
-  condition: "CND", evaluative: "EVA", exclamations: "EXC", feelings: "FEE",
-  food: "FOO", furniture: "FUR", health: "HEA", household: "HLD",
-  nature: "NAT", numbers: "NUM", people: "PPL", prepositions: "PRP",
-  pronouns: "PRN", requests: "REQ", rooms: "ROM", sensory: "SEN",
-  shapes: "SHP", size: "SIZ", social: "SOC", time: "TIM", toys: "TOY",
-  vehicles: "VEH", verbs: "VRB", weather: "WEA",
-};
-
 const CATEGORY_DEFAULT_TYPE: Record<string, string> = {
   animals: "noun", body: "noun", clothing: "noun", colors: "adjective",
   condition: "adjective", evaluative: "adjective", exclamations: "exclamation",
@@ -113,7 +103,7 @@ const dryRun = args.includes("--dry-run");
 
 const existing = words.find(w => w.word === word);
 if (existing) {
-  console.log(`"${word}" already exists (${existing.word_id}, IPA: ${existing.ipa})`);
+  console.log(`"${word}" already exists (IPA: ${existing.ipa})`);
   process.exit(0);
 }
 
@@ -392,15 +382,6 @@ if (!CATEGORIES.includes(category as any)) {
   process.exit(1);
 }
 
-// ── Generate word ID ────────────────────────────────────────────────
-
-const prefix = CATEGORY_PREFIXES[category];
-const existingIds = words
-  .filter(w => w.word_id.startsWith(prefix))
-  .map(w => parseInt(w.word_id.slice(prefix.length)));
-const nextId = Math.max(0, ...existingIds) + 1;
-const wordId = `${prefix}${String(nextId).padStart(3, "0")}`;
-
 // ── Visual hint ─────────────────────────────────────────────────────
 
 const visualHint = `photo_${word.replace(/\s+/g, "_")}`;
@@ -409,7 +390,6 @@ const emoji = emojiArg || "❓";
 // ── Build entry ─────────────────────────────────────────────────────
 
 const entry = {
-  word_id: wordId,
   word,
   ipa: finalIPA,
   category,
@@ -430,7 +410,6 @@ const entry = {
 console.log(`\n=== Adding "${word}" ===\n`);
 console.log(`  espeak-ng IPA: ${espeakIPA}`);
 console.log(`  Final IPA:     ${finalIPA}`);
-console.log(`  Word ID:       ${wordId}`);
 console.log(`  Category:      ${category}`);
 console.log(`  Word type:     ${wordType}`);
 console.log(`  Word shape:    ${wordShape}`);
@@ -462,7 +441,6 @@ if (closingIdx === -1) {
 }
 
 const newEntry = `  {
-    word_id: "${entry.word_id}",
     word: "${entry.word}",
     ipa: "${entry.ipa}",
     category: "${entry.category}",
@@ -499,7 +477,7 @@ writeFileSync(emojiPath, newEmojiContent);
 // ── Verify ──────────────────────────────────────────────────────────
 
 try {
-  const verify = execSync(`bun -e "const { words } = require('./src/data/words'); const w = words.find(x => x.word === '${word.replace(/'/g, "\\'")}'); console.log(w ? 'OK: ' + w.word_id : 'FAIL');"`, {
+  const verify = execSync(`bun -e "const { words } = require('./src/data/words'); const w = words.find(x => x.word === '${word.replace(/'/g, "\\'")}'); console.log(w ? 'OK' : 'FAIL');"`, {
     encoding: "utf-8",
   }).trim();
   console.log(`Verification: ${verify}`);
@@ -507,7 +485,7 @@ try {
   console.error("WARNING: Verification failed — check the generated entry for syntax errors.");
 }
 
-console.log(`\nDone! Added "${word}" as ${wordId}. Total words: ${words.length + 1}`);
+console.log(`\nDone! Added "${word}". Total words: ${words.length + 1}`);
 if (emoji === "❓") {
   console.log(`NOTE: No emoji specified. Update ${visualHint} in emojiMap.ts or re-run with --emoji <emoji>`);
 }
