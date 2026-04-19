@@ -8,12 +8,14 @@
  * Usage:
  *   bun run scripts/add-word.ts "butter"
  *   bun run scripts/add-word.ts "maple tree" --category nature --emoji 🍁
- *   bun run scripts/add-word.ts "jump" --category actions --type verb --emoji 🦘 --yes
+ *   bun run scripts/add-word.ts "jump" --category verbs --type verb --emoji 🦘 --yes
  *
  * Options:
- *   --category <cat>   Category (actions, animals, body, clothing, colors, describing,
- *                       feelings, food, furniture, house, nature, numbers, people,
- *                       shapes, spatial, time, toys, vehicles, weather)
+ *   --category <cat>   Category (animals, body, clothing, colors, condition,
+ *                       evaluative, exclamations, feelings, food, furniture, health,
+ *                       household, nature, numbers, people, prepositions, pronouns,
+ *                       requests, rooms, sensory, shapes, size, social, time, toys,
+ *                       vehicles, verbs, weather)
  *   --type <type>       Word type (noun, verb, adjective, adverb, exclamation, etc.)
  *   --emoji <emoji>     Emoji for the visual hint
  *   --yes               Skip confirmation prompt
@@ -26,25 +28,32 @@ import { words } from "../src/data/words";
 // ── Config ──────────────────────────────────────────────────────────
 
 const CATEGORIES = [
-  "actions", "animals", "body", "clothing", "colors", "describing",
-  "feelings", "food", "furniture", "house", "nature", "numbers",
-  "people", "shapes", "spatial", "time", "toys", "vehicles", "weather",
+  "animals", "body", "clothing", "colors", "condition",
+  "evaluative", "exclamations", "feelings", "food", "furniture", "health",
+  "household", "nature", "numbers", "people", "prepositions", "pronouns",
+  "requests", "rooms", "sensory", "shapes", "size", "social", "time", "toys",
+  "vehicles", "verbs", "weather",
 ] as const;
 
 const CATEGORY_PREFIXES: Record<string, string> = {
-  actions: "ACT", animals: "ANI", body: "BOD", clothing: "CLO",
-  colors: "COL", describing: "DES", feelings: "FEE", food: "FOO",
-  furniture: "FUR", house: "OBJ", nature: "NAT", numbers: "NUM",
-  people: "PPL", shapes: "SHP", spatial: "SPA", time: "TIM",
-  toys: "TOY", vehicles: "VEH", weather: "WEA",
+  animals: "ANI", body: "BOD", clothing: "CLO", colors: "COL",
+  condition: "CND", evaluative: "EVA", exclamations: "EXC", feelings: "FEE",
+  food: "FOO", furniture: "FUR", health: "HEA", household: "HLD",
+  nature: "NAT", numbers: "NUM", people: "PPL", prepositions: "PRP",
+  pronouns: "PRN", requests: "REQ", rooms: "ROM", sensory: "SEN",
+  shapes: "SHP", size: "SIZ", social: "SOC", time: "TIM", toys: "TOY",
+  vehicles: "VEH", verbs: "VRB", weather: "WEA",
 };
 
 const CATEGORY_DEFAULT_TYPE: Record<string, string> = {
-  actions: "verb", animals: "noun", body: "noun", clothing: "noun",
-  colors: "adjective", describing: "adjective", feelings: "adjective",
-  food: "noun", furniture: "noun", house: "noun", nature: "noun",
-  numbers: "noun", people: "noun", shapes: "noun", spatial: "adverb",
-  time: "noun", toys: "noun", vehicles: "noun", weather: "noun",
+  animals: "noun", body: "noun", clothing: "noun", colors: "adjective",
+  condition: "adjective", evaluative: "adjective", exclamations: "exclamation",
+  feelings: "adjective", food: "noun", furniture: "noun", health: "noun",
+  household: "noun", nature: "noun", numbers: "noun", people: "noun",
+  prepositions: "adverb", pronouns: "pronoun", requests: "requesting",
+  rooms: "noun", sensory: "adjective", shapes: "noun", size: "adjective",
+  social: "social", time: "noun", toys: "noun", vehicles: "noun",
+  verbs: "verb", weather: "noun",
 };
 
 // IPA consonant → sound ID mapping
@@ -375,7 +384,7 @@ const syllableCount = countVowelNuclei(finalIPA);
 
 // ── Determine category and type ─────────────────────────────────────
 
-const category = categoryArg || "house"; // default, user should specify
+const category = categoryArg || "household"; // default, user should specify
 const wordType = typeArg || CATEGORY_DEFAULT_TYPE[category] || "noun";
 
 if (!CATEGORIES.includes(category as any)) {

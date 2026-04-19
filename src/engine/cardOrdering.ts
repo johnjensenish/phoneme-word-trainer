@@ -11,7 +11,7 @@ for (const [i, group] of staticRhymeGroups.entries()) {
   }
 }
 
-export const ALL_CATEGORIES = ['actions', 'animals', 'body', 'clothing', 'colors', 'describing', 'feelings', 'food', 'furniture', 'house', 'nature', 'numbers', 'people', 'shapes', 'spatial', 'time', 'toys', 'vehicles', 'weather'] as const
+export const ALL_CATEGORIES = ['animals', 'body', 'clothing', 'colors', 'condition', 'evaluative', 'exclamations', 'feelings', 'food', 'furniture', 'health', 'household', 'nature', 'numbers', 'people', 'prepositions', 'pronouns', 'requests', 'rooms', 'sensory', 'shapes', 'size', 'social', 'time', 'toys', 'vehicles', 'verbs', 'weather'] as const
 
 export interface FilterState {
   categories: string[]
