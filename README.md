@@ -28,6 +28,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Audio files are pre-generated and committed to the repo (~5-10 KB each), so most developers won't need to run this unless sounds or words change.
 
+> **CI generates audio automatically.** When a PR modifies `src/data/words.ts`, the `Generate Audio` workflow synthesizes any missing MP3s and pushes them back to the PR branch. Local generation is only needed for offline work or when iterating on SSML templates in `generate-audio.ts`. The workflow uses the `GCP_TTS_SA_KEY` repo secret — rotate it by regenerating the service account key and updating the secret.
+
 ### Prerequisites
 
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) (`brew install google-cloud-sdk`)
