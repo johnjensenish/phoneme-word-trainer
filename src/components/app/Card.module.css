@@ -253,3 +253,45 @@
     max-width: 700px;
   }
 }
+
+/* Short landscape (tablets rotated, laptops with low-res screens) — keep the card in view without page scroll */
+@media (min-width: 768px) and (max-height: 900px) and (orientation: landscape) {
+  .imageArea {
+    height: 200px;
+    font-size: 90px;
+  }
+
+  .imageLabel {
+    font-size: 22px;
+    margin-top: var(--space-xs);
+  }
+
+  .content {
+    padding: var(--space-md) var(--space-lg) var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .wordRow {
+    font-size: clamp(40px, 6vw, 64px);
+  }
+
+  .hearItButton {
+    height: 52px;
+    font-size: 18px;
+    max-width: 300px;
+  }
+
+  .tipText {
+    font-size: 14px;
+    min-height: calc(2 * 1.5 * 14px);
+  }
+
+  .actionBar {
+    padding-top: var(--space-xs);
+  }
+
+  .navButton {
+    width: 44px;
+    height: 44px;
+  }
+}
