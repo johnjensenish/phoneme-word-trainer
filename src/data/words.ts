@@ -6810,7 +6810,7 @@ export const words: Word[] = [
     notes: "Compound: fig + bar. F emerging, G early, B early, R late.",
   },
   {
-    word_id: "ACT065",
+    word_id: "ACT133",
     word: "like",
     ipa: "laɪk",
     category: "verbs",
@@ -6826,7 +6826,7 @@ export const words: Word[] = [
     notes: "L late, K early. High-frequency preference word.",
   },
   {
-    word_id: "ACT066",
+    word_id: "ACT134",
     word: "hello",
     ipa: "hɛl.oʊ",
     category: "social",
@@ -6890,7 +6890,7 @@ export const words: Word[] = [
     notes: "S emerging, N early, D early. Auditory concept.",
   },
   {
-    word_id: "ACT067",
+    word_id: "ACT135",
     word: "hear",
     ipa: "hɪr",
     category: "verbs",
@@ -6906,7 +6906,7 @@ export const words: Word[] = [
     notes: "H early, R late. Pairs with sound/listen.",
   },
   {
-    word_id: "ACT068",
+    word_id: "ACT136",
     word: "love",
     ipa: "lʌv",
     category: "verbs",
@@ -6925,7 +6925,7 @@ export const words: Word[] = [
   // ─── BATCH: daily words, routine, play, sensory ─────────────────
 
   {
-    word_id: "ACT069",
+    word_id: "ACT137",
     word: "please",
     ipa: "pliːz",
     category: "social",
@@ -6941,7 +6941,7 @@ export const words: Word[] = [
     notes: "PL cluster, Z final. Key manners word.",
   },
   {
-    word_id: "ACT070",
+    word_id: "ACT138",
     word: "thank you",
     ipa: "θæŋk.juː",
     category: "social",
@@ -6957,7 +6957,7 @@ export const words: Word[] = [
     notes: "TH very late, NG emerging. Essential manners phrase.",
   },
   {
-    word_id: "ACT071",
+    word_id: "ACT139",
     word: "sorry",
     ipa: "sɑːr.i",
     category: "social",
@@ -6973,7 +6973,7 @@ export const words: Word[] = [
     notes: "S emerging, R late. Important social word.",
   },
   {
-    word_id: "ACT072",
+    word_id: "ACT140",
     word: "yes",
     ipa: "jɛs",
     category: "social",
@@ -6989,7 +6989,7 @@ export const words: Word[] = [
     notes: "Y early, S emerging. Affirmative response.",
   },
   {
-    word_id: "ACT073",
+    word_id: "ACT141",
     word: "OK",
     ipa: "oʊˈkeɪ",
     category: "social",
@@ -7005,7 +7005,7 @@ export const words: Word[] = [
     notes: "K only consonant. Very common agreement word.",
   },
   {
-    word_id: "ACT074",
+    word_id: "ACT142",
     word: "what",
     ipa: "wʌt",
     category: "pronouns",
@@ -8845,7 +8845,7 @@ export const words: Word[] = [
     notes: "R late, ST cluster. Time to rest — naptime/bedtime word.",
   },
   {
-    word_id: "OBJ044",
+    word_id: "OBJ059",
     word: "battery",
     ipa: "bæt.ɚ.i",
     category: "household",
@@ -9549,7 +9549,7 @@ export const words: Word[] = [
     notes: "L late, D early. Cups, jars, boxes — kids love opening lids.",
   },
   {
-    word_id: "ANI043",
+    word_id: "ANI053",
     word: "goose",
     ipa: "ɡuːs",
     category: "animals",
@@ -9565,7 +9565,7 @@ export const words: Word[] = [
     notes: "G early, S emerging. Duck's big cousin — fun comparison.",
   },
   {
-    word_id: "ANI044",
+    word_id: "ANI054",
     word: "hedgehog",
     ipa: "hɛdʒ.hɑːɡ",
     category: "animals",
@@ -9579,22 +9579,6 @@ export const words: Word[] = [
     visual_hint: "photo_hedgehog",
     rhyme_group: "",
     notes: "H early, J late, G early. Spiky animal kids adore.",
-  },
-  {
-    word_id: "NAT027",
-    word: "dirt",
-    ipa: "dɝːt",
-    category: "nature",
-    word_type: "noun",
-    word_shape: "CVCC",
-    syllable_count: 1,
-    consonant_ids: ["D", "R", "T"],
-    consonant_positions: ["initial", "medial", "final"],
-    hardest_sound_id: "R",
-    cluster_ids: [],
-    visual_hint: "emoji_grass",
-    rhyme_group: "",
-    notes: "D early, R late, T emerging. Outdoor play staple.",
   },
   {
     word_id: "NAT028",
@@ -9661,7 +9645,7 @@ export const words: Word[] = [
     notes: "L late, DR cluster, R late. Daily household routine.",
   },
   {
-    word_id: "FUR019",
+    word_id: "FUR023",
     word: "dishwasher",
     ipa: "dɪʃ.wɑːʃ.ɚ",
     category: "furniture",
@@ -9677,7 +9661,7 @@ export const words: Word[] = [
     notes: "D early, SH late, W early, R late. Kitchen appliance kids hear running.",
   },
   {
-    word_id: "FUR020",
+    word_id: "FUR024",
     word: "oven",
     ipa: "ʌv.ən",
     category: "furniture",
@@ -9693,7 +9677,7 @@ export const words: Word[] = [
     notes: "V late, N early. Hot — good safety word too.",
   },
   {
-    word_id: "FUR021",
+    word_id: "FUR025",
     word: "stove",
     ipa: "stoʊv",
     category: "furniture",

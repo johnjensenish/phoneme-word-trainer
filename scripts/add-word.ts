@@ -8,7 +8,7 @@
  * Usage:
  *   bun run scripts/add-word.ts "butter"
  *   bun run scripts/add-word.ts "maple tree" --category nature --emoji 🍁
- *   bun run scripts/add-word.ts "jump" --category actions --type verb --emoji 🦘 --yes
+ *   bun run scripts/add-word.ts "jump" --category verbs --type verb --emoji 🦘 --yes
  *
  * Options:
  *   --category <cat>   Category (animals, body, clothing, colors, condition,
