@@ -5,7 +5,6 @@ import { DEFAULT_FILTERS, type FilterState } from '~/engine/cardOrdering'
 import { computeAgeMonths, formatAgeShort } from '~/engine/ageUtils'
 import { useCards } from '~/hooks/useCards'
 import { useAudio, usePrefetchAudio } from '~/hooks/useAudio'
-import { useSwipe } from '~/hooks/useSwipe'
 import { AgeEntry } from '~/components/app/AgeEntry'
 import { Card } from '~/components/app/Card'
 import { FilterPanel } from '~/components/app/FilterPanel'
@@ -115,11 +114,6 @@ function AppRoute() {
     setPinnedCard(null)
     setCurrentIndex(i => (cards.length > 0 ? (i - 1 + cards.length) % cards.length : 0))
   }, [cards.length])
-
-  const { containerRef } = useSwipe({
-    onSwipeLeft: goNext,
-    onSwipeRight: goPrev,
-  })
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -279,7 +273,6 @@ function AppRoute() {
 
       {/* Card area */}
       <div
-        ref={containerRef}
         style={{
           flex: 1,
           display: 'flex',
