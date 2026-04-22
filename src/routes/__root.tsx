@@ -45,20 +45,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  // iPad Safari ignores viewport `maximum-scale=1`, so block the
-  // iOS-only gesture events that drive pinch-to-zoom.
-  React.useEffect(() => {
-    const prevent = (e: Event) => e.preventDefault()
-    document.addEventListener('gesturestart', prevent)
-    document.addEventListener('gesturechange', prevent)
-    document.addEventListener('gestureend', prevent)
-    return () => {
-      document.removeEventListener('gesturestart', prevent)
-      document.removeEventListener('gesturechange', prevent)
-      document.removeEventListener('gestureend', prevent)
-    }
-  }, [])
-
   return <Outlet />
 }
 
