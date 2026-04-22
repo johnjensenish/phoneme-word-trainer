@@ -9,7 +9,6 @@
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
   overflow: hidden;
-  touch-action: pan-y;
   transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
