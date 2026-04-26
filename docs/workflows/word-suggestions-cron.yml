@@ -12,9 +12,9 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
+  # Auto-issued GITHUB_TOKEN only needs models:read (used by the classifier).
+  # All git/issue/PR writes go through BOT_PAT below so events trigger
+  # downstream workflows (ci.yml, generate-audio.yml).
   models: read
 
 jobs:
@@ -25,12 +25,22 @@ jobs:
       LABEL_PENDING: word-suggestion
       LABEL_QUEUED: queued
       LABEL_REVIEW: needs-human-review
-      GH_TOKEN: ${{ github.token }}
+      # BOT_PAT must be set as a repo secret. See docs/word-suggestions.md.
+      GH_TOKEN: ${{ secrets.BOT_PAT }}
 
     steps:
+      - name: Verify BOT_PAT is configured
+        run: |
+          if [[ -z "${{ secrets.BOT_PAT }}" ]]; then
+            echo "::error::BOT_PAT secret is not set. See docs/word-suggestions.md."
+            exit 1
+          fi
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # Use BOT_PAT so subsequent `git push` triggers ci.yml + generate-audio.yml.
+          token: ${{ secrets.BOT_PAT }}
 
       - uses: oven-sh/setup-bun@v2
 
@@ -74,6 +84,11 @@ jobs:
 
       - name: Classify with GitHub Models
         if: steps.fetch.outputs.count != '0'
+        # GitHub Models inference is gated on the auto-issued GITHUB_TOKEN's
+        # `models:read` permission, not on a PAT — so pass it explicitly here
+        # since the job-level GH_TOKEN points at BOT_PAT.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           bun run scripts/classify-suggestions.ts < /tmp/pending.json > /tmp/classified.json
           jq . /tmp/classified.json
