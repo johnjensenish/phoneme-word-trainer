@@ -383,6 +383,23 @@
 
 /* iPad landscape — match the iPad portrait button size */
 @media (orientation: landscape) and (min-width: 1024px) {
+  .content {
+    gap: var(--space-2xl);
+  }
+
+  .hearItButton {
+    height: 84px;
+    max-width: 460px;
+    font-size: 22px;
+    border-radius: 20px;
+    margin-top: var(--space-md);
+  }
+
+  .hearItButton svg {
+    width: 26px;
+    height: 26px;
+  }
+
   .navButton {
     height: 88px;
     padding: 0 32px;
