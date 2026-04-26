@@ -150,25 +150,34 @@
 }
 
 .navButton {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: var(--color-surface-sunken);
-  color: var(--color-text);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-sm);
+  height: 60px;
+  padding: 0 22px;
+  border-radius: 16px;
+  background: var(--color-secondary-light);
+  color: var(--color-secondary);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   flex-shrink: 0;
   transition: background var(--transition-fast), transform 100ms ease;
   cursor: pointer;
 }
 
+.navButton svg {
+  width: 22px;
+  height: 22px;
+}
+
 .navButton:hover {
-  background: var(--color-border);
+  background: var(--color-secondary-light-hover);
 }
 
 .navButton:active {
-  transform: scale(0.93);
+  transform: scale(0.96);
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
@@ -197,6 +206,18 @@
 
   .imageLabel {
     font-size: 24px;
+  }
+
+  .navButton {
+    height: 54px;
+    padding: 0 16px;
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .navButton svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -253,6 +274,43 @@
   }
 }
 
+/* iPad / large tablet portrait — bigger touch targets for toddler-friendly use */
+@media (min-width: 768px) and (orientation: portrait) {
+  .content {
+    gap: var(--space-2xl);
+  }
+
+  .hearItButton {
+    height: 84px;
+    max-width: 460px;
+    font-size: 22px;
+    border-radius: 20px;
+    margin-top: var(--space-md);
+  }
+
+  .hearItButton svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .navButton {
+    height: 88px;
+    padding: 0 32px;
+    font-size: 22px;
+    border-radius: 20px;
+    gap: var(--space-md);
+  }
+
+  .navButton svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .actionBar {
+    padding-top: var(--space-md);
+  }
+}
+
 /* Short landscape (tablets rotated, laptops with low-res screens) — keep the card in view without page scroll */
 @media (min-width: 768px) and (max-height: 900px) and (orientation: landscape) {
   .imageArea {
@@ -288,9 +346,78 @@
   .actionBar {
     padding-top: var(--space-xs);
   }
+}
+
+/* Landscape — pin nav buttons to the viewport edges so they sit beside the card */
+@media (orientation: landscape) {
+  .actionBar {
+    height: 0;
+    padding: 0;
+    border-top: none;
+    overflow: visible;
+  }
+
+  .actionBarSpacer {
+    display: none;
+  }
 
   .navButton {
-    width: 44px;
-    height: 44px;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: var(--z-action-bar);
+  }
+
+  .navPrev {
+    left: max(var(--space-md), env(safe-area-inset-left));
+  }
+
+  .navNext {
+    right: max(var(--space-md), env(safe-area-inset-right));
+  }
+
+  .navButton:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+}
+
+/* iPad landscape — match the iPad portrait button size */
+@media (orientation: landscape) and (min-width: 1024px) {
+  .content {
+    gap: var(--space-2xl);
+  }
+
+  .hearItButton {
+    height: 84px;
+    max-width: 460px;
+    font-size: 22px;
+    border-radius: 20px;
+    margin-top: var(--space-md);
+  }
+
+  .hearItButton svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .navButton {
+    height: 88px;
+    padding: 0 32px;
+    font-size: 22px;
+    border-radius: 20px;
+    gap: var(--space-md);
+  }
+
+  .navButton svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .navPrev {
+    left: max(var(--space-lg), env(safe-area-inset-left));
+  }
+
+  .navNext {
+    right: max(var(--space-lg), env(safe-area-inset-right));
   }
 }

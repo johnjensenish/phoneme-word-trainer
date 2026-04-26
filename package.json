@@ -10,7 +10,8 @@
     "deploy": "bun run build && wrangler deploy",
     "cf-typegen": "wrangler types",
     "generate-audio": "bun run scripts/generate-audio.ts",
-    "generate-audio:force": "bun run scripts/generate-audio.ts --force"
+    "generate-audio:force": "bun run scripts/generate-audio.ts --force",
+    "generate-icon": "bun run scripts/generate-icon.ts"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.166.7",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.30.0",
     "@google-cloud/text-to-speech": "^6.4.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
