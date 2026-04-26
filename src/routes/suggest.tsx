@@ -199,7 +199,7 @@ function SuggestPage() {
             ? `Someone already suggested that one — tracked as #${result.issueNumber}.`
             : result.status === 'flagged'
               ? `Thanks! Flagged for human review as #${result.issueNumber}.`
-              : `Thanks! Queued as #${result.issueNumber}. It'll appear in the app after the next batch lands.`}
+              : `Thanks! Queued as #${result.issueNumber}. Maybe it'll appear in the app after the next batch lands.`}
         </div>
       )}
 
