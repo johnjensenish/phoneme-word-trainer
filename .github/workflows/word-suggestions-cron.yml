@@ -106,10 +106,10 @@ jobs:
             gh issue edit "$num" --add-label "$LABEL_REVIEW"
             gh issue comment "$num" --body "Auto-classifier wasn't confident enough to add this automatically.
 
-Suggested category: \`$cat\` (confidence $conf)
-Reasoning: $reason
+            Suggested category: \`$cat\` (confidence $conf)
+            Reasoning: $reason
 
-A maintainer will take it from here."
+            A maintainer will take it from here."
           done < /tmp/rejected.jsonl
 
       - name: Reconcile branch state
