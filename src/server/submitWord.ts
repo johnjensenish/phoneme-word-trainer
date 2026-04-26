@@ -1,9 +1,11 @@
 import { createServerFn } from '@tanstack/react-start'
 import { getRequestIP } from '@tanstack/react-start-server'
 import { words } from '~/data/words'
+import { findLexicalMatch } from './lexicalDedup'
 
 const REPO = 'johnjensenish/phoneme-word-trainer'
 const LABEL = 'word-suggestion'
+const LABEL_REVIEW = 'needs-human-review'
 const WORD_RE = /^[a-z][a-z' -]{0,28}[a-z]$|^[a-z]$/
 const SENTENCE_MAX = 200
 const HONEYPOT_FIELD = 'website'
@@ -14,13 +16,19 @@ export type SubmitInput = {
   captchaA: number
   captchaB: number
   captchaAnswer: number
+  // True when the user was shown a lexical match and clicked
+  // "this is a different word." Files the issue with `needs-human-review`
+  // (and the matched word in the body) so a maintainer adjudicates.
+  confirmDistinct?: boolean
+  matchedWord?: string
   // Honeypot — bots fill it, humans don't see it. Real submissions leave it ''.
   [HONEYPOT_FIELD]?: string
 }
 
 export type SubmitResult =
-  | { ok: true; issueNumber: number; status: 'queued' | 'duplicate-pending' }
-  | { ok: false; error: string }
+  | { ok: true; issueNumber: number; status: 'queued' | 'duplicate-pending' | 'flagged' }
+  | { ok: false; kind: 'lexical-match'; existingWord: string; error: string }
+  | { ok: false; kind?: undefined; error: string }
 
 const recentByIp = new Map<string, number[]>()
 const RATE_LIMIT = 5
@@ -46,6 +54,9 @@ function validate(input: unknown): SubmitInput {
   const captchaA = Number(o.captchaA)
   const captchaB = Number(o.captchaB)
   const captchaAnswer = Number(o.captchaAnswer)
+  const confirmDistinct = o.confirmDistinct === true
+  const matchedWordRaw = typeof o.matchedWord === 'string' ? o.matchedWord.trim().toLowerCase() : ''
+  const matchedWord = WORD_RE.test(matchedWordRaw) ? matchedWordRaw : undefined
   const honeypot = typeof o[HONEYPOT_FIELD] === 'string' ? (o[HONEYPOT_FIELD] as string) : ''
 
   if (!WORD_RE.test(word)) {
@@ -67,6 +78,8 @@ function validate(input: unknown): SubmitInput {
     captchaA,
     captchaB,
     captchaAnswer,
+    confirmDistinct,
+    matchedWord,
     [HONEYPOT_FIELD]: honeypot,
   }
 }
@@ -90,16 +103,24 @@ async function createIssue(
   token: string,
   word: string,
   sentence: string | undefined,
+  opts: { matchedWord?: string } = {},
 ): Promise<number> {
+  const flagged = Boolean(opts.matchedWord)
   const body = [
     `**Word:** ${word}`,
     sentence ? `**Example sentence:** ${sentence}` : null,
+    flagged
+      ? `**User confirmed distinct from existing word:** \`${opts.matchedWord}\``
+      : null,
     '',
-    '_Submitted via the in-app suggestion form. The nightly classifier will pick this up._',
+    flagged
+      ? '_Submitted via the in-app suggestion form. The lexical dedup matched an existing word, but the submitter said it is a different word — please review manually._'
+      : '_Submitted via the in-app suggestion form. The nightly classifier will pick this up._',
   ]
     .filter(Boolean)
     .join('\n')
 
+  const labels = flagged ? [LABEL, LABEL_REVIEW] : [LABEL]
   const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
     method: 'POST',
     headers: {
@@ -111,7 +132,7 @@ async function createIssue(
     body: JSON.stringify({
       title: `word: ${word}`,
       body,
-      labels: [LABEL],
+      labels,
     }),
   })
   if (!res.ok) {
@@ -148,8 +169,20 @@ export const submitWord = createServerFn({ method: 'POST' })
       return { ok: false, error: 'Too many submissions from this IP. Try again later.' }
     }
 
-    if (words.some(w => w.word === data.word)) {
-      return { ok: false, error: `"${data.word}" is already in the trainer.` }
+    // Lexical dedup. Skip when the user has already confirmed it's distinct.
+    if (!data.confirmDistinct) {
+      const match = findLexicalMatch(data.word, words)
+      if (match) {
+        return {
+          ok: false,
+          kind: 'lexical-match',
+          existingWord: match.existing.word,
+          error:
+            match.reason === 'exact'
+              ? `"${data.word}" is already in the trainer.`
+              : `Looks like we already have "${match.existing.word}" — that matches your "${data.word}".`,
+        }
+      }
     }
 
     try {
@@ -157,8 +190,15 @@ export const submitWord = createServerFn({ method: 'POST' })
       if (existing) {
         return { ok: true, issueNumber: existing, status: 'duplicate-pending' }
       }
-      const issueNumber = await createIssue(token, data.word, data.sentence)
-      return { ok: true, issueNumber, status: 'queued' }
+      const flagged = data.confirmDistinct === true
+      const issueNumber = await createIssue(token, data.word, data.sentence, {
+        matchedWord: flagged ? data.matchedWord : undefined,
+      })
+      return {
+        ok: true,
+        issueNumber,
+        status: flagged ? 'flagged' : 'queued',
+      }
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Unknown error'
       return { ok: false, error: msg }

@@ -34,8 +34,7 @@ function SuggestPage() {
     setAnswer('')
   }, [])
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const send = useCallback(async (override?: { confirmDistinct: true; matchedWord: string }) => {
     setBusy(true)
     setResult(null)
     try {
@@ -47,6 +46,7 @@ function SuggestPage() {
           captchaB: challenge.b,
           captchaAnswer: Number(answer),
           website: trap,
+          ...(override ?? {}),
         },
       })
       setResult(res)
@@ -54,8 +54,6 @@ function SuggestPage() {
         setWord('')
         setSentence('')
       }
-      // Whether success or fail, roll a fresh challenge so the next attempt
-      // can't replay the previous answer.
       reroll()
     } catch (err) {
       setResult({ ok: false, error: err instanceof Error ? err.message : 'Submission failed' })
@@ -63,6 +61,11 @@ function SuggestPage() {
     } finally {
       setBusy(false)
     }
+  }, [submit, word, sentence, challenge, answer, trap, reroll])
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    void send()
   }
 
   return (
@@ -190,29 +193,80 @@ function SuggestPage() {
         </button>
       </form>
 
-      {result && (
-        <div
-          role="status"
-          aria-live="polite"
-          style={{
-            marginTop: 20,
-            padding: 14,
-            borderRadius: 10,
-            background: result.ok ? '#e8f5ee' : '#fdecea',
-            color: result.ok ? '#1f5132' : '#7a1a14',
-            fontSize: 14,
-            lineHeight: 1.5,
-          }}
-        >
-          {result.ok ? (
-            result.status === 'duplicate-pending'
-              ? `Someone already suggested that one — tracked as #${result.issueNumber}.`
-              : `Thanks! Queued as #${result.issueNumber}. It'll appear in the app after the next batch lands.`
-          ) : (
-            result.error
-          )}
+      {result?.ok && (
+        <div role="status" aria-live="polite" style={resultBox('ok')}>
+          {result.status === 'duplicate-pending'
+            ? `Someone already suggested that one — tracked as #${result.issueNumber}.`
+            : result.status === 'flagged'
+              ? `Thanks! Flagged for human review as #${result.issueNumber}.`
+              : `Thanks! Queued as #${result.issueNumber}. It'll appear in the app after the next batch lands.`}
+        </div>
+      )}
+
+      {result && !result.ok && result.kind === 'lexical-match' && (
+        <div role="status" aria-live="polite" style={resultBox('warn')}>
+          <div>
+            Looks like we already have <strong>{result.existingWord}</strong> — that
+            matches your <strong>{word.trim()}</strong>.
+          </div>
+          <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => send({ confirmDistinct: true, matchedWord: result.existingWord })}
+              disabled={busy}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 10,
+                background: 'var(--color-accent)',
+                color: 'white',
+                fontWeight: 700,
+                fontSize: 13,
+              }}
+            >
+              {busy ? 'Submitting…' : 'This is a different word →'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setResult(null)}
+              disabled={busy}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 10,
+                background: 'transparent',
+                color: 'var(--color-text-muted)',
+                fontWeight: 700,
+                fontSize: 13,
+                border: '1px solid var(--color-border, #ddd)',
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {result && !result.ok && result.kind !== 'lexical-match' && (
+        <div role="status" aria-live="polite" style={resultBox('err')}>
+          {result.error}
         </div>
       )}
     </main>
   )
+}
+
+function resultBox(kind: 'ok' | 'warn' | 'err'): React.CSSProperties {
+  const palette = {
+    ok:   { bg: '#e8f5ee', fg: '#1f5132' },
+    warn: { bg: '#fff4d6', fg: '#5c4400' },
+    err:  { bg: '#fdecea', fg: '#7a1a14' },
+  }[kind]
+  return {
+    marginTop: 20,
+    padding: 14,
+    borderRadius: 10,
+    background: palette.bg,
+    color: palette.fg,
+    fontSize: 14,
+    lineHeight: 1.5,
+  }
 }
