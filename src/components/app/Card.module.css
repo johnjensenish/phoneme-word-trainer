@@ -346,16 +346,61 @@
   .actionBar {
     padding-top: var(--space-xs);
   }
+}
+
+/* Landscape — pin nav buttons to the viewport edges so they sit beside the card */
+@media (orientation: landscape) {
+  .actionBar {
+    height: 0;
+    padding: 0;
+    border-top: none;
+    overflow: visible;
+  }
+
+  .actionBarSpacer {
+    display: none;
+  }
 
   .navButton {
-    height: 48px;
-    padding: 0 14px;
-    font-size: 14px;
-    gap: 6px;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: var(--z-action-bar);
+  }
+
+  .navPrev {
+    left: max(var(--space-md), env(safe-area-inset-left));
+  }
+
+  .navNext {
+    right: max(var(--space-md), env(safe-area-inset-right));
+  }
+
+  .navButton:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+}
+
+/* iPad landscape — match the iPad portrait button size */
+@media (orientation: landscape) and (min-width: 1024px) {
+  .navButton {
+    height: 88px;
+    padding: 0 32px;
+    font-size: 22px;
+    border-radius: 20px;
+    gap: var(--space-md);
   }
 
   .navButton svg {
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .navPrev {
+    left: max(var(--space-lg), env(safe-area-inset-left));
+  }
+
+  .navNext {
+    right: max(var(--space-lg), env(safe-area-inset-right));
   }
 }
