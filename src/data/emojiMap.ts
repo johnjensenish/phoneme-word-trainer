@@ -484,4 +484,5 @@ export const emojiMap: Record<string, string> = {
   photo_wish: "🌠",
   photo_chip: "🍟",
   photo_cozy: "🛋️",
+  photo_wombat: "🐾",
 };
