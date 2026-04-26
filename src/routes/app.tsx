@@ -8,6 +8,7 @@ import { useAudio, usePrefetchAudio } from '~/hooks/useAudio'
 import { AgeEntry } from '~/components/app/AgeEntry'
 import { Card } from '~/components/app/Card'
 import { FilterPanel } from '~/components/app/FilterPanel'
+import { UnlockModal } from '~/components/app/UnlockModal'
 import { WordSearch } from '~/components/app/WordSearch'
 
 export const Route = createFileRoute('/app')({
@@ -17,6 +18,7 @@ export const Route = createFileRoute('/app')({
 const STORAGE_KEY_BIRTH = 'phoneme-trainer-birth'
 const STORAGE_KEY_OVERRIDES = 'phoneme-trainer-overrides'
 const STORAGE_KEY_REACH = 'phoneme-trainer-reach'
+const STORAGE_KEY_TODDLER = 'phoneme-trainer-toddler-mode'
 
 interface BirthDate {
   month: number
@@ -74,6 +76,20 @@ function saveOverrides(overrides: Map<string, SoundOverride>) {
   )
 }
 
+function loadToddlerMode(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    return localStorage.getItem(STORAGE_KEY_TODDLER) === '1'
+  } catch {
+    return false
+  }
+}
+
+function saveToddlerMode(on: boolean) {
+  if (on) localStorage.setItem(STORAGE_KEY_TODDLER, '1')
+  else localStorage.removeItem(STORAGE_KEY_TODDLER)
+}
+
 function AppRoute() {
   const [birthDate, setBirthDate] = useState<BirthDate | null>(null)
   const [birthLoaded, setBirthLoaded] = useState(false)
@@ -84,6 +100,8 @@ function AppRoute() {
   const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
   const [editingAge, setEditingAge] = useState(false)
   const [pinnedCard, setPinnedCard] = useState<ComputedWordCard | null>(null)
+  const [toddlerMode, setToddlerMode] = useState(false)
+  const [unlockOpen, setUnlockOpen] = useState(false)
 
   // Load persisted state on mount
   useEffect(() => {
@@ -91,6 +109,19 @@ function AppRoute() {
     setBirthLoaded(true)
     setSoundOverrides(loadOverrides())
     setReachMonths(loadReach())
+    setToddlerMode(loadToddlerMode())
+  }, [])
+
+  const enableToddlerMode = useCallback(() => {
+    setFilterOpen(false)
+    setToddlerMode(true)
+    saveToddlerMode(true)
+  }, [])
+
+  const handleUnlock = useCallback(() => {
+    setToddlerMode(false)
+    saveToddlerMode(false)
+    setUnlockOpen(false)
   }, [])
 
   const baseAgeMonths = birthDate ? computeAgeMonths(birthDate.month, birthDate.year) : 24
@@ -196,79 +227,114 @@ function AppRoute() {
       <header style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: toddlerMode ? 'flex-end' : 'space-between',
         padding: '0 var(--space-md)',
         height: 'var(--nav-height)',
         flexShrink: 0,
       }}>
-        <button
-          onClick={() => setFilterOpen(true)}
-          style={{
-            fontSize: '13px',
-            fontWeight: 700,
-            color: 'var(--color-text-muted)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            padding: '6px 10px',
-            borderRadius: '10px',
-            background: 'var(--color-surface-sunken)',
-            transition: 'background 150ms ease',
-          }}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="16" y2="12" />
-            <line x1="4" y1="18" x2="12" y2="18" />
-          </svg>
-          Filter
-          {stats.filtered < stats.total && (
-            <span style={{
-              background: 'var(--color-accent)',
-              color: 'white',
-              borderRadius: '8px',
-              padding: '1px 6px',
-              fontSize: '10px',
-              fontWeight: 800,
-            }}>
-              {stats.filtered}
-            </span>
-          )}
-        </button>
+        {!toddlerMode && (
+          <button
+            onClick={() => setFilterOpen(true)}
+            style={{
+              fontSize: '13px',
+              fontWeight: 700,
+              color: 'var(--color-text-muted)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '6px 10px',
+              borderRadius: '10px',
+              background: 'var(--color-surface-sunken)',
+              transition: 'background 150ms ease',
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="16" y2="12" />
+              <line x1="4" y1="18" x2="12" y2="18" />
+            </svg>
+            Filter
+            {stats.filtered < stats.total && (
+              <span style={{
+                background: 'var(--color-accent)',
+                color: 'white',
+                borderRadius: '8px',
+                padding: '1px 6px',
+                fontSize: '10px',
+                fontWeight: 800,
+              }}>
+                {stats.filtered}
+              </span>
+            )}
+          </button>
+        )}
 
-        <WordSearch
-          allCards={allCards}
-          filteredCards={cards}
-          currentIndex={currentIndex}
-          filteredCount={cards.length}
-          onSelect={handleSearchSelect}
-        />
+        {!toddlerMode && (
+          <WordSearch
+            allCards={allCards}
+            filteredCards={cards}
+            currentIndex={currentIndex}
+            filteredCount={cards.length}
+            onSelect={handleSearchSelect}
+          />
+        )}
 
-        <button
-          onClick={() => setEditingAge(true)}
-          style={{
-            fontSize: '13px',
-            fontWeight: 700,
-            color: 'var(--color-text-muted)',
-            padding: '6px 10px',
-            borderRadius: '10px',
-            background: 'var(--color-surface-sunken)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-          }}
-        >
-          {formatAgeShort(baseAgeMonths)}
-          {reachMonths > 0 && (
-            <span style={{
-              color: 'var(--color-accent)',
-              fontSize: '11px',
-              fontWeight: 800,
-            }}>
-              +{reachMonths}
-            </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          {!toddlerMode && (
+            <button
+              onClick={() => setEditingAge(true)}
+              style={{
+                fontSize: '13px',
+                fontWeight: 700,
+                color: 'var(--color-text-muted)',
+                padding: '6px 10px',
+                borderRadius: '10px',
+                background: 'var(--color-surface-sunken)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+            >
+              {formatAgeShort(baseAgeMonths)}
+              {reachMonths > 0 && (
+                <span style={{
+                  color: 'var(--color-accent)',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                }}>
+                  +{reachMonths}
+                </span>
+              )}
+            </button>
           )}
-        </button>
+
+          <button
+            onClick={toddlerMode ? () => setUnlockOpen(true) : enableToddlerMode}
+            aria-label={toddlerMode ? 'Unlock parental controls' : 'Enter toddler mode'}
+            title={toddlerMode ? 'Unlock parental controls' : 'Enter toddler mode'}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '32px',
+              height: '32px',
+              borderRadius: '10px',
+              background: toddlerMode ? 'var(--color-accent)' : 'var(--color-surface-sunken)',
+              color: toddlerMode ? 'white' : 'var(--color-text-muted)',
+              border: 'none',
+              transition: 'background 150ms ease',
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+              <rect x="4" y="11" width="16" height="10" rx="2" />
+              {toddlerMode ? (
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+              ) : (
+                <path d="M8 11V7a4 4 0 0 1 8 0" />
+              )}
+            </svg>
+          </button>
+        </div>
       </header>
 
       {/* Card area */}
@@ -317,6 +383,12 @@ function AppRoute() {
         onTierToggle={handleTierToggle}
         shuffle={filters.shuffle}
         onShuffleToggle={handleShuffleToggle}
+      />
+
+      <UnlockModal
+        isOpen={unlockOpen}
+        onUnlock={handleUnlock}
+        onClose={() => setUnlockOpen(false)}
       />
     </div>
   )

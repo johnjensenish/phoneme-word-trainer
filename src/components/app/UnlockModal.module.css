@@ -1,0 +1,134 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: var(--z-overlay);
+  animation: fadeIn var(--transition-normal) ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-modal);
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  width: min(92vw, 360px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.problem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  padding: var(--space-md) 0;
+}
+
+.op {
+  color: var(--color-text-muted);
+}
+
+.input {
+  width: 72px;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-family);
+  text-align: center;
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  padding: 4px 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.error {
+  margin: 0;
+  text-align: center;
+  font-size: var(--font-size-small);
+  color: var(--color-accent);
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.cancel,
+.submit {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel {
+  background: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+}
+
+.submit {
+  background: var(--color-accent);
+  color: white;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.shake {
+  animation: shake 0.32s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-6px); }
+  75%      { transform: translateX(6px); }
+}
