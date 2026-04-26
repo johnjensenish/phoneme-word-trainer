@@ -6,10 +6,16 @@ const REPO = 'johnjensenish/phoneme-word-trainer'
 const LABEL = 'word-suggestion'
 const WORD_RE = /^[a-z][a-z' -]{0,28}[a-z]$|^[a-z]$/
 const SENTENCE_MAX = 200
+const HONEYPOT_FIELD = 'website'
 
 export type SubmitInput = {
   word: string
   sentence?: string
+  captchaA: number
+  captchaB: number
+  captchaAnswer: number
+  // Honeypot — bots fill it, humans don't see it. Real submissions leave it ''.
+  [HONEYPOT_FIELD]?: string
 }
 
 export type SubmitResult =
@@ -37,13 +43,32 @@ function validate(input: unknown): SubmitInput {
   const o = input as Record<string, unknown>
   const word = typeof o.word === 'string' ? o.word.trim().toLowerCase() : ''
   const sentence = typeof o.sentence === 'string' ? o.sentence.trim() : undefined
+  const captchaA = Number(o.captchaA)
+  const captchaB = Number(o.captchaB)
+  const captchaAnswer = Number(o.captchaAnswer)
+  const honeypot = typeof o[HONEYPOT_FIELD] === 'string' ? (o[HONEYPOT_FIELD] as string) : ''
+
   if (!WORD_RE.test(word)) {
     throw new Error('Word must be 1–30 lowercase letters (apostrophes/hyphens/spaces allowed in the middle)')
   }
   if (sentence && sentence.length > SENTENCE_MAX) {
     throw new Error(`Example sentence must be under ${SENTENCE_MAX} characters`)
   }
-  return { word, sentence: sentence || undefined }
+  if (
+    !Number.isInteger(captchaA) || captchaA < 1 || captchaA > 9 ||
+    !Number.isInteger(captchaB) || captchaB < 1 || captchaB > 9 ||
+    !Number.isInteger(captchaAnswer)
+  ) {
+    throw new Error('Invalid captcha challenge')
+  }
+  return {
+    word,
+    sentence: sentence || undefined,
+    captchaA,
+    captchaB,
+    captchaAnswer,
+    [HONEYPOT_FIELD]: honeypot,
+  }
 }
 
 async function findExistingIssue(token: string, word: string): Promise<number | null> {
@@ -102,6 +127,16 @@ export const submitWord = createServerFn({ method: 'POST' })
   .handler(async ({ data }): Promise<SubmitResult> => {
     const token = process.env.GITHUB_PAT
     if (!token) return { ok: false, error: 'Server not configured (GITHUB_PAT missing)' }
+
+    // Honeypot: bots fill hidden fields, humans don't. Pretend success
+    // so the bot doesn't learn it was caught.
+    if (data[HONEYPOT_FIELD] && data[HONEYPOT_FIELD].length > 0) {
+      return { ok: true, issueNumber: 0, status: 'queued' }
+    }
+
+    if (data.captchaAnswer !== data.captchaA + data.captchaB) {
+      return { ok: false, error: 'Math check failed. Try the new question.' }
+    }
 
     let ip = 'unknown'
     try {

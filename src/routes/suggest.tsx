@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useServerFn } from '@tanstack/react-start'
 import { submitWord, type SubmitResult } from '~/server/submitWord'
 
@@ -14,27 +14,52 @@ export const Route = createFileRoute('/suggest')({
   }),
 })
 
+function rollChallenge() {
+  return { a: 1 + Math.floor(Math.random() * 9), b: 1 + Math.floor(Math.random() * 9) }
+}
+
 function SuggestPage() {
   const { word: prefill } = Route.useSearch()
   const submit = useServerFn(submitWord)
   const [word, setWord] = useState(prefill ?? '')
   const [sentence, setSentence] = useState('')
+  const [challenge, setChallenge] = useState(rollChallenge)
+  const [answer, setAnswer] = useState('')
+  const [trap, setTrap] = useState('')
   const [busy, setBusy] = useState(false)
   const [result, setResult] = useState<SubmitResult | null>(null)
+
+  const reroll = useCallback(() => {
+    setChallenge(rollChallenge())
+    setAnswer('')
+  }, [])
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setBusy(true)
     setResult(null)
     try {
-      const res = await submit({ data: { word, sentence: sentence || undefined } })
+      const res = await submit({
+        data: {
+          word,
+          sentence: sentence || undefined,
+          captchaA: challenge.a,
+          captchaB: challenge.b,
+          captchaAnswer: Number(answer),
+          website: trap,
+        },
+      })
       setResult(res)
       if (res.ok) {
         setWord('')
         setSentence('')
       }
+      // Whether success or fail, roll a fresh challenge so the next attempt
+      // can't replay the previous answer.
+      reroll()
     } catch (err) {
       setResult({ ok: false, error: err instanceof Error ? err.message : 'Submission failed' })
+      reroll()
     } finally {
       setBusy(false)
     }
@@ -105,9 +130,52 @@ function SuggestPage() {
           </span>
         </label>
 
+        {/* Honeypot: visually hidden, off-screen, not focusable.
+            Real humans never fill this; bots usually do. */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
+          <label>
+            Website
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={trap}
+              onChange={e => setTrap(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <label style={{ display: 'grid', gap: 6 }}>
+          <span style={{ fontWeight: 700, fontSize: 14 }}>
+            Quick check: what is {challenge.a} + {challenge.b}?
+          </span>
+          <input
+            type="number"
+            inputMode="numeric"
+            required
+            value={answer}
+            onChange={e => setAnswer(e.target.value)}
+            min={2}
+            max={18}
+            disabled={busy}
+            style={{
+              padding: '10px 12px',
+              borderRadius: 10,
+              border: '1px solid var(--color-border, #ddd)',
+              background: 'var(--color-surface, #fff)',
+              fontSize: 16,
+              maxWidth: 120,
+            }}
+          />
+          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+            Confirms you&rsquo;re a human. We don&rsquo;t store this.
+          </span>
+        </label>
+
         <button
           type="submit"
-          disabled={busy || !word.trim()}
+          disabled={busy || !word.trim() || !answer}
           style={{
             padding: '12px 16px',
             borderRadius: 12,
@@ -115,7 +183,7 @@ function SuggestPage() {
             color: 'white',
             fontWeight: 800,
             fontSize: 15,
-            opacity: busy || !word.trim() ? 0.6 : 1,
+            opacity: busy || !word.trim() || !answer ? 0.6 : 1,
           }}
         >
           {busy ? 'Submitting…' : 'Submit suggestion'}

@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import type { Tier } from '~/data/types'
 import { ALL_CATEGORIES } from '~/engine/cardOrdering'
 import styles from './FilterPanel.module.css'
@@ -84,6 +85,12 @@ export function FilterPanel({
               <span className={styles.toggleThumb} />
             </button>
           </label>
+        </div>
+
+        <div className={styles.footer}>
+          <Link to="/suggest" onClick={onClose} className={styles.suggestLink}>
+            Missing a word? Suggest one →
+          </Link>
         </div>
       </aside>
     </>
