@@ -311,3 +311,21 @@
     width: 280px;
   }
 }
+
+/* ─── Footer ──────────────────────────────────────────────────────── */
+.footer {
+  margin-top: auto;
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border-light);
+  text-align: center;
+}
+
+.suggestLink {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.suggestLink:hover {
+  color: var(--color-accent-hover);
+}

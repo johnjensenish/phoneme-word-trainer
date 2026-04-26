@@ -36,22 +36,6 @@ again.
 
 ## One-time setup (must be done at github.com)
 
-### 0. Install the workflow files
-
-The two workflow YAMLs live at `docs/workflows/` rather than
-`.github/workflows/` because the OAuth app that opens this branch lacks the
-`workflow` scope and can't push them. Move them into place once with a
-human-authored commit:
-
-```sh
-mkdir -p .github/workflows
-git mv docs/workflows/word-suggestions-cron.yml .github/workflows/
-git mv docs/workflows/word-suggestions-requeue.yml .github/workflows/
-git commit -m "Activate word-suggestions workflows"
-git push
-```
-
-
 ### 1. Create the labels
 
 In `johnjensenish/phoneme-word-trainer` → Issues → Labels:
@@ -94,7 +78,35 @@ Repo Settings → Actions → General → ensure **Read and write permissions** 
 the `GITHUB_TOKEN` are enabled. Models inference uses this token and the
 workflow already requests `permissions: models: read`.
 
-### 5. Auto-delete merged branches (optional but recommended)
+### 5. Mint a separate PAT for the cron (`BOT_PAT`)
+
+> **Why this is required, not optional.** GitHub deliberately suppresses
+> downstream workflow triggers when an event is authored by `GITHUB_TOKEN` —
+> if the cron used the auto-issued token, neither `ci.yml` nor
+> `generate-audio.yml` would run on the bot's PR. A PAT (or GitHub App
+> token) is the standard escape hatch.
+
+Create a second fine-grained PAT — separate from the Worker's `GITHUB_PAT` so
+the two can be rotated independently:
+
+- **Token name:** `phoneme-trainer-bot`
+- **Repository access:** `Only select repositories` → `phoneme-word-trainer`
+- **Repository permissions:**
+  - **Contents:** Read and write (for `git push`)
+  - **Issues:** Read and write (for label edits + comments)
+  - **Pull requests:** Read and write (for `gh pr create / edit`)
+  - **Metadata:** Read-only (auto)
+
+Add it as a **repository secret** (not Actions variable):
+
+Repo → Settings → Secrets and variables → Actions → New repository secret
+- Name: `BOT_PAT`
+- Value: paste the token
+
+The cron workflow checks for this secret at job start and fails loudly with a
+pointer to this doc if it's missing.
+
+### 6. Auto-delete merged branches (optional but recommended)
 
 Repo Settings → General → tick **"Automatically delete head branches"**. This
 keeps `bot/word-suggestions` clean between batches.

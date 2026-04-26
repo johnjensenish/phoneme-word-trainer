@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useServerFn } from '@tanstack/react-start'
 import { submitWord, type SubmitResult } from '~/server/submitWord'
 
@@ -14,30 +14,58 @@ export const Route = createFileRoute('/suggest')({
   }),
 })
 
+function rollChallenge() {
+  return { a: 1 + Math.floor(Math.random() * 9), b: 1 + Math.floor(Math.random() * 9) }
+}
+
 function SuggestPage() {
   const { word: prefill } = Route.useSearch()
   const submit = useServerFn(submitWord)
   const [word, setWord] = useState(prefill ?? '')
   const [sentence, setSentence] = useState('')
+  const [challenge, setChallenge] = useState(rollChallenge)
+  const [answer, setAnswer] = useState('')
+  const [trap, setTrap] = useState('')
   const [busy, setBusy] = useState(false)
   const [result, setResult] = useState<SubmitResult | null>(null)
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const reroll = useCallback(() => {
+    setChallenge(rollChallenge())
+    setAnswer('')
+  }, [])
+
+  const send = useCallback(async (override?: { confirmDistinct: true; matchedWord: string }) => {
     setBusy(true)
     setResult(null)
     try {
-      const res = await submit({ data: { word, sentence: sentence || undefined } })
+      const res = await submit({
+        data: {
+          word,
+          sentence: sentence || undefined,
+          captchaA: challenge.a,
+          captchaB: challenge.b,
+          captchaAnswer: Number(answer),
+          website: trap,
+          ...(override ?? {}),
+        },
+      })
       setResult(res)
       if (res.ok) {
         setWord('')
         setSentence('')
       }
+      reroll()
     } catch (err) {
       setResult({ ok: false, error: err instanceof Error ? err.message : 'Submission failed' })
+      reroll()
     } finally {
       setBusy(false)
     }
+  }, [submit, word, sentence, challenge, answer, trap, reroll])
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    void send()
   }
 
   return (
@@ -105,9 +133,52 @@ function SuggestPage() {
           </span>
         </label>
 
+        {/* Honeypot: visually hidden, off-screen, not focusable.
+            Real humans never fill this; bots usually do. */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
+          <label>
+            Website
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={trap}
+              onChange={e => setTrap(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <label style={{ display: 'grid', gap: 6 }}>
+          <span style={{ fontWeight: 700, fontSize: 14 }}>
+            Quick check: what is {challenge.a} + {challenge.b}?
+          </span>
+          <input
+            type="number"
+            inputMode="numeric"
+            required
+            value={answer}
+            onChange={e => setAnswer(e.target.value)}
+            min={2}
+            max={18}
+            disabled={busy}
+            style={{
+              padding: '10px 12px',
+              borderRadius: 10,
+              border: '1px solid var(--color-border, #ddd)',
+              background: 'var(--color-surface, #fff)',
+              fontSize: 16,
+              maxWidth: 120,
+            }}
+          />
+          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+            Confirms you&rsquo;re a human. We don&rsquo;t store this.
+          </span>
+        </label>
+
         <button
           type="submit"
-          disabled={busy || !word.trim()}
+          disabled={busy || !word.trim() || !answer}
           style={{
             padding: '12px 16px',
             borderRadius: 12,
@@ -115,36 +186,87 @@ function SuggestPage() {
             color: 'white',
             fontWeight: 800,
             fontSize: 15,
-            opacity: busy || !word.trim() ? 0.6 : 1,
+            opacity: busy || !word.trim() || !answer ? 0.6 : 1,
           }}
         >
           {busy ? 'Submitting…' : 'Submit suggestion'}
         </button>
       </form>
 
-      {result && (
-        <div
-          role="status"
-          aria-live="polite"
-          style={{
-            marginTop: 20,
-            padding: 14,
-            borderRadius: 10,
-            background: result.ok ? '#e8f5ee' : '#fdecea',
-            color: result.ok ? '#1f5132' : '#7a1a14',
-            fontSize: 14,
-            lineHeight: 1.5,
-          }}
-        >
-          {result.ok ? (
-            result.status === 'duplicate-pending'
-              ? `Someone already suggested that one — tracked as #${result.issueNumber}.`
-              : `Thanks! Queued as #${result.issueNumber}. It'll appear in the app after the next batch lands.`
-          ) : (
-            result.error
-          )}
+      {result?.ok && (
+        <div role="status" aria-live="polite" style={resultBox('ok')}>
+          {result.status === 'duplicate-pending'
+            ? `Someone already suggested that one — tracked as #${result.issueNumber}.`
+            : result.status === 'flagged'
+              ? `Thanks! Flagged for human review as #${result.issueNumber}.`
+              : `Thanks! Queued as #${result.issueNumber}. It'll appear in the app after the next batch lands.`}
+        </div>
+      )}
+
+      {result && !result.ok && result.kind === 'lexical-match' && (
+        <div role="status" aria-live="polite" style={resultBox('warn')}>
+          <div>
+            Looks like we already have <strong>{result.existingWord}</strong> — that
+            matches your <strong>{word.trim()}</strong>.
+          </div>
+          <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={() => send({ confirmDistinct: true, matchedWord: result.existingWord })}
+              disabled={busy}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 10,
+                background: 'var(--color-accent)',
+                color: 'white',
+                fontWeight: 700,
+                fontSize: 13,
+              }}
+            >
+              {busy ? 'Submitting…' : 'This is a different word →'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setResult(null)}
+              disabled={busy}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 10,
+                background: 'transparent',
+                color: 'var(--color-text-muted)',
+                fontWeight: 700,
+                fontSize: 13,
+                border: '1px solid var(--color-border, #ddd)',
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {result && !result.ok && result.kind !== 'lexical-match' && (
+        <div role="status" aria-live="polite" style={resultBox('err')}>
+          {result.error}
         </div>
       )}
     </main>
   )
+}
+
+function resultBox(kind: 'ok' | 'warn' | 'err'): React.CSSProperties {
+  const palette = {
+    ok:   { bg: '#e8f5ee', fg: '#1f5132' },
+    warn: { bg: '#fff4d6', fg: '#5c4400' },
+    err:  { bg: '#fdecea', fg: '#7a1a14' },
+  }[kind]
+  return {
+    marginTop: 20,
+    padding: 14,
+    borderRadius: 10,
+    background: palette.bg,
+    color: palette.fg,
+    fontSize: 14,
+    lineHeight: 1.5,
+  }
 }
