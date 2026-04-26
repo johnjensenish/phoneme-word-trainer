@@ -30,6 +30,8 @@
   /* Secondary accent — cool blue for info/links */
   --color-secondary: #3B82F6;
   --color-secondary-hover: #2563EB;
+  --color-secondary-light: #DBEAFE;
+  --color-secondary-light-hover: #BFDBFE;
 
   /* Borders and dividers */
   --color-border: #E2E8F0;

@@ -150,25 +150,34 @@
 }
 
 .navButton {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: var(--color-surface-sunken);
-  color: var(--color-text);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-sm);
+  height: 60px;
+  padding: 0 22px;
+  border-radius: 16px;
+  background: var(--color-secondary-light);
+  color: var(--color-secondary);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   flex-shrink: 0;
   transition: background var(--transition-fast), transform 100ms ease;
   cursor: pointer;
 }
 
+.navButton svg {
+  width: 22px;
+  height: 22px;
+}
+
 .navButton:hover {
-  background: var(--color-border);
+  background: var(--color-secondary-light-hover);
 }
 
 .navButton:active {
-  transform: scale(0.93);
+  transform: scale(0.96);
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
@@ -197,6 +206,18 @@
 
   .imageLabel {
     font-size: 24px;
+  }
+
+  .navButton {
+    height: 54px;
+    padding: 0 16px;
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .navButton svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -273,14 +294,16 @@
   }
 
   .navButton {
-    width: 76px;
-    height: 76px;
-    border-radius: 18px;
+    height: 88px;
+    padding: 0 32px;
+    font-size: 22px;
+    border-radius: 20px;
+    gap: var(--space-md);
   }
 
   .navButton svg {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
   }
 
   .actionBar {
@@ -325,7 +348,14 @@
   }
 
   .navButton {
-    width: 44px;
-    height: 44px;
+    height: 48px;
+    padding: 0 14px;
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .navButton svg {
+    width: 18px;
+    height: 18px;
   }
 }
