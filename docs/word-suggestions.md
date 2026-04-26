@@ -36,6 +36,22 @@ again.
 
 ## One-time setup (must be done at github.com)
 
+### 0. Install the workflow files
+
+The two workflow YAMLs live at `docs/workflows/` rather than
+`.github/workflows/` because the OAuth app that opens this branch lacks the
+`workflow` scope and can't push them. Move them into place once with a
+human-authored commit:
+
+```sh
+mkdir -p .github/workflows
+git mv docs/workflows/word-suggestions-cron.yml .github/workflows/
+git mv docs/workflows/word-suggestions-requeue.yml .github/workflows/
+git commit -m "Activate word-suggestions workflows"
+git push
+```
+
+
 ### 1. Create the labels
 
 In `johnjensenish/phoneme-word-trainer` → Issues → Labels:
