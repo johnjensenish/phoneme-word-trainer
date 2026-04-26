@@ -66,10 +66,12 @@ jobs:
             | jq '[.[] | select(.labels | map(.name) | index(env.LABEL_QUEUED) | not)]' \
             > /tmp/raw-issues.json
 
-          # Parse word + sentence out of the issue body.
+          # Parse word + sentence out of the issue body. Title format is
+          # "word: <w>" and the word is server-validated by submitWord.ts
+          # (WORD_RE), so we just strip the prefix and trust the rest.
           jq '[.[] | {
             number,
-            word: (.title | sub("^word: "; "") | ascii_downcase | gsub("[^a-z\'\'' -]"; "")),
+            word: (.title | sub("^word: "; "") | ascii_downcase),
             sentence: (
               .body
               | capture("\\*\\*Example sentence:\\*\\* (?<s>[^\\n]+)"; "i").s
