@@ -1,0 +1,216 @@
+name: Process Word Suggestions
+
+on:
+  schedule:
+    # Daily at 09:00 UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+# Single source of truth: never let two runs race on the same branch.
+concurrency:
+  group: word-suggestions
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  models: read
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: bot/word-suggestions
+      LABEL_PENDING: word-suggestion
+      LABEL_QUEUED: queued
+      LABEL_REVIEW: needs-human-review
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install espeak-ng
+        run: sudo apt-get update && sudo apt-get install -y espeak-ng
+
+      - run: bun install --frozen-lockfile
+
+      - name: Configure git identity
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch pending suggestions
+        id: fetch
+        run: |
+          # Open issues with the suggestion label, excluding ones already queued.
+          gh issue list \
+            --label "$LABEL_PENDING" \
+            --state open \
+            --limit 100 \
+            --json number,title,body,labels \
+            | jq '[.[] | select(.labels | map(.name) | index(env.LABEL_QUEUED) | not)]' \
+            > /tmp/raw-issues.json
+
+          # Parse word + sentence out of the issue body.
+          jq '[.[] | {
+            number,
+            word: (.title | sub("^word: "; "") | ascii_downcase | gsub("[^a-z\'\'' -]"; "")),
+            sentence: (
+              .body
+              | capture("\\*\\*Example sentence:\\*\\* (?<s>[^\\n]+)"; "i").s
+              // empty
+            )
+          } | select(.word != "")]' /tmp/raw-issues.json > /tmp/pending.json
+
+          count=$(jq 'length' /tmp/pending.json)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "Found $count pending suggestion(s)."
+          if [[ "$count" -gt 0 ]]; then jq . /tmp/pending.json; fi
+
+      - name: Classify with GitHub Models
+        if: steps.fetch.outputs.count != '0'
+        run: |
+          bun run scripts/classify-suggestions.ts < /tmp/pending.json > /tmp/classified.json
+          jq . /tmp/classified.json
+
+      - name: Reject low-confidence suggestions
+        if: steps.fetch.outputs.count != '0'
+        run: |
+          jq -c '.[] | select(.accepted | not)' /tmp/classified.json > /tmp/rejected.jsonl || true
+          while IFS= read -r row; do
+            num=$(echo "$row" | jq -r .number)
+            cat=$(echo "$row" | jq -r .category)
+            conf=$(echo "$row" | jq -r .confidence)
+            reason=$(echo "$row" | jq -r .reasoning)
+            echo "Flagging #$num for human review (category=$cat, confidence=$conf)"
+            gh issue edit "$num" --add-label "$LABEL_REVIEW"
+            gh issue comment "$num" --body "Auto-classifier wasn't confident enough to add this automatically.
+
+Suggested category: \`$cat\` (confidence $conf)
+Reasoning: $reason
+
+A maintainer will take it from here."
+          done < /tmp/rejected.jsonl
+
+      - name: Reconcile branch state
+        id: branch
+        if: steps.fetch.outputs.count != '0'
+        run: |
+          jq -c '.[] | select(.accepted)' /tmp/classified.json > /tmp/accepted.jsonl || true
+          accepted_count=$(wc -l < /tmp/accepted.jsonl | tr -d ' ')
+          echo "accepted=$accepted_count" >> "$GITHUB_OUTPUT"
+          if [[ "$accepted_count" == "0" ]]; then
+            echo "No accepted suggestions — nothing to commit."
+            exit 0
+          fi
+
+          # Single source of truth: do we have an open PR for this branch?
+          pr_number=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
+          echo "pr=$pr_number" >> "$GITHUB_OUTPUT"
+
+          if [[ -n "$pr_number" ]]; then
+            echo "Reusing existing PR #$pr_number on $BRANCH"
+            git fetch origin "$BRANCH"
+            git checkout "$BRANCH"
+            git rebase origin/main
+          else
+            # No open PR. Nuke any stale branch left over from a closed/unmerged PR.
+            git push origin --delete "$BRANCH" 2>/dev/null || true
+            git checkout -B "$BRANCH" origin/main
+          fi
+
+      - name: Run add-word.ts for accepted suggestions
+        id: add
+        if: steps.branch.outputs.accepted != '0'
+        run: |
+          : > /tmp/succeeded.jsonl
+          : > /tmp/failed.jsonl
+          while IFS= read -r row; do
+            num=$(echo "$row" | jq -r .number)
+            word=$(echo "$row" | jq -r .word)
+            cat=$(echo "$row" | jq -r .category)
+            emoji=$(echo "$row" | jq -r .emoji)
+
+            echo "::group::Adding '$word' (category=$cat, emoji=$emoji) — issue #$num"
+            if bun run scripts/add-word.ts "$word" --category "$cat" --emoji "$emoji" --yes; then
+              git add src/data/words.ts src/data/emojiMap.ts
+              if git diff --cached --quiet; then
+                echo "No diff produced for '$word' — likely already present. Skipping."
+                echo "$row" >> /tmp/failed.jsonl
+              else
+                git commit -m "Add suggested word: $word (closes #$num)"
+                echo "$row" >> /tmp/succeeded.jsonl
+              fi
+            else
+              echo "add-word.ts failed for '$word'"
+              echo "$row" >> /tmp/failed.jsonl
+            fi
+            echo "::endgroup::"
+          done < /tmp/accepted.jsonl
+
+          succ=$(wc -l < /tmp/succeeded.jsonl | tr -d ' ')
+          echo "succeeded=$succ" >> "$GITHUB_OUTPUT"
+
+      - name: Flag failures for human review
+        if: steps.branch.outputs.accepted != '0'
+        run: |
+          while IFS= read -r row; do
+            num=$(echo "$row" | jq -r .number)
+            word=$(echo "$row" | jq -r .word)
+            gh issue edit "$num" --add-label "$LABEL_REVIEW"
+            gh issue comment "$num" --body "\`add-word.ts\` couldn't process \`$word\` automatically (run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). A maintainer will take a look."
+          done < /tmp/failed.jsonl
+
+      - name: Push branch
+        if: steps.add.outputs.succeeded != '' && steps.add.outputs.succeeded != '0'
+        run: git push --force-with-lease -u origin "$BRANCH"
+
+      - name: Open or update PR
+        if: steps.add.outputs.succeeded != '' && steps.add.outputs.succeeded != '0'
+        id: pr
+        run: |
+          # Build a body that lists every issue this PR closes.
+          {
+            echo "Auto-generated batch of word suggestions, classified by GitHub Models."
+            echo
+            echo "## Words in this PR"
+            git log origin/main..HEAD --pretty=format:"- %s" | sed 's/Add suggested word: //'
+            echo
+            echo
+            echo "## Closes"
+            git log origin/main..HEAD --pretty=format:"%s" \
+              | grep -oE '#[0-9]+' \
+              | sort -u \
+              | sed 's/^/- Closes /'
+            echo
+            echo
+            echo "_Merge to ship; close without merging to send these suggestions back to the queue._"
+          } > /tmp/pr-body.md
+
+          if [[ -z "${{ steps.branch.outputs.pr }}" ]]; then
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "Add suggested words" \
+              --body-file /tmp/pr-body.md
+          else
+            gh pr edit "${{ steps.branch.outputs.pr }}" --body-file /tmp/pr-body.md
+          fi
+
+          # Capture the (possibly new) PR number for downstream comments.
+          new_pr=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
+          echo "number=$new_pr" >> "$GITHUB_OUTPUT"
+
+      - name: Mark queued issues
+        if: steps.pr.outputs.number != ''
+        run: |
+          while IFS= read -r row; do
+            num=$(echo "$row" | jq -r .number)
+            gh issue edit "$num" --add-label "$LABEL_QUEUED"
+            gh issue comment "$num" --body "Queued in #${{ steps.pr.outputs.number }} — will close automatically when that PR merges."
+          done < /tmp/succeeded.jsonl

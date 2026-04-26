@@ -1,0 +1,37 @@
+name: Requeue Word Suggestions
+
+# Fires when the auto-generated suggestions PR is closed.
+# - Merged → GitHub auto-closes the linked issues; nothing to do here.
+# - Closed unmerged → strip the `queued` label so the cron picks them up again.
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  issues: write
+
+jobs:
+  requeue:
+    if: >
+      github.event.pull_request.merged == false &&
+      startsWith(github.event.pull_request.head.ref, 'bot/word-suggestions')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      LABEL_QUEUED: queued
+    steps:
+      - name: Strip queued label from referenced issues
+        run: |
+          # Extract every #NNN from the PR body — the cron writes "Closes #NNN" lines.
+          numbers=$(printf '%s\n' "${{ github.event.pull_request.body }}" \
+            | grep -oE '#[0-9]+' | tr -d '#' | sort -u)
+          if [[ -z "$numbers" ]]; then
+            echo "No issue references found in PR body."
+            exit 0
+          fi
+          for num in $numbers; do
+            echo "Removing '$LABEL_QUEUED' from #$num"
+            gh issue edit "$num" \
+              --repo "${{ github.repository }}" \
+              --remove-label "$LABEL_QUEUED" || true
+          done

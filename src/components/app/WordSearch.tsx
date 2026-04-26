@@ -1,7 +1,10 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { Link } from '@tanstack/react-router'
 import type { ComputedWordCard, Tier } from '~/data/types'
 import { emojiMap } from '~/data/emojiMap'
 import styles from './WordSearch.module.css'
+
+const WORD_RE = /^[a-z][a-z' -]{0,28}[a-z]$|^[a-z]$/
 
 interface WordSearchProps {
   allCards: ComputedWordCard[]
@@ -190,7 +193,24 @@ export function WordSearch({
         <>
           <div className={styles.backdrop} onClick={close} />
           <div className={styles.dropdown}>
-            <div className={styles.noResults}>No words match "{query}"</div>
+            <div className={styles.noResults}>
+              <div>No words match "{query}"</div>
+              {WORD_RE.test(query.trim().toLowerCase()) && (
+                <Link
+                  to="/suggest"
+                  search={{ word: query.trim().toLowerCase() }}
+                  style={{
+                    display: 'inline-block',
+                    marginTop: 10,
+                    fontWeight: 700,
+                    fontSize: 13,
+                  }}
+                  onClick={close}
+                >
+                  Suggest "{query.trim().toLowerCase()}" →
+                </Link>
+              )}
+            </div>
           </div>
         </>
       )}
