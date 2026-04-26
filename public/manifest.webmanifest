@@ -1,0 +1,11 @@
+{
+  "name": "Phoneme Word Trainer",
+  "short_name": "Phoneme",
+  "description": "A parent-led flashcard app for toddler speech development.",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#F97316",
+  "background_color": "#FAF9F6"
+}
