@@ -13,10 +13,8 @@ interface Problem {
 }
 
 function newProblem(): Problem {
-  // Single-digit addition, both operands ≥ 2 so the answer is non-trivial
-  // for a young child but still instant for an adult.
-  const a = 2 + Math.floor(Math.random() * 8)
-  const b = 2 + Math.floor(Math.random() * 8)
+  const a = 1 + Math.floor(Math.random() * 5)
+  const b = 1 + Math.floor(Math.random() * 5)
   return { a, b }
 }
 
