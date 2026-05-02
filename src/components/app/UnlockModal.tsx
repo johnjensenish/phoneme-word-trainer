@@ -71,8 +71,12 @@ export function UnlockModal({ isOpen, onUnlock, onClose }: UnlockModalProps) {
               pattern="[0-9]*"
               value={answer}
               onChange={e => {
-                setAnswer(e.target.value.replace(/\D/g, ''))
+                const next = e.target.value.replace(/\D/g, '')
+                setAnswer(next)
                 setWrong(false)
+                if (next && Number(next) === problem.a + problem.b) {
+                  onUnlock()
+                }
               }}
               className={styles.input}
               aria-label="Answer"
