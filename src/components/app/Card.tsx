@@ -10,6 +10,7 @@ interface CardProps {
   onPhonemePlay: (soundId: string) => void
   onPrev: () => void
   onNext: () => void
+  cooldownActive?: boolean
 }
 
 function SpeakerIcon({ size = 16 }: { size?: number }) {
@@ -38,7 +39,7 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   )
 }
 
-export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardProps) {
+export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext, cooldownActive = false }: CardProps) {
   const emoji = emojiMap[card.word.visual_hint] ?? '🔤'
 
   const segments = segmentWord(
@@ -50,7 +51,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext }: CardP
   const coachingTip = generateCoachingTip(card.word, card.drill_mode)
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${cooldownActive ? styles.cooldown : ''}`}>
       <div className={styles.imageArea}>
         <span className="emoji" role="img" aria-label={card.word.visual_hint}>
           {emoji}

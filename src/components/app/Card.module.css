@@ -12,6 +12,15 @@
   transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
+/* Cooldown — subtle, brief unresponsive state for toddler-mode taps. */
+.cooldown .hearItButton,
+.cooldown .navButton,
+.cooldown .letterGroupConsonant {
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 180ms ease;
+}
+
 /* ─── Image Area ─────────────────────────────────────────────────── */
 .imageArea {
   display: flex;
