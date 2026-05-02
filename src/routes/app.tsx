@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import type { Tier, SoundOverride, ComputedWordCard } from '~/data/types'
 import { DEFAULT_FILTERS, type FilterState } from '~/engine/cardOrdering'
 import { computeAgeMonths, formatAgeShort } from '~/engine/ageUtils'
@@ -102,6 +102,8 @@ function AppRoute() {
   const [pinnedCard, setPinnedCard] = useState<ComputedWordCard | null>(null)
   const [toddlerMode, setToddlerMode] = useState(false)
   const [unlockOpen, setUnlockOpen] = useState(false)
+  const [cooldownLocked, setCooldownLocked] = useState(false)
+  const cooldownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Load persisted state on mount
   useEffect(() => {
@@ -123,6 +125,31 @@ function AppRoute() {
     saveToddlerMode(false)
     setUnlockOpen(false)
   }, [])
+
+  // Brief cooldown after each tap in toddler mode to prevent button-mashing.
+  const TODDLER_COOLDOWN_MS = 600
+  useEffect(() => () => {
+    if (cooldownTimerRef.current) clearTimeout(cooldownTimerRef.current)
+  }, [])
+  useEffect(() => {
+    if (!toddlerMode) {
+      if (cooldownTimerRef.current) {
+        clearTimeout(cooldownTimerRef.current)
+        cooldownTimerRef.current = null
+      }
+      setCooldownLocked(false)
+    }
+  }, [toddlerMode])
+  const triggerCooldown = useCallback(() => {
+    setCooldownLocked(true)
+    if (cooldownTimerRef.current) clearTimeout(cooldownTimerRef.current)
+    cooldownTimerRef.current = setTimeout(() => setCooldownLocked(false), TODDLER_COOLDOWN_MS)
+  }, [])
+  const guard = useCallback(<A extends unknown[]>(fn: (...args: A) => void) => (...args: A) => {
+    if (toddlerMode && cooldownLocked) return
+    fn(...args)
+    if (toddlerMode) triggerCooldown()
+  }, [toddlerMode, cooldownLocked, triggerCooldown])
 
   const baseAgeMonths = birthDate ? computeAgeMonths(birthDate.month, birthDate.year) : 24
   const childAgeMonths = baseAgeMonths + reachMonths
@@ -221,8 +248,24 @@ function AppRoute() {
     )
   }
 
+  const cooldownActive = toddlerMode && cooldownLocked
+
   return (
-    <div style={{ height: '100svh', overflow: 'hidden', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        height: '100svh',
+        overflow: 'hidden',
+        background: 'var(--color-bg)',
+        display: 'flex',
+        flexDirection: 'column',
+        ...(toddlerMode && {
+          userSelect: 'none' as const,
+          WebkitUserSelect: 'none' as const,
+          WebkitTouchCallout: 'none' as const,
+          WebkitTapHighlightColor: 'transparent',
+        }),
+      }}
+    >
       {/* Top bar — minimal, stays out of the way */}
       <header style={{
         display: 'flex',
@@ -350,10 +393,11 @@ function AppRoute() {
         {currentCard ? (
           <Card
             card={currentCard}
-            onAudioPlay={speak}
-            onPhonemePlay={speakPhoneme}
-            onPrev={goPrev}
-            onNext={goNext}
+            onAudioPlay={guard(speak)}
+            onPhonemePlay={guard(speakPhoneme)}
+            onPrev={guard(goPrev)}
+            onNext={guard(goNext)}
+            cooldownActive={cooldownActive}
           />
         ) : (
           <div style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>
