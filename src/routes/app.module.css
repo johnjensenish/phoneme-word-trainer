@@ -1,0 +1,45 @@
+.headerChip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background var(--transition-fast);
+}
+
+.headerChipBadge {
+  background: var(--color-accent);
+  color: white;
+  border-radius: 8px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.headerChipReach {
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.headerIconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  border: none;
+  transition: background var(--transition-fast);
+}
+
+.headerIconButtonActive {
+  background: var(--color-accent);
+  color: white;
+}

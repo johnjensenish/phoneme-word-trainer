@@ -108,7 +108,7 @@
   width: 100%;
   max-width: 320px;
   height: 60px;
-  border-radius: 16px;
+  border-radius: var(--action-button-radius);
   background: var(--color-accent);
   color: var(--color-text-inverse);
   display: flex;
@@ -118,19 +118,19 @@
   font-size: 19px;
   font-weight: 800;
   letter-spacing: 0.01em;
-  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.25);
+  box-shadow: 0 4px 16px rgba(var(--color-accent-rgb), 0.25);
   transition: background var(--transition-fast), transform 100ms ease, box-shadow var(--transition-fast);
   cursor: pointer;
 }
 
 .hearItButton:hover {
   background: var(--color-accent-hover);
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.35);
 }
 
 .hearItButton:active {
   transform: scale(0.97);
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+  box-shadow: 0 2px 8px rgba(var(--color-accent-rgb), 0.2);
 }
 
 /* ─── Coaching Tip ───────────────────────────────────────────────── */
@@ -163,7 +163,7 @@
   gap: var(--space-sm);
   height: 60px;
   padding: 0 22px;
-  border-radius: 16px;
+  border-radius: var(--action-button-radius);
   background: var(--color-secondary-light);
   color: var(--color-secondary);
   font-size: 17px;
