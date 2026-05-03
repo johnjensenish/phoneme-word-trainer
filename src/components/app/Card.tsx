@@ -89,12 +89,12 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext, cooldow
         )}
 
         <div className={styles.actionBar}>
-          <button className={`${styles.navButton} ${styles.navPrev}`} onClick={onPrev} aria-label="Previous word">
+          <button className={`${styles.navButton} ${styles.navPrev}`} onPointerDown={onPrev} aria-label="Previous word">
             <ArrowIcon direction="left" />
             <span>Previous</span>
           </button>
           <div className={styles.actionBarSpacer} />
-          <button className={`${styles.navButton} ${styles.navNext}`} onClick={onNext} aria-label="Next word">
+          <button className={`${styles.navButton} ${styles.navNext}`} onPointerDown={onNext} aria-label="Next word">
             <span>Next</span>
             <ArrowIcon direction="right" />
           </button>
