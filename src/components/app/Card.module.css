@@ -3,73 +3,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: var(--card-max-width);
-  margin: 0 auto;
+  height: 100%;
   background: var(--color-surface);
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
   overflow: hidden;
-  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
-}
-
-/* ─── Fullscreen layouts ─────────────────────────────────────────── */
-/* Edge: true edge-to-edge, no card chrome. */
-.card.layoutEdge {
-  max-width: none;
-  height: 100%;
-  margin: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* Padded: fills the screen but keeps card chrome and a margin. */
-.card.layoutPadded {
-  max-width: none;
-  height: 100%;
-  margin: 0;
-}
-
-/* In fullscreen layouts the image area grows to fill leftover space. */
-.card.layoutEdge .imageArea,
-.card.layoutPadded .imageArea {
-  flex: 1 1 auto;
-  height: auto;
-  min-height: 0;
-}
-
-/* Stretch the content area too — pad it generously so the word breathes. */
-.card.layoutEdge .content,
-.card.layoutPadded .content {
-  flex: 0 0 auto;
-  padding: var(--space-xl) var(--space-lg) var(--space-lg);
-  gap: var(--space-lg);
-}
-
-/* iPad portrait — emoji can be massive */
-@media (min-width: 768px) and (orientation: portrait) {
-  .card.layoutEdge .imageArea,
-  .card.layoutPadded .imageArea {
-    font-size: clamp(180px, 30vh, 320px);
-  }
-
-  .card.layoutEdge .imageLabel,
-  .card.layoutPadded .imageLabel {
-    font-size: 40px;
-  }
-
-  .card.layoutEdge .content,
-  .card.layoutPadded .content {
-    padding: var(--space-2xl) var(--space-xl) var(--space-xl);
-    gap: var(--space-xl);
-  }
-}
-
-/* Landscape — keep image generous, content compact */
-@media (min-width: 768px) and (orientation: landscape) {
-  .card.layoutEdge .imageArea,
-  .card.layoutPadded .imageArea {
-    font-size: clamp(120px, 22vh, 220px);
-  }
 }
 
 /* Cooldown — subtle, brief unresponsive state for toddler-mode taps. */
@@ -84,13 +20,13 @@
 /* ─── Image Area ─────────────────────────────────────────────────── */
 .imageArea {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  height: 260px;
+  min-height: 0;
   background: var(--color-surface-sunken);
-  font-size: 110px;
   line-height: 1;
 }
 
@@ -106,9 +42,10 @@
 /* ─── Content Area ───────────────────────────────────────────────── */
 .content {
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-xl) var(--space-md) var(--space-md);
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
   gap: var(--space-lg);
 }
 
@@ -253,13 +190,7 @@
 
 /* Phone */
 @media (max-width: 767px) {
-  .card {
-    border-radius: 20px;
-    margin: 0 var(--space-sm);
-  }
-
   .imageArea {
-    height: 200px;
     font-size: 80px;
   }
 
@@ -290,18 +221,8 @@
   }
 }
 
-/* Tablet portrait */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .imageArea {
-    height: 300px;
-    font-size: 130px;
-  }
-
-  .content {
-    padding: var(--space-xl) var(--space-lg) var(--space-md);
-    gap: var(--space-xl);
-  }
-
+/* Tablet+ */
+@media (min-width: 768px) {
   .hearItButton {
     height: 64px;
     max-width: 340px;
@@ -313,38 +234,62 @@
   }
 }
 
-/* Tablet landscape / desktop */
-@media (min-width: 1024px) {
-  .imageArea {
-    height: 340px;
-    font-size: 150px;
-  }
-
-  .content {
-    padding: var(--space-xl) var(--space-xl) var(--space-md);
-    gap: var(--space-xl);
-  }
-
-  .hearItButton {
-    height: 64px;
-    max-width: 340px;
-    font-size: 20px;
-  }
-
-  .tipText {
-    font-size: 15px;
-  }
-}
-
-/* Large desktop */
-@media (min-width: 1200px) {
-  .card {
-    max-width: 700px;
-  }
-}
-
-/* iPad / large tablet portrait — bigger touch targets for toddler-friendly use */
+/* iPad / large tablet portrait — bigger emoji and label */
 @media (min-width: 768px) and (orientation: portrait) {
+  .imageArea {
+    font-size: clamp(180px, 30vh, 320px);
+  }
+
+  .imageLabel {
+    font-size: 40px;
+  }
+
+  .content {
+    padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+  }
+}
+
+/* Tablet+ landscape — emoji clamp tuned for short viewport */
+@media (min-width: 768px) and (orientation: landscape) {
+  .imageArea {
+    font-size: clamp(120px, 22vh, 220px);
+  }
+}
+
+/* Short landscape (tablets rotated, laptops with low-res screens) — compact card chrome */
+@media (min-width: 768px) and (max-height: 900px) and (orientation: landscape) {
+  .imageArea {
+    font-size: 90px;
+  }
+
+  .imageLabel {
+    font-size: 22px;
+    margin-top: var(--space-xs);
+  }
+
+  .content {
+    padding: var(--space-md) var(--space-lg) var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .wordRow {
+    font-size: clamp(40px, 6vw, 64px);
+  }
+
+  .hearItButton {
+    height: 52px;
+    font-size: 18px;
+    max-width: 300px;
+  }
+
+  .tipText {
+    font-size: 14px;
+  }
+}
+
+/* iPad-class touch targets — large portrait or large landscape */
+@media (min-width: 768px) and (orientation: portrait),
+       (min-width: 1024px) and (orientation: landscape) {
   .content {
     gap: var(--space-2xl);
   }
@@ -374,78 +319,11 @@
     width: 30px;
     height: 30px;
   }
-
-  /* Side-pin nav buttons to viewport edges, like landscape. */
-  .actionBar {
-    height: 0;
-    padding: 0;
-    border-top: none;
-    overflow: visible;
-  }
-
-  .actionBarSpacer {
-    display: none;
-  }
-
-  .navButton {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: var(--z-action-bar);
-  }
-
-  .navPrev {
-    left: max(var(--space-lg), env(safe-area-inset-left));
-  }
-
-  .navNext {
-    right: max(var(--space-lg), env(safe-area-inset-right));
-  }
-
-  .navButton:active {
-    transform: translateY(-50%) scale(0.96);
-  }
 }
 
-/* Short landscape (tablets rotated, laptops with low-res screens) — keep the card in view without page scroll */
-@media (min-width: 768px) and (max-height: 900px) and (orientation: landscape) {
-  .imageArea {
-    height: 200px;
-    font-size: 90px;
-  }
-
-  .imageLabel {
-    font-size: 22px;
-    margin-top: var(--space-xs);
-  }
-
-  .content {
-    padding: var(--space-md) var(--space-lg) var(--space-sm);
-    gap: var(--space-md);
-  }
-
-  .wordRow {
-    font-size: clamp(40px, 6vw, 64px);
-  }
-
-  .hearItButton {
-    height: 52px;
-    font-size: 18px;
-    max-width: 300px;
-  }
-
-  .tipText {
-    font-size: 14px;
-    min-height: calc(2 * 1.5 * 14px);
-  }
-
-  .actionBar {
-    padding-top: var(--space-xs);
-  }
-}
-
-/* Landscape — pin nav buttons to the viewport edges so they sit beside the card */
-@media (orientation: landscape) {
+/* Pin nav buttons to viewport edges — any landscape, plus large portrait */
+@media (orientation: landscape),
+       (min-width: 768px) and (orientation: portrait) {
   .actionBar {
     height: 0;
     padding: 0;
@@ -477,38 +355,9 @@
   }
 }
 
-/* iPad landscape — match the iPad portrait button size */
-@media (orientation: landscape) and (min-width: 1024px) {
-  .content {
-    gap: var(--space-2xl);
-  }
-
-  .hearItButton {
-    height: 84px;
-    max-width: 460px;
-    font-size: 22px;
-    border-radius: 20px;
-    margin-top: var(--space-md);
-  }
-
-  .hearItButton svg {
-    width: 26px;
-    height: 26px;
-  }
-
-  .navButton {
-    height: 88px;
-    padding: 0 32px;
-    font-size: 22px;
-    border-radius: 20px;
-    gap: var(--space-md);
-  }
-
-  .navButton svg {
-    width: 30px;
-    height: 30px;
-  }
-
+/* Wider edge insets where touch targets are big */
+@media (min-width: 768px) and (orientation: portrait),
+       (min-width: 1024px) and (orientation: landscape) {
   .navPrev {
     left: max(var(--space-lg), env(safe-area-inset-left));
   }

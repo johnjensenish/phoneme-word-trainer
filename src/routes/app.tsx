@@ -6,7 +6,7 @@ import { computeAgeMonths, formatAgeShort } from '~/engine/ageUtils'
 import { useCards } from '~/hooks/useCards'
 import { useAudio, usePrefetchAudio } from '~/hooks/useAudio'
 import { AgeEntry } from '~/components/app/AgeEntry'
-import { Card, type CardLayout } from '~/components/app/Card'
+import { Card } from '~/components/app/Card'
 import { FilterPanel } from '~/components/app/FilterPanel'
 import { UnlockModal } from '~/components/app/UnlockModal'
 import { WordSearch } from '~/components/app/WordSearch'
@@ -19,29 +19,6 @@ const STORAGE_KEY_BIRTH = 'phoneme-trainer-birth'
 const STORAGE_KEY_OVERRIDES = 'phoneme-trainer-overrides'
 const STORAGE_KEY_REACH = 'phoneme-trainer-reach'
 const STORAGE_KEY_TODDLER = 'phoneme-trainer-toddler-mode'
-const STORAGE_KEY_LAYOUT = 'phoneme-trainer-card-layout'
-
-const LAYOUT_CYCLE: CardLayout[] = ['edge', 'padded', 'classic']
-const LAYOUT_LABEL: Record<CardLayout, string> = {
-  edge: 'Edge',
-  padded: 'Padded',
-  classic: 'Card',
-}
-
-function loadLayout(): CardLayout {
-  if (typeof window === 'undefined') return 'edge'
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY_LAYOUT)
-    if (stored === 'edge' || stored === 'padded' || stored === 'classic') return stored
-    return 'edge'
-  } catch {
-    return 'edge'
-  }
-}
-
-function saveLayout(layout: CardLayout) {
-  localStorage.setItem(STORAGE_KEY_LAYOUT, layout)
-}
 
 interface BirthDate {
   month: number
@@ -125,7 +102,6 @@ function AppRoute() {
   const [pinnedCard, setPinnedCard] = useState<ComputedWordCard | null>(null)
   const [toddlerMode, setToddlerMode] = useState(false)
   const [unlockOpen, setUnlockOpen] = useState(false)
-  const [layout, setLayout] = useState<CardLayout>('edge')
   const [cooldownLocked, setCooldownLocked] = useState(false)
   const cooldownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -136,16 +112,6 @@ function AppRoute() {
     setSoundOverrides(loadOverrides())
     setReachMonths(loadReach())
     setToddlerMode(loadToddlerMode())
-    setLayout(loadLayout())
-  }, [])
-
-  const cycleLayout = useCallback(() => {
-    setLayout(prev => {
-      const idx = LAYOUT_CYCLE.indexOf(prev)
-      const next = LAYOUT_CYCLE[(idx + 1) % LAYOUT_CYCLE.length]
-      saveLayout(next)
-      return next
-    })
   }, [])
 
   const enableToddlerMode = useCallback(() => {
@@ -359,23 +325,6 @@ function AppRoute() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           {!toddlerMode && (
             <button
-              onClick={cycleLayout}
-              title={`Layout: ${LAYOUT_LABEL[layout]} — click to cycle`}
-              style={{
-                fontSize: '13px',
-                fontWeight: 700,
-                color: 'var(--color-text-muted)',
-                padding: '6px 10px',
-                borderRadius: '10px',
-                background: 'var(--color-surface-sunken)',
-              }}
-            >
-              {LAYOUT_LABEL[layout]}
-            </button>
-          )}
-
-          {!toddlerMode && (
-            <button
               onClick={() => setEditingAge(true)}
               style={{
                 fontSize: '13px',
@@ -436,15 +385,9 @@ function AppRoute() {
         style={{
           flex: 1,
           display: 'flex',
-          alignItems: layout === 'classic' ? 'center' : 'stretch',
+          alignItems: 'stretch',
           justifyContent: 'center',
           minHeight: 0,
-          padding:
-            layout === 'edge'
-              ? '0'
-              : layout === 'padded'
-              ? 'var(--space-md)'
-              : 'var(--space-sm) var(--space-md)',
         }}
       >
         {currentCard ? (
@@ -455,7 +398,6 @@ function AppRoute() {
             onPrev={guard(goPrev)}
             onNext={guard(goNext)}
             cooldownActive={cooldownActive}
-            layout={layout}
           />
         ) : (
           <div style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>
