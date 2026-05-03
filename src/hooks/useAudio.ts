@@ -98,7 +98,7 @@ export function usePrefetchAudio(card: ComputedWordCard | undefined) {
     const links: HTMLLinkElement[] = []
     for (const href of urls) {
       const link = document.createElement('link')
-      link.rel = 'prefetch'
+      link.rel = 'preload'
       link.as = 'audio'
       link.href = href
       document.head.appendChild(link)
