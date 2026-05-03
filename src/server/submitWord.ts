@@ -1,5 +1,5 @@
 import { createServerFn } from '@tanstack/react-start'
-import { getRequestIP } from '@tanstack/react-start-server'
+import { getRequestIP } from '@tanstack/react-start/server'
 import { words } from '~/data/words'
 import { findLexicalMatch } from './lexicalDedup'
 
