@@ -69,6 +69,7 @@
   position: relative;
   padding: 0 1px;
   border-radius: 6px;
+  white-space: pre;
   transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
