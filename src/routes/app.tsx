@@ -10,6 +10,7 @@ import { Card } from '~/components/app/Card'
 import { FilterPanel } from '~/components/app/FilterPanel'
 import { UnlockModal } from '~/components/app/UnlockModal'
 import { WordSearch } from '~/components/app/WordSearch'
+import styles from './app.module.css'
 
 export const Route = createFileRoute('/app')({
   component: AppRoute,
@@ -20,24 +21,33 @@ const STORAGE_KEY_OVERRIDES = 'phoneme-trainer-overrides'
 const STORAGE_KEY_REACH = 'phoneme-trainer-reach'
 const STORAGE_KEY_TODDLER = 'phoneme-trainer-toddler-mode'
 
+const TODDLER_COOLDOWN_MS = 600
+
 interface BirthDate {
   month: number
   year: number
 }
 
-function loadBirth(): BirthDate | null {
-  if (typeof window === 'undefined') return null
+function readStorage<T>(key: string, decode: (raw: string) => T | null, fallback: T): T {
+  if (typeof window === 'undefined') return fallback
   try {
-    const stored = localStorage.getItem(STORAGE_KEY_BIRTH)
-    if (!stored) return null
-    const parsed = JSON.parse(stored)
+    const stored = localStorage.getItem(key)
+    if (stored === null) return fallback
+    const decoded = decode(stored)
+    return decoded ?? fallback
+  } catch {
+    return fallback
+  }
+}
+
+function loadBirth(): BirthDate | null {
+  return readStorage<BirthDate | null>(STORAGE_KEY_BIRTH, raw => {
+    const parsed = JSON.parse(raw)
     if (parsed && typeof parsed.month === 'number' && typeof parsed.year === 'number') {
       return parsed as BirthDate
     }
     return null
-  } catch {
-    return null
-  }
+  }, null)
 }
 
 function saveBirth(month: number, year: number) {
@@ -45,13 +55,7 @@ function saveBirth(month: number, year: number) {
 }
 
 function loadReach(): number {
-  if (typeof window === 'undefined') return 0
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY_REACH)
-    return stored ? Number(stored) : 0
-  } catch {
-    return 0
-  }
+  return readStorage(STORAGE_KEY_REACH, raw => Number(raw), 0)
 }
 
 function saveReach(months: number) {
@@ -59,14 +63,7 @@ function saveReach(months: number) {
 }
 
 function loadOverrides(): Map<string, SoundOverride> {
-  if (typeof window === 'undefined') return new Map()
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY_OVERRIDES)
-    if (!stored) return new Map()
-    return new Map(JSON.parse(stored))
-  } catch {
-    return new Map()
-  }
+  return readStorage(STORAGE_KEY_OVERRIDES, raw => new Map(JSON.parse(raw)) as Map<string, SoundOverride>, new Map())
 }
 
 function saveOverrides(overrides: Map<string, SoundOverride>) {
@@ -77,12 +74,7 @@ function saveOverrides(overrides: Map<string, SoundOverride>) {
 }
 
 function loadToddlerMode(): boolean {
-  if (typeof window === 'undefined') return false
-  try {
-    return localStorage.getItem(STORAGE_KEY_TODDLER) === '1'
-  } catch {
-    return false
-  }
+  return readStorage(STORAGE_KEY_TODDLER, raw => raw === '1', false)
 }
 
 function saveToddlerMode(on: boolean) {
@@ -127,17 +119,13 @@ function AppRoute() {
   }, [])
 
   // Brief cooldown after each tap in toddler mode to prevent button-mashing.
-  const TODDLER_COOLDOWN_MS = 600
-  useEffect(() => () => {
-    if (cooldownTimerRef.current) clearTimeout(cooldownTimerRef.current)
-  }, [])
   useEffect(() => {
-    if (!toddlerMode) {
+    if (!toddlerMode) setCooldownLocked(false)
+    return () => {
       if (cooldownTimerRef.current) {
         clearTimeout(cooldownTimerRef.current)
         cooldownTimerRef.current = null
       }
-      setCooldownLocked(false)
     }
   }, [toddlerMode])
   const triggerCooldown = useCallback(() => {
@@ -276,21 +264,7 @@ function AppRoute() {
         flexShrink: 0,
       }}>
         {!toddlerMode && (
-          <button
-            onClick={() => setFilterOpen(true)}
-            style={{
-              fontSize: '13px',
-              fontWeight: 700,
-              color: 'var(--color-text-muted)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '6px 10px',
-              borderRadius: '10px',
-              background: 'var(--color-surface-sunken)',
-              transition: 'background 150ms ease',
-            }}
-          >
+          <button onClick={() => setFilterOpen(true)} className={styles.headerChip}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round">
               <line x1="4" y1="6" x2="20" y2="6" />
               <line x1="4" y1="12" x2="16" y2="12" />
@@ -298,16 +272,7 @@ function AppRoute() {
             </svg>
             Filter
             {stats.filtered < stats.total && (
-              <span style={{
-                background: 'var(--color-accent)',
-                color: 'white',
-                borderRadius: '8px',
-                padding: '1px 6px',
-                fontSize: '10px',
-                fontWeight: 800,
-              }}>
-                {stats.filtered}
-              </span>
+              <span className={styles.headerChipBadge}>{stats.filtered}</span>
             )}
           </button>
         )}
@@ -324,29 +289,10 @@ function AppRoute() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           {!toddlerMode && (
-            <button
-              onClick={() => setEditingAge(true)}
-              style={{
-                fontSize: '13px',
-                fontWeight: 700,
-                color: 'var(--color-text-muted)',
-                padding: '6px 10px',
-                borderRadius: '10px',
-                background: 'var(--color-surface-sunken)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-              }}
-            >
+            <button onClick={() => setEditingAge(true)} className={styles.headerChip}>
               {formatAgeShort(baseAgeMonths)}
               {reachMonths > 0 && (
-                <span style={{
-                  color: 'var(--color-accent)',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                }}>
-                  +{reachMonths}
-                </span>
+                <span className={styles.headerChipReach}>+{reachMonths}</span>
               )}
             </button>
           )}
@@ -355,18 +301,7 @@ function AppRoute() {
             onClick={toddlerMode ? () => setUnlockOpen(true) : enableToddlerMode}
             aria-label={toddlerMode ? 'Unlock parental controls' : 'Enter toddler mode'}
             title={toddlerMode ? 'Unlock parental controls' : 'Enter toddler mode'}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '32px',
-              height: '32px',
-              borderRadius: '10px',
-              background: toddlerMode ? 'var(--color-accent)' : 'var(--color-surface-sunken)',
-              color: toddlerMode ? 'white' : 'var(--color-text-muted)',
-              border: 'none',
-              transition: 'background 150ms ease',
-            }}
+            className={`${styles.headerIconButton} ${toddlerMode ? styles.headerIconButtonActive : ''}`}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="11" width="16" height="10" rx="2" />

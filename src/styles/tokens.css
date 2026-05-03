@@ -24,6 +24,7 @@
 
   /* Accent — warm coral-orange for primary actions */
   --color-accent: #F97316;
+  --color-accent-rgb: 249, 115, 22;
   --color-accent-hover: #EA580C;
   --color-accent-light: #FFF7ED;
 
