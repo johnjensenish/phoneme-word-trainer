@@ -4,6 +4,8 @@ import { segmentWord } from '~/engine/wordSegmentation'
 import { emojiMap } from '~/data/emojiMap'
 import styles from './Card.module.css'
 
+export type CardLayout = 'classic' | 'edge' | 'padded'
+
 interface CardProps {
   card: ComputedWordCard
   onAudioPlay: (word: string) => void
@@ -11,6 +13,7 @@ interface CardProps {
   onPrev: () => void
   onNext: () => void
   cooldownActive?: boolean
+  layout?: CardLayout
 }
 
 function SpeakerIcon({ size = 16 }: { size?: number }) {
@@ -39,7 +42,13 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   )
 }
 
-export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext, cooldownActive = false }: CardProps) {
+const LAYOUT_CLASSES: Record<CardLayout, string> = {
+  classic: '',
+  edge: styles.layoutEdge,
+  padded: styles.layoutPadded,
+}
+
+export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext, cooldownActive = false, layout = 'classic' }: CardProps) {
   const emoji = emojiMap[card.word.visual_hint] ?? '🔤'
 
   const segments = segmentWord(
@@ -51,7 +60,7 @@ export function Card({ card, onAudioPlay, onPhonemePlay, onPrev, onNext, cooldow
   const coachingTip = generateCoachingTip(card.word, card.drill_mode)
 
   return (
-    <div className={`${styles.card} ${cooldownActive ? styles.cooldown : ''}`}>
+    <div className={`${styles.card} ${LAYOUT_CLASSES[layout]} ${cooldownActive ? styles.cooldown : ''}`}>
       <div className={styles.imageArea}>
         <span className="emoji" role="img" aria-label={card.word.visual_hint}>
           {emoji}

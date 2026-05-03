@@ -12,6 +12,66 @@
   transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
+/* ─── Fullscreen layouts ─────────────────────────────────────────── */
+/* Edge: true edge-to-edge, no card chrome. */
+.card.layoutEdge {
+  max-width: none;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Padded: fills the screen but keeps card chrome and a margin. */
+.card.layoutPadded {
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+
+/* In fullscreen layouts the image area grows to fill leftover space. */
+.card.layoutEdge .imageArea,
+.card.layoutPadded .imageArea {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+
+/* Stretch the content area too — pad it generously so the word breathes. */
+.card.layoutEdge .content,
+.card.layoutPadded .content {
+  flex: 0 0 auto;
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  gap: var(--space-lg);
+}
+
+/* iPad portrait — emoji can be massive */
+@media (min-width: 768px) and (orientation: portrait) {
+  .card.layoutEdge .imageArea,
+  .card.layoutPadded .imageArea {
+    font-size: clamp(180px, 30vh, 320px);
+  }
+
+  .card.layoutEdge .imageLabel,
+  .card.layoutPadded .imageLabel {
+    font-size: 40px;
+  }
+
+  .card.layoutEdge .content,
+  .card.layoutPadded .content {
+    padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+    gap: var(--space-xl);
+  }
+}
+
+/* Landscape — keep image generous, content compact */
+@media (min-width: 768px) and (orientation: landscape) {
+  .card.layoutEdge .imageArea,
+  .card.layoutPadded .imageArea {
+    font-size: clamp(120px, 22vh, 220px);
+  }
+}
+
 /* Cooldown — subtle, brief unresponsive state for toddler-mode taps. */
 .cooldown .hearItButton,
 .cooldown .navButton,
