@@ -20,19 +20,19 @@
   bottom: 0;
   width: 300px;
   background: var(--color-surface);
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
   z-index: calc(var(--z-overlay) + 1);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overscroll-behavior: contain;
   transform: translateX(-100%);
-  transition: transform var(--transition-normal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   font-family: var(--font-family);
 }
 
 .panelOpen {
   transform: translateX(0);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
 }
 
 /* ─── Header ──────────────────────────────────────────────────────── */

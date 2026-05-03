@@ -385,9 +385,9 @@ function AppRoute() {
         style={{
           flex: 1,
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'stretch',
           justifyContent: 'center',
-          padding: 'var(--space-sm) var(--space-md)',
+          minHeight: 0,
         }}
       >
         {currentCard ? (
