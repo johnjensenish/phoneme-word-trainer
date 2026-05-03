@@ -375,8 +375,35 @@
     height: 30px;
   }
 
+  /* Side-pin nav buttons to viewport edges, like landscape. */
   .actionBar {
-    padding-top: var(--space-md);
+    height: 0;
+    padding: 0;
+    border-top: none;
+    overflow: visible;
+  }
+
+  .actionBarSpacer {
+    display: none;
+  }
+
+  .navButton {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: var(--z-action-bar);
+  }
+
+  .navPrev {
+    left: max(var(--space-lg), env(safe-area-inset-left));
+  }
+
+  .navNext {
+    right: max(var(--space-lg), env(safe-area-inset-right));
+  }
+
+  .navButton:active {
+    transform: translateY(-50%) scale(0.96);
   }
 }
 
