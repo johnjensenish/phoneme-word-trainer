@@ -196,7 +196,8 @@
   }
 
   .content {
-    padding: var(--space-md) var(--space-sm) var(--space-sm);
+    padding: var(--space-md) var(--space-sm)
+      calc(var(--space-sm) + env(safe-area-inset-bottom));
     gap: var(--space-md);
   }
 
