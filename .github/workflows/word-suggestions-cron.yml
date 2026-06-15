@@ -75,7 +75,7 @@ jobs:
             sentence: (
               .body
               | capture("\\*\\*Example sentence:\\*\\* (?<s>[^\\n]+)"; "i").s
-              // empty
+              // ""
             )
           } | select(.word != "")]' /tmp/raw-issues.json > /tmp/pending.json
 
