@@ -488,4 +488,5 @@ export const emojiMap: Record<string, string> = {
   photo_crust: "🍞",
   photo_spray: "💦",
   photo_ambulance: "🚑",
+  photo_recycling_truck: "🚛",
 };
