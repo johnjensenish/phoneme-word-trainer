@@ -1,12 +1,11 @@
 #!/usr/bin/env bun
 /**
- * Classify pending word suggestions via GitHub Models.
+ * Classify pending word suggestions via the Gemini API.
  *
  * Reads JSON from stdin: [{number, word, sentence?}]
  * Writes JSON to stdout:  [{number, word, category, emoji, confidence, reasoning, accepted}]
  *
- * Requires GITHUB_TOKEN with models:read (provided by Actions when
- * `permissions: models: read` is set).
+ * Requires GEMINI_API_KEY (create at https://aistudio.google.com/apikey).
  */
 
 const CATEGORIES = [
@@ -18,8 +17,8 @@ const CATEGORIES = [
 ] as const;
 
 const MIN_CONFIDENCE = 0.7;
-const MODEL = process.env.WORD_CLASSIFIER_MODEL || "openai/gpt-4o-mini";
-const ENDPOINT = "https://models.github.ai/inference/chat/completions";
+const MODEL = process.env.WORD_CLASSIFIER_MODEL || "gemini-2.5-flash";
+const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 
 interface Pending {
   number: number;
@@ -52,12 +51,34 @@ Rules:
 - Emoji must depict the word itself, not the category. "butter" → 🧈, not 🍽️.
 - If you can't find a depictive emoji, use ❓ and lower confidence.
 
-Return ONLY a JSON object: { "results": [ { "word": "...", "category": "...", "emoji": "...", "confidence": 0.95, "reasoning": "..." } ] }
 The "results" array must be in the same order as the input.`;
 
+// OpenAPI-subset schema for Gemini structured output — guarantees parseable
+// JSON and constrains category to the valid set.
+const RESPONSE_SCHEMA = {
+  type: "OBJECT",
+  properties: {
+    results: {
+      type: "ARRAY",
+      items: {
+        type: "OBJECT",
+        properties: {
+          word: { type: "STRING" },
+          category: { type: "STRING", enum: [...CATEGORIES] },
+          emoji: { type: "STRING" },
+          confidence: { type: "NUMBER" },
+          reasoning: { type: "STRING" },
+        },
+        required: ["word", "category", "emoji", "confidence", "reasoning"],
+      },
+    },
+  },
+  required: ["results"],
+};
+
 async function classify(pending: Pending[]): Promise<Classification[]> {
-  const token = process.env.GITHUB_TOKEN;
-  if (!token) throw new Error("GITHUB_TOKEN not set");
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error("GEMINI_API_KEY not set");
 
   const userPrompt = JSON.stringify(
     pending.map(p => ({
@@ -66,33 +87,34 @@ async function classify(pending: Pending[]): Promise<Classification[]> {
     })),
   );
 
-  const res = await fetch(ENDPOINT, {
+  const res = await fetch(`${ENDPOINT}/${MODEL}:generateContent`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
+      "x-goog-api-key": apiKey,
       "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28",
     },
     body: JSON.stringify({
-      model: MODEL,
-      temperature: 0.1,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: userPrompt },
-      ],
+      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+      generationConfig: {
+        temperature: 0.1,
+        responseMimeType: "application/json",
+        responseSchema: RESPONSE_SCHEMA,
+      },
     }),
   });
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`GitHub Models ${res.status}: ${text.slice(0, 500)}`);
+    throw new Error(`Gemini ${res.status}: ${text.slice(0, 500)}`);
   }
 
   const data = (await res.json()) as {
-    choices?: Array<{ message?: { content?: string } }>;
+    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
   };
-  const content = data.choices?.[0]?.message?.content;
+  const content = data.candidates?.[0]?.content?.parts
+    ?.map(p => p.text ?? "")
+    .join("");
   if (!content) throw new Error("No content in model response");
 
   const parsed = JSON.parse(content) as {

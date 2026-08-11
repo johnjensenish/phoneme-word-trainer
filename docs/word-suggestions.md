@@ -13,7 +13,7 @@ User → /suggest form → Worker server fn → GitHub issue (label: word-sugges
                               ┌─ daily cron (word-suggestions-cron.yml)
                               │   1. fetch open `word-suggestion` issues
                               │      that don't have `queued`
-                              │   2. classify each via GitHub Models
+                              │   2. classify each via the Gemini API
                               │      (category + emoji + confidence)
                               │   3. low-confidence → label `needs-human-review`
                               │   4. accepted → run add-word.ts, commit
@@ -72,11 +72,21 @@ echo 'GITHUB_PAT="ghp_..."' >> .dev.vars
 `.dev.vars` is read automatically by `vite dev` via the Cloudflare plugin and
 must NOT be committed.
 
-### 4. Allow GitHub Actions to use Models
+### 4. Create a Gemini API key for the classifier (`GEMINI_API_KEY`)
 
-Repo Settings → Actions → General → ensure **Read and write permissions** for
-the `GITHUB_TOKEN` are enabled. Models inference uses this token and the
-workflow already requests `permissions: models: read`.
+The cron classifies suggestions with the Gemini API (GitHub Models, the
+previous backend, was retired on July 30, 2026). Create a key at
+<https://aistudio.google.com/apikey> — any Google account with a Cloud
+project works; the account already used for `GCP_TTS_SA_KEY` is fine.
+
+Add it as a **repository secret**:
+
+Repo → Settings → Secrets and variables → Actions → New repository secret
+- Name: `GEMINI_API_KEY`
+- Value: paste the key
+
+The cron workflow checks for this secret at job start and fails loudly with a
+pointer to this doc if it's missing.
 
 ### 5. Mint a separate PAT for the cron (`BOT_PAT`)
 
@@ -121,10 +131,10 @@ keeps `bot/word-suggestions` clean between batches.
 - **Rate limit.** The Worker rate-limits submissions per IP at 5/hour
   (in-memory; resets when the Worker cold-starts). Tighten or move to a KV
   binding if abuse becomes an issue.
-- **Model choice.** Defaults to `openai/gpt-4o-mini` via GitHub Models. Override
-  by setting `WORD_CLASSIFIER_MODEL` in the cron workflow env.
-- **Cost.** GitHub Models has a free per-account quota that's plenty for a
-  daily batch of a few words. The Worker's GitHub API calls are ~2 requests
+- **Model choice.** Defaults to `gemini-2.5-flash`. Override by setting
+  `WORD_CLASSIFIER_MODEL` in the cron workflow env.
+- **Cost.** The Gemini API free tier is plenty for a daily batch of a few
+  words (one request per run). The Worker's GitHub API calls are ~2 requests
   per submission.
 
 ## Testing locally
@@ -132,7 +142,7 @@ keeps `bot/word-suggestions` clean between batches.
 ```sh
 # Dry-run the classifier with a mock input:
 echo '[{"number": 1, "word": "butter"}]' \
-  | GITHUB_TOKEN=ghp_xxx bun run scripts/classify-suggestions.ts
+  | GEMINI_API_KEY=xxx bun run scripts/classify-suggestions.ts
 
 # Manually trigger the cron from the GitHub UI:
 # Actions → Process Word Suggestions → Run workflow
