@@ -61,13 +61,15 @@ jobs:
       - name: Fetch pending suggestions
         id: fetch
         run: |
-          # Open issues with the suggestion label, excluding ones already queued.
+          # Open issues with the suggestion label, excluding ones already queued
+          # or handed to a human — re-fetching flagged issues would re-classify
+          # and re-comment on them every day.
           gh issue list \
             --label "$LABEL_PENDING" \
             --state open \
             --limit 100 \
             --json number,title,body,labels \
-            | jq '[.[] | select(.labels | map(.name) | index(env.LABEL_QUEUED) | not)]' \
+            | jq '[.[] | select([.labels[].name] | (index(env.LABEL_QUEUED) or index(env.LABEL_REVIEW)) | not)]' \
             > /tmp/raw-issues.json
 
           # Parse word + sentence out of the issue body. Title format is

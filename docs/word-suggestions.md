@@ -12,7 +12,8 @@ User → /suggest form → Worker server fn → GitHub issue (label: word-sugges
                                             ▼
                               ┌─ daily cron (word-suggestions-cron.yml)
                               │   1. fetch open `word-suggestion` issues
-                              │      that don't have `queued`
+                              │      that don't have `queued` or
+                              │      `needs-human-review`
                               │   2. classify each via the Gemini API
                               │      (category + emoji + confidence)
                               │   3. low-confidence → label `needs-human-review`
