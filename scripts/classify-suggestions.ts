@@ -17,7 +17,9 @@ const CATEGORIES = [
 ] as const;
 
 const MIN_CONFIDENCE = 0.7;
-const MODEL = process.env.WORD_CLASSIFIER_MODEL || "gemini-2.5-flash";
+// Alias that tracks the current Flash model — pinned versions retire out from
+// under new API keys (gemini-2.5-flash 404s for accounts created after mid-2026).
+const MODEL = process.env.WORD_CLASSIFIER_MODEL || "gemini-flash-latest";
 const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 
 interface Pending {

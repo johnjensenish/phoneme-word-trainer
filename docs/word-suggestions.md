@@ -131,7 +131,8 @@ keeps `bot/word-suggestions` clean between batches.
 - **Rate limit.** The Worker rate-limits submissions per IP at 5/hour
   (in-memory; resets when the Worker cold-starts). Tighten or move to a KV
   binding if abuse becomes an issue.
-- **Model choice.** Defaults to `gemini-2.5-flash`. Override by setting
+- **Model choice.** Defaults to the `gemini-flash-latest` alias so the cron
+  survives model retirements. Pin a specific model by setting
   `WORD_CLASSIFIER_MODEL` in the cron workflow env.
 - **Cost.** The Gemini API free tier is plenty for a daily batch of a few
   words (one request per run). The Worker's GitHub API calls are ~2 requests
