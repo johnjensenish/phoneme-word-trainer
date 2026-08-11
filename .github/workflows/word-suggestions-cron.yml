@@ -11,9 +11,6 @@ concurrency:
   group: word-suggestions
   cancel-in-progress: false
 
-# The auto-issued GITHUB_TOKEN is barely used: the classifier authenticates
-# with GEMINI_API_KEY, and all git/issue/PR writes go through BOT_PAT below so
-# events trigger downstream workflows (ci.yml, generate-audio.yml).
 permissions:
   contents: read
 
