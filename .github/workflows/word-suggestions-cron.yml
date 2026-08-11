@@ -12,10 +12,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  # Auto-issued GITHUB_TOKEN only needs models:read (used by the classifier).
-  # All git/issue/PR writes go through BOT_PAT below so events trigger
-  # downstream workflows (ci.yml, generate-audio.yml).
-  models: read
+  contents: read
 
 jobs:
   process:
@@ -29,10 +26,14 @@ jobs:
       GH_TOKEN: ${{ secrets.BOT_PAT }}
 
     steps:
-      - name: Verify BOT_PAT is configured
+      - name: Verify required secrets are configured
         run: |
           if [[ -z "${{ secrets.BOT_PAT }}" ]]; then
             echo "::error::BOT_PAT secret is not set. See docs/word-suggestions.md."
+            exit 1
+          fi
+          if [[ -z "${{ secrets.GEMINI_API_KEY }}" ]]; then
+            echo "::error::GEMINI_API_KEY secret is not set. See docs/word-suggestions.md."
             exit 1
           fi
 
@@ -57,13 +58,15 @@ jobs:
       - name: Fetch pending suggestions
         id: fetch
         run: |
-          # Open issues with the suggestion label, excluding ones already queued.
+          # Open issues with the suggestion label, excluding ones already queued
+          # or handed to a human — re-fetching flagged issues would re-classify
+          # and re-comment on them every day.
           gh issue list \
             --label "$LABEL_PENDING" \
             --state open \
             --limit 100 \
             --json number,title,body,labels \
-            | jq '[.[] | select(.labels | map(.name) | index(env.LABEL_QUEUED) | not)]' \
+            | jq '[.[] | select([.labels[].name] | (index(env.LABEL_QUEUED) or index(env.LABEL_REVIEW)) | not)]' \
             > /tmp/raw-issues.json
 
           # Parse word + sentence out of the issue body. Title format is
@@ -84,13 +87,10 @@ jobs:
           echo "Found $count pending suggestion(s)."
           if [[ "$count" -gt 0 ]]; then jq . /tmp/pending.json; fi
 
-      - name: Classify with GitHub Models
+      - name: Classify with Gemini
         if: steps.fetch.outputs.count != '0'
-        # GitHub Models inference is gated on the auto-issued GITHUB_TOKEN's
-        # `models:read` permission, not on a PAT — so pass it explicitly here
-        # since the job-level GH_TOKEN points at BOT_PAT.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           bun run scripts/classify-suggestions.ts < /tmp/pending.json > /tmp/classified.json
           jq . /tmp/classified.json
@@ -193,7 +193,7 @@ jobs:
         run: |
           # Build a body that lists every issue this PR closes.
           {
-            echo "Auto-generated batch of word suggestions, classified by GitHub Models."
+            echo "Auto-generated batch of word suggestions, classified by Gemini."
             echo
             echo "## Words in this PR"
             git log origin/main..HEAD --pretty=format:"- %s" | sed 's/Add suggested word: //'
